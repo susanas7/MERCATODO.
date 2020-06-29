@@ -24,3 +24,6 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('verified'
 Route::get('/users', 'UserController@index')->name('users.index');
 Route::post('/users', 'UserController@store')->name('users.store');
 Route::delete('/users/{user}', 'UserController@destroy')->name('users.destroy');
+Route::get('/users/{user}/edit', 'UserController@edit')->name('users.edit');
+Route::put('/users/{user}/update', 'UserController@update')->name('users.update');
+

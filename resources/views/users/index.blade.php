@@ -13,6 +13,7 @@
                         <th>ID</th>
                         <th>Nombre</th>
                         <th>Email</th>
+                        <th>Rol</th>
                         <th>Eliminar</th>
                       </tr>
                       </thead>
@@ -21,6 +22,10 @@
                           <td>{{ $user->id }}</td>
                           <td>{{ $user->name }}</td>
                           <td>{{ $user->email }}</td>
+                          <td>{{ $user->role}}</td>
+                          <td>
+                              <a href="{{route('users.edit', $user->id)}}">Editar<a/>
+                          </td>
                           <td>
                             <form action="{{ route('users.destroy', $user) }}" method="POST">
                               @method('DELETE')

@@ -73,6 +73,8 @@ class UserController extends Controller
     public function edit($id)
     {
         //
+        $user = User::find($email);
+        return view('users.edit')->with('user', $user);
     }
 
     /**
@@ -85,6 +87,14 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $user = User::find($is);
+        $user->name = $request->get('name');
+        $user->email = $request->get('email');
+        $user->role = $request->get('user', 'admin');
+        $user->status = $request->get('activo', 'inactivo');
+        $user->save();
+        return redirect('/users')->with('notice', 'El usuario ha sido modificado');
+  
     }
 
     /**
