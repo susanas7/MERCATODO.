@@ -70,10 +70,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
-        $user = User::find($email);
         return view('users.edit')->with('user', $user);
     }
 
@@ -87,7 +85,7 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $user = User::find($is);
+        $user = User::find($id);
         $user->name = $request->get('name');
         $user->email = $request->get('email');
         $user->role = $request->get('user', 'admin');

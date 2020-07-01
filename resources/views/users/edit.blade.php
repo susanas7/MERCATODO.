@@ -1,23 +1,16 @@
 @extends('layouts.app')
 @section('content')
-<html>
-<head>
-  <meta name="csrf-token" content="{{ csrf_token() }}">
-</head>
-<body>
-<form action="{{route('users.edit' , $user)}}" method="PUT" {{csrf_token()}}>
+<form action="{{route('users.update' , $user)}}" method="POST">
   @csrf
   @method('PUT')
-  <input type="hidden" name="_token" value="{{csrf_token()}}">
   <th><label name="name">Nombre</label></th>
-  <input type="text" name="name" placeholder="{{$user->name}}">
+  <input type="text" name="name" value="{{$user->name}}">
   <th><label name="email">Email</label></th>
-  <input type="text" name="email" placeholder="{{$user->email}}">
+  <input type="text" name="email" value="{{$user->email}}">
   <th><label name="role">Rol</label></th>
-  <input type="text" name="role" placeholder="{{$user->role}}">
+  <input type="text" name="role" value="{{$user->role}}">
   <th><label name="status">Estatus</label></th>
-  <input type="text" name="status" placeholder="{{$user->status}}">
-<form method="PUT" action="('users.update')">
-  @csrf
+  <input type="text" name="status" value="{{$user->status}}">
   <button type="submit" >Actualizar</button>
 </form>
+@endsection
