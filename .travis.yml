@@ -1,0 +1,13 @@
+language: php
+
+php:
+  7.4.7
+
+git:
+  depth: 3
+
+install:
+  composer install
+
+deploy:
+  github-token: $GITHUB_TOKEN

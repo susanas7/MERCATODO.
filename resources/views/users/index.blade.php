@@ -24,7 +24,7 @@
                           <td>{{ $user->email }}</td>
                           <td>{{ $user->role}}</td>
                           <td>
-                              <a href="{{route('users.edit', $user->id)}}">Editar<a/>
+                              <a href="{{route('users.edit', $user->id)}}">Editar</a>
                           </td>
                           <td>
                             <form action="{{ route('users.destroy', $user) }}" method="POST">
