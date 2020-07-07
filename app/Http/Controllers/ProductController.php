@@ -2,17 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class ProductController extends Controller
 {
-
-    public function __construct()
-    {
-      $this->middleware('admin');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -20,11 +13,10 @@ class UserController extends Controller
      */
     public function index()
     {
-      $users = User::latest()->get();
-      return view('users.index',[
-        'users' => $users
-      ]);
-
+        $products = Product::latest()->get();
+        return view('products.index', [
+            'products' => $products
+        ]);
     }
 
     /**
@@ -45,12 +37,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-      User::create([
-        'name' => $request->name,
-        'email' => $request->email,
-        'password' => $request->password,
-      ]);
-      return back();
+        //
     }
 
     /**
@@ -67,43 +54,34 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  string  $user 
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($id)
     {
-        return view('users.edit')->with('user', $user);
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         //
-        $user = User::find($id);
-        $user->name = $request->get('name');
-        $user->email = $request->get('email');
-        $user->role = $request->get('user', 'admin');
-        $user->status = $request->get('activo', 'inactivo');
-        $user->save();
-        return redirect('/users')->with('notice', 'El usuario ha sido modificado');
-  
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  string $user
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
-      $user->delete();
-      return back();
+        //
     }
 }
