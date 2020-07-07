@@ -27,7 +27,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('products.create');
     }
 
     /**
@@ -39,9 +39,10 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         Product::create([
-            'title' => $request->$title,
-            'slug' => $request->$slug,
-            'price' => $request->$price
+            'title' => $request->title,
+            'slug' => $request->slug,
+            'price' => $request->price,
+            'category_id' => $request->category_id,
         ]);
 
         return back();

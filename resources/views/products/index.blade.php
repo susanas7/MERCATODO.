@@ -6,6 +6,7 @@
             <div class="card">
                 <div class="card-header">Dashboard</div>
                   <div class="card-body">
+                       
                     <table class="table">
                       <thead>
                       <tr>
@@ -30,7 +31,6 @@
                               value="Eliminar"
                               onclick="return confirm('¿Desea eliminar?')">
                             </form>
-
                           </td>
                         </tr>
                         @endforeach
