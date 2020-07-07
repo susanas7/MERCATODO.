@@ -22,6 +22,16 @@
                           <td>{{ $product->title }}</td>
                           <td>{{ $product->price }}</td>
                           <td>{{ $product->category_id }}</td>
+                          <td>
+                            <form action="{{ route('products.destroy', $product) }}" method="POST">
+                              @method('DELETE')
+                              @csrf
+                              <input type="submit"
+                              value="Eliminar"
+                              onclick="return confirm('¿Desea eliminar?')">
+                            </form>
+
+                          </td>
                         </tr>
                         @endforeach
                       </tbody>
@@ -32,5 +42,6 @@
     </div>
 </div>
 
+{{$products->links()}}
 
 @endsection

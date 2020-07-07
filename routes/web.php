@@ -27,10 +27,5 @@ Route::delete('/users/{user}', 'UserController@destroy')->name('users.destroy');
 Route::get('/users/{user}/edit', 'UserController@edit')->name('users.edit');
 Route::put('/users/{user}/update', 'UserController@update')->name('users.update');
 
-//Route::get('/products', 'ProductController@index')->name('products.index');
-Route::get('/products', function(){
-    $products = App\Product::all();
-    return view('products.index', [
-        'products' => $products
-    ]);
-});
+Route::get('/products', 'ProductController@index')->name('products.index');
+Route::delete('/products/{product}', 'ProductController@destroy')->name('products.destroy');
