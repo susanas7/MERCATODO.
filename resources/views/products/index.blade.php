@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-header">Dashboard</div>
                   <div class="card-body">
-                       
+                  <a href="{{route('products.create')}}" class="btn btn-primary">Crear</a>
                     <table class="table">
                       <thead>
                       <tr>

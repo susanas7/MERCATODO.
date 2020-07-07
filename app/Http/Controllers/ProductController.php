@@ -45,7 +45,7 @@ class ProductController extends Controller
             'category_id' => $request->category_id,
         ]);
 
-        return back();
+        return redirect('/products');
     }
 
     /**
