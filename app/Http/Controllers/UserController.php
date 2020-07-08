@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use DB;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -21,7 +20,7 @@ class UserController extends Controller
      */
     public function index()
     {
-      $users = User::paginate(20)->with('imagesproducts:name')->get();
+      $users = User::paginate(20);
             return view('users.index',[
         'users' => $users
       ]);
@@ -62,7 +61,11 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+
+        return view('users.show', [
+          'user' => $user
+        ]);
     }
 
     /**

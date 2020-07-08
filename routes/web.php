@@ -21,14 +21,6 @@ Auth::routes([ 'verify' => 'true' ]);
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 
-Route::get('/users', 'UserController@index')->name('users.index');
-Route::post('/users/store', 'UserController@store')->name('users.store');
-Route::delete('/users/{user}', 'UserController@destroy')->name('users.destroy');
-Route::get('/users/{user}/edit', 'UserController@edit')->name('users.edit');
-Route::put('/users/{user}/update', 'UserController@update')->name('users.update');
-
-/*Route::get('/products', 'ProductController@index')->name('products.index');
-Route::post('/products/store', 'ProductCOntroller@store')->name('products.store');
-Route::delete('/products/{product}', 'ProductController@destroy')->name('products.destroy');*/
+Route::resource('/users', 'UserController');
 
 Route::resource('/products', 'ProductController');

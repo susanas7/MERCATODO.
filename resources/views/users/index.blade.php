@@ -24,6 +24,9 @@
                           <td>{{ $user->email }}</td>
                           <td>{{ $user->role}}</td>
                           <td>
+                            <a href="{{route('users.show', $user->id) }}" class="btn btn-sm btn-default">Ver</a>
+                          </td>
+                          <td>
                               <a href="{{route('users.edit', $user->id)}}">Editar</a>
                           </td>
                           <td>
