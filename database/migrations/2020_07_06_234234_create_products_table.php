@@ -16,7 +16,7 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('category_id')->nullable();
+            $table->integer('category_id')->nullable();
             $table->string('title');
             $table->string('slug');
             $table->enum('status', ['active', 'inactive'])->default('active');
