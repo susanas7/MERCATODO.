@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->string('slug');
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->integer('price')->nullable();
+            $table->integer('images')->unsigned();
             
             $table->timestamps();
         });
