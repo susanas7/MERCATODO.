@@ -80,7 +80,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::find($id);
+        return view('products.edit')->with('product', $product);
+
     }
 
     /**
@@ -92,7 +94,16 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product = Product::find($id);
+        $product->title = $request->get('title');
+        $product->slug = $request->get('slug');
+        $product->price = $request->get();
+        $product->status = $request->get('active', 'inactive');
+        $product->category_id = $request->get();
+        $product->img_route = $request->get();
+
+        $user->save();
+        return redirect('/products');
     }
 
     /**

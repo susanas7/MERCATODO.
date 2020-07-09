@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('content')
 
-<form action="{{route('products.store')}}" method="POST" enctype="multipart/form-data">
+<form action="{{route('products.update', $product)}}" method="POST" enctype="multipart/form-data">
   @csrf
-  <th><label name="name">Nombre</label></th>
+  <th><label name="title">Nombre</label></th>
   <input type="text" name="title">
   <th><label name="slug">Descripcion</label></th>
   <input type="text" name="slug">

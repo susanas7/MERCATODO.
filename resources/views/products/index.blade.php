@@ -29,6 +29,9 @@
                             <a href="{{route('products.show', $product->id) }}" class="btn btn-sm btn-default">Ver</a>
                           </td>
                           <td>
+                              <a href="{{route('products.edit', $product->id)}}">Editar</a>
+                          </td>
+                          <td>
                             <form action="{{ route('products.destroy', $product) }}" method="POST">
                               @method('DELETE')
                               @csrf
