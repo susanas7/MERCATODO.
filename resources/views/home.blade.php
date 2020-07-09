@@ -2,39 +2,22 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <tr>Productos</tr>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header"> Bienvenido</div>
+            <div class="card-header">Productos</div>
+            <div class="card-header" justify-content-center>
+                <div class="row">
+                    @foreach($products as $product)
+                        <div class="col-md-4 tect-md-center">
+                            <img src="images/{{$product->img_route}}" width="75">
+                            <h4>{{ $product->title }}</h4>
+                            <h4>Precio COP {{ $product->price }} </h4>
+                            <a class="btn btn-primary" href="{{route('home.show', $product->id)}}">Detalles</a>
+                        </div>
+                    @endforeach
                 </div>
-
-                <div class="panel-body">
-                    <p>
-                    <P ALIGN=center>{{ $products->total() }} productos | pagina {{ $products->currentPage() }} de {{ $products->lastPage() }}
-                    </p>
-
-                    <table class="table table-hover table-striped">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Producto</th>
-                                <th>Precio</th>
-                                <th>&nbsp;</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($products as $product)
-                            <tr>
-                                <td>{{$product->id}}</td>
-                                <td>{{$product->title}}</td>
-                                <td>{{$product->price}}</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            </div>                    
         </div>
     </div>
 </div>

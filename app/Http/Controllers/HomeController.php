@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -25,5 +26,14 @@ class HomeController extends Controller
     {
         $products = \App\Product::paginate(10);
         return view('home', compact('products'));
+    }
+
+    public function show($id)
+    {
+        $product = Product::find($id);
+
+        return view('show', [
+          'product' => $product
+        ]);
     }
 }
