@@ -10,6 +10,7 @@
                     <strong>Ver producto</strong>
                 </div>
                 <div class="panel-body">
+                    <p><td><img src="images/{{$product->img_route}}" width="250"></td>
                     <p><strong>Nombre:  </strong> {{$product->title}} </p>
                     <p><strong>Descripcion:  </strong>{{$product->slug}} </p>
                     <p><strong>Precio:  </strong>{{$product->price}} </p>

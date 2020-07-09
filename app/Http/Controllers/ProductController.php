@@ -38,12 +38,21 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        Product::create([
+        $input = $request->all();
+
+        if($archive=$request->file('file')){
+            $name_file=$archive->getClientOriginalName();
+            $archive->move('images', $name_file);
+            $input['img_route']=$name_file;
+        }
+
+        Product::create($input);
+        /*Product::create([
             'title' => $request->title,
             'slug' => $request->slug,
             'price' => $request->price,
             'category_id' => $request->category_id,
-        ]);
+        ]);*/
 
         return redirect('/products');
     }
