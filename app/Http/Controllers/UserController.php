@@ -92,8 +92,8 @@ class UserController extends Controller
         $user = User::find($id);
         $user->name = $request->get('name');
         $user->email = $request->get('email');
-        $user->role = $request->get('user', 'admin');
-        $user->status = $request->get('activo', 'inactivo');
+        $user->role = $request->get('role');
+        $user->status = $request->get('status');
         $user->save();
         return redirect('/users')->with('notice', 'El usuario ha sido modificado');
   

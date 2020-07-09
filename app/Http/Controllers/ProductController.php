@@ -94,16 +94,32 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $product = Product::find($id);
+       /* $product = Product::find($id);
         $product->title = $request->get('title');
         $product->slug = $request->get('slug');
-        $product->price = $request->get();
-        $product->status = $request->get('active', 'inactive');
-        $product->category_id = $request->get();
-        $product->img_route = $request->get();
+        $product->price = $request->get('price');
+       // $product->status = $request->get('active', 'inactive');
+        $product->category_id = $request->get('category_id');
+        $product->img_route = $request->get('img_route');
 
-        $user->save();
-        return redirect('/products');
+        $product->save();
+        return redirect('/products');*/
+
+        //actualiza todos los datos pero no actualiza la imagen
+
+        $product=Product::find($id);
+        if ($request->hasFile('img_route')){
+                // aquí compruebo que exista la foto anterior
+                if (\Storage::exists($product->img_route))
+                {
+                     // aquí la borro
+                     \Storage::delete($trabajador->img_route);
+                }
+                $trabajador->foto=\Storage::putFile('public', $request->file('img_route'));
+            }
+            $product->update($request->all());
+            return redirect("/products");
+
     }
 
     /**

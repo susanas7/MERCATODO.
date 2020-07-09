@@ -14,7 +14,7 @@ class AddColumnProducts extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->string('img_route');
+            $table->string('img_route')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AddColumnProducts extends Migration
     public function down()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->dropColumn('img_route');
+            $table->dropColumn('img_route')->nullable();
         });
     }
 }

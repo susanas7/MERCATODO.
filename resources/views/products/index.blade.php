@@ -29,14 +29,15 @@
                             <a href="{{route('products.show', $product->id) }}" class="btn btn-sm btn-default">Ver</a>
                           </td>
                           <td>
-                              <a href="{{route('products.edit', $product->id)}}">Editar</a>
+                              <a href="{{route('products.edit', $product->id)}}" >Editar</a>
                           </td>
                           <td>
-                            <form action="{{ route('products.destroy', $product) }}" method="POST">
+                            <form action="{{ route('products.destroy', $product) }}" method="POST" >
                               @method('DELETE')
                               @csrf
                               <input type="submit"
                               value="Eliminar"
+                              class="btn btn-danger"
                               onclick="return confirm('¿Desea eliminar?')">
                             </form>
                           </td>
