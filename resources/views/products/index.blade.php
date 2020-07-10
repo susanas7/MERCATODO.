@@ -21,7 +21,7 @@
                         @foreach ($products as $product)
                         <tr>
                           <td>{{ $product->id }}</td>
-                          <td><img src="images/{{$product->img_route}}" width="75"></td>
+                          <td><img src="{{ URL::to('/images/' . $product->img_route) }}" width="100"> </td>
                           <td>{{ $product->title }}</td>
                           <td>{{ $product->price }}</td>
                           <td>{{ $product->category_id }}</td>
