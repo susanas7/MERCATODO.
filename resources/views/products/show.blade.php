@@ -10,7 +10,7 @@
                     <strong>Ver producto</strong>
                 </div>
                 <div class="panel-body">
-                    <p><strong>Foto:  </strong><img src="images/{{$product->img_route}}" width="75"></p>
+                    <p><img src="{{ URL::to('/images/' . $product->img_route) }}" width="300" ></p>
                     <p><strong>Nombre:  </strong> {{$product->title}} </p>
                     <p><strong>Descripcion:  </strong>{{$product->slug}} </p>
                     <p><strong>Precio:  </strong>{{$product->price}} </p>
