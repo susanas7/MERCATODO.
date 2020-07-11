@@ -5,7 +5,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header"> Bienvenido</div>
-            <div class="card-header">Productos</div>
+            <div class="card-header"><P ALIGN=center> {{ $products->total() }} productos | página {{ $products->currentPage() }} de {{ $products->lastpage() }}</div>
             <div class="card-header justify-content-center">
                 <div class="row">
                     @foreach($products as $product)
@@ -22,7 +22,7 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h4 class="modal-title" id="muModalLabel">{{$product->title}}</h4>
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                                         </div>
                                         <div class="modal-body">
                                             <div align="center">
