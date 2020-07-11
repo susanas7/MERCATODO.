@@ -21,4 +21,11 @@ class Product extends Model
     {
         return $this->hasMany('App\ImgProducts');
     }
+
+    public function active(){
+        if($this->status=='active'){
+          return true;
+        }
+        return false;
+      }
 }
