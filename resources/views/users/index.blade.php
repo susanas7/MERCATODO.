@@ -8,6 +8,9 @@
             <div class="card-header"> Bienvenido</div>
                 <div class="card-header"><P ALIGN=center> {{ $users->total() }} usuarios | página {{ $users->currentPage() }} de {{ $users->lastpage() }}</div>
                   <div class="card-body">
+                  <div>
+                      <a href="{{route('users.create')}}" class="btn btn-primary">Crear</a>
+                    </div><br>
                     <table class="table">
                       <thead>
                       <tr>
@@ -43,6 +46,7 @@
                                               <p><h4>Email: {{$user->email}} </h4></p>
                                               <p><h4>Rol: {{$user->role}} </h4></p> 
                                               <p><h4>Estado: {{$user->status}} </h4></p>
+                                              <p><h4>Email verificado: {{$user->email_verified_at}} </h4></p>
                                               <p><h4>Fecha de creacion: {{$user->created_at}}</h4></p>  
                                               <p><h4>Ultima actualizacion: {{$user->updated_at}} </h4></p>
                                             </div>    

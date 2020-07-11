@@ -34,7 +34,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        
+      return view('users.create');
     }
 
     /**
@@ -49,8 +49,9 @@ class UserController extends Controller
         'name' => $request->name,
         'email' => $request->email,
         'password' => $request->password,
+        'role' => $request->role,
       ]);
-      return back();
+      return redirect('/users');
     }
 
     /**
