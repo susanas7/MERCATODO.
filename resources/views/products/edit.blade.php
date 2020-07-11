@@ -30,14 +30,14 @@
                             <label name="price" class="col-md-4 col-form-label text-md-right">Precio</label>
 
                             <div class="col-md-6">
-                                <input type="text" name="price" class="form-control" value="{{$product->price}}" >
+                                <input type="number" name="price" class="form-control" value="{{$product->price}}" >
                             </div>
                         </div>
                         <div class="form-group row">
                             <label name="category_id" class="col-md-4 col-form-label text-md-right">Categoria</label>
 
                             <div class="col-md-6">
-                                <input type="text" name="category_id" class="form-control" value="{{$product->category_id}}" >
+                                <input type="number" name="category_id" class="form-control" value="{{$product->category_id}}" >
                             </div>
                         </div>
                         <div class="form-group row">
