@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Http\Requests\Users\IndexRequest;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -18,12 +19,19 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-      $users = User::paginate(20);
+      $users = User::name($request->name)
+        ->orderBy('id', 'asc')
+        ->paginate(5);
+      return view('users.index', ['users' => $users]);
+
+
+      /*$users = User::paginate(20);
             return view('users.index',[
         'users' => $users
-      ]);
+      ]);*/
+
 
     }
 

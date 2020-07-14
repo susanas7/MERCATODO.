@@ -37,7 +37,7 @@
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h4 class="modal-title" id="muModalLabel">{{$product->title}}</h4>
+                                            <h4 class="modal-title" id="myModalLabel">{{$product->title}}</h4>
                                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                                         </div>
                                         <div class="modal-body">
