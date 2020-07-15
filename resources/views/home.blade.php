@@ -1,6 +1,33 @@
 @extends('layouts.app')
 
 @section('content')
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+        <h6>Busqueda de productos</h6>
+        <form action=" {{route('home')}} ">
+          <div class="row">
+            <div class="col" >
+              <input type="search" name="title" class="form-control form-control-navbar" placeholder="Nombre">
+            </div>
+            <div class="col" >
+              <input type="search" name="slug" class="form-control form-control-navbar" placeholder="Descripcion">
+            </div>
+            <div class="col">
+            <button type="submit" class="btn btn-default">Buscar</button>
+            <a href="{{ route('home') }}" class="btn btn-link">Regresar</a>
+            </div>
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><br>
+
 <div class="container">
     <div class="col-md-12">
         <div class="card">

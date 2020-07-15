@@ -12,12 +12,18 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::paginate(10);
+        $title = $request->get('title');
+        $slug = $request->get('slug');
+
+        $products = Product::title($title)->slug($slug)->paginate(20);
+        return view('products.index', ['products' => $products]);
+
+        /*$products = Product::paginate(10);
         return view('products.index', [
             'products' => $products
-        ]);
+        ]);*/
     }
 
     /**

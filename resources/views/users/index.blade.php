@@ -11,13 +11,13 @@
         <h4>Busqueda de usuarios</h4>
         <form action=" {{route('users.index')}} ">
           <div class="row">
-            <div class="form-group" >
+            <div class="col" >
               <input type="text" name="name" class="form-control form-control-navbar" placeholder="Nombre">
             </div>
-            <div class="form-group" >
+            <div class="col" >
               <input type="text" name="email" class="form-control form-control-navbar" placeholder="Email">
             </div>
-            <div class="form-group">
+            <div class="col">
             <button type="submit" class="btn btn-default">Buscar</button>
             <a href="{{ route('users.index') }}" class="btn btn-link">Regresar</a>
             </div>
@@ -33,7 +33,6 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-            <div class="card-header"> Bienvenido</div>
                 <div class="card-header"><P ALIGN=center> {{ $users->total() }} usuarios | página {{ $users->currentPage() }} de {{ $users->lastpage() }}</div>
                   <div class="card-body">
                     <div>

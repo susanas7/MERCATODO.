@@ -1,8 +1,35 @@
 @extends('layouts.app')
 @section('content')
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+        <h6>Busqueda de productos</h6>
+        <form action=" {{route('products.index')}} ">
+          <div class="row">
+            <div class="col" >
+              <input type="search" name="title" class="form-control form-control-navbar" placeholder="Nombre">
+            </div>
+            <div class="col" >
+              <input type="search" name="slug" class="form-control form-control-navbar" placeholder="Descripcion">
+            </div>
+            <div class="col">
+            <button type="submit" class="btn btn-default">Buscar</button>
+            <a href="{{ route('products.index') }}" class="btn btn-link">Regresar</a>
+            </div>
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><br>
+
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header"><P ALIGN=center> {{ $products->total() }} productos | página {{ $products->currentPage() }} de {{ $products->lastpage() }} </div>
                   <div class="card-body">
@@ -15,8 +42,10 @@
                         <th>ID</th>
                         <th>Imagen</th>
                         <th>Producto</th>
+                        <th>Descripcion</th>
                         <th>Precio</th>
                         <th>Categoria</th>
+                        <th>&nbsp;</th>
                         <th>&nbsp;</th>
                         <th>&nbsp;</th>
                         <th>&nbsp;</th>
@@ -27,6 +56,7 @@
                           <td>{{ $product->id }}</td>
                           <td><img src="{{ URL::to('/images/' . $product->img_route) }}" width="100"> </td>
                           <td>{{ $product->title }}</td>
+                          <td>{{ $product->slug }}</td>
                           <td>{{ $product->price }}</td>
                           <td>{{ $product->category_id }}</td>
                           <td>
@@ -77,12 +107,12 @@
                         @endforeach
                       </tbody>
                     </table>
+                    {{$products->links()}}
                   </div>
             </div>
         </div>
     </div>
 </div>
 
-{{$products->links()}}
 
 @endsection

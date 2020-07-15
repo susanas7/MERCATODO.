@@ -22,10 +22,15 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = \App\Product::paginate(10);
+        $title = $request->get('title');
+        $slug = $request->get('slug');
+
+        $products = Product::title($title)->slug($slug)->paginate(20);
         return view('home', compact('products'));
+        /*$products = \App\Product::paginate(10);
+        return view('home', compact('products'));*/
     }
 
     public function show($id)
