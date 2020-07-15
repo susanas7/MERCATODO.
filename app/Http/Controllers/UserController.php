@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+// use Illuminate\Http\Response;
+
 
 class UserController extends Controller
 {
@@ -18,12 +20,22 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-      $users = User::paginate(20);
+      $name = $request->get('name');
+      $email = $request->get('email');
+      $users = User::name($name)->email($email)->paginate(5);
+      return view('users.index', ['users' => $users]);
+
+      /*$users = User::name($request->name)
+        ->orderBy('id', 'asc')
+        ->paginate(5);
+      return view('users.index', ['users' => $users]);*/
+
+      /*$users = User::paginate(20);
             return view('users.index',[
         'users' => $users
-      ]);
+      ]);*/
 
     }
 
