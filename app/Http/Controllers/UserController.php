@@ -22,10 +22,16 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-      $name = $request->get('name');
+      
+      $search = $request->get('search.for');
+      $type = $request->get('type');
+      $users = User::search($type, $search)->paginate(5);
+      return view('users.index', ['users' => $users]);
+
+      /*$name = $request->get('name');
       $email = $request->get('email');
       $users = User::name($name)->email($email)->paginate(5);
-      return view('users.index', ['users' => $users]);
+      return view('users.index', ['users' => $users]);*/
 
       /*$users = User::name($request->name)
         ->orderBy('id', 'asc')

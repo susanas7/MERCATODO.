@@ -10,13 +10,17 @@
         <h4>Busqueda de usuarios</h4>
         <form action=" {{route('users.index')}} ">
           <div class="row">
-            <div class="form-group" >
-              <input type="search" name="name" class="form-control form-control-navbar" placeholder="Nombre">
+            <div class="form-control">
+              <select name="type" class="form-control mr-sm-2">
+                <option value="name">Nombre</option>
+                <option value="email">Email</option>
+              </select>
             </div>
-            <div class="form-group" >
-              <input type="search" name="email" class="form-control form-control-navbar" placeholder="Email">
-            </div>           
-            <div class="form-group">
+            <div class="form-control">
+              <input type="search" name="search.for" placeholder="Buscar">
+            </div>
+            
+
             <button type="submit" class="btn btn-default">Buscar</button>
             <a href="{{ route('users.index') }}" class="btn btn-link">Regresar</a>
             </div>

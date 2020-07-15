@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 //use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -55,6 +56,13 @@ class User extends Authenticatable implements MustVerifyEmail
     private function searchByField(Builder $query, string $field, string $value, string $operator = null): Builder
     {
         return $query->where($field, $operator, $value);
+    }
+
+    public function scopeSearch($query, $type, $search)
+    {
+        if( ($type) && ($search) ){
+            return $query->where($type, 'like', "%$search%");            
+        }
     }
 
 }
