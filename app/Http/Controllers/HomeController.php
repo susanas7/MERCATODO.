@@ -25,9 +25,8 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $title = $request->get('title');
-        $slug = $request->get('slug');
 
-        $products = Product::title($title)->slug($slug)->paginate(20);
+        $products = Product::title($title)->paginate(20);
         return view('home', compact('products'));
         /*$products = \App\Product::paginate(10);
         return view('home', compact('products'));*/

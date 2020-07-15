@@ -13,9 +13,6 @@
             <div class="col" >
               <input type="search" name="title" class="form-control form-control-navbar" placeholder="Nombre">
             </div>
-            <div class="col" >
-              <input type="search" name="slug" class="form-control form-control-navbar" placeholder="Descripcion">
-            </div>
             <div class="col">
             <button type="submit" class="btn btn-default">Buscar</button>
             <a href="{{ route('home') }}" class="btn btn-link">Regresar</a>
