@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Builder;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -44,9 +45,17 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
 
-    public function scopeEmail($query, $email)
+    public function scopeEmail(Builder $query, $email): Builder
     {
-        return $query->where('email', 'LIKE', "&$email%");
+        if(null !== $email){
+            return $this->searchByField($query, 'email', $email, '=');
+        }
+        return $query;
+    }
+
+    public function searchByField(Builder $query, string $field, string $value, string $operator = null): Builder
+    {
+        return $query->where($field, $operator, $value);
     }
 
 

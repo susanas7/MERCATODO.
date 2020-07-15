@@ -14,6 +14,9 @@
             <div class="form-group" >
               <input type="text" name="name" class="form-control form-control-navbar" placeholder="Nombre">
             </div>
+            <div class="form-group" >
+              <input type="text" name="email" class="form-control form-control-navbar" placeholder="Email">
+            </div>
             <div class="form-group">
             <button type="submit" class="btn btn-default">Buscar</button>
             <a href="{{ route('users.index') }}" class="btn btn-link">Regresar</a>
