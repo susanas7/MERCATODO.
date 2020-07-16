@@ -26,3 +26,5 @@ Route::get('/home/{product}', 'HomeController@show')->name('home.show');
 Route::resource('/users', 'UserController');
 
 Route::resource('/products', 'ProductController');
+
+Route::resource('/roles', 'RoleController');

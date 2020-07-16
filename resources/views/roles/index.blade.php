@@ -1,0 +1,87 @@
+@extends('layouts.app')
+
+@section('content')
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card">
+                <div class="card-header"><P ALIGN=center> {{ $roles->total() }} roles | página {{ $roles->currentPage() }} de {{ $roles->lastpage() }}</div>
+                  <div class="card-body">
+                    <div>                    
+                    <a href="{{route('roles.create')}}" class="btn btn-primary">Crear</a>
+                    </div><br>
+                    <table class="table">
+                      <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Descripcion</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                      </tr>
+                      </thead>
+                        @foreach ($roles as $role)
+                        <tr>
+                          <td>{{ $role->id }}</td>
+                          <td>{{ $role->name }}</td>
+                          <td>{{ $role->slug }}</td>
+                          <td>
+                            <a class="btn btn-success" data-toggle="modal" data-target="#{{$role->name}}" >Ver</a>
+                            <!-- ventana emergente-->
+                            <div class="modal fade" id="{{$role->name}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="muModalLabel">Usuario</h4>
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div><P ALIGN=center>
+                                              <p><h4>Nombre: {{$role->name}}</h4></p> 
+                                              <p><h4>Descripcion: {{$role->slug}} </h4></p>
+                                              <p><h4>Permisos:  </h4></p> 
+                                              <p><h4>Fecha de creacion: {{$role->created_at}}</h4></p>  
+                                              <p><h4>Ultima actualizacion: {{$role->updated_at}} </h4></p>
+                                            </div>    
+                                        </div>
+                                        <div class="modal-footer">
+                                        
+                                          <a class="btn btn-info" href="{{route('roles.edit', $role->id)}}" >Editar</a>
+                                                                                   
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                              
+                              
+
+                          </td>
+                          <td>
+                              <a class="btn btn-info" href="{{route('roles.edit', $role->id)}}">Editar</a>
+                          </td>
+                          <td>
+                            
+                              <form action="{{ route('roles.destroy', $role) }}" method="POST">
+                                @method('DELETE')
+                                @csrf
+                                <input type="submit"
+                                value="Eliminar"
+                                class="btn btn-danger"
+                                onclick="return confirm('¿Desea eliminar?')">
+                              </form>
+                            
+                          </td>
+                        </tr>
+                        @endforeach
+                      </tbody>
+                    </table>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{$roles->links()}}
+@endsection

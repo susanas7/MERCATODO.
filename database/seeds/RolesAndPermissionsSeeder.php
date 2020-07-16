@@ -40,13 +40,13 @@ class RolesAndPermissions extends Seeder
 
         //create roles and assign created permissions
         
-        $role = Role::create(['name' => 'editor']);
+        $role = Role::create(['name' => 'editor', 'slug' => 'Administrador de usuarios']);
         $role->givePermissionTo('read user');
         $role->givePermissionTo('update user');
         $role->givePermissionTo('read product');
         $role->givePermissionTo('update product');
 
-        $role = Role::create(['name' => 'moderator']);
+        $role = Role::create(['name' => 'moderator', 'slug' => 'Administrador de usuarios y productos']);
         $role->givePermissionTo('create user');
         $role->givePermissionTo('read user');
         $role->givePermissionTo('update user');
@@ -56,7 +56,7 @@ class RolesAndPermissions extends Seeder
         $role->givePermissionTo('update product');
         $role->givePermissionTo('delete product');
 
-        $role = Role::create(['name' => 'super-admin']);
+        $role = Role::create(['name' => 'super-admin', 'slug' => 'Administrador total']);
         $role->givePermissionTo(Permission::all());
 
     }
