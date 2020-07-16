@@ -30,7 +30,15 @@
                             <label name="role" class="col-md-4 col-form-label text-md-right">Role</label>
 
                             <div class="col-md-6">
-                                <input type="text" name="role" class="form-control" value="{{$user->role}}" >
+                            <select class="form-control" name="role">
+                            @foreach($roles as $key => $value)
+                                @if($user->hasRole($value))
+                                <option value=" {{ $value }} " selected> {{$value}} </option>
+                                @else
+                                <option value="{{ $value }}">{{ $value }}</option>
+                                @endif
+                            @endforeach
+                            </select>
                             </div>
                         </div>
                         <div class="form-group row">

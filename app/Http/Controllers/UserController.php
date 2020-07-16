@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Traits\HasRoles;
+
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -10,7 +13,7 @@ class UserController extends Controller
 
     public function __construct()
     {
-      $this->middleware('admin');
+      $this->middleware(['role:super-admin|editor|moderator']);
     }
 
     /**
@@ -48,7 +51,9 @@ class UserController extends Controller
      */
     public function create()
     {
-      return view('users.create');
+      $roles = Role::all()->pluck('name', 'id');
+
+      return view('users.create', compact('roles'));
     }
 
     /**
@@ -59,13 +64,19 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-      User::create([
-        'name' => $request->name,
-        'email' => $request->email,
-        'password' => $request->password,
-        'role' => $request->role,
-      ]);
-      return redirect('/users');
+      
+      $user = new User;
+
+      $user->name = $request->name;
+      $user->email = $request->email;
+      $user->password = bcrypt($request->password);
+
+      if($user->save()){
+        $user->assignRole($request->role);
+        return redirect('/users');
+      }
+
+     
     }
 
     /**
@@ -91,7 +102,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('users.edit')->with('user', $user);
+      $roles = Role::all()->pluck('name', 'id');  
+      return view('users.edit', compact('roles'))->with('user', $user);
     }
 
     /**
@@ -103,14 +115,18 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        $user = User::find($id);
-        $user->name = $request->get('name');
-        $user->email = $request->get('email');
-        $user->role = $request->get('role');
-        $user->status = $request->get('status');
+        $user = User::findOrFail($id);
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+
+        if($request->password != null){
+          $user->password = $request->password;
+        }
+        $user->syncRoles($request->role);
         $user->save();
-        return redirect('/users')->with('notice', 'El usuario ha sido modificado');
+
+        return redirect('/users');
   
     }
 

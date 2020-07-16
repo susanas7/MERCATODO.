@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -25,6 +26,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $title = $request->get('title');
+        //$role = $user->roles->implode('name', ',');
 
         $products = Product::title($title)->paginate(20);
         return view('home', compact('products'));
