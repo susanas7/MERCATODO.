@@ -29,7 +29,9 @@
                           <td>{{ $role->name }}</td>
                           <td>{{ $role->slug }}</td>
                           <td>
+                            @can('ver rol')
                             <a class="btn btn-success" data-toggle="modal" data-target="#{{$role->name}}" >Ver</a>
+                            @endcan
                             <!-- ventana emergente-->
                             <div class="modal fade" id="{{$role->name}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                 <div class="modal-dialog" role="document">
@@ -49,9 +51,9 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                        
+                                          @can('editar rol')
                                           <a class="btn btn-info" href="{{route('roles.edit', $role->id)}}" >Editar</a>
-                                                                                  
+                                          @endcan                                          
                                         </div>
                                         </div>
                                 </div>
@@ -61,7 +63,7 @@
                               <a class="btn btn-info" href="{{route('roles.edit', $role->id)}}">Editar</a>
                           </td>
                           <td>
-                            
+                            @can('eliminar rol')
                               <form action="{{ route('roles.destroy', $role) }}" method="POST">
                                 @method('DELETE')
                                 @csrf
@@ -70,7 +72,7 @@
                                 class="btn btn-danger"
                                 onclick="return confirm('¿Desea eliminar?')">
                               </form>
-                            
+                            @endcan
                           </td>
                         </tr>
                         @endforeach

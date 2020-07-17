@@ -13,7 +13,7 @@ class UserController extends Controller
 
     public function __construct()
     {
-      $this->middleware(['role:super-admin|editor|moderator']);
+      $this->middleware(['permission:ver usuario']);
     }
 
     /**

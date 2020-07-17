@@ -61,7 +61,9 @@
                           <td>{{ $product->category_id }}</td>
                           <td>
                             <!--<a href="{{route('products.show', $product->id) }}" class="btn btn-sm btn-default">Ver</a>-->
+                            @can('ver producto')
                             <a class="btn btn-success" data-toggle="modal" data-target="#{{$product->title}}" >Ver</a>
+                            @endcan
                               <!-- ventana emergente-->
                               <div class="modal fade" id="{{$product->title}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                 <div class="modal-dialog" role="document">
@@ -83,17 +85,22 @@
                                               <p><h4>Ultima actualizacion: {{$product->updated_at}} </h4></p>
                                             </div>    
                                         </div>
+                                        @can('editar producto')
                                         <div class="modal-footer">
-                                        <a class="btn btn-info" href="{{route('products.edit', $product->id)}}" >Editar</a>                                           
+                                        <a class="btn btn-info" href="{{route('products.edit', $product->id)}}" >Editar</a>  
+                                        @endcan                                         
                                         </div>
                                     </div>
                                 </div>
                             </div>
                           </td>
                           <td>
+                            @can('editar producto')
                               <a class="btn btn-info" href="{{route('products.edit', $product->id)}}" >Editar</a>
+                            @endcan
                           </td>
                           <td>
+                            @can('eliminar producto')
                             <form action="{{ route('products.destroy', $product) }}" method="POST" >
                               @method('DELETE')
                               @csrf
@@ -102,6 +109,7 @@
                               class="btn btn-danger"
                               onclick="return confirm('¿Desea eliminar?')">
                             </form>
+                            @endcan
                           </td>
                         </tr>
                         @endforeach

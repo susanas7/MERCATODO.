@@ -36,21 +36,21 @@
                     <ul class="navbar-nav mr-auto">
 
                     <ul class="nav navbar-nav">
-                        @can('read product')
+                        @can('ver producto')
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('products.index')}}">Productos</a>
                             </li>
                         @endcan
-                        @can('read user')
+                        @can('ver usuario')
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('users.index')}}">Usuarios</a>
                             </li>
                         @endcan
-
+                        @can('ver rol')
                         <li class="nav-item">
                                 <a class="nav-link" href="{{ route('roles.index')}}">Roles</a>
                             </li>
-                    
+                        @endcan
                     
                     </ul>
 

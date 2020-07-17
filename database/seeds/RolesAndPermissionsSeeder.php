@@ -18,45 +18,47 @@ class RolesAndPermissions extends Seeder
         app()['cache']->forget('spatie.permission.cache');
 
         //create permissions
-        Permission::create(['name' => 'create user']);
-        Permission::create(['name' => 'read user']);
-        Permission::create(['name' => 'update user']);
-        Permission::create(['name' => 'delete user']);
+        Permission::create(['name' => 'crear usuario']);
+        Permission::create(['name' => 'ver usuario']);
+        Permission::create(['name' => 'editar usuario']);
+        Permission::create(['name' => 'eliminar usuario']);
 
-        Permission::create(['name' => 'create role']);
-        Permission::create(['name' => 'read role']);
-        Permission::create(['name' => 'update role']);
-        Permission::create(['name' => 'delete role']);
+        Permission::create(['name' => 'crear rol']);
+        Permission::create(['name' => 'ver rol']);
+        Permission::create(['name' => 'editar rol']);
+        Permission::create(['name' => 'eliminar rol']);
 
-        Permission::create(['name' => 'create permission']);
-        Permission::create(['name' => 'read permission']);
-        Permission::create(['name' => 'update permission']);
-        Permission::create(['name' => 'delete permission']);
+        Permission::create(['name' => 'crear permission']);
+        Permission::create(['name' => 'ver permission']);
+        Permission::create(['name' => 'editar permission']);
+        Permission::create(['name' => 'eliminar permission']);
 
-        Permission::create(['name' => 'create product']);
-        Permission::create(['name' => 'read product']);
-        Permission::create(['name' => 'update product']);
-        Permission::create(['name' => 'delete product']);
+        Permission::create(['name' => 'crear producto']);
+        Permission::create(['name' => 'ver producto']);
+        Permission::create(['name' => 'editar producto']);
+        Permission::create(['name' => 'eliminar producto']);
 
         //create roles and assign created permissions
         
-        $role = Role::create(['name' => 'editor', 'slug' => 'Administrador de usuarios']);
-        $role->givePermissionTo('read user');
-        $role->givePermissionTo('update user');
-        $role->givePermissionTo('read product');
-        $role->givePermissionTo('update product');
+        $role = Role::create(['name' => 'Administrador de usuarios', 'slug' => 'Tiene permiso para ver, editar, crear, y eliminar usuarios']);
+        $role->givePermissionTo('ver usuario');
+        $role->givePermissionTo('editar usuario');
+        $role->givePermissionTo('crear usuario');
+        $role->givePermissionTo('eliminar usuario');
+        $role->givePermissionTo('ver rol');
 
-        $role = Role::create(['name' => 'moderator', 'slug' => 'Administrador de usuarios y productos']);
-        $role->givePermissionTo('create user');
-        $role->givePermissionTo('read user');
-        $role->givePermissionTo('update user');
-        $role->givePermissionTo('delete user');
-        $role->givePermissionTo('create product');
-        $role->givePermissionTo('read product');
-        $role->givePermissionTo('update product');
-        $role->givePermissionTo('delete product');
+        $role = Role::create(['name' => 'Administrador de productos', 'slug' => 'Tiene permiso para ver, editar, crear, y eliminar productos']);
+        $role->givePermissionTo('crear producto');
+        $role->givePermissionTo('ver producto');
+        $role->givePermissionTo('editar producto');
+        $role->givePermissionTo('eliminar producto');
 
-        $role = Role::create(['name' => 'super-admin', 'slug' => 'Administrador total']);
+        $role = Role::create(['name' => 'Auditor', 'slug' => 'Ver roles, usuarios y productos']);
+        $role->givePermissionTo('ver usuario');
+        $role->givePermissionTo('ver producto');
+        $role->givePermissionTo('ver rol');
+
+        $role = Role::create(['name' => 'Super-administrador', 'slug' => 'Administrador global']);
         $role->givePermissionTo(Permission::all());
 
     }

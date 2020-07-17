@@ -36,7 +36,7 @@
                 <div class="card-header"><P ALIGN=center> {{ $users->total() }} usuarios | página {{ $users->currentPage() }} de {{ $users->lastpage() }}</div>
                   <div class="card-body">
                     <div>
-                    @can('create user')
+                    @can('crear usuario')
                       <a href="{{route('users.create')}}" class="btn btn-primary">Crear</a>
                     @endcan
                     </div><br>
@@ -60,7 +60,7 @@
                           <td>{{ $user->roles->implode('name', ',')}}</td>
                           <td>
                             <!--<a href="{{route('users.show', $user->id) }}" class="btn btn-sm btn-default">Ver</a>-->
-                            @can('read user')
+                            @can('ver usuario')
                               <a class="btn btn-success" data-toggle="modal" data-target="#{{$user->name}}" >Ver</a>
                             @endcan
                               <!-- ventana emergente-->
@@ -83,7 +83,7 @@
                                             </div>    
                                         </div>
                                         <div class="modal-footer">
-                                        @can('edit users')
+                                        @can('editar usuario')
                                           <a class="btn btn-info" href="{{route('users.edit', $user->id)}}" >Editar</a>
                                         @endcan                                           
                                         </div>
@@ -95,7 +95,7 @@
                               <a class="btn btn-info" href="{{route('users.edit', $user->id)}}">Editar</a>
                           </td>
                           <td>
-                            @can('delete user')
+                            @can('eliminar usuario')
                               <form action="{{ route('users.destroy', $user) }}" method="POST">
                                 @method('DELETE')
                                 @csrf
