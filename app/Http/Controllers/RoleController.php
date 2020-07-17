@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Traits\HasRoles;
+
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
@@ -26,9 +28,12 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        
+        $permissions = Permission::get();
+
+        return view('roles.create', compact('permissions'));
     }
 
     /**
@@ -39,7 +44,30 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /*$role = Role::create($request->all()); NO ME FUNCIONA
+        $role->permissions()->sync($request->get('permissions'));
+
+        return redirect('roles');*/
+
+        
+        /*$role = Role::create($request->all());
+        
+        $permissions = Permission::find($id);
+        $permission = Permission::find($id);
+        //$role->syncPermissions($permissions);
+        $permissions->syncRoles($role);
+        $role->permissions()->sync($request->get('permissions'));
+
+        return redirect('/roles');*/
+        $role = new Role;
+
+      $role->name = $request->name;
+      $role->slug = $request->slug;
+
+      if($role->save()){
+        $role->syncPermission($request->permissions);
+        return redirect('/roles');}
+      
     }
 
     /**
@@ -90,7 +118,7 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Role $role)
     {
         $role->delete();
         return back();

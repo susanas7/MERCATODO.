@@ -62,7 +62,7 @@
                           </td>
                           <td>
                             
-                              <form action="{{ route('roles.destroy', $roles) }}" method="POST">
+                              <form action="{{ route('roles.destroy', $role) }}" method="POST">
                                 @method('DELETE')
                                 @csrf
                                 <input type="submit"
