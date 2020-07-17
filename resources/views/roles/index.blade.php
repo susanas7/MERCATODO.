@@ -35,36 +35,34 @@
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h4 class="modal-title" id="muModalLabel">Usuario</h4>
+                                            <h4 class="modal-title" id="muModalLabel">Rol: {{$role->name}}</h4>
                                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                                         </div>
                                         <div class="modal-body">
                                             <div><P ALIGN=center>
                                               <p><h4>Nombre: {{$role->name}}</h4></p> 
                                               <p><h4>Descripcion: {{$role->slug}} </h4></p>
-                                              <p><h4>Permisos:  </h4></p> 
+                                              <p><h4>Permisos:
+                                              <h4> {{ $role->permissions->implode('name' , ', ')}} </h4>
                                               <p><h4>Fecha de creacion: {{$role->created_at}}</h4></p>  
                                               <p><h4>Ultima actualizacion: {{$role->updated_at}} </h4></p>
-                                            </div>    
+                                            </div>
                                         </div>
                                         <div class="modal-footer">
                                         
                                           <a class="btn btn-info" href="{{route('roles.edit', $role->id)}}" >Editar</a>
-                                                                                   
+                                                                                  
                                         </div>
-                                    </div>
+                                        </div>
                                 </div>
                             </div>
-                              
-                              
-
                           </td>
                           <td>
                               <a class="btn btn-info" href="{{route('roles.edit', $role->id)}}">Editar</a>
                           </td>
                           <td>
                             
-                              <form action="{{ route('roles.destroy', $role) }}" method="POST">
+                              <form action="{{ route('roles.destroy', $roles) }}" method="POST">
                                 @method('DELETE')
                                 @csrf
                                 <input type="submit"
@@ -82,6 +80,6 @@
             </div>
         </div>
     </div>
-</div>
+</div>                                        
 {{$roles->links()}}
 @endsection

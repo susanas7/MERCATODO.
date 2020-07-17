@@ -13,11 +13,12 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Role $role)
     {
         $roles = Role::paginate();
+        $permissions = Permission::all()->pluck('name', 'id');
 
-        return view('roles.index', compact('roles'));
+        return view('roles.index', compact('roles', 'permissions'));
     }
 
     /**
