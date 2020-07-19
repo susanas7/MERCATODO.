@@ -59,16 +59,18 @@
                           <td>{{ $user->email }}</td>
                           <td>{{ $user->roles->implode('name', ',')}}</td>
                           <td>
-                            <!--<a href="{{route('users.show', $user->id) }}" class="btn btn-sm btn-default">Ver</a>-->
-                            @can('ver usuario')
-                              <a class="btn btn-success" data-toggle="modal" data-target="#{{$user->name}}" >Ver</a>
+                          @can('ver usuario')
+                            <a href="{{route('users.show', $user->id) }}" class="btn btn-success">Ver</a>
+                          @endcan
+                            <!--@can('ver usuario')
+                              <a class="btn btn-success"  id="#{{$user->id}}" data-toggle="modal" data-target="#{{$user->id}}" >Ver</a>
                             @endcan
-                              <!-- ventana emergente-->
-                              <div class="modal fade" id="{{$user->name}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                              
+                              <div class="modal fade" id="{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h4 class="modal-title" id="muModalLabel">Usuario</h4>
+                                            <h4 class="modal-title" id="myModalLabel">Usuario</h4>
                                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                                         </div>
                                         <div class="modal-body">
@@ -89,7 +91,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                              
+                            </div>-->
                           </td>
                           <td>
                               <a class="btn btn-info" href="{{route('users.edit', $user->id)}}">Editar</a>

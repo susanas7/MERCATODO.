@@ -29,10 +29,12 @@
                           <td>{{ $role->name }}</td>
                           <td>{{ $role->slug }}</td>
                           <td>
+                          <a href="{{route('roles.show', $role->id)}}">Ver</a>
+                            <!--
                             @can('ver rol')
                             <a class="btn btn-success" data-toggle="modal" data-target="#{{$role->name}}" >Ver</a>
                             @endcan
-                            <!-- ventana emergente-->
+                            ventana emergente
                             <div class="modal fade" id="{{$role->name}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -57,7 +59,7 @@
                                         </div>
                                         </div>
                                 </div>
-                            </div>
+                            </div>-->
                           </td>
                           <td>
                               <a class="btn btn-info" href="{{route('roles.edit', $role->id)}}">Editar</a>

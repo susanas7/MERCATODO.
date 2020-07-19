@@ -13,15 +13,15 @@ class UsersSeeder extends Seeder
     public function run()
     {
         $editor = User::create([
-            'name' => 'Admin user',
+            'name' => 'User',
             'email' => 'admin.user@mail.com',
             'password' => bcrypt('12345678'),
         ]);
 
-        $editor->assignRole('Administrador de usuarios');
+        $editor->assignRole('Gestor de usuarios');
 
         $moderator = User::create([
-            'name' => 'Admin prod',
+            'name' => 'Prod',
             'email' => 'admin.prod@mail.com',
             'password' => bcrypt('12345678'),
         ]);
@@ -42,6 +42,6 @@ class UsersSeeder extends Seeder
             'password' => bcrypt('12345678'),
         ]);
 
-        $admin->assignRole('SUper-administrador');
+        $admin->assignRole('Super-administrador');
     }
 }

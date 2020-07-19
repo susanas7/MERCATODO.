@@ -60,11 +60,12 @@
                           <td>{{ $product->price }}</td>
                           <td>{{ $product->category_id }}</td>
                           <td>
-                            <!--<a href="{{route('products.show', $product->id) }}" class="btn btn-sm btn-default">Ver</a>-->
+                            <a href="{{route('products.show', $product->id) }}" class="btn btn-sm btn-default">Ver</a>
+                            <!--
                             @can('ver producto')
                             <a class="btn btn-success" data-toggle="modal" data-target="#{{$product->title}}" >Ver</a>
                             @endcan
-                              <!-- ventana emergente-->
+                               ventana emergente
                               <div class="modal fade" id="{{$product->title}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -92,7 +93,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
                           </td>
                           <td>
                             @can('editar producto')

@@ -24,6 +24,7 @@ class RoleController extends Controller
      */
     public function index(Role $role)
     {
+        $id = Role::find($role);
         $roles = Role::paginate();
         $permissions = Permission::all()->pluck('name', 'id');
 
@@ -85,7 +86,11 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-        //
+        $role = Role::find($id);
+
+        return view('roles.show', [
+          'role' => $role
+        ]);
     }
 
     /**
