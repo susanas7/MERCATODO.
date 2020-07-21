@@ -48,6 +48,8 @@ Route::middleware(['auth'])->group(function(){
     
     Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit')
         ->middleware('permission:editar usuario');
+
+    Route::get('/users/changeStatus/{id}', 'UserController@changeStatus')->name('users.changeStatus');
 });
 
 

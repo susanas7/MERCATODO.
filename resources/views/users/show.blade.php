@@ -34,7 +34,13 @@
                             <label name="status" class="col-md-4 col-form-label text-md-right">Estado:</label>
 
                             <div class="col-md-6">
-                                <label name="name" class="col-md-4 col-form-label text-md-right">{{$user->status}}</label>
+                                <label name="name" class="col-md-4 col-form-label text-md-right">
+                                @if($user->is_active==1)
+                                    Activo
+                                @else
+                                    Inactivo
+                                @endif
+                                </label>
                             </div>
                         </div>
                         <div class="form-group row">

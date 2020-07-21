@@ -141,4 +141,15 @@ class UserController extends Controller
       $user->delete();
       return back();
     }
+    public function changeStatus($id){
+      $user = User::find($id);
+      
+      $user->is_active=!$user->is_active;
+
+      if($user->save()){
+        return redirect(route('users.index'));
+      }else{
+        return redirect(route('users.index'));
+      }
+    }
 }

@@ -46,7 +46,9 @@
                         <th>ID</th>
                         <th>Nombre</th>
                         <th>Email</th>
+                        <th>Estado</th>
                         <th>Rol</th>
+                        <th>&nbsp;</th>
                         <th>&nbsp;</th>
                         <th>&nbsp;</th>
                         <th>&nbsp;</th>
@@ -57,6 +59,13 @@
                           <td>{{ $user->id }}</td>
                           <td>{{ $user->name }}</td>
                           <td>{{ $user->email }}</td>
+                          <td>
+                            @if($user->is_active==1)
+                              Activo
+                            @else
+                              Inactivo
+                            @endif
+                          </td>
                           <td>{{ $user->roles->implode('name', ',')}}</td>
                           <td>
                           @can('ver usuario')
@@ -93,6 +102,13 @@
                                 </div>
                               
                             </div>-->
+                          </td>
+                          <td>
+                          @if($user->is_active==1)
+                            <a href="{{route('users.changeStatus', $user->id)}}" class="btn btn-success">Desactivar</a>
+                          @else
+                            <a href="{{route('users.changeStatus', $user->id)}}" class="btn btn-success" >Activar</a>
+                          @endif
                           </td>
                           <td>
                               <a class="btn btn-info" href="{{route('users.edit', $user->id)}}">Editar</a>
