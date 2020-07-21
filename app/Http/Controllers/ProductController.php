@@ -11,6 +11,7 @@ class ProductController extends Controller
     public function __construct()
     {
       $this->middleware(['permission:ver producto']);
+      $this->middleware(['verified']);
     }
 
     /**

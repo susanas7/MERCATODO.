@@ -14,6 +14,7 @@ class RoleController extends Controller
     public function __construct()
     {
       $this->middleware(['permission:ver rol']);
+      $this->middleware(['verified']);
     }
 
 
