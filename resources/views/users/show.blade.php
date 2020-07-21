@@ -27,7 +27,7 @@
                             <label name="role" class="col-md-4 col-form-label text-md-right">Role:</label>
 
                             <div class="col-md-6">
-                                <label name="name" class="col-md-4 col-form-label text-md-right">{{$user->role}}</label>
+                                <label name="name" class="col-md-4 col-form-label text-md-right">{{ $user->roles->implode('name', ',')}}</label>
                             </div>
                         </div>
                         <div class="form-group row">

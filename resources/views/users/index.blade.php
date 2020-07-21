@@ -31,7 +31,7 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header"><P ALIGN=center> {{ $users->total() }} usuarios | página {{ $users->currentPage() }} de {{ $users->lastpage() }}</div>
                   <div class="card-body">
@@ -105,9 +105,9 @@
                           </td>
                           <td>
                           @if($user->is_active==1)
-                            <a href="{{route('users.changeStatus', $user->id)}}" class="btn btn-success">Desactivar</a>
+                            <a href="{{route('users.changeStatus', $user->id)}}" class="btn btn-warning">Desactivar</a>
                           @else
-                            <a href="{{route('users.changeStatus', $user->id)}}" class="btn btn-success" >Activar</a>
+                            <a href="{{route('users.changeStatus', $user->id)}}" class="btn btn-warning" >Activar</a>
                           @endif
                           </td>
                           <td>

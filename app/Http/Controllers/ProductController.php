@@ -146,4 +146,17 @@ class ProductController extends Controller
 
         return back();
     }
+
+    public function changeStatus($id){
+        $product = Product::find($id);
+        
+        $product->is_active=!$product->is_active;
+  
+        if($product->save()){
+          return redirect(route('products.index'));
+        }else{
+          return redirect(route('products.index'));
+        }
+      }
+
 }

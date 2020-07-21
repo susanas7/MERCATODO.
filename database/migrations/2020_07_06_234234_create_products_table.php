@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->integer('category_id')->nullable();
             $table->string('title');
             $table->string('slug');
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->boolean('is_active')->default(1);
             $table->integer('price')->nullable();
             $table->integer('images')->nullable();
             

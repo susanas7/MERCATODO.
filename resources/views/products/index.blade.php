@@ -29,7 +29,7 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header"><P ALIGN=center> {{ $products->total() }} productos | página {{ $products->currentPage() }} de {{ $products->lastpage() }} </div>
                   <div class="card-body">
@@ -45,6 +45,7 @@
                         <th>Descripcion</th>
                         <th>Precio</th>
                         <th>Categoria</th>
+                        <th>Estado</th>
                         <th>&nbsp;</th>
                         <th>&nbsp;</th>
                         <th>&nbsp;</th>
@@ -60,7 +61,14 @@
                           <td>{{ $product->price }}</td>
                           <td>{{ $product->category_id }}</td>
                           <td>
-                            <a href="{{route('products.show', $product->id) }}" class="btn btn-sm btn-default">Ver</a>
+                          @if($product->is_active==1)
+                              Activo
+                            @else
+                              Inactivo
+                            @endif
+                          </td>
+                          <td>
+                            <a href="{{route('products.show', $product->id) }}" class="btn btn-success">Ver</a>
                             <!--
                             @can('ver producto')
                             <a class="btn btn-success" data-toggle="modal" data-target="#{{$product->title}}" >Ver</a>
@@ -94,6 +102,13 @@
                                     </div>
                                 </div>
                             </div>-->
+                          </td>
+                          <td>
+                          @if($product->is_active==1)
+                            <a href="{{route('products.changeStatus', $product->id)}}" class="btn btn-warning">Desactivar</a>
+                          @else
+                            <a href="{{route('products.changeStatus', $product->id)}}" class="btn btn-warning" >Activar</a>
+                          @endif
                           </td>
                           <td>
                             @can('editar producto')

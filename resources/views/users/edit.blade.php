@@ -41,13 +41,6 @@
                             </select>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label name="status" class="col-md-4 col-form-label text-md-right">Estado</label>
-
-                            <div class="col-md-6">
-                                <input type="text" name="status" class="form-control" value="{{$user->status}}"></input>
-                            </div>
-                        </div>
                         <div class="form-group"><P ALIGN=center>
                         </div>
                         <button class="btn btn-success" type="submit" >Actualizar</button>

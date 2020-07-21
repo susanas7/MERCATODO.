@@ -78,6 +78,8 @@ Route::middleware(['auth'])->group(function(){
     
     Route::get('products/{product}/edit', 'ProductController@edit')->name('products.edit')
         ->middleware('permission:editar producto');
+
+    Route::get('/products/changeStatus/{id}', 'ProductController@changeStatus')->name('products.changeStatus');
 });
 
 //Route::resource('/roles', 'RoleController');
