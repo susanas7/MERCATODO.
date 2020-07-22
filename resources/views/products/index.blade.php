@@ -29,7 +29,7 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-12">
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header"><P ALIGN=center> {{ $products->total() }} productos | página {{ $products->currentPage() }} de {{ $products->lastpage() }} </div>
                   <div class="card-body">
@@ -40,11 +40,9 @@
                       <thead>
                       <tr>
                         <th>ID</th>
-                        <th>Imagen</th>
+                        <th>&nbsp;</th>
                         <th>Producto</th>
-                        <th>Descripcion</th>
                         <th>Precio</th>
-                        <th>Categoria</th>
                         <th>Estado</th>
                         <th>&nbsp;</th>
                         <th>&nbsp;</th>
@@ -57,9 +55,7 @@
                           <td>{{ $product->id }}</td>
                           <td><img src="{{ URL::to('/images/' . $product->img_route) }}" width="100"> </td>
                           <td>{{ $product->title }}</td>
-                          <td>{{ $product->slug }}</td>
                           <td>{{ $product->price }}</td>
-                          <td>{{ $product->category_id }}</td>
                           <td>
                           @if($product->is_active==1)
                               Activo
