@@ -45,15 +45,8 @@
                                 <input type="number" name="category_id" class="form-control" value="{{$product->category_id}}" >
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label name="status" class="col-md-4 col-form-label text-md-right">Estado</label>
-
-                            <div class="col-md-6">
-                                <input type="text" name="status" class="form-control" value="{{$product->status}}"></input>
-                            </div>
-                        </div>
                         <div class="form-group"><P ALIGN=center>
-                        <input accept="image/*" type="file" name="file" >
+                        <input type="file" name="img_route" >
                         </div>
                         <button class="btn btn-success" type="submit" >Actualizar</button>
                     </form>

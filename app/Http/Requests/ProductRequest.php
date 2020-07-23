@@ -28,7 +28,6 @@ class ProductRequest extends FormRequest
             'slug' => 'required|max:200',
             'category_id' => 'required',
             'price' => 'required|numeric|min:0',
-            'img_route' => 'mimes:jpg,jpeg,bmp,png'
         ];
     }
 }

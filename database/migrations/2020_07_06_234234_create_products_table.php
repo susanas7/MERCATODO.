@@ -21,7 +21,6 @@ class CreateProductsTable extends Migration
             $table->string('slug');
             $table->boolean('is_active')->default(1);
             $table->integer('price');
-            $table->integer('images')->nullable();
             
             $table->timestamps();
         });

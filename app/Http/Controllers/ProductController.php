@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -52,7 +53,7 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        $input = $request->all();
+        /*$input = $request->all();
 
         if($archive=$request->file('file')){
             $name_file=$archive->getClientOriginalName();
@@ -68,6 +69,18 @@ class ProductController extends Controller
             'category_id' => $request->category_id,
         ]);*/
 
+        $product = new Product;
+        $product->title = $request->title;
+        $product->slug = $request->slug;
+        $product->price = $request->price;
+        $product->category_id = $request->category_id;
+        $product->img_route = $request->img_route;
+        $product->save();
+
+        if($request->file('img_route')){
+            $product->img_route = $request->file('img_route')->store('images', 'public');
+            $product->save();
+        }
         return redirect('/products');
     }
 
@@ -121,18 +134,29 @@ class ProductController extends Controller
 
         //actualiza todos los datos pero no actualiza la imagen
 
-        $product=Product::find($id);
+        /*$product=Product::find($id);
         if ($request->hasFile('img_route')){
                 // aquí compruebo que exista la foto anterior
                 if (\Storage::exists($product->img_route))
                 {
                      // aquí la borro
-                     \Storage::delete($trabajador->img_route);
+                     \Storage::delete($product->img_route);
                 }
-                $trabajador->foto=\Storage::putFile('public', $request->file('img_route'));
+                $product->img_route=\Storage::putFile('public', $request->file('img_route'));
             }
             $product->update($request->all());
-            return redirect("/products");
+            return redirect("/products");*/
+
+        //dd($request->all());
+        $product = Product::find($id);
+        $product->update($request->all());
+
+        if($request->file('img_route')){
+            Storage::disk('public')->delete($product->img_route);
+            $product->img_route = $request->file('img_route')->store('images','public');
+            $product->save();
+        }
+        return redirect ('products');
 
     }
 
@@ -144,6 +168,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        Storage::disk('public')->delete($product->img_route);
         $product->delete();
 
         return back();

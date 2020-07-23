@@ -49,4 +49,9 @@ class Product extends Model
       {
           return $query->where($field, $operator, $value);
       }
+
+      public function getGetImageAttribute(){
+          if($this->img_route)
+          return url("storage/$this->img_route");
+      }
 }

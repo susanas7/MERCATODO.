@@ -34,7 +34,7 @@
                 <div class="row">
                     @foreach($products as $product)
                         <div class="col-md-4 tect-md-center" align="center">
-                            <br><br><img src="{{ URL::to('/images/' . $product->img_route) }}" style="width:250px ; heigth:250px">
+                            <br><br><img src="{{ $product->get_image }}" class="card-img-top">
                             <!--<img src="images/{{$product->img_route}}" width="75">-->
                             <h4>{{ $product->title }}</h4>
                             <h4>Precio COP {{ $product->price }} </h4>
