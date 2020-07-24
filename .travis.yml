@@ -23,8 +23,3 @@ notifications:
       - susana.s7@hotmail.com
     on_success: always
     on_failure: always
-
-deploy:
-  provider: heroku
-  on:
-    all_branches: true
