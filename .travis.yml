@@ -24,8 +24,7 @@ notifications:
     on_success: always
     on_failure: always
 
-branches:
-  only:
-  - master
-  - develop
-  - test
+deploy:
+  provider: heroku
+  on:
+    all_branches: true
