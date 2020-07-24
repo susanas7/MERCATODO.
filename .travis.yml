@@ -11,7 +11,7 @@ deploy:
 
 before_script:
   - cp .env.travis .env
-  - mysql -e 'create database homestead_test;'
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS homestead_test; USE homestead_test;'
   - composer self-update
   - composer install --no-interaction
 
