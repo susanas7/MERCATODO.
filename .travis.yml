@@ -23,3 +23,9 @@ notifications:
       - susana.s7@hotmail.com
     on_success: always
     on_failure: always
+
+branches:
+  only:
+  - master
+  - develop
+  - test
