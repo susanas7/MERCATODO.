@@ -10,10 +10,10 @@ deploy:
   github-token: $GITHUB_TOKEN
 
 before_script:
-  - cp .env.travis .env
-  - mysql -e 'CREATE DATABASE IF NOT EXISTS homestead_test; USE homestead_test;'
-  - composer self-update
-  - composer install --no-interaction
+  - cp .env.example .env
+  - composer install
+  - php artisan key:generate
+  - php artisan jwt:secret
 
 script:
   -vendor/bin/phpunit
