@@ -6,11 +6,15 @@ php:
 install:
   composer install
 
+services:
+  - mysql
+
 deploy:
   github-token: $GITHUB_TOKEN
 
 before_script:
-  - cp .env.example .env
+  - cp .env.travis .env
+  - sudo mysql -e 'CREATE DATABASE `workshop-laravel-test`;'
   - composer install
   - php artisan key:generate
 
