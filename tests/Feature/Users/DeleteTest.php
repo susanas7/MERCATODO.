@@ -14,7 +14,7 @@ class DeleteTest extends TestCase
     use WithoutMiddleware;
 
     /** @test */
-    public function testExample()
+    public function aUserCanBeDeleted()
     {
         $this->withoutExceptionHandling();
         $user = factory(User::class)->create();

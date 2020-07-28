@@ -10,5 +10,6 @@ $factory->define(Product::class, function (Faker $faker) {
         'title' => $faker->sentence(4),
         'slug' => $faker->slug(4),
         'price' => rand('10', '20'),
+        'category_id' => rand('1', '4')
         ];
 });

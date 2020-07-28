@@ -43,7 +43,7 @@ Route::middleware(['auth'])->group(function(){
         ->middleware('permission:eliminar usuario');
     
     Route::put('users/{user}', 'UserController@update')->name('users.update')
-        ;
+        ->middleware('permission:editar usuario');
     
     Route::get('users/{user}', 'UserController@show')->name('users.show')
         ->middleware('permission:ver usuario');
