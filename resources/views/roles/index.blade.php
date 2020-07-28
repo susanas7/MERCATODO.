@@ -8,18 +8,13 @@
             <div class="card">
                 <div class="card-header"><P ALIGN=center> {{ $roles->total() }} roles | página {{ $roles->currentPage() }} de {{ $roles->lastpage() }}</div>
                   <div class="card-body">
-                    <div>                    
-                    <a href="{{route('roles.create')}}" class="btn btn-primary">Crear</a>
-                    </div><br>
+                    <br>
                     <table class="table">
                       <thead>
                       <tr>
                         <th>ID</th>
                         <th>Nombre</th>
                         <th>Descripcion</th>
-                        <th>&nbsp;</th>
-                        <th>&nbsp;</th>
-                        <th>&nbsp;</th>
                         <th>&nbsp;</th>
                       </tr>
                       </thead>
@@ -60,21 +55,6 @@
                                         </div>
                                 </div>
                             </div>-->
-                          </td>
-                          <td>
-                              <a class="btn btn-info" href="{{route('roles.edit', $role->id)}}">Editar</a>
-                          </td>
-                          <td>
-                            @can('eliminar rol')
-                              <form action="{{ route('roles.destroy', $role) }}" method="POST">
-                                @method('DELETE')
-                                @csrf
-                                <input type="submit"
-                                value="Eliminar"
-                                class="btn btn-danger"
-                                onclick="return confirm('¿Desea eliminar?')">
-                              </form>
-                            @endcan
                           </td>
                         </tr>
                         @endforeach
