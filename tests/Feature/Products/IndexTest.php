@@ -15,7 +15,7 @@ class IndexTest extends TestCase
     use WithoutMiddleware;
 
     /** @test */
-    public function testExample()
+    public function aUserCanListProducts()
     {
         $this->withoutExceptionHandling();
         //$this->expectException(AuthenticationException::class);
