@@ -9,11 +9,10 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-
     public function __construct()
     {
-      $this->middleware(['permission:ver producto']);
-      $this->middleware(['verified']);
+        $this->middleware(['permission:ver producto']);
+        $this->middleware(['verified']);
     }
 
     /**
@@ -77,7 +76,7 @@ class ProductController extends Controller
         $product->img_route = $request->img_route;
         $product->save();
 
-        if($request->file('img_route')){
+        if ($request->file('img_route')) {
             $product->img_route = $request->file('img_route')->store('images', 'public');
             $product->save();
         }
@@ -109,7 +108,6 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         return view('products.edit')->with('product', $product);
-
     }
 
     /**
@@ -121,16 +119,16 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, $id)
     {
-       /*$product = Product::find($id);
-        $product->title = $request->get('title');
-        $product->slug = $request->get('slug');
-        $product->price = $request->get('price');
-        $product->status = $request->get('status');
-        $product->category_id = $request->get('category_id');
-        $product->img_route = $request->get('img_route');
+        /*$product = Product::find($id);
+         $product->title = $request->get('title');
+         $product->slug = $request->get('slug');
+         $product->price = $request->get('price');
+         $product->status = $request->get('status');
+         $product->category_id = $request->get('category_id');
+         $product->img_route = $request->get('img_route');
 
-        $product->save();
-        return redirect('/products');*/
+         $product->save();
+         return redirect('/products');*/
 
         //actualiza todos los datos pero no actualiza la imagen
 
@@ -151,13 +149,12 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product->update($request->all());
 
-        if($request->file('img_route')){
+        if ($request->file('img_route')) {
             Storage::disk('public')->delete($product->img_route);
-            $product->img_route = $request->file('img_route')->store('images','public');
+            $product->img_route = $request->file('img_route')->store('images', 'public');
             $product->save();
         }
         return redirect()->route('products  .index');
-
     }
 
     /**
@@ -174,16 +171,16 @@ class ProductController extends Controller
         return back();
     }
 
-    public function changeStatus($id){
+    public function changeStatus($id)
+    {
         $product = Product::find($id);
         
         $product->is_active=!$product->is_active;
   
-        if($product->save()){
-          return redirect(route('products.index'));
-        }else{
-          return redirect(route('products.index'));
+        if ($product->save()) {
+            return redirect(route('products.index'));
+        } else {
+            return redirect(route('products.index'));
         }
-      }
-
+    }
 }

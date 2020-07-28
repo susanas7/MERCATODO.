@@ -21,7 +21,7 @@ class UpdateTest extends TestCase
 
         $user = factory(User::class)->create();
 
-        $this->put(route('users.show' , $user), [
+        $this->put(route('users.show', $user), [
             'name' =>'Elisa',
             'email' => 'elisa@mail.com',
         ]);
@@ -30,7 +30,5 @@ class UpdateTest extends TestCase
             'name' =>'Elisa',
             'email' => 'elisa@mail.com',
         ]);
-        
-
     }
 }

@@ -9,7 +9,6 @@ use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 
-
 class UserTest extends TestCase
 {
     use RefreshDatabase;
@@ -17,7 +16,6 @@ class UserTest extends TestCase
     /** @test */
     public function aUserCanBeCreated()
     {
-
         $this->withoutExceptionHandling();
         $this->expectException(\Illuminate\Auth\AuthenticationException::class);
 
@@ -32,6 +30,5 @@ class UserTest extends TestCase
             'email' => 'elisa@mail.com',
             'password' => '12345678'
         ]);
-        
     }
 }

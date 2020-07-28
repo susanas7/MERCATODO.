@@ -30,6 +30,5 @@ class CreateTest extends TestCase
             'updated_at' => $product->updated_at,
             'created_at' => $product->created_at,
         ]);
-
     }
 }

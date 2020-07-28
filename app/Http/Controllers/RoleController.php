@@ -10,11 +10,10 @@ use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
-
     public function __construct()
     {
-      $this->middleware(['permission:ver rol']);
-      $this->middleware(['verified']);
+        $this->middleware(['permission:ver rol']);
+        $this->middleware(['verified']);
     }
 
 
@@ -46,5 +45,4 @@ class RoleController extends Controller
           'role' => $role
         ]);
     }
-
 }

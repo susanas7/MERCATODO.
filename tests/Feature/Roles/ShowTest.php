@@ -20,7 +20,7 @@ class ShowTest extends TestCase
         $this->withoutExceptionHandling();
 
         $role = factory(Role::class)->create();
-        $response = $this->get(route('roles.show' , $role));
+        $response = $this->get(route('roles.show', $role));
         $response->assertStatus(200);
         $response->assertViewIs('roles.show');
     }

@@ -22,7 +22,7 @@ class DeleteTest extends TestCase
         $this->delete('products/{$product->id}');
 
     
-       $this->assertDatabaseMissing('products', [
+        $this->assertDatabaseMissing('products', [
             'id' => $product->id,
             'category_id' => $product->category_id,
             'title' => $product->title,

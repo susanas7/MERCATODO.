@@ -9,7 +9,6 @@ use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 
-
 class ShowTest extends TestCase
 {
     use RefreshDatabase;
@@ -22,10 +21,8 @@ class ShowTest extends TestCase
         //$this->expectException(\Illuminate\Auth\AuthenticationException::class);
 
         $user = factory(User::class)->create();
-        $response = $this->get(route('users.show' , $user));
+        $response = $this->get(route('users.show', $user));
         $response->assertStatus(200);
         $response->assertViewIs('users.show');
-
-
     }
 }

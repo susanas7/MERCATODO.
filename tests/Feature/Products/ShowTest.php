@@ -20,7 +20,7 @@ class ShowTest extends TestCase
         $this->withoutExceptionHandling();
 
         $product = factory(Product::class)->create();
-        $response = $this->get(route('products.show' , $product));
+        $response = $this->get(route('products.show', $product));
         $response->assertStatus(200);
         $response->assertViewIs('products.show');
     }

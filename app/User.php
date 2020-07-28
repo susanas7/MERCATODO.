@@ -8,7 +8,6 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Builder;
 use Spatie\Permission\Traits\HasRoles;
 
-
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
@@ -52,7 +51,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function scopeEmail(Builder $query, $email): Builder
     {
-        if(null !== $email){
+        if (null !== $email) {
             return $this->searchByField($query, 'email', $email, '=');
         }
         return $query;
@@ -62,7 +61,4 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $query->where($field, $operator, $value);
     }
-
-
-
 }

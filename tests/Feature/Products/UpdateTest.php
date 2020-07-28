@@ -17,10 +17,9 @@ class UpdateTest extends TestCase
     /** @test */
     public function aProductCanBeUpdated()
     {
-
         $product = factory(Product::class)->create();
 
-        $this->put(route('products.show' , $product), [
+        $this->put(route('products.show', $product), [
             'title' =>'pan pita',
             'slug' => 'masa texturizada',
             'price' => '19',
@@ -35,8 +34,5 @@ class UpdateTest extends TestCase
             'category_id' =>'2',
             'img_route' => 'images/sDFKDt03wBqktBU1KYYqDcJPEPPO4bOpdD8CzK7M.jpeg'
         ]);
-        
-
     }
-
 }

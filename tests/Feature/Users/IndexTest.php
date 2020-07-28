@@ -8,7 +8,6 @@ use Tests\TestCase;
 use App\User;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 
-
 class IndexTest extends TestCase
 {
     use RefreshDatabase;
@@ -29,7 +28,7 @@ class IndexTest extends TestCase
 
         $responseUsers = $response->getOriginalContent()['users'];
 
-        $responseUsers->each(function($item) use ($user) {
+        $responseUsers->each(function ($item) use ($user) {
             $this->assertEquals($user->id, $item->id);
         });
     }

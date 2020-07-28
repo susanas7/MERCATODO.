@@ -12,11 +12,10 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-
     public function __construct()
     {
-      $this->middleware(['permission:ver usuario']);
-      $this->middleware(['verified']);
+        $this->middleware(['permission:ver usuario']);
+        $this->middleware(['verified']);
     }
 
     /**
@@ -26,25 +25,22 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+        $name = $request->get('name');
+        $email = $request->get('email');
 
-      $name = $request->get('name');
-      $email = $request->get('email');
+        $users = User::name($name)->email($email)->paginate(10);
+        return view('users.index', ['users' => $users]);
 
-      $users = User::name($name)->email($email)->paginate(10);
-      return view('users.index', ['users' => $users]);
-
-      /*$users = User::name($request->name)
-        ->orderBy('id', 'asc')
-        ->paginate(5);
-      return view('users.index', ['users' => $users]);*/
+        /*$users = User::name($request->name)
+          ->orderBy('id', 'asc')
+          ->paginate(5);
+        return view('users.index', ['users' => $users]);*/
 
 
       /*$users = User::paginate(20);
             return view('users.index',[
         'users' => $users
       ]);*/
-
-
     }
 
     /**
@@ -54,9 +50,9 @@ class UserController extends Controller
      */
     public function create()
     {
-      $roles = Role::all()->pluck('name', 'id');
+        $roles = Role::all()->pluck('name', 'id');
 
-      return view('users.create', compact('roles'));
+        return view('users.create', compact('roles'));
     }
 
     /**
@@ -67,19 +63,16 @@ class UserController extends Controller
      */
     public function store(CreateRequest $request)
     {
-      
-      $user = new User;
+        $user = new User;
 
-      $user->name = $request->name;
-      $user->email = $request->email;
-      $user->password = bcrypt($request->password);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
 
-      if($user->save()){
-        $user->assignRole($request->role);
-        return redirect()->route('users.index');
-      }
-
-     
+        if ($user->save()) {
+            $user->assignRole($request->role);
+            return redirect()->route('users.index');
+        }
     }
 
     /**
@@ -100,14 +93,14 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  string  $user 
+     * @param  string  $user
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-      $roles = Role::all()->pluck('name', 'id');
-      $user = User::find($id);
-      return view('users.edit', ['user' => $user, 'roles' => $roles]);
+        $roles = Role::all()->pluck('name', 'id');
+        $user = User::find($id);
+        return view('users.edit', ['user' => $user, 'roles' => $roles]);
     }
 
     /**
@@ -119,7 +112,7 @@ class UserController extends Controller
      */
     public function update(UpdateRequest $request, $id)
     {
-      $user = User::findOrFail($id);
+        $user = User::findOrFail($id);
 
         $user->name = $request->name;
         $user->email = $request->email;
@@ -128,7 +121,6 @@ class UserController extends Controller
 
         //return redirect('/users');
         return redirect()->route('users.index');
-
     }
 
     /**
@@ -139,20 +131,21 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-      $user->delete();
-      return back();
+        $user->delete();
+        return back();
     }
 
 
-    public function changeStatus($id){
-      $user = User::find($id);
+    public function changeStatus($id)
+    {
+        $user = User::find($id);
       
-      $user->is_active=!$user->is_active;
+        $user->is_active=!$user->is_active;
 
-      if($user->save()){
-        return redirect(route('users.index'));
-      }else{
-        return redirect(route('users.index'));
-      }
+        if ($user->save()) {
+            return redirect(route('users.index'));
+        } else {
+            return redirect(route('users.index'));
+        }
     }
 }

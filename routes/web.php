@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redis;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,7 +26,7 @@ Route::get('/home/{product}', 'HomeController@show')->name('home.show');
 
 //Route::resource('/users', 'UserController');
 
-Route::middleware(['auth'])->group(function(){
+Route::middleware(['auth'])->group(function () {
 
     //usuarios
     Route::post('users', 'UserController@store')->name('users.store')
@@ -57,7 +56,7 @@ Route::middleware(['auth'])->group(function(){
 
 //Route::resource('/products', 'ProductController');
 
-Route::middleware(['auth'])->group(function(){
+Route::middleware(['auth'])->group(function () {
 
     //productos
     Route::post('products', 'ProductController@store')->name('products.store')
@@ -86,7 +85,7 @@ Route::middleware(['auth'])->group(function(){
 
 //Route::resource('/roles', 'RoleController');
 
-Route::middleware(['auth'])->group(function(){
+Route::middleware(['auth'])->group(function () {
 
     //roles
     Route::post('roles', 'RoleController@store')->name('roles.store')

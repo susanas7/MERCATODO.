@@ -25,7 +25,7 @@ class IndexTest extends TestCase
         $response->assertOk();
 
         $responseProducts = $response->getOriginalContent()['products'];
-        $responseProducts->each(function($item) use ($product) {
+        $responseProducts->each(function ($item) use ($product) {
             $this->assertEquals($product->id, $item->id);
         });
     }

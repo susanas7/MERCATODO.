@@ -24,7 +24,7 @@ class IndexTest extends TestCase
         $response = $this->get(route('roles.index'));
         $response->assertOk();
         $responseRoles = $response->getOriginalContent()['roles'];
-        $responseRoles->each(function($item) use ($role) {
+        $responseRoles->each(function ($item) use ($role) {
             $this->assertEquals($role->id, $item->id);
         });
     }
