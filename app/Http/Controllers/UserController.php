@@ -76,7 +76,7 @@ class UserController extends Controller
 
       if($user->save()){
         $user->assignRole($request->role);
-        return redirect('/users');
+        return redirect()->route('users.index');
       }
 
      
@@ -126,8 +126,9 @@ class UserController extends Controller
         $user->syncRoles($request->role);
         $user->save();
 
-        return redirect('/users');
-  
+        //return redirect('/users');
+        return redirect()->route('users.index');
+
     }
 
     /**
@@ -141,6 +142,8 @@ class UserController extends Controller
       $user->delete();
       return back();
     }
+
+
     public function changeStatus($id){
       $user = User::find($id);
       

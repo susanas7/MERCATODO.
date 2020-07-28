@@ -81,7 +81,7 @@ class ProductController extends Controller
             $product->img_route = $request->file('img_route')->store('images', 'public');
             $product->save();
         }
-        return redirect('/products');
+        return redirect()->route('products.index');
     }
 
     /**
@@ -156,7 +156,7 @@ class ProductController extends Controller
             $product->img_route = $request->file('img_route')->store('images','public');
             $product->save();
         }
-        return redirect ('products');
+        return redirect()->route('products  .index');
 
     }
 
