@@ -16,7 +16,7 @@
                 <div class="card-body">
                     <form action="{{route('users.update', $user)}}" method="POST">
                         @csrf
-                        @method('PATCH')
+                        @method('PUT')
 
                         <div class="form-group row">
                             <label name="name" class="col-md-4 col-form-label text-md-right">Nombre</label>
