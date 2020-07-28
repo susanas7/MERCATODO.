@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\User;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
-use  App\Http\Requests\UserRequest;
+use  App\Http\Requests\User\CreateRequest;
+use  App\Http\Requests\User\UpdateRequest;
 
 use Illuminate\Http\Request;
 
@@ -64,7 +65,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequest $request)
+    public function store(CreateRequest $request)
     {
       
       $user = new User;
@@ -102,10 +103,11 @@ class UserController extends Controller
      * @param  string  $user 
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($id)
     {
-      $roles = Role::all()->pluck('name', 'id');  
-      return view('users.edit', compact('roles'))->with('user', $user);
+      $roles = Role::all()->pluck('name', 'id');
+      $user = User::find($id);
+      return view('users.edit', ['user' => $user, 'roles' => $roles]);
     }
 
     /**
@@ -115,16 +117,12 @@ class UserController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
-        $user = User::findOrFail($id);
+      $user = User::findOrFail($id);
 
         $user->name = $request->name;
         $user->email = $request->email;
-
-        if($request->password != null){
-          $user->password = $request->password;
-        }
         $user->syncRoles($request->role);
         $user->save();
 

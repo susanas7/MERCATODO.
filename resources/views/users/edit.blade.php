@@ -1,6 +1,11 @@
 @extends('layouts.app')
 @section('content')
 
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        @include('users.fragment.error')
+    </div>
+</div>
 
 <div class="container">
     <div class="row justify-content-center">
@@ -11,7 +16,7 @@
                 <div class="card-body">
                     <form action="{{route('users.update', $user)}}" method="POST">
                         @csrf
-                        @method('PUT')
+                        @method('PATCH')
 
                         <div class="form-group row">
                             <label name="name" class="col-md-4 col-form-label text-md-right">Nombre</label>

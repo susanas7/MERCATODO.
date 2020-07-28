@@ -9,21 +9,27 @@ use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 
-
-class ShowTest extends TestCase
+class UpdateTest extends TestCase
 {
     use RefreshDatabase;
     use WithoutMiddleware;
 
     /** @test */
-    public function aUserCanSeeDetailsOfUsers()
+    public function aUserCanBeUpdated()
     {
         $this->withoutExceptionHandling();
-        //$this->expectException(\Illuminate\Auth\AuthenticationException::class);
 
         $user = factory(User::class)->create();
-        $response = $this->get(route('users.show' , $user));
-        $response->assertStatus(200);
 
+        $this->put(route('users.show' , $user), [
+            'name' =>'Elisa',
+            'email' => 'elisa@mail.com',
+        ]);
+
+        $this->assertDatabaseHas('users', [
+            'name' =>'Elisa',
+            'email' => 'elisa@mail.com',
+        ]);
+        
     }
 }

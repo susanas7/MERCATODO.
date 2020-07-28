@@ -5,14 +5,32 @@ namespace Tests\Feature\Users;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\User;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+
 
 class IndexTest extends TestCase
 {
+    use RefreshDatabase;
+    use WithoutMiddleware;
+    
     /** @test */
-    public function aUserCanSeeDetailsOfUsers()
+    public function aUserCanListUsers()
     {
-        $response = $this->get(route('users.index'));
+        $this->withoutExceptionHandling();
 
-        $response->assertRedirect('login');
+        $user = factory(User::class)->create();
+
+        $response = $this->actingAs($user)
+            ->get(route('users.index'));
+
+        $response->assertOk();
+        //$response->assertViewIs('users.index');
+
+        $responseUsers = $response->getOriginalContent()['users'];
+
+        $responseUsers->each(function($item) use ($user) {
+            $this->assertEquals($user->id, $item->id);
+        });
     }
 }

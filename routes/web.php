@@ -42,8 +42,8 @@ Route::middleware(['auth'])->group(function(){
     Route::delete('users/{user}', 'UserController@destroy')->name('users.destroy')
         ->middleware('permission:eliminar usuario');
     
-    Route::put('users/{user}', 'UserController@update')->name('users.update')
-        ->middleware('permission:editar usuario');
+    Route::patch('users/{user}', 'UserController@update')->name('users.update')
+        ;
     
     Route::get('users/{user}', 'UserController@show')->name('users.show')
         ->middleware('permission:ver usuario');
