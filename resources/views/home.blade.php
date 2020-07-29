@@ -66,9 +66,10 @@
                         </div>
                     @endforeach
                 </div>
-            </div>                    
+                <br>
+                {{$products->links()}}  
+            </div>                 
         </div>
     </div>
 </div>
-{{$products->links()}}
 @endsection

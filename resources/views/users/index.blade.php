@@ -31,7 +31,7 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-12">
+        <div class="col-md-12" >
             <div class="card">
                 <div class="card-header"><P ALIGN=center> {{ $users->total() }} usuarios | página {{ $users->currentPage() }} de {{ $users->lastpage() }}</div>
                   <div class="card-body">
@@ -129,10 +129,11 @@
                         @endforeach
                       </tbody>
                     </table>
+                    {{$users->links()}}
                   </div>
             </div>
         </div>
     </div>
 </div>
-{{$users->links()}}
+
 @endsection
