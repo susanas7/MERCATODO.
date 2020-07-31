@@ -11095,7 +11095,7 @@ form .txt_field {
 }
 
 #box-crud {
-  position: absolute;
+  position: relative;
   border-radius: 20px;
   background: white;
   align-content: center;
@@ -11106,6 +11106,7 @@ form .txt_field {
   border-radius: 20px;
   background: white;
   align-content: center;
+  box-shadow: 11px 8px 52px rgba(18, 18, 18, 0.35);
 }
 
 #show-crud {

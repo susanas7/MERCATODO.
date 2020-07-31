@@ -1,5 +1,5 @@
 #box-crud{
-    position: absolute;
+    position: relative;
     border-radius: 20px;
     background: white;
     align-content: center;
@@ -9,6 +9,7 @@
     border-radius: 20px;
     background: white;
     align-content: center;
+    box-shadow: 11px 8px 52px rgba(18,18,18, .35);
 }
 #show-crud{
     color: #85C829;
