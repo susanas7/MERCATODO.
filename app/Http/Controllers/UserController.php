@@ -14,7 +14,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['permission:ver usuario']);
+        $this->middleware(['role:Gestor de usuarios|Super-administrador']);
         $this->middleware(['verified']);
     }
 

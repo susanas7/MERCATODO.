@@ -53,10 +53,10 @@ class RolesAndPermissions extends Seeder
         $role->givePermissionTo('editar producto');
         $role->givePermissionTo('eliminar producto');
 
-        $role = Role::create(['name' => 'Auditor', 'slug' => 'Ver roles, usuarios y productos']);
+        /*$role = Role::create(['name' => 'Auditor', 'slug' => 'Ver roles, usuarios y productos']);
         $role->givePermissionTo('ver usuario');
         $role->givePermissionTo('ver producto');
-        $role->givePermissionTo('ver rol');
+        $role->givePermissionTo('ver rol');*/
 
         $role = Role::create(['name' => 'Super-administrador', 'slug' => 'Administrador global']);
         $role->givePermissionTo(Permission::all());

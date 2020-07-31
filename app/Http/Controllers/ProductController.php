@@ -11,7 +11,7 @@ class ProductController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['permission:ver producto']);
+        $this->middleware(['role:Administrador de productos|Super-administrador']);
         $this->middleware(['verified']);
     }
 
