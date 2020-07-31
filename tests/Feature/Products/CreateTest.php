@@ -29,6 +29,7 @@ class CreateTest extends TestCase
             'price' => $product->price,
             'updated_at' => $product->updated_at,
             'created_at' => $product->created_at,
+            'img_route' => $product->img_route
         ]);
     }
 }
