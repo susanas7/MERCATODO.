@@ -18,11 +18,9 @@ class ShowTest extends TestCase
     public function aUserCanSeeDetailsOfUsers()
     {
         $this->withoutExceptionHandling();
-        //$this->expectException(\Illuminate\Auth\AuthenticationException::class);
 
         $user = factory(User::class)->create();
         $response = $this->get(route('users.show', $user));
         $response->assertStatus(200);
-        $response->assertViewIs('users.show');
     }
 }
