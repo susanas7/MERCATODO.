@@ -1,0 +1,73 @@
+#box-crud{
+    position: absolute;
+    border-radius: 20px;
+    background: white;
+    align-content: center;
+}
+#box-search-crud{
+    position: relative;
+    border-radius: 20px;
+    background: white;
+    align-content: center;
+}
+#show-crud{
+    color: #85C829;
+    align-content: center;
+    border: 1px solid #85C829;
+    border-radius: 10px;    
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+}
+#status-crud{
+    color: #CDB936;
+    align-content: center;
+    border: 1px solid #CDB936;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+}
+#edit-crud{
+    color: #2ED5D3;
+    align-content: center;
+    border: 1px solid #2ED5D3;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+}
+#delete-crud{
+    color: #D23232;
+    align-content: center;
+    border: 1px solid #D23232;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+}
+#btn-search-crud{
+    color: #218F91;
+    align-content: center;
+    //border: 1px solid #35EFF2;
+    //border-radius: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+}
+#btn-refresh-crud{
+    color: #103C3D;
+    align-content: center;
+    //border: 1px solid #103C3D;
+    //border-radius: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+}
+

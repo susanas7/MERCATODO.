@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="center">
-    <h1>Login</h1>
+    <h1>Ingresar</h1>
     <form method="POST" action="{{route('login')}}">
         @csrf 
         <div class="txt_field">
@@ -28,12 +28,12 @@
         </div>
         <div>
         @if (Route::has('password.request'))
-            <a class="btn btn-link" href="{{ route('password.request') }}">
-                {{ __('Forgot Your Password?') }}
+            <a id="btn-forgot" href="{{ route('password.request') }}">
+                ¿Olvidó su contraseña?
             </a>
         @endif
         <br>
-            <input type="submit" value="Ingresar">
+            <input id="btn-login-register" type="submit" value="Ingresar">
         </div>
     </form>
 </div>

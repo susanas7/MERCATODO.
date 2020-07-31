@@ -6,7 +6,7 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-8">
-      <div class="card">
+      <div class="card" id="box-search-crud">
         <div class="card-body">
         <h6>Busqueda de usuarios</h6>
         <form action=" {{route('users.index')}} ">
@@ -18,8 +18,8 @@
               <input type="text" name="email" class="form-control form-control-navbar" placeholder="Email">
             </div>
             <div class="col">
-            <button type="submit" class="btn btn-default">Buscar</button>
-            <a href="{{ route('users.index') }}" class="btn btn-link">Regresar</a>
+            <button type="submit" id="btn-search-crud" class="btn btn-link">Buscar</button>
+            <a href="{{ route('users.index') }}" id="btn-refresh-crud" class="btn btn-link">Regresar</a>
             </div>
           </div>
         </form>
@@ -32,7 +32,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12" >
-            <div class="card">
+            <div class="card"  id="box-crud">
                 <div class="card-header"><P ALIGN=center> {{ $users->total() }} usuarios | página {{ $users->currentPage() }} de {{ $users->lastpage() }}</div>
                   <div class="card-body">
                     <div>
@@ -69,7 +69,7 @@
                           <td>{{ $user->roles->implode('name', ',')}}</td>
                           <td>
                           @can('ver usuario')
-                            <a href="{{route('users.show', $user->id) }}" class="btn btn-success">Ver</a>
+                            <a href="{{route('users.show', $user->id) }}" id="show-crud" class="btn btn-link">Ver</a>
                           @endcan
                             <!--@can('ver usuario')
                               <a class="btn btn-success"  id="#{{$user->id}}" data-toggle="modal" data-target="#{{$user->id}}" >Ver</a>
@@ -105,13 +105,13 @@
                           </td>
                           <td>
                           @if($user->is_active==1)
-                            <a href="{{route('users.changeStatus', $user->id)}}" class="btn btn-warning">Desactivar</a>
+                            <a href="{{route('users.changeStatus', $user->id)}}" id="status-crud" class="btn btn-link">Desactivar</a>
                           @else
-                            <a href="{{route('users.changeStatus', $user->id)}}" class="btn btn-warning" >Activar</a>
+                            <a href="{{route('users.changeStatus', $user->id)}}" id="status-crud" class="btn btn-link" >Activar</a>
                           @endif
                           </td>
                           <td>
-                              <a class="btn btn-info" href="{{route('users.edit', $user->id)}}">Editar</a>
+                              <a class="btn btn-link" id="edit-crud" href="{{route('users.edit', $user->id)}}">Editar</a>
                           </td>
                           <td>
                             @can('eliminar usuario')
@@ -120,7 +120,8 @@
                                 @csrf
                                 <input type="submit"
                                 value="Eliminar"
-                                class="btn btn-danger"
+                                class="btn btn-link"
+                                id="delete-crud"
                                 onclick="return confirm('¿Desea eliminar?')">
                               </form>
                             @endcan

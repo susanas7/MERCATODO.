@@ -6,13 +6,14 @@
     width: 400px;
     background: white;
     border-radius: 20px;
+    opacity: 0.8;
 }
 .center h1{
     text-align: center;
     padding: 0 0 20px 0;
-    border-bottom: 1px solid silver;
-    margin-top: 10px;
-    color: #0a00af;
+    margin-top: 30px;
+    color: $font-color-login;
+    opacity: 1;
 }
 .center form{
     padding: 0 40px;
@@ -40,7 +41,7 @@ form .txt_field{
     transform: translateY(-50%);
     font-size: 16px;
     pointer-events: none;
-    transition: .5s;
+    transition: .50s;
 }
 .txt_field span:before{
     content: '';
@@ -49,13 +50,13 @@ form .txt_field{
     left: 0;
     width: 0%;
     height: 2px;
-    background: #0a00af;
+    background: #aaa8ce;
     transition: .50s;
 }
 .txt_field input:focus ~ label,
 .txt_field input:valid ~ label{
     top: -5px;
-    color: black;
+    color: $font-color-login;
 }
 .txt_field input:focus ~ span::before,
 .txt_field input:valid ~ span::before{
@@ -69,7 +70,7 @@ form .txt_field{
 .pass:hover{
     text-decoration: underline;
 }
-input[type="submit"]{
+#btn-login-register{
     width: 200px;
     height: 50px;
     align-content: center;
@@ -85,7 +86,10 @@ input[type="submit"]{
     cursor: pointer;
     outline: none;
 }
-input[type="submit"]:hover{
+#btn-login-register:hover{
     border-color: #2691d9;
-    transition: .20s;
+    transition: .50s;
+}
+#btn-forgot{
+    color: $font-color-login;
 }

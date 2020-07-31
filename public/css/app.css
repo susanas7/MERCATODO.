@@ -10927,7 +10927,8 @@ a.text-dark:focus {
 }
 
 body {
-  background-image: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
+  background: #e3e2f0;
+  background: linear-gradient(90deg, #e3e2f0 0%, #aaa8ce 100%);
 }
 
 #container {
@@ -10942,14 +10943,15 @@ body {
   width: 400px;
   background: white;
   border-radius: 20px;
+  opacity: 0.8;
 }
 
 .center h1 {
   text-align: center;
   padding: 0 0 20px 0;
-  border-bottom: 1px solid silver;
-  margin-top: 10px;
+  margin-top: 30px;
   color: #0a00af;
+  opacity: 1;
 }
 
 .center form {
@@ -10981,7 +10983,7 @@ form .txt_field {
   transform: translateY(-50%);
   font-size: 16px;
   pointer-events: none;
-  transition: .5s;
+  transition: .50s;
 }
 
 .txt_field span:before {
@@ -10991,14 +10993,14 @@ form .txt_field {
   left: 0;
   width: 0%;
   height: 2px;
-  background: #0a00af;
+  background: #aaa8ce;
   transition: .50s;
 }
 
 .txt_field input:focus ~ label,
 .txt_field input:valid ~ label {
   top: -5px;
-  color: black;
+  color: #0a00af;
 }
 
 .txt_field input:focus ~ span::before,
@@ -11016,7 +11018,7 @@ form .txt_field {
   text-decoration: underline;
 }
 
-input[type="submit"] {
+#btn-login-register {
   width: 200px;
   height: 50px;
   align-content: center;
@@ -11033,8 +11035,168 @@ input[type="submit"] {
   outline: none;
 }
 
-input[type="submit"]:hover {
+#btn-login-register:hover {
   border-color: #2691d9;
-  transition: .20s;
+  transition: .50s;
+}
+
+#btn-forgot {
+  color: #0a00af;
+}
+
+.box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 900px;
+  background: white;
+  border-radius: 20px;
+}
+
+.box h1 {
+  text-align: left;
+  margin-left: 20px;
+  margin-right: 20px;
+  border-bottom: 1px solid silver;
+  padding: 0 0 20px 0;
+  margin-top: 30px;
+  color: #0a00af;
+}
+
+.box h4 {
+  text-align: justify;
+  color: #8B70AA;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+#box-btn {
+  width: 500px;
+  height: 50px;
+  align-content: center;
+  background: #0a00af;
+  background: radial-gradient(circle, #0a00af 0%, #5454c1 35%, #8484bf 100%);
+  color: #e9f4fb;
+  margin-bottom: 10px;
+  margin-left: 195px;
+  border-radius: 25px;
+  font-size: 18px;
+  color: #e9f4fb;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+  border: 1px solid;
+}
+
+#alert {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+#box-crud {
+  position: absolute;
+  border-radius: 20px;
+  background: white;
+  align-content: center;
+}
+
+#box-search-crud {
+  position: relative;
+  border-radius: 20px;
+  background: white;
+  align-content: center;
+}
+
+#show-crud {
+  color: #85C829;
+  align-content: center;
+  border: 1px solid #85C829;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+}
+
+#status-crud {
+  color: #CDB936;
+  align-content: center;
+  border: 1px solid #CDB936;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+}
+
+#edit-crud {
+  color: #2ED5D3;
+  align-content: center;
+  border: 1px solid #2ED5D3;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+}
+
+#delete-crud {
+  color: #D23232;
+  align-content: center;
+  border: 1px solid #D23232;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+}
+
+#btn-search-crud {
+  color: #218F91;
+  align-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+}
+
+#btn-refresh-crud {
+  color: #103C3D;
+  align-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+}
+
+#box-home {
+  position: absolute;
+  border-radius: 20px;
+  background: white;
+  align-content: center;
+  margin-bottom: 20px;
+}
+
+#btn-show-home {
+  color: #85C829;
+  align-content: center;
+  border: 1px solid #85C829;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+}
+
+#btn-add-home {
+  color: #D23232;
+  align-content: center;
+  border: 1px solid #D23232;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
 }
 

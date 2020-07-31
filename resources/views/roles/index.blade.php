@@ -2,11 +2,11 @@
 
 @section('content')
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-10">
-            <div class="card">
-                <div class="card-header"><P ALIGN=center> {{ $roles->total() }} roles | página {{ $roles->currentPage() }} de {{ $roles->lastpage() }}</div>
+<div class="container" >
+    <div class="row justify-content-center" >
+        <div class="col-md-10"  id="box-crud" >
+            <div class="card" >
+                <div class="card-header" ><P ALIGN=center> {{ $roles->total() }} roles | página {{ $roles->currentPage() }} de {{ $roles->lastpage() }}</div>
                   <div class="card-body">
                     <br>
                     <table class="table">
@@ -24,7 +24,7 @@
                           <td>{{ $role->name }}</td>
                           <td>{{ $role->slug }}</td>
                           <td>
-                          <a href="{{route('roles.show', $role->id)}}">Ver</a>
+                          <a id="show-crud" class="btn btn-link" href="{{route('roles.show', $role->id)}}">Ver</a>
                             <!--
                             @can('ver rol')
                             <a class="btn btn-success" data-toggle="modal" data-target="#{{$role->name}}" >Ver</a>

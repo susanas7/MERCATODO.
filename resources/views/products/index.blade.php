@@ -4,7 +4,7 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-8">
-      <div class="card">
+      <div class="card" id="box-search-crud">
         <div class="card-body">
         <h6>Busqueda de productos</h6>
         <form action=" {{route('products.index')}} ">
@@ -16,8 +16,8 @@
               <input type="search" name="slug" class="form-control form-control-navbar" placeholder="Descripcion">
             </div>
             <div class="col">
-            <button type="submit" class="btn btn-default">Buscar</button>
-            <a href="{{ route('products.index') }}" class="btn btn-link">Regresar</a>
+            <button type="submit" id="btn-search-crud" class="btn btn-link">Buscar</button>
+            <a href="{{ route('products.index') }}" id="btn-refresh-crud" class="btn btn-link">Regresar</a>
             </div>
           </div>
         </form>
@@ -27,10 +27,10 @@
   </div>
 </div><br>
 
-<div class="container">
-    <div class="row justify-content-center">
+<div class="container" >
+    <div class="row justify-content-center" >
         <div class="col-md-10">
-            <div class="card">
+            <div class="card" id="box-crud" >
                 <div class="card-header"><P ALIGN=center> {{ $products->total() }} productos | página {{ $products->currentPage() }} de {{ $products->lastpage() }} </div>
                   <div class="card-body">
                     <div>
@@ -64,7 +64,7 @@
                             @endif
                           </td>
                           <td>
-                            <a href="{{route('products.show', $product->id) }}" class="btn btn-success">Ver</a>
+                            <a href="{{route('products.show', $product->id) }}" id="show-crud" class="btn btn-link">Ver</a>
                             <!--
                             @can('ver producto')
                             <a class="btn btn-success" data-toggle="modal" data-target="#{{$product->title}}" >Ver</a>
@@ -101,14 +101,14 @@
                           </td>
                           <td>
                           @if($product->is_active==1)
-                            <a href="{{route('products.changeStatus', $product->id)}}" class="btn btn-warning">Desactivar</a>
+                            <a href="{{route('products.changeStatus', $product->id)}}" id="status-crud" class="btn btn-link">Desactivar</a>
                           @else
-                            <a href="{{route('products.changeStatus', $product->id)}}" class="btn btn-warning" >Activar</a>
+                            <a href="{{route('products.changeStatus', $product->id)}}" id="status-crud" class="btn btn-link" >Activar</a>
                           @endif
                           </td>
                           <td>
                             @can('editar producto')
-                              <a class="btn btn-info" href="{{route('products.edit', $product->id)}}" >Editar</a>
+                              <a class="btn btn-link" id="edit-crud" href="{{route('products.edit', $product->id)}}" >Editar</a>
                             @endcan
                           </td>
                           <td>
@@ -118,7 +118,8 @@
                               @csrf
                               <input type="submit"
                               value="Eliminar"
-                              class="btn btn-danger"
+                              class="btn btn-link"
+                              id="delete-crud"
                               onclick="return confirm('¿Desea eliminar?')">
                             </form>
                             @endcan

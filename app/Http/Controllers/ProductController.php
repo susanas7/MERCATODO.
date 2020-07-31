@@ -154,7 +154,7 @@ class ProductController extends Controller
             $product->img_route = $request->file('img_route')->store('images', 'public');
             $product->save();
         }
-        return redirect()->route('products  .index');
+        return redirect()->route('products.index');
     }
 
     /**

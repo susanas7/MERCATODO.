@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="center">
-    <h1>Login</h1>
+    <h1>Registrarse</h1>
     <form method="POST" action="{{route('register')}}">
         @csrf 
         <div class="txt_field">
@@ -42,7 +42,7 @@
             <label>Confirmar contraseña</label>
         </div>
         <div>
-            <input type="submit" value="Registrarse">
+            <input id="btn-login-register" type="submit" value="Registrarse">
         </div>
     </form>
 </div>
