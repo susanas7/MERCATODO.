@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\User;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
-use  App\Http\Requests\User\CreateRequest;
-use  App\Http\Requests\User\UpdateRequest;
+use App\Http\Requests\User\CreateRequest;
+use App\Http\Requests\User\UpdateRequest;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Redis;
 
 use Illuminate\Http\Request;
 
@@ -25,22 +27,20 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $name = $request->get('name');
+        /*$name = $request->get('name');
         $email = $request->get('email');
 
         $users = User::name($name)->email($email)->paginate(10);
-        return view('users.index', ['users' => $users]);
-
-        /*$users = User::name($request->name)
-          ->orderBy('id', 'asc')
-          ->paginate(5);
         return view('users.index', ['users' => $users]);*/
+        $data = Cache::rememberForever('bigX', function(){
+            return User::all();
+        });
+        $name = $request->get('name');
+        $email = $request->get('email');
 
+        $users = User::name($name)->email($email)->paginate(505);
+        return view('users.index', ['users' => $users, 'data' => $data]);
 
-      /*$users = User::paginate(20);
-            return view('users.index',[
-        'users' => $users
-      ]);*/
     }
 
     /**
@@ -83,11 +83,14 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
+        /*$user = User::find($id);
 
         return view('users.show', [
           'user' => $user
-        ]);
+        ]);*/
+        $user = Redis::get('bigX'.$id);
+
+        return $user;
     }
 
     /**

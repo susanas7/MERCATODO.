@@ -12,23 +12,20 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 class UserTest extends TestCase
 {
     use RefreshDatabase;
+    use WithoutMiddleware;
 
     /** @test */
     public function aUserCanBeCreated()
     {
         $this->withoutExceptionHandling();
-        $this->expectException(\Illuminate\Auth\AuthenticationException::class);
 
-        $this->get('/users/create', [
-            'name' =>'Elisa',
-            'email' => 'elisa@mail.com',
-            'password' => '12345678'
-        ]);
-
-        $this->assertCredentials([
-            'name' =>'Elisa',
-            'email' => 'elisa@mail.com',
-            'password' => '12345678'
+        $user = factory(User::class)->create();
+        
+        $this->assertDatabaseHas('users',[
+            'name' => $user->name,
+            'email' => $user->email,
+            'email_verified_at' => $user->email_verified_at,
+            'password' => $user->password,
         ]);
     }
 }
