@@ -6,6 +6,7 @@ use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Cache;
 
 class ProductController extends Controller
 {
@@ -22,11 +23,15 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
+        $data = Cache::remember('products',6000 , function(){
+            return Product::all();
+        });
+        Cache::get('products');
         $title = $request->get('title');
         $slug = $request->get('slug');
 
         $products = Product::title($title)->slug($slug)->paginate(20);
-        return view('products.index', ['products' => $products]);
+        return view('products.index', ['products' => $products, 'data' => $data]);
 
         /*$products = Product::paginate(10);
         return view('products.index', [

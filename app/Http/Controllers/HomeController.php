@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Product;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
 {
@@ -27,9 +28,12 @@ class HomeController extends Controller
     {
         $title = $request->get('title');
         //$role = $user->roles->implode('name', ',');
-
+        $data = Cache::remember('products',6000 , function(){
+            return Product::all();
+        });
+        Cache::get('products');
         $products = Product::title($title)->paginate(20);
-        return view('home', compact('products'));
+        return view('home', compact('products', 'data'));
         /*$products = \App\Product::paginate(10);
         return view('home', compact('products'));*/
     }

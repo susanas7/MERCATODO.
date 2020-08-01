@@ -27,14 +27,10 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        /*$name = $request->get('name');
-        $email = $request->get('email');
-
-        $users = User::name($name)->email($email)->paginate(10);
-        return view('users.index', ['users' => $users]);*/
-        $data = Cache::rememberForever('bigX', function(){
+        $data = Cache::remember('users',6000 , function(){
             return User::all();
         });
+        Cache::get('users');
         $name = $request->get('name');
         $email = $request->get('email');
 
@@ -68,11 +64,13 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
+        
 
         if ($user->save()) {
             $user->assignRole($request->role);
             return redirect()->route('users.index');
         }
+        Cache::put('bigX.' . $user->id, $user, 6000);
     }
 
     /**
