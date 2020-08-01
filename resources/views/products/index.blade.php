@@ -1,9 +1,37 @@
 @extends('layouts.app')
 @section('content')
+
+
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card" id="box-search-crud">
+        <div class="card-body">
+        <h6>Busqueda de productos</h6>
+        <form action=" {{route('products.index')}} ">
+          <div class="row">
+            <div class="col" >
+              <input type="search" name="title" class="form-control form-control-navbar" placeholder="Nombre">
+            </div>
+            <div class="col" >
+              <input type="search" name="slug" class="form-control form-control-navbar" placeholder="Descripcion">
+            </div>
+            <div class="col">
+            <button type="submit" id="btn-search-crud" class="btn btn-link">Buscar</button>
+            <a href="{{ route('products.index') }}" id="btn-refresh-crud" class="btn btn-link">Regresar</a>
+            </div>
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><br>
+
+<div class="container" >
+    <div class="row justify-content-center" >
+        <div class="col-md-10">
+            <div class="card" id="box-crud" >
                 <div class="card-header"><P ALIGN=center> {{ $products->total() }} productos | página {{ $products->currentPage() }} de {{ $products->lastpage() }} </div>
                   <div class="card-body">
                     <div>
@@ -13,10 +41,11 @@
                       <thead>
                       <tr>
                         <th>ID</th>
-                        <th>Imagen</th>
+                        <th>&nbsp;</th>
                         <th>Producto</th>
                         <th>Precio</th>
-                        <th>Categoria</th>
+                        <th>Estado</th>
+                        <th>&nbsp;</th>
                         <th>&nbsp;</th>
                         <th>&nbsp;</th>
                         <th>&nbsp;</th>
@@ -25,19 +54,28 @@
                         @foreach ($products as $product)
                         <tr>
                           <td>{{ $product->id }}</td>
-                          <td><img src="{{ URL::to('/images/' . $product->img_route) }}" width="100"> </td>
+                          <td><img src="{{ $product->get_image }}" class="card-img-top"> </td>
                           <td>{{ $product->title }}</td>
                           <td>{{ $product->price }}</td>
-                          <td>{{ $product->category_id }}</td>
                           <td>
-                            <!--<a href="{{route('products.show', $product->id) }}" class="btn btn-sm btn-default">Ver</a>-->
+                          @if($product->is_active==1)
+                              Activo
+                            @else
+                              Inactivo
+                            @endif
+                          </td>
+                          <td>
+                            <a href="{{route('products.show', $product->id) }}" id="show-crud" class="btn btn-link">Ver</a>
+                            <!--
+                            @can('ver producto')
                             <a class="btn btn-success" data-toggle="modal" data-target="#{{$product->title}}" >Ver</a>
-                              <!-- ventana emergente-->
+                            @endcan
+                               ventana emergente
                               <div class="modal fade" id="{{$product->title}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h4 class="modal-title" id="muModalLabel">{{$product->title}}</h4>
+                                            <h4 class="modal-title" id="myModalLabel">{{$product->title}}</h4>
                                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                                         </div>
                                         <div class="modal-body">
@@ -53,36 +91,50 @@
                                               <p><h4>Ultima actualizacion: {{$product->updated_at}} </h4></p>
                                             </div>    
                                         </div>
+                                        @can('editar producto')
                                         <div class="modal-footer">
-                                        <a class="btn btn-info" href="{{route('products.edit', $product->id)}}" >Editar</a>                                           
+                                        <a class="btn btn-info" href="{{route('products.edit', $product->id)}}" >Editar</a>  
+                                        @endcan                                         
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
                           </td>
                           <td>
-                              <a class="btn btn-info" href="{{route('products.edit', $product->id)}}" >Editar</a>
+                          @if($product->is_active==1)
+                            <a href="{{route('products.changeStatus', $product->id)}}" id="status-crud" class="btn btn-link">Desactivar</a>
+                          @else
+                            <a href="{{route('products.changeStatus', $product->id)}}" id="status-crud" class="btn btn-link" >Activar</a>
+                          @endif
                           </td>
                           <td>
+                            @can('editar producto')
+                              <a class="btn btn-link" id="edit-crud" href="{{route('products.edit', $product->id)}}" >Editar</a>
+                            @endcan
+                          </td>
+                          <td>
+                            @can('eliminar producto')
                             <form action="{{ route('products.destroy', $product) }}" method="POST" >
                               @method('DELETE')
                               @csrf
                               <input type="submit"
                               value="Eliminar"
-                              class="btn btn-danger"
+                              class="btn btn-link"
+                              id="delete-crud"
                               onclick="return confirm('¿Desea eliminar?')">
                             </form>
+                            @endcan
                           </td>
                         </tr>
                         @endforeach
                       </tbody>
                     </table>
+                    {{$products->links()}}
                   </div>
             </div>
         </div>
     </div>
 </div>
 
-{{$products->links()}}
 
 @endsection

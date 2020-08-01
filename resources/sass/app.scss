@@ -6,3 +6,17 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+@import 'lib/_background';
+
+@import 'lib/_container.scss';
+
+@import 'lib/_login.scss';
+
+@import 'lib/_verify.scss';
+
+@import 'lib/_crud';
+
+@import 'lib/_home';
+
+@import 'node_modules/toastr/toastr.scss';

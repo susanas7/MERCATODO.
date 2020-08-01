@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Redis;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,5 +25,9 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('verified'
 Route::get('/home/{product}', 'HomeController@show')->name('home.show');
 
 Route::resource('/users', 'UserController');
+Route::get('/users/changeStatus/{id}', 'UserController@changeStatus')->name('users.changeStatus');
 
 Route::resource('/products', 'ProductController');
+Route::get('/products/changeStatus/{id}', 'ProductController@changeStatus')->name('products.changeStatus');
+
+Route::resource('/roles', 'RoleController');
