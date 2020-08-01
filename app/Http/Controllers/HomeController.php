@@ -22,22 +22,25 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return \Illuminate\View\View
      */
     public function index(Request $request)
     {
         $title = $request->get('title');
-        //$role = $user->roles->implode('name', ',');
-        $data = Cache::remember('products',6000 , function(){
+        $data = Cache::remember('products', 6000, function () {
             return Product::all();
         });
         Cache::get('products');
         $products = Product::title($title)->paginate(20);
         return view('home', compact('products', 'data'));
-        /*$products = \App\Product::paginate(10);
-        return view('home', compact('products'));*/
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param int $id
+     * @return \Illuminate\View\View
+     */
     public function show($id)
     {
         $product = Product::find($id);

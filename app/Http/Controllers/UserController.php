@@ -9,6 +9,7 @@ use App\Http\Requests\User\CreateRequest;
 use App\Http\Requests\User\UpdateRequest;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
+use Illuminate\Http\RedirectResponse;
 
 use Illuminate\Http\Request;
 
@@ -23,11 +24,12 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\View\View
      */
     public function index(Request $request)
     {
-        $data = Cache::remember('users',6000 , function(){
+        $data = Cache::remember('users', 6000, function () {
             return User::all();
         });
         Cache::get('users');
@@ -36,7 +38,6 @@ class UserController extends Controller
 
         $users = User::name($name)->email($email)->paginate(505);
         return view('users.index', ['users' => $users, 'data' => $data]);
-
     }
 
     /**
@@ -54,8 +55,8 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  CreateRequest  $request
+     * @return RedirectResponse
      */
     public function store(CreateRequest $request)
     {
@@ -68,16 +69,15 @@ class UserController extends Controller
 
         if ($user->save()) {
             $user->assignRole($request->role);
-            return redirect()->route('users.index');
+            return redirect()->route('users.index')->with('success');
         }
-        Cache::put('bigX.' . $user->id, $user, 6000);
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function show($id)
     {
@@ -91,8 +91,8 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  string  $user
-     * @return \Illuminate\Http\Response
+     * @param  int $id
+     * @return \Illuminate\View\View
      */
     public function edit($id)
     {
@@ -104,9 +104,9 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  UpdateRequest  $request
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
     public function update(UpdateRequest $request, $id)
     {
@@ -117,8 +117,7 @@ class UserController extends Controller
         $user->syncRoles($request->role);
         $user->save();
 
-        //return redirect('/users');
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->with('success');
     }
 
     /**
@@ -133,7 +132,12 @@ class UserController extends Controller
         return back();
     }
 
-
+    /**
+     * Enable or disable the status of a user
+     *
+     * @param int $id
+     * @return RedirectResponse
+     */
     public function changeStatus($id)
     {
         $user = User::find($id);

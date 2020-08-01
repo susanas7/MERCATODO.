@@ -21,7 +21,7 @@ class UserTest extends TestCase
 
         $user = factory(User::class)->create();
         
-        $this->assertDatabaseHas('users',[
+        $this->assertDatabaseHas('users', [
             'name' => $user->name,
             'email' => $user->email,
             'email_verified_at' => $user->email_verified_at,

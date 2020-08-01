@@ -42,13 +42,21 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-
+    /**
+     * @param Builder
+     * @param string $name
+     * @return Builder
+     */
     public function scopeName($query, $name)
     {
         return $query->where('name', 'LIKE', "%$name%");
     }
 
-
+    /**
+     * @param Builder $query
+     * @param string $email
+     * @return Builder
+     */
     public function scopeEmail(Builder $query, $email): Builder
     {
         if (null !== $email) {
@@ -57,6 +65,13 @@ class User extends Authenticatable implements MustVerifyEmail
         return $query;
     }
 
+    /**
+     * @param Builder $query
+     * @param string $field
+     * @param strin $value
+     * @param string|null $operator
+     * @return Builder
+     */
     public function searchByField(Builder $query, string $field, string $value, string $operator = null): Builder
     {
         return $query->where($field, $operator, $value);

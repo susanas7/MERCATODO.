@@ -2,7 +2,7 @@
 @section('content')
 <div class="row justify-content-center">
     <div class="col-md-4">
-        @include('products.fragment.error')
+        @include('alerts.error')
     </div>
 </div>
 
