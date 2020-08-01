@@ -68,7 +68,7 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * @param Builder $query
      * @param string $field
-     * @param strin $value
+     * @param string $value
      * @param string|null $operator
      * @return Builder
      */
