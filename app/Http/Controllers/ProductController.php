@@ -82,11 +82,12 @@ class ProductController extends Controller
         $product->category_id = $request->category_id;
         $product->img_route = $request->img_route;
         $product->save();
-
+    
         if ($request->file('img_route')) {
-            $product->img_route = $request->file('img_route')->store('images', 'public');
+            $product->image = $request->file('img_route')->store('images', 'public');
             $product->save();
         }
+
         return redirect()->route('products.index');
     }
 
