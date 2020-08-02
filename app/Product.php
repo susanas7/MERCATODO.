@@ -31,12 +31,21 @@ class Product extends Model
         return false;
     }
 
+     /**
+     * @param Builder $query
+     * @param string $title
+     * @return Builder
+     */
     public function scopeTitle($query, $title)
     {
         return $query->where('title', 'LIKE', "%$title%");
     }
   
-  
+     /**
+     * @param Builder $query
+     * @param string $slug
+     * @return Builder
+     */
     public function scopeSlug(Builder $query, $slug): Builder
     {
         if (null !== $slug) {
@@ -45,6 +54,13 @@ class Product extends Model
         return $query;
     }
   
+    /**
+     * @param Builder $query
+     * @param string $field
+     * @param strin $value
+     * @param string|null $operator
+     * @return Builder
+     */
     public function searchByField(Builder $query, string $field, string $value, string $operator = null): Builder
     {
         return $query->where($field, $operator, $value);

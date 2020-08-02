@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Http\RedirectResponse;
 
 class ProductController extends Controller
 {
@@ -19,7 +20,8 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\View\View
      */
     public function index(Request $request)
     {
@@ -42,7 +44,7 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -52,8 +54,8 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  ProductRequest  $request
+     * @return RedirectResponse
      */
     public function store(ProductRequest $request)
     {
@@ -107,7 +109,7 @@ class ProductController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function edit($id)
     {
@@ -118,9 +120,9 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  ProductRequest  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
     public function update(ProductRequest $request, $id)
     {
@@ -166,7 +168,7 @@ class ProductController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  string $product
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
     public function destroy(Product $product)
     {
@@ -176,6 +178,12 @@ class ProductController extends Controller
         return back();
     }
 
+    /**
+     * Enable or disable the status of a product
+     *
+     * @param int $id
+     * @return RedirectResponse
+     */
     public function changeStatus($id)
     {
         $product = Product::find($id);

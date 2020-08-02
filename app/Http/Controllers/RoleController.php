@@ -20,7 +20,8 @@ class RoleController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param App\Role $role
+     * @return \Illuminate\View\View
      */
     public function index(Role $role)
     {
@@ -35,7 +36,7 @@ class RoleController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function show($id)
     {
