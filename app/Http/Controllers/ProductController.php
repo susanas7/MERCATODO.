@@ -75,13 +75,14 @@ class ProductController extends Controller
             'category_id' => $request->category_id,
         ]);*/
 
-        $product = new Product;
+        /*$product = new Product;
         $product->title = $request->title;
         $product->slug = $request->slug;
         $product->price = $request->price;
         $product->category_id = $request->category_id;
         $product->img_route = $request->img_route;
-        $product->save();
+        $product->save();*/
+        $product = Product::create($request->all());
     
         if ($request->file('img_route')) {
             $product->img_route = $request->file('img_route')->store('images', 'public');
