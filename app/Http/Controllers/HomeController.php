@@ -31,7 +31,7 @@ class HomeController extends Controller
             return Product::all();
         });
         Cache::get('products');
-        $products = Product::title($title)->paginate(20);
+        $products = Product::where('is_active', 1)->title($title)->paginate(20);
         return view('home', compact('products', 'data'));
     }
 
