@@ -27,7 +27,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $title = $request->get('title');
-        $data = Cache::remember('products',6000 , function(){
+        $data = Cache::remember('products', 6000, function () {
             return Product::all();
         });
         Cache::get('products');

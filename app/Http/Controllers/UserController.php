@@ -29,7 +29,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Cache::remember('users',6000 , function(){
+        $data = Cache::remember('users', 6000, function () {
             return User::all();
         });
         Cache::get('users');
@@ -38,7 +38,6 @@ class UserController extends Controller
 
         $users = User::name($name)->email($email)->paginate(505);
         return view('users.index', ['users' => $users, 'data' => $data]);
-
     }
 
     /**

@@ -25,7 +25,7 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Cache::remember('products',6000 , function(){
+        $data = Cache::remember('products', 6000, function () {
             return Product::all();
         });
         Cache::get('products');

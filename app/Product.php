@@ -31,21 +31,21 @@ class Product extends Model
         return false;
     }
 
-     /**
-     * @param Builder $query
-     * @param string $title
-     * @return Builder
-     */
+    /**
+    * @param Builder $query
+    * @param string $title
+    * @return Builder
+    */
     public function scopeTitle($query, $title)
     {
         return $query->where('title', 'LIKE', "%$title%");
     }
   
-     /**
-     * @param Builder $query
-     * @param string $slug
-     * @return Builder
-     */
+    /**
+    * @param Builder $query
+    * @param string $slug
+    * @return Builder
+    */
     public function scopeSlug(Builder $query, $slug): Builder
     {
         if (null !== $slug) {
