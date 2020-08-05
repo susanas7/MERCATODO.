@@ -19,7 +19,7 @@ class UpdateTest extends TestCase
     {
         $product = factory(Product::class)->create();
 
-        $this->put(route('products.show', $product), [
+        $this->put(route('products.update', $product), [
             'title' =>'pan pita',
             'slug' => 'masa texturizada',
             'price' => '19',

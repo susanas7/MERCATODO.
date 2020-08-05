@@ -29,14 +29,6 @@ class UsersSeeder extends Seeder
         $moderator->assignRole('Administrador de productos');
 
         $admin = User::create([
-            'name' => 'Auditor',
-            'email' => 'auditor@mail.com',
-            'password' => bcrypt('12345678'),
-        ]);
-
-        $admin->assignRole('Auditor');
-
-        $admin = User::create([
             'name' => 'Super admin',
             'email' => 'super.admin@mail.com',
             'password' => bcrypt('12345678'),
