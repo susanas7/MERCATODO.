@@ -35,34 +35,10 @@
                     @foreach($products as $product)
                         <div class="col-md-4 tect-md-center" id="row-home" align="center">
                             <br><br><img src="{{ $product->get_image }}" class="card-img-top">
-                            <!--<img src="images/{{$product->img_route}}" width="75">-->
                             <h4>{{ $product->title }}</h4>
-                            <h4>Precio COP {{ $product->price }} </h4>
-                            <a class="btn btn-link" data-toggle="modal" data-target="#{{$product->title}}" id="btn-show-home" >Detalles</a>
-                            <button type="button" class="btn btn-link" id="btn-add-home">Agregar</button>                                            
-                            <!--ventana emergente-->
-                            <div class="modal fade" id="{{$product->title}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title" id="muModalLabel">{{$product->title}}</h4>
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div align="center">
-                                            <img src="{{ URL::to('/images/' . $product->img_route) }}" width="250">
-                                            </div>
-                                            <p><h4>{{$product->slug}}</h4></p>                                 
-                                        </div>
-                                        <div class="modal-footer">
-                                            <div align="center">
-                                                <span class="label label-success"> Precio: ${{number_format($product->price)}}</span>
-                                            </div>
-                                            <button type="button" class="btn btn-success">Agregar</button>                                            
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <h4>Precio COP {{ number_format($product->price, 2) }} </h4>
+                            <a class="btn btn-link" href="{{route('home.show', $product->id) }}" id="btn-show-home" >Detalles</a>
+                            <button type="button" class="btn btn-link" id="btn-add-home">Agregar</button> 
                         </div>
                     @endforeach
                 </div>
