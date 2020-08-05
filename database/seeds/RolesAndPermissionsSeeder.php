@@ -1,16 +1,21 @@
 <?php
 
-use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
+/*
+ * This file is part of PHP CS Fixer.
+ * (c) Fabien Potencier <fabien@symfony.com>
+ *     Dariusz Rumiński <dariusz.ruminski@gmail.com>
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
 
+use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class RolesAndPermissions extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
     public function run()
     {
@@ -39,7 +44,7 @@ class RolesAndPermissions extends Seeder
         Permission::create(['name' => 'eliminar producto']);
 
         //create roles and assign created permissions
-        
+
         $role = Role::create(['name' => 'Gestor de usuarios', 'slug' => 'Tiene permiso para ver, editar, crear, y eliminar usuarios']);
         $role->givePermissionTo('ver usuario');
         $role->givePermissionTo('editar usuario');
@@ -60,6 +65,5 @@ class RolesAndPermissions extends Seeder
 
         $role = Role::create(['name' => 'Super-administrador', 'slug' => 'Administrador global']);
         $role->givePermissionTo(Permission::all());
-
     }
 }

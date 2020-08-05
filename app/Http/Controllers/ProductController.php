@@ -1,14 +1,22 @@
 <?php
 
+/*
+ * This file is part of PHP CS Fixer.
+ * (c) Fabien Potencier <fabien@symfony.com>
+ *     Dariusz Rumiński <dariusz.ruminski@gmail.com>
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Http\Controllers;
 
-use App\Product;
-use Illuminate\Http\Request;
-use App\Http\Requests\Product\UpdateRequest;
 use App\Http\Requests\Product\CreateRequest;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Cache;
+use App\Http\Requests\Product\UpdateRequest;
+use App\Product;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -21,7 +29,6 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param Request $request
      * @return \Illuminate\View\View
      */
     public function index(Request $request)
@@ -34,8 +41,8 @@ class ProductController extends Controller
         $slug = $request->get('slug');
 
         $products = Product::title($title)->slug($slug)->paginate(20);
-        return view('products.index', ['products' => $products, 'data' => $data]);
 
+        return view('products.index', ['products' => $products, 'data' => $data]);
     }
 
     /**
@@ -51,24 +58,25 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  CreateRequest  $request
      * @return RedirectResponse
      */
     public function store(CreateRequest $request)
     {
         $product = Product::create($request->all());
-    
+
         if ($request->file('img_route')) {
             $product->img_route = $request->file('img_route')->store('images', 'public');
             $product->save();
         }
+
         return redirect()->route('products.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -76,27 +84,29 @@ class ProductController extends Controller
         $product = Product::find($id);
 
         return view('products.show', [
-          'product' => $product
+            'product' => $product,
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\View\View
      */
     public function edit($id)
     {
         $product = Product::find($id);
+
         return view('products.edit')->with('product', $product);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  UpdateRequest  $request
-     * @param  int  $id
+     * @param int $id
+     *
      * @return RedirectResponse
      */
     public function update(UpdateRequest $request, $id)
@@ -109,13 +119,15 @@ class ProductController extends Controller
             $product->img_route = $request->file('img_route')->store('images', 'public');
             $product->save();
         }
+
         return redirect()->route('products.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  string $product
+     * @param string $product
+     *
      * @return RedirectResponse
      */
     public function destroy(Product $product)
@@ -127,21 +139,22 @@ class ProductController extends Controller
     }
 
     /**
-     * Enable or disable the status of a product
+     * Enable or disable the status of a product.
      *
      * @param int $id
+     *
      * @return RedirectResponse
      */
     public function changeStatus($id)
     {
         $product = Product::find($id);
-        
-        $product->is_active=!$product->is_active;
-  
+
+        $product->is_active = !$product->is_active;
+
         if ($product->save()) {
             return redirect(route('products.index'));
-        } else {
-            return redirect(route('products.index'));
         }
+
+        return redirect(route('products.index'));
     }
 }
