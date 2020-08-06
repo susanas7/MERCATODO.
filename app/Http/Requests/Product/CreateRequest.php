@@ -36,7 +36,7 @@ class CreateRequest extends FormRequest
             'slug' => 'required|max:200',
             'category_id' => 'required',
             'price' => 'required|numeric|min:0',
-            'image' => 'image|required',
+            'image' => 'image',
         ];
     }
 }
