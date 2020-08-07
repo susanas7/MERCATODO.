@@ -102,7 +102,7 @@ class ProductController extends Controller
         $product = Product::find($id);
         $categories = ProductCategory::all();
 
-        return view('products.edit')->with('product', $product);
+        return view('products.edit', ['product' => $product, 'categories' => $categories]);
     }
 
     /**
