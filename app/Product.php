@@ -64,7 +64,7 @@ class Product extends Model
     }
 
     /**
-     * @param strin $value
+     * @param string $value
      */
     public function searchByField(Builder $query, string $field, string $value, string $operator = null): Builder
     {

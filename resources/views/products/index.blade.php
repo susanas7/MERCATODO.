@@ -44,6 +44,7 @@
                         <th>Producto</th>
                         <th>Precio</th>
                         <th>Estado</th>
+                        <th>Categoria</th>
                         <th>&nbsp;</th>
                         <th>&nbsp;</th>
                         <th>&nbsp;</th>
@@ -63,6 +64,8 @@
                               Inactivo
                             @endif
                           </td>
+                          <td> {{$product->category->title}} </td>
+                          <td></td>
                           <td>
                           @can('ver producto')
                             <a href="{{route('products.show', $product->id) }}" id="show-crud" class="btn btn-link">Ver</a>

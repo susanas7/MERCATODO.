@@ -13,6 +13,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Product\CreateRequest;
 use App\Http\Requests\Product\UpdateRequest;
 use App\Product;
+use App\ProductCategory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -52,7 +53,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        $categories = ProductCategory::all();
+        return view('products.create', ['categories' => $categories]);
     }
 
     /**
@@ -98,8 +100,9 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::find($id);
+        $categories = ProductCategory::all();
 
-        return view('products.edit')->with('product', $product);
+        return view('products.edit', ['product' => $product, 'categories' => $categories]);
     }
 
     /**
@@ -112,6 +115,7 @@ class ProductController extends Controller
     public function update(UpdateRequest $request, $id)
     {
         $product = Product::find($id);
+        $categories = ProductCategory::all();
         $product->update($request->all());
 
         if ($request->file('img_route')) {

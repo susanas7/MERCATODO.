@@ -42,7 +42,11 @@
                             <label name="category_id" class="col-md-4 col-form-label text-md-right">Categoria</label>
 
                             <div class="col-md-6">
-                                <input type="number" name="category_id" class="form-control" value="{{$product->category_id}}" >
+                            <select name="category_id" id="category_id">
+                                @foreach($categories as $category)
+                                    <option value="{{$category->id}}"> {{$category->title}} </option>
+                                @endforeach
+                            </select>
                             </div>
                         </div>
                         <div class="form-group"><P ALIGN=center>
