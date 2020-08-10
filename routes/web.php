@@ -38,3 +38,11 @@ Route::resource('/products', 'ProductController');
 Route::get('/products/changeStatus/{id}', 'ProductController@changeStatus')->name('products.changeStatus');
 
 Route::resource('/roles', 'RoleController');
+
+Route::get('/categories', 'CategoryController@index')->name('categories.index');
+Route::get('/categories/create', 'CategoryController@create')->name('categories.create');
+Route::post('/categories', 'CategoryController@store')->name('categories.store');
+Route::get('/categories/{category}/edit', 'CategoryController@edit')->name('categories.edit');
+Route::put('/categories/{category}', 'CategoryController@update')->name('categories.update');
+Route::delete('/categories/{category}', 'CategoryController@destroy')->name('categories.destroy');
+
