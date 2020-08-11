@@ -11,6 +11,9 @@
                         <span class="badge">{{$product['qty']}}</span>
                         <strong>{{$product['item']['title']}}</strong>
                         <span class="label label-success">{{$product['price']}}</span>
+                        <a class="btn btn-link" href="{{route('reduceByOne', ['id' => $product['item']['id']])}}">Eliminar 1</a>
+                        <a class="btn btn-link" href="{{route('addByOne', ['id' => $product['item']['id']])}}">Add 1</a>
+                        <a class="btn btn-link" href="{{route('removeItem', ['id' => $product['item']['id']])}}">Remove</a>
                     </li>
                 @endforeach
             </ul>
@@ -28,9 +31,10 @@
         </div>
     </div>
 @else
-    <div class="row">
+    <div class="row">incremento	Retorna $a, y luego incrementa $a en uno.
+--$a	Pre-decremento	Decrem
         <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-            <strong>Total: {{$totalPrice}}</strong> 
+            <strong>Total: {{ $totalPrice ?? '' }}</strong> 
         </div>
     </div>
 

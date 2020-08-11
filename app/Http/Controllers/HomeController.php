@@ -70,6 +70,36 @@ class HomeController extends Controller
         return redirect()->route('home');
     }
 
+    public function reduceByOne($id)
+    {
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->reduceByOne($id);
+
+        Session::put('cart', $cart);
+        return redirect()->route('shoppingCart');
+    }
+
+    public function addByOne($id)
+    {
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->addByOne($id);
+
+        Session::put('cart', $cart);
+        return redirect()->route('shoppingCart');
+    }
+
+    public function removeItem($id)
+    {
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->removeItem($id);
+
+        Session::put('cart', $cart);
+        return redirect()->route('shoppingCart');
+    }
+
     public function shoppingCart()
     {
         if (!Session::has('cart')) {
@@ -79,4 +109,5 @@ class HomeController extends Controller
         $cart = new Cart($oldCart);
         return view('shop.shoppingCart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
     }
+    
 }
