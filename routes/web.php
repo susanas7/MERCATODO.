@@ -27,6 +27,10 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/home/{product}', 'HomeController@show')->name('home.show');
 
+Route::get('/add-to-cart/{id}', 'HomeController@addToCart')->name('addToCart');
+
+Route::get('/shoppingCart', 'HomeController@shoppingCart')->name('shoppingCart');
+
 Route::resource('/users', 'UserController');
 Route::get('/users/changeStatus/{id}', 'UserController@changeStatus')->name('users.changeStatus');
 

@@ -38,7 +38,7 @@
                             <h4>{{ $product->title }}</h4>
                             <h4>Precio COP {{ number_format($product->price, 2) }} </h4>
                             <a class="btn btn-link" href="{{route('home.show', $product->id) }}" id="btn-show-home" >Detalles</a>
-                            <button type="button" class="btn btn-link" id="btn-add-home">Agregar</button> 
+                            <a href="{{route('addToCart', ['id' => $product->id ])}}" type="button" class="btn btn-link" id="btn-add-home">Agregar</a> 
                         </div>
                     @endforeach
                 </div>
