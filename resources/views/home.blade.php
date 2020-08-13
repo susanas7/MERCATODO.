@@ -34,8 +34,8 @@
                 <div class="row">
                     @foreach($products as $product)
                         <div class="col-md-4 tect-md-center" id="row-home" align="center">
-                            <br><br><img src="{{ $product->get_image }}" class="card-img-top">
-                            <h4>{{ $product->title }}</h4>
+                          <br><a class="btn btn-light" href="{{route('home.show', $product->id) }}"> <h3>{{ $product->title }}</h3></a>
+                            <img src="{{ $product->get_image }}" class="card-img-top">
                             <h4>Precio COP {{ number_format($product->price, 2) }} </h4>
                             <a class="btn btn-link" href="{{route('home.show', $product->id) }}" id="btn-show-home" >Detalles</a>
                             <a href="{{route('addToCart', ['id' => $product->id ])}}" type="button" class="btn btn-link" id="btn-add-home">Agregar</a> 
