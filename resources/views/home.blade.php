@@ -25,7 +25,24 @@
   </div>
 </div><br>
 
-<div class="container">
+<div class="container2">
+  @foreach($products as $product)
+    <div class="card">
+        <a href="{{route('home.show', $product->id) }}" id="btn-show-home" >
+          <img src="{{ $product->get_image }}">
+        </a>
+        <h4>{{$product->title}}</h4>
+        <p>{{$product->slug}}</p>
+        <p class="price">$ {{number_format($product->price)}}</p>
+        <a class="add" href="{{route('addToCart', ['id' => $product->id ])}}">Agregar</a> 
+    </div>
+  @endforeach
+</div>
+
+@endsection
+
+
+<!--<div class="container">
     <div class="col-md-12">
         <div class="card" id="box-home">
             <div class="card-header"> Bienvenido</div>
@@ -47,5 +64,4 @@
             </div>                 
         </div>
     </div>
-</div>
-@endsection
+</div>-->
