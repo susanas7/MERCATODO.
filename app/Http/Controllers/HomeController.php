@@ -67,7 +67,7 @@ class HomeController extends Controller
         $cart->add($product, $product->id);
 
         $request->session()->put('cart', $cart);
-        return redirect()->route('home');
+        return back();
     }
 
     public function reduceByOne($id)
