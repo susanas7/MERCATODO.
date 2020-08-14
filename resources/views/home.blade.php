@@ -2,28 +2,28 @@
 
 @section('content')
 
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-md-8">
+
       <div class="card" id="box-search-crud">
         <div class="card-body">
-        <h6>Busqueda de productos</h6>
         <form action=" {{route('home')}} ">
           <div class="row">
             <div class="col" >
-              <input type="search" name="title" class="form-control form-control-navbar" placeholder="Nombre">
+              <input type="search" name="title" class="form-control form-control-navbar" placeholder="Buscar">
             </div>
             <div class="col">
-            <button type="submit" id="btn-search-crud" class="btn btn-link">Buscar</button>
+            <button type="submit" id="btn-search-crud" class="btn btn-link">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+            <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+            </svg>
+              </button>
             <a href="{{ route('home') }}" id="btn-refresh-crud" class="btn btn-link">Regresar</a>
             </div>
           </div>
         </form>
         </div>
       </div>
-    </div>
-  </div>
-</div><br>
+    <br>
 
 <div class="container2">
   @foreach($products as $product)
