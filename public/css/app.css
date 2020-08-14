@@ -11251,34 +11251,6 @@ form .txt_field {
   font-weight: 400;
 }
 
-/*#box-home{
-    position: absolute;
-    border-radius: 20px;
-    background: white;
-    align-content: center;
-    margin-bottom: 20px;
-}
-#btn-show-home{
-    color: #85C829;
-    align-content: center;
-    border: 1px solid #85C829;
-    border-radius: 10px;    
-    font-size: 12px;
-    font-weight: 700;
-    cursor: pointer;
-    outline: none;
-}
-#btn-add-home{
-    color: #D23232;
-    align-content: center;
-    border: 1px solid #D23232;
-    border-radius: 10px;
-    font-size: 12px;
-    font-weight: 700;
-    cursor: pointer;
-    outline: none;
-}*/
-
 .container_show {
   width: 75%;
   height: 400px;
