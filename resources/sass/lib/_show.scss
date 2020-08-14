@@ -1,6 +1,6 @@
 .container_show{
     width: 75%;
-    height: 500px;
+    height: 400px;
     margin: auto;
     justify-content: center;
     margin-top: 5%;
@@ -22,10 +22,12 @@
     //margin: auto;
     margin-left: 17.5%;
 }
-.containershow .row .col-md-5{
-    margin-left: 5%;
-    //width: 330px;
-    height: 500px;
+.container_show .row .col-md-5 img{
+    //margin-left: 5%;
+    height: 220px;
+    width: 330px;
+    margin: auto;
+    margin-right: 450px;
 }
 .container_show .row .col-md-6{
     margin-left: 5%;

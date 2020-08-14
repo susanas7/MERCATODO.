@@ -5,7 +5,7 @@
 <div class="container_show">
     <div class="row">
         <div class="col-md-5">
-            <img src="{{ $product->get_image }}" class="card-img-top">
+            <img src="{{ $product->get_image }}">
         </div>
         <div class="col-md-6">
             <h2>{{ $product->title }}</h2><br><br>

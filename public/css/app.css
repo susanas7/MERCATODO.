@@ -11281,7 +11281,7 @@ form .txt_field {
 
 .container_show {
   width: 75%;
-  height: 500px;
+  height: 400px;
   margin: auto;
   justify-content: center;
   margin-top: 5%;
@@ -11300,9 +11300,11 @@ form .txt_field {
   margin-left: 17.5%;
 }
 
-.containershow .row .col-md-5 {
-  margin-left: 5%;
-  height: 500px;
+.container_show .row .col-md-5 img {
+  height: 220px;
+  width: 330px;
+  margin: auto;
+  margin-right: 450px;
 }
 
 .container_show .row .col-md-6 {
