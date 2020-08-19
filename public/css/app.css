@@ -11251,6 +11251,19 @@ form .txt_field {
   font-weight: 400;
 }
 
+.card {
+  width: 8%;
+  height: auto;
+  margin-left: 30px;
+  background: white;
+  align-content: center;
+  box-shadow: 11px 8px 52px rgba(18, 18, 18, 0.35);
+  border-radius: 15px;
+  padding-top: 5px;
+  padding-left: 5px;
+  padding-bottom: 5px;
+}
+
 .container_show {
   width: 75%;
   height: 400px;

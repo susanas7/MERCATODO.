@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Session;
 use App\Cart;
+use App\ProductCategory;
 
 class HomeController extends Controller
 {
@@ -38,9 +39,10 @@ class HomeController extends Controller
             return Product::all();
         });
         Cache::get('products');
+        $categories = ProductCategory::all();
         $products = Product::where('is_active', 1)->title($title)->paginate(20);
 
-        return view('home', compact('products', 'data'));
+        return view('home', compact('products', 'data', 'categories'));
     }
 
     /**
@@ -57,6 +59,14 @@ class HomeController extends Controller
         return view('show', [
             'product' => $product,
         ]);
+    }
+
+    public function showCategory($id)
+    {
+        $category = ProductCategory::all();
+        $categories = Product::where('category_id', $id)->get();
+        $id_ = $id;
+        return view('category', compact('categories', 'id_', 'category'));
     }
 
     public function addToCart(Request $request, $id)

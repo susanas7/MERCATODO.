@@ -27,6 +27,8 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/home/{product}', 'HomeController@show')->name('home.show');
 
+Route::get('/category/{id}', 'HomeController@showCategory')->name('category');
+
 Route::get('/add-to-cart/{id}', 'HomeController@addToCart')->name('addToCart');
 
 Route::get('/shoppingCart', 'HomeController@shoppingCart')->name('shoppingCart');

@@ -56,7 +56,7 @@
                                 <a id="title" class="nav-link" href="{{ route('categories.index')}}">Categorías</a>
                             </li>
                         @endcan
-                    
+                        
                     </ul>
 
                     </ul>
