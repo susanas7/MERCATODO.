@@ -23,7 +23,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/home') }}">
+                <a class="navbar-brand" href="{{ url('/') }}">
                     Mercatodo
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -47,8 +47,13 @@
                             </li>
                         @endcan
                         @can('ver rol')
-                        <li class="nav-item">
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('roles.index')}}">Roles</a>
+                            </li>
+                        @endcan
+                        @can('ver categoria')
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('categories.index')}}">Categorías</a>
                             </li>
                         @endcan
                     

@@ -1,7 +1,14 @@
 <?php
 
-return [
+/*
+ * This file is part of PHP CS Fixer.
+ * (c) Fabien Potencier <fabien@symfony.com>
+ *     Dariusz Rumiński <dariusz.ruminski@gmail.com>
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
 
+return [
     /*
     |--------------------------------------------------------------------------
     | Password Reset Language Lines
@@ -18,5 +25,4 @@ return [
     'throttled' => 'Please wait before retrying.',
     'token' => 'This password reset token is invalid.',
     'user' => "We can't find a user with that email address.",
-
 ];

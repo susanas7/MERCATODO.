@@ -1,16 +1,21 @@
 <?php
 
-use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
+/*
+ * This file is part of PHP CS Fixer.
+ * (c) Fabien Potencier <fabien@symfony.com>
+ *     Dariusz Rumiński <dariusz.ruminski@gmail.com>
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
 
+use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class RolesAndPermissions extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
     public function run()
     {
@@ -38,8 +43,13 @@ class RolesAndPermissions extends Seeder
         Permission::create(['name' => 'editar producto']);
         Permission::create(['name' => 'eliminar producto']);
 
+        Permission::create(['name' => 'crear categoria']);
+        Permission::create(['name' => 'ver categoria']);
+        Permission::create(['name' => 'editar categoria']);
+        Permission::create(['name' => 'eliminar categoria']);
+
         //create roles and assign created permissions
-        
+
         $role = Role::create(['name' => 'Gestor de usuarios', 'slug' => 'Tiene permiso para ver, editar, crear, y eliminar usuarios']);
         $role->givePermissionTo('ver usuario');
         $role->givePermissionTo('editar usuario');
@@ -52,14 +62,12 @@ class RolesAndPermissions extends Seeder
         $role->givePermissionTo('ver producto');
         $role->givePermissionTo('editar producto');
         $role->givePermissionTo('eliminar producto');
-
-        /*$role = Role::create(['name' => 'Auditor', 'slug' => 'Ver roles, usuarios y productos']);
-        $role->givePermissionTo('ver usuario');
-        $role->givePermissionTo('ver producto');
-        $role->givePermissionTo('ver rol');*/
+        $role->givePermissionTo('crear categoria');
+        $role->givePermissionTo('ver categoria');
+        $role->givePermissionTo('editar categoria');
+        $role->givePermissionTo('eliminar categoria');
 
         $role = Role::create(['name' => 'Super-administrador', 'slug' => 'Administrador global']);
         $role->givePermissionTo(Permission::all());
-
     }
 }

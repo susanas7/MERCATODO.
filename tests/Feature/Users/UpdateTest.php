@@ -1,33 +1,42 @@
 <?php
 
+/*
+ * This file is part of PHP CS Fixer.
+ * (c) Fabien Potencier <fabien@symfony.com>
+ *     Dariusz Rumiński <dariusz.ruminski@gmail.com>
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace Tests\Feature\Users;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
 use App\User;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Tests\TestCase;
 
-class UpdateTest extends TestCase
+/**
+ * @internal
+ * @coversNothing
+ */
+final class UpdateTest extends TestCase
 {
     use RefreshDatabase;
     use WithoutMiddleware;
 
-    /** @test */
-    public function aUserCanBeUpdated()
+    public function testAUserCanBeUpdated()
     {
         $this->withoutExceptionHandling();
 
         $user = factory(User::class)->create();
 
-        $this->put(route('users.show', $user), [
-            'name' =>'Elisa',
+        $this->put(route('users.update', $user), [
+            'name' => 'Elisa',
             'email' => 'elisa@mail.com',
         ]);
 
         $this->assertDatabaseHas('users', [
-            'name' =>'Elisa',
+            'name' => 'Elisa',
             'email' => 'elisa@mail.com',
         ]);
     }

@@ -14,7 +14,7 @@
                 <div class="card-header">Crear producto</div>
 
                 <div class="card-body">
-                    <form action="{{route('products.store')}}" method="POST">
+                    <form action="{{route('products.store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">
@@ -35,7 +35,11 @@
                             <label name="category_id" class="col-md-4 col-form-label text-md-right">Categoria</label>
 
                             <div class="col-md-6">
-                                <input type="number" name="category_id" class="form-control">
+                                <select name="category_id" id="category_id">
+                                    @foreach($categories as $category)
+                                        <option value="{{$category->id}}"> {{$category->title}} </option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -49,7 +53,7 @@
                           <label name="img_route" class="col-md-4 col-form-label text-md-right"></label>
 
                           <div class="col-md-6">
-                            <input accept="image/*" type="file" name="img_route" >
+                            <input type="file" name="img_route" >
                           </div>
                         </div>
                         <div class="form-group"><P ALIGN=center>

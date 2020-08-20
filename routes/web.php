@@ -1,7 +1,14 @@
 <?php
 
+/*
+ * This file is part of PHP CS Fixer.
+ * (c) Fabien Potencier <fabien@symfony.com>
+ *     Dariusz Rumiński <dariusz.ruminski@gmail.com>
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Redis;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,13 +21,9 @@ use Illuminate\Support\Facades\Redis;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Auth::routes(['verify' => 'true']);
 
-Auth::routes([ 'verify' => 'true' ]);
-
-Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/home/{product}', 'HomeController@show')->name('home.show');
 
@@ -31,3 +34,14 @@ Route::resource('/products', 'ProductController');
 Route::get('/products/changeStatus/{id}', 'ProductController@changeStatus')->name('products.changeStatus');
 
 Route::resource('/roles', 'RoleController');
+<<<<<<< HEAD
+=======
+
+Route::get('/categories', 'CategoryController@index')->name('categories.index');
+Route::get('/categories/create', 'CategoryController@create')->name('categories.create');
+Route::post('/categories', 'CategoryController@store')->name('categories.store');
+Route::get('/categories/{category}/edit', 'CategoryController@edit')->name('categories.edit');
+Route::put('/categories/{category}', 'CategoryController@update')->name('categories.update');
+Route::delete('/categories/{category}', 'CategoryController@destroy')->name('categories.destroy');
+
+>>>>>>> develop
