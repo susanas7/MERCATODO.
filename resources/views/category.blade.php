@@ -4,7 +4,7 @@
 
 <div class="row">
 
-<div class="card">
+<div class="filter">
   <h6> Categorias </h6>
     @foreach($category as $cat)
       <a class="btn tbn-link" href="{{route('category', $cat->id )}}">{{$cat->title}}</a>
@@ -47,6 +47,4 @@
     </div>
   @endforeach
 </div>
-
-
 @endsection
