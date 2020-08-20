@@ -29,11 +29,6 @@ final class CreateTest extends TestCase
         $this->withoutExceptionHandling();
 
         $user = factory(User::class)->create();
-<<<<<<< HEAD
-        
-=======
-
->>>>>>> develop
         $this->assertDatabaseHas('users', [
             'name' => $user->name,
             'email' => $user->email,
