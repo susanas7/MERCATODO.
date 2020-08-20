@@ -1,8 +1,14 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Redis;
+/*
+ * This file is part of PHP CS Fixer.
+ * (c) Fabien Potencier <fabien@symfony.com>
+ *     Dariusz Rumiński <dariusz.ruminski@gmail.com>
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
 
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,98 +21,34 @@ use Illuminate\Support\Facades\Redis;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Auth::routes(['verify' => 'true']);
 
-Auth::routes([ 'verify' => 'true' ]);
-
-Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/home/{product}', 'HomeController@show')->name('home.show');
 
-//Route::resource('/users', 'UserController');
+Route::get('/category/{id}', 'HomeController@showCategory')->name('category');
 
-Route::middleware(['auth'])->group(function(){
+Route::get('/add-to-cart/{id}', 'HomeController@addToCart')->name('addToCart');
 
-    //usuarios
-    Route::post('users', 'UserController@store')->name('users.store')
-        ->middleware('permission:crear usuario');
-    
-    Route::get('users', 'UserController@index')->name('users.index')
-        ->middleware('permission:ver usuario');
-    
-    Route::get('users/create', 'UserController@create')->name('users.create')
-        ->middleware('permission:crear usuario');
-    
-    Route::delete('users/{user}', 'UserController@destroy')->name('users.destroy')
-        ->middleware('permission:eliminar usuario');
-    
-    Route::put('users/{user}', 'UserController@update')->name('users.update')
-        ->middleware('permission:editar usuario');
-    
-    Route::get('users/{user}', 'UserController@show')->name('users.show')
-        ->middleware('permission:ver usuario');
-    
-    Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit')
-        ->middleware('permission:editar usuario');
+Route::get('/shoppingCart', 'HomeController@shoppingCart')->name('shoppingCart');
 
-    Route::get('/users/changeStatus/{id}', 'UserController@changeStatus')->name('users.changeStatus');
-});
+Route::get('/reduce/{id}', 'HomeController@reduceByOne')->name('reduceByOne');
+Route::get('/add/{id}', 'HomeController@addByOne')->name('addByOne');
+Route::get('/remove/{id}', 'HomeController@removeItem')->name('removeItem');
 
+Route::resource('/users', 'UserController');
+Route::get('/users/changeStatus/{id}', 'UserController@changeStatus')->name('users.changeStatus');
 
-//Route::resource('/products', 'ProductController');
+Route::resource('/products', 'ProductController');
+Route::get('/products/changeStatus/{id}', 'ProductController@changeStatus')->name('products.changeStatus');
 
-Route::middleware(['auth'])->group(function(){
+Route::resource('/roles', 'RoleController');
 
-    //productos
-    Route::post('products', 'ProductController@store')->name('products.store')
-        ->middleware('permission:crear producto');
-    
-    Route::get('products', 'ProductController@index')->name('products.index')
-        ->middleware('permission:ver producto');
-    
-    Route::get('products/create', 'ProductController@create')->name('products.create')
-        ->middleware('permission:crear producto');
-    
-    Route::delete('products/{product}', 'ProductController@destroy')->name('products.destroy')
-        ->middleware('permission:eliminar producto');
-    
-    Route::put('products/{product}', 'ProductController@update')->name('products.update')
-        ->middleware('permission:editar producto');
-    
-    Route::get('products/{product}', 'ProductController@show')->name('products.show')
-        ->middleware('permission:ver producto');
-    
-    Route::get('products/{product}/edit', 'ProductController@edit')->name('products.edit')
-        ->middleware('permission:editar producto');
+Route::get('/categories', 'CategoryController@index')->name('categories.index');
+Route::get('/categories/create', 'CategoryController@create')->name('categories.create');
+Route::post('/categories', 'CategoryController@store')->name('categories.store');
+Route::get('/categories/{category}/edit', 'CategoryController@edit')->name('categories.edit');
+Route::put('/categories/{category}', 'CategoryController@update')->name('categories.update');
+Route::delete('/categories/{category}', 'CategoryController@destroy')->name('categories.destroy');
 
-    Route::get('/products/changeStatus/{id}', 'ProductController@changeStatus')->name('products.changeStatus');
-});
-
-//Route::resource('/roles', 'RoleController');
-
-Route::middleware(['auth'])->group(function(){
-
-    //roles
-    Route::post('roles', 'RoleController@store')->name('roles.store')
-        ->middleware('permission:crear rol');
-    
-    Route::get('roles', 'RoleController@index')->name('roles.index')
-        ->middleware('permission:ver rol');
-    
-    Route::get('roles/create', 'RoleController@create')->name('roles.create')
-        ->middleware('permission:crear rol');
-    
-    Route::delete('roles/{role}', 'RoleController@destroy')->name('roles.destroy')
-        ->middleware('permission:eliminar rol');
-    
-    Route::put('roles/{role}', 'RoleController@update')->name('roles.update')
-        ->middleware('permission:editar rol');
-    
-    Route::get('roles/{role}', 'RoleController@show')->name('roles.show')
-        ->middleware('permission:ver rol');
-    
-    Route::get('roles/{role}/edit', 'RoleController@edit')->name('roles.edit')
-        ->middleware('permission:editar rol');
-});

@@ -1,14 +1,20 @@
 <?php
 
-use Illuminate\Database\Seeder;
+/*
+ * This file is part of PHP CS Fixer.
+ * (c) Fabien Potencier <fabien@symfony.com>
+ *     Dariusz Rumiński <dariusz.ruminski@gmail.com>
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 use App\User;
+use Illuminate\Database\Seeder;
 
 class UsersSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
     public function run()
     {
@@ -27,14 +33,6 @@ class UsersSeeder extends Seeder
         ]);
 
         $moderator->assignRole('Administrador de productos');
-
-        $admin = User::create([
-            'name' => 'Auditor',
-            'email' => 'auditor@mail.com',
-            'password' => bcrypt('12345678'),
-        ]);
-
-        $admin->assignRole('Auditor');
 
         $admin = User::create([
             'name' => 'Super admin',

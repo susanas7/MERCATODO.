@@ -1,27 +1,32 @@
 <?php
 
+/*
+ * This file is part of PHP CS Fixer.
+ * (c) Fabien Potencier <fabien@symfony.com>
+ *     Dariusz Rumiński <dariusz.ruminski@gmail.com>
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Http\Controllers;
 
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Traits\HasRoles;
-
-use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
-
     public function __construct()
     {
-      $this->middleware(['permission:ver rol']);
-      $this->middleware(['verified']);
+        $this->middleware(['role:Gestor de usuarios|Super-administrador']);
+        $this->middleware(['verified']);
     }
-
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param App\Role $role
+     *
+     * @return \Illuminate\View\View
      */
     public function index(Role $role)
     {
@@ -35,16 +40,16 @@ class RoleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     *
+     * @return \Illuminate\View\View
      */
     public function show($id)
     {
         $role = Role::find($id);
 
         return view('roles.show', [
-          'role' => $role
+            'role' => $role,
         ]);
     }
-
 }
