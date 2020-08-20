@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);/*!
+@import url(https://fonts.googleapis.com/css?family=Nunito);@import url(https://fonts.googleapis.com/css2?family=Rubik&display=swap);/*!
  * Bootstrap v4.5.0 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors
  * Copyright 2011-2020 Twitter, Inc.
@@ -10927,8 +10927,7 @@ a.text-dark:focus {
 }
 
 body {
-  background: #e3e2f0;
-  background: linear-gradient(90deg, #e3e2f0 0%, #aaa8ce 100%);
+  background: white;
 }
 
 #container {
@@ -10944,14 +10943,18 @@ body {
   background: white;
   border-radius: 20px;
   opacity: 0.8;
+  margin: auto;
+  border-radius: 8px;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.226);
 }
 
 .center h1 {
   text-align: center;
   padding: 0 0 20px 0;
   margin-top: 30px;
-  color: #0a00af;
+  color: #ff2426;
   opacity: 1;
+  font-family: 'Rubik', sans-serif;
 }
 
 .center form {
@@ -10961,7 +10964,7 @@ body {
 
 form .txt_field {
   position: relative;
-  border-bottom: 2px solid #adadad;
+  border-bottom: 2px solid black;
   margin: 30px 0;
 }
 
@@ -10979,7 +10982,7 @@ form .txt_field {
   position: absolute;
   top: 50%;
   left: 5px;
-  color: #adadad;
+  color: black;
   transform: translateY(-50%);
   font-size: 16px;
   pointer-events: none;
@@ -10993,14 +10996,14 @@ form .txt_field {
   left: 0;
   width: 0%;
   height: 2px;
-  background: #aaa8ce;
+  background: black;
   transition: .50s;
 }
 
 .txt_field input:focus ~ label,
 .txt_field input:valid ~ label {
   top: -5px;
-  color: #0a00af;
+  color: black;
 }
 
 .txt_field input:focus ~ span::before,
@@ -11010,7 +11013,7 @@ form .txt_field {
 
 .pass {
   margin: -5px 0 20px 5px;
-  color: #a6a6a6;
+  color: black;
   cursor: pointer;
 }
 
@@ -11025,14 +11028,13 @@ form .txt_field {
   margin-left: 65px;
   margin-bottom: 15px;
   border: 1px solid;
-  background: #0a00af;
-  background: radial-gradient(circle, #0a00af 0%, #5454c1 35%, #8484bf 100%);
-  border-radius: 25px;
-  font-size: 18px;
+  background-image: linear-gradient(130deg, #ff9259 0, #ff2426 70%);
+  border-radius: 15px;
+  font-size: 16px;
   color: #e9f4fb;
-  font-weight: 700;
   cursor: pointer;
   outline: none;
+  font-family: 'Rubik', sans-serif;
 }
 
 #btn-login-register:hover {
@@ -11041,7 +11043,7 @@ form .txt_field {
 }
 
 #btn-forgot {
-  color: #0a00af;
+  color: black;
 }
 
 .box {
@@ -11095,15 +11097,16 @@ form .txt_field {
 }
 
 #box-crud {
-  position: relative;
+  position: absolute;
   border-radius: 20px;
   background: white;
   align-content: center;
 }
 
 #box-search-crud {
-  position: relative;
-  border-radius: 20px;
+  border-radius: 15px;
+  width: 50%;
+  margin: auto;
   background: white;
   align-content: center;
   box-shadow: 11px 8px 52px rgba(18, 18, 18, 0.35);
@@ -11171,33 +11174,143 @@ form .txt_field {
   outline: none;
 }
 
-#box-home {
-  position: absolute;
-  border-radius: 20px;
+.container2 {
+  width: 100%;
+  max-width: 1200px;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: auto;
+}
+
+.container2 .card {
+  width: 330px;
+  height: 430px;
+  border-radius: 8px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  margin: 20px;
+  transition: all 0.25;
+}
+
+.container2 .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);
+}
+
+.container2 .card img {
+  width: 330px;
+  height: 220px;
+}
+
+.container2 .card h4 {
+  font-weight: 600;
+  justify-content: left;
+  margin-left: 10px;
+}
+
+.container2 .card p {
+  padding: 0 1rem;
+  font-size: 16px;
+  margin: 10px;
+  height: 40px;
+}
+
+.container2 .card .price {
+  text-align: right;
+}
+
+.container2 .card a {
+  font-weight: 500;
+  text-decoration: none;
+  color: #3498db;
+}
+
+.container2 .card .add {
+  background-image: linear-gradient(130deg, #ff9259 0, #ff2426 70%);
+  color: white;
+  margin: auto;
+  text-align: center;
+  border-radius: 15px;
+  height: 45px;
+  width: 80%;
+  font-size: 16px;
+  font-family: 'Rubik', sans-serif;
+  padding: 8.5px 14px;
+  margin-bottom: 10px;
+}
+
+#navbar {
+  background-image: linear-gradient(130deg, #ff9259 0, #ff2426 70%);
+  background-color: blanchedalmond;
+}
+
+#title {
+  color: white;
+  font-weight: 400;
+}
+
+.filter {
+  width: 8%;
+  height: auto;
+  margin-left: 30px;
   background: white;
   align-content: center;
-  margin-bottom: 20px;
+  box-shadow: 11px 8px 52px rgba(18, 18, 18, 0.35);
+  border-radius: 15px;
+  padding-top: 5px;
+  padding-left: 5px;
+  padding-bottom: 5px;
 }
 
-#btn-show-home {
-  color: #85C829;
-  align-content: center;
-  border: 1px solid #85C829;
-  border-radius: 10px;
-  font-size: 12px;
-  font-weight: 700;
-  cursor: pointer;
-  outline: none;
+.container_show {
+  width: 75%;
+  height: 400px;
+  margin: auto;
+  justify-content: center;
+  margin-top: 5%;
+  display: flex;
+  flex-wrap: wrap;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
 }
 
-#btn-add-home {
-  color: #D23232;
-  align-content: center;
-  border: 1px solid #D23232;
-  border-radius: 10px;
-  font-size: 12px;
-  font-weight: 700;
-  cursor: pointer;
-  outline: none;
+.container .img {
+  margin-right: 52.5%;
+  justify-content: center;
+}
+
+.container .img .img1 {
+  margin-left: 17.5%;
+}
+
+.container_show .row .col-md-5 img {
+  height: 220px;
+  width: 330px;
+  margin: auto;
+  margin-right: 450px;
+}
+
+.container_show .row .col-md-6 {
+  margin-left: 5%;
+}
+
+.container_show .row .col-md-6 h3 {
+  text-align: right;
+}
+
+.container_show .row .col-md-6 a {
+  background-image: linear-gradient(130deg, #ff9259 0, #ff2426 70%);
+  color: white;
+  margin: auto;
+  text-align: center;
+  border-radius: 15px;
+  height: 45px;
+  width: 80%;
+  font-size: 16px;
+  font-family: 'Rubik', sans-serif;
+  padding: 10px 40%;
+  align-items: center;
 }
 

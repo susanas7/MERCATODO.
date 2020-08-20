@@ -27,6 +27,16 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/home/{product}', 'HomeController@show')->name('home.show');
 
+Route::get('/category/{id}', 'HomeController@showCategory')->name('category');
+
+Route::get('/add-to-cart/{id}', 'HomeController@addToCart')->name('addToCart');
+
+Route::get('/shoppingCart', 'HomeController@shoppingCart')->name('shoppingCart');
+
+Route::get('/reduce/{id}', 'HomeController@reduceByOne')->name('reduceByOne');
+Route::get('/add/{id}', 'HomeController@addByOne')->name('addByOne');
+Route::get('/remove/{id}', 'HomeController@removeItem')->name('removeItem');
+
 Route::resource('/users', 'UserController');
 Route::get('/users/changeStatus/{id}', 'UserController@changeStatus')->name('users.changeStatus');
 
