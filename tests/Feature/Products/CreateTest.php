@@ -21,10 +21,10 @@ use Tests\TestCase;
  */
 final class CreateTest extends TestCase
 {
-    use RefreshDatabase;
+    //use RefreshDatabase;
     use WithoutMiddleware;
 
-    public function testAProductCanBeCreated()
+    public function aProductCanBeCreated()
     {
         $this->withoutExceptionHandling();
 

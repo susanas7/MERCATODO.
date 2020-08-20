@@ -1,11 +1,16 @@
-@if(count($errors))
-    <div class="alert alert-danger">
-        <button type="button" class="close" data-dismiss="alert">&times;
-        </button>
-        <ul>
-            @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
+
+@if ($errors->any())
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="alert alert-danger alert-alt">
+                <strong><i class="fa fa-bug fa-fw"></i> Ошибка</strong><br>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
     </div>
+    <br/>
 @endif
