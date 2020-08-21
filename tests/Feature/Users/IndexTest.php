@@ -24,18 +24,18 @@ final class IndexTest extends TestCase
     use RefreshDatabase;
     use WithoutMiddleware;
 
-    public function testAUserCanListUsers()
+    /**
+     * @test
+     */
+    public function aUserCanListUsers()
     {
         $this->withoutExceptionHandling();
 
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($user)
-            ->get(route('users.index'))
-        ;
+        $response = $this->actingAs($user)->get(route('users.index'));
 
         $response->assertOk();
-        //$response->assertViewIs('users.index');
 
         $responseUsers = $response->getOriginalContent()['users'];
 

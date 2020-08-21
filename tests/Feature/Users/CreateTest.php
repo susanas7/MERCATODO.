@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Hash;
  */
 final class CreateTest extends TestCase
 {
-    use RefreshDatabase;
+    //use RefreshDatabase;
     use WithoutMiddleware;
 
     /**
@@ -22,8 +22,6 @@ final class CreateTest extends TestCase
      */
     public function aUserCanViewTheCreateForm()
     {
-        $this->withoutExceptionHandling();
-
         $user = factory(User::class)->create();
 
         $response = $this->actingAs($user)->get(route('users.create'));
