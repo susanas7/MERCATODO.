@@ -35,5 +35,6 @@ final class ShowTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertViewIs('users.show');
+        $response->assertViewHas('user', $user);
     }
 }

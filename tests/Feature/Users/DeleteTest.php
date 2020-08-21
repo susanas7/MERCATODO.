@@ -26,7 +26,6 @@ final class DeleteTest extends TestCase
 
     public function testAUserCanBeDeleted()
     {
-        $this->withoutExceptionHandling();
         $user = factory(User::class)->create();
 
         $this->delete('users/{$user->id}');

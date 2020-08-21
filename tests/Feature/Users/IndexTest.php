@@ -29,16 +29,13 @@ final class IndexTest extends TestCase
      */
     public function aUserCanListUsers()
     {
-        $this->withoutExceptionHandling();
-
         $user = factory(User::class)->create();
 
         $response = $this->actingAs($user)->get(route('users.index'));
+        $users = User::all();
 
         $response->assertOk();
-
         $responseUsers = $response->getOriginalContent()['users'];
-
         $responseUsers->each(function ($item) use ($user) {
             $this->assertSame($user->id, $item->id);
         });

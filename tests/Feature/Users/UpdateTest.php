@@ -24,20 +24,21 @@ final class UpdateTest extends TestCase
     use RefreshDatabase;
     use WithoutMiddleware;
 
-    public function testAUserCanBeUpdated()
+    /**
+     * @test
+     */
+    public function aUserCanBeUpdated()
     {
-        $this->withoutExceptionHandling();
-
         $user = factory(User::class)->create();
 
-        $this->put(route('users.update', $user), [
+        $response = $this->put(route('users.update', $user), [
             'name' => 'Elisa',
             'email' => 'elisa@mail.com',
         ]);
+        $user = User::first();
 
-        $this->assertDatabaseHas('users', [
-            'name' => 'Elisa',
-            'email' => 'elisa@mail.com',
-        ]);
+        $this->assertEquals('Elisa', $user->name);
+        $this->assertEquals('elisa@mail.com', $user->email);
+        $response->assertRedirect(route('users.index'));
     }
 }
