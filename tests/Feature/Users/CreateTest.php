@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Hash;
  * @internal
  * @coversNothing
  */
-final class CreateTest extends TestCase
+class CreateTest extends TestCase
 {
     use RefreshDatabase;
     use WithoutMiddleware;
@@ -37,6 +37,7 @@ final class CreateTest extends TestCase
      */
     public function aUserCanStoreAnUser()
     {
+        $this->withoutExceptionHandling();
         $response = $this->post(route('users.store'), [
                 'name' => 'Jhon',
                 'email' => 'jhon@mail.com',
