@@ -1,14 +1,17 @@
 @extends('layouts.app')
 @section('content')
 
-
-
+<!--<div class="row justify-content-center">
+    <div class="col-md-4">
+        @include('users.fragment.error')
+    </div>
+</div>-->
 
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Editar usuario</div>
+                <div class="card-header">Crear usuario</div>
 
                 <div class="card-body">
                     <form action="{{route('users.store')}}" method="POST">
@@ -51,7 +54,7 @@
                         </div>
                         <div class="form-group"><P ALIGN=center>
                         </div>
-                        <button class="btn btn-success" type="submit" >Actualizar</button>
+                        <button class="btn btn-success" type="submit" >Crear</button>
                     </form>
                 </div>
             </div>

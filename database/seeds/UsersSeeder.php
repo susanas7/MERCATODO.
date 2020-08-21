@@ -38,6 +38,7 @@ class UsersSeeder extends Seeder
             'name' => 'Super admin',
             'email' => 'super.admin@mail.com',
             'password' => bcrypt('12345678'),
+            'email_verified_at' => '2020-06-24 17:35:22',
         ]);
 
         $admin->assignRole('Super-administrador');
