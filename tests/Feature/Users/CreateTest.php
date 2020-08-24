@@ -32,10 +32,10 @@ class CreateTest extends TestCase
     public function aUserCanStoreAnUser()
     {
         $response = $this->post(route('users.store'), [
-                'name' => 'Juli',
-                'email' => 'juli@mail.com',
-                'password' => '12345678',
-            ]);
+            'name' => 'Juli',
+            'email' => 'juli@mail.com',
+            'password' => '12345678',
+        ]);
 
         $user = User::first();
         $this->assertCount(1, User::all());
@@ -52,13 +52,12 @@ class CreateTest extends TestCase
     public function aUserCanNotBeStoredWithInvalidEmail()
     {
         $user = $this->post(route('users.store'), [
-                'name' => 'Juli',
-                'email' => 'juli',
-                'password' => '12345678',
-            ]);
+            'name' => 'Juli',
+            'email' => 'juli',
+            'password' => '12345678',
+        ]);
 
         $this->assertCount(0, User::all());
-
     }
 
     /**
@@ -67,54 +66,53 @@ class CreateTest extends TestCase
     public function aUserCanNotBeStoredWithInvalidPassword()
     {
         $user = $this->post(route('users.store'), [
-                'name' => 'Juli',
-                'email' => 'juli',
-                'password' => '123',
-            ]);
+            'name' => 'Juli',
+            'email' => 'juli',
+            'password' => '123',
+        ]);
 
         $this->assertCount(0, User::all());
-
     }
+
     /**
      * @test
      */
     public function aUserCanNotBeStoredWithEmptyName()
     {
         $user = $this->post(route('users.store'), [
-                'name' => '',
-                'email' => 'juli',
-                'password' => '12345678',
-            ]);
+            'name' => '',
+            'email' => 'juli',
+            'password' => '12345678',
+        ]);
 
         $this->assertCount(0, User::all());
-
     }
+
     /**
      * @test
      */
     public function aUserCanNotBeStoredWithEmptyEmail()
     {
         $user = $this->post(route('users.store'), [
-                'name' => 'juli',
-                'email' => '',
-                'password' => '12345678',
-            ]);
+            'name' => 'juli',
+            'email' => '',
+            'password' => '12345678',
+        ]);
 
         $this->assertCount(0, User::all());
-
     }
+
     /**
      * @test
      */
     public function aUserCanNotBeStoredWithEmptyPassword()
     {
         $user = $this->post(route('users.store'), [
-                'name' => 'juli',
-                'email' => 'juli@mail.com',
-                'password' => '',
-            ]);
+            'name' => 'juli',
+            'email' => 'juli@mail.com',
+            'password' => '',
+        ]);
 
         $this->assertCount(0, User::all());
-
     }
 }
