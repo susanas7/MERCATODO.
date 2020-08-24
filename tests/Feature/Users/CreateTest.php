@@ -8,10 +8,6 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
 use Illuminate\Support\Facades\Hash;
 
-/**
- * @internal
- * @coversNothing
- */
 class CreateTest extends TestCase
 {
     use RefreshDatabase;

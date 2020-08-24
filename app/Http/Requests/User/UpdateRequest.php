@@ -33,7 +33,7 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            //'email' => 'required|unique:users,email',
+            'email' => 'email|required|unique:users,email',
         ];
     }
 }

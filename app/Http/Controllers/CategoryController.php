@@ -20,7 +20,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = ProductCategory::paginate();
-        
+
         return view('categories.index', ['categories' => $categories]);
     }
 
