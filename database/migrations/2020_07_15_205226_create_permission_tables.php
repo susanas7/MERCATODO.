@@ -1,13 +1,5 @@
 <?php
 
-/*
- * This file is part of PHP CS Fixer.
- * (c) Fabien Potencier <fabien@symfony.com>
- *     Dariusz Rumiński <dariusz.ruminski@gmail.com>
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
- */
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -51,8 +43,7 @@ class CreatePermissionTables extends Migration
             $table->foreign('permission_id')
                 ->references('id')
                 ->on($tableNames['permissions'])
-                ->onDelete('cascade')
-            ;
+                ->onDelete('cascade');
 
             $table->primary(
                 ['permission_id', $columnNames['model_morph_key'], 'model_type'],
@@ -70,8 +61,7 @@ class CreatePermissionTables extends Migration
             $table->foreign('role_id')
                 ->references('id')
                 ->on($tableNames['roles'])
-                ->onDelete('cascade')
-            ;
+                ->onDelete('cascade');
 
             $table->primary(
                 ['role_id', $columnNames['model_morph_key'], 'model_type'],
@@ -86,22 +76,19 @@ class CreatePermissionTables extends Migration
             $table->foreign('permission_id')
                 ->references('id')
                 ->on($tableNames['permissions'])
-                ->onDelete('cascade')
-            ;
+                ->onDelete('cascade');
 
             $table->foreign('role_id')
                 ->references('id')
                 ->on($tableNames['roles'])
-                ->onDelete('cascade')
-            ;
+                ->onDelete('cascade');
 
             $table->primary(['permission_id', 'role_id'], 'role_has_permissions_permission_id_role_id_primary');
         });
 
         app('cache')
             ->store('default' !== config('permission.cache.store') ? config('permission.cache.store') : null)
-            ->forget(config('permission.cache.key'))
-        ;
+            ->forget(config('permission.cache.key'));
     }
 
     /**
