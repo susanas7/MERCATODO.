@@ -1,43 +1,151 @@
 <?php
 
-/*
- * This file is part of PHP CS Fixer.
- * (c) Fabien Potencier <fabien@symfony.com>
- *     Dariusz Rumiński <dariusz.ruminski@gmail.com>
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
- */
-
 namespace Tests\Feature\Products;
 
 use App\Product;
+use App\User;
+use App\ProductCategory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
 
-/**
- * @internal
- * @coversNothing
- */
-final class CreateTest extends TestCase
+class CreateTest extends TestCase
 {
-    //use RefreshDatabase;
+    use RefreshDatabase;
     use WithoutMiddleware;
 
-    public function aProductCanBeCreated()
+    /**
+     * @test
+     */
+    public function aUserCanViewTheProductCreateForm()
     {
-        $this->withoutExceptionHandling();
-
         $product = factory(Product::class)->create();
 
-        $this->assertDatabaseHas('products', [
-            'title' => $product->title,
-            'category_id' => $product->category_id,
-            'slug' => $product->slug,
-            'price' => $product->price,
-            'updated_at' => $product->updated_at,
-            'created_at' => $product->created_at,
-            'img_route' => $product->img_route,
+        $response = $this->get(route('users.create'));
+
+        $response->assertOk();
+        $response->assertStatus(200);
+    }
+
+    /**
+     * @test
+     */
+    public function aUserCanStoreAProduct()
+    {
+        $category = factory(ProductCategory::class)->create();
+
+        $response = $this->post(route('products.store'), [
+            'title' => 'Agua',
+            'slug' => 'lorem ipsum etc',
+            'category_id' => '1',
+            'price' => '32444',
+            'img_route' => 'images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg'
         ]);
+
+        $product = Product::first();
+        $this->assertCount(1, Product::all());
+
+        $this->assertEquals('Agua', $product->title);
+        $this->assertEquals('lorem ipsum etc', $product->slug);
+        $this->assertEquals('1', $product->category_id);
+        $this->assertEquals('32444', $product->price);
+        $this->assertEquals('images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg', $product->img_route);
+        $response->assertRedirect(route('products.index'));
+    }
+
+    /**
+     * @test
+     */
+    public function aProductCanNotBeStoredWithEmptyTitle()
+    {
+        $product = $this->post(route('products.store'), [
+            'title' => '',
+            'slug' => 'lorem ipsum etc',
+            'category_id' => '1',
+            'price' => '32444',
+            'img_route' => 'images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg'
+        ]);
+
+        $this->assertCount(0, Product::all());
+    }
+
+    /**
+     * @test
+     */
+    public function aProductCanNotBeStoredWithEmptySlug()
+    {
+        $product = $this->post(route('products.store'), [
+            'title' => 'Agua',
+            'slug' => '',
+            'category_id' => '1',
+            'price' => '32444',
+            'img_route' => 'images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg'
+        ]);
+
+        $this->assertCount(0, Product::all());
+    }
+
+    /**
+     * @test
+     */
+    public function aProductCanNotBeStoredWithEmptyCategory()
+    {
+        $product = $this->post(route('products.store'), [
+            'title' => 'Agua',
+            'slug' => 'lorem ipsum etc',
+            'category_id' => '',
+            'price' => '32444',
+            'img_route' => 'images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg'
+        ]);
+
+        $this->assertCount(0, Product::all());
+    }
+
+    /**
+     * @test
+     */
+    public function aProductCanNotBeStoredWithEmptyPrice()
+    {
+        $product = $this->post(route('products.store'), [
+            'title' => 'Agua',
+            'slug' => 'lorem ipsum etc',
+            'category_id' => '1',
+            'price' => '',
+            'img_route' => 'images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg'
+        ]);
+
+        $this->assertCount(0, Product::all());
+    }
+
+    /**
+     * @test
+     */
+    public function aProductCanNotBeStoredWithInvalidSlug()
+    {
+        $product = $this->post(route('products.store'), [
+            'title' => 'Agua',
+            'slug' => 'lorem ipsum etc ehshh agsj ahsuuu ajsue ajdh ays hejja sy ejdhahhyedhah dggajd agjdg asgas hahaha hsuuenmdimn uauus uauusujsujsu uujsn dd hj hahaha ujsu e8u oif syduaidy ia duiyud yiud iuay odsgbdljsg ok',
+            'category_id' => '1',
+            'price' => '32444',
+            'img_route' => 'images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg'
+        ]);
+
+        $this->assertCount(0, Product::all());
+    }
+
+    /**
+     * @test
+     */
+    public function aProductCanNotBeStoredWithInvalidPrice()
+    {
+        $product = $this->post(route('products.store'), [
+            'title' => 'Agua',
+            'slug' => 'lorem ipsum etc',
+            'category_id' => '1',
+            'price' => 'husme',
+            'img_route' => 'images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg'
+        ]);
+
+        $this->assertCount(0, Product::all());
     }
 }
