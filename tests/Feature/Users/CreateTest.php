@@ -16,7 +16,7 @@ class CreateTest extends TestCase
     /**
      * @test
      */
-    public function aUserCanViewTheCreateForm()
+    public function aUserCanViewTheUserCreateForm()
     {
         $user = factory(User::class)->create();
 

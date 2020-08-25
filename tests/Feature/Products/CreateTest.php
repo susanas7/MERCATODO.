@@ -21,7 +21,7 @@ class CreateTest extends TestCase
     {
         $product = factory(Product::class)->create();
 
-        $response = $this->get(route('users.create'));
+        $response = $this->get(route('products.create'));
 
         $response->assertOk();
         $response->assertStatus(200);
