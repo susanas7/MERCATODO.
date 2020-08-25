@@ -100,6 +100,20 @@ return [
             'prefix' => '',
             'strict' => false,
         ],
+
+        'tdd' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_TDD_DATABASE', 'tdd'),
+            'username' => env('DB_TDD_USERNAME', 'root'),
+            'password' => env('DB_TDD_PASSWORD', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+        ],
+
     ],
 
     /*
