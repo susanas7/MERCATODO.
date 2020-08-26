@@ -1,17 +1,17 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="row justify-content-center">
+<!--<div class="row justify-content-center">
     <div class="col-md-4">
         @include('users.fragment.error')
     </div>
-</div>
+</div>-->
 
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Editar usuario</div>
+                <div class="card-header">Crear usuario</div>
 
                 <div class="card-body">
                     <form action="{{route('users.store')}}" method="POST">
@@ -42,6 +42,7 @@
                             <label name="role" class="col-md-4 col-form-label text-md-right">Role</label>
                             <div class="col-md-6">
                             <select class="form-control" name="role">
+                            <option value="">Ninguno</option>
                             @foreach($roles as $key => $value)
                                 <option value=" {{ $value }} "> {{$value}} </option>
                             @endforeach
@@ -51,16 +52,9 @@
                                 <input type="text" name="role" class="form-control">
                             </div>-->
                         </div>
-                        <div class="form-group row">
-                            <label name="status" class="col-md-4 col-form-label text-md-right">Estado</label>
-
-                            <div class="col-md-6">
-                                <input type="text" name="status" class="form-control"></input>
-                            </div>
-                        </div>
                         <div class="form-group"><P ALIGN=center>
                         </div>
-                        <button class="btn btn-success" type="submit" >Actualizar</button>
+                        <button class="btn btn-success" type="submit" >Crear</button>
                     </form>
                 </div>
             </div>

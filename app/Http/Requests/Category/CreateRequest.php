@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\User;
+namespace App\Http\Requests\Category;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,9 +24,7 @@ class CreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'email' => 'email|required|unique:users,email',
-            'password' => 'required|min:8',
+            'title' => 'required|unique:product_categories,title',
         ];
     }
 }

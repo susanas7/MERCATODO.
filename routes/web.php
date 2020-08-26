@@ -1,13 +1,5 @@
 <?php
 
-/*
- * This file is part of PHP CS Fixer.
- * (c) Fabien Potencier <fabien@symfony.com>
- *     Dariusz Rumiński <dariusz.ruminski@gmail.com>
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
- */
-
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,4 +43,3 @@ Route::post('/categories', 'CategoryController@store')->name('categories.store')
 Route::get('/categories/{category}/edit', 'CategoryController@edit')->name('categories.edit');
 Route::put('/categories/{category}', 'CategoryController@update')->name('categories.update');
 Route::delete('/categories/{category}', 'CategoryController@destroy')->name('categories.destroy');
-

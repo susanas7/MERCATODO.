@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\ProductCategory;
-use Illuminate\Http\Request;
+use App\Http\Requests\Category\CreateRequest;
+use App\Http\Requests\Category\UpdateRequest;
 
 class CategoryController extends Controller
 {
@@ -20,7 +21,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = ProductCategory::paginate();
-        
+
         return view('categories.index', ['categories' => $categories]);
     }
 
@@ -39,7 +40,7 @@ class CategoryController extends Controller
      *
      * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(CreateRequest $request)
     {
         $category = new ProductCategory();
         $category->title = $request->title;
@@ -69,7 +70,7 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
         $category = ProductCategory::findOrFail($id);
 
