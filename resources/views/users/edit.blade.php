@@ -33,6 +33,34 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label name="email" class="col-md-4 col-form-label text-md-right">Nro de documento</label>
+
+                            <div class="col-md-6">
+                                <input type="text" name="email" class="form-control" value="{{$user->data->document}}" >
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label name="email" class="col-md-4 col-form-label text-md-right">Dirección</label>
+
+                            <div class="col-md-6">
+                                <input type="text" name="email" class="form-control" value="{{$user->data->address}}" >
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label name="email" class="col-md-4 col-form-label text-md-right">Celular</label>
+
+                            <div class="col-md-6">
+                                <input type="text" name="email" class="form-control" value="{{$user->data->phone}}" >
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label name="email" class="col-md-4 col-form-label text-md-right">Fecha de nacimiento</label>
+
+                            <div class="col-md-6">
+                                <input type="text" name="email" class="form-control" value="{{$user->data->birthday}}" >
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label name="role" class="col-md-4 col-form-label text-md-right">Role</label>
 
                             <div class="col-md-6">

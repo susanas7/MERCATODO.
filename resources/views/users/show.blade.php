@@ -44,6 +44,34 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label name="email" class="col-md-4 col-form-label text-md-right">Nro de documento:</label>
+
+                            <div class="col-md-6">
+                            <label name="name" class="col-md-8 col-form-label text-md-right">{{$user->data->document_type}} - {{$user->data->document}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label name="email" class="col-md-4 col-form-label text-md-right">Dirección:</label>
+
+                            <div class="col-md-6">
+                            <label name="name" class="col-md-8 col-form-label text-md-right">{{$user->data->address}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label name="email" class="col-md-4 col-form-label text-md-right">Celular:</label>
+
+                            <div class="col-md-6">
+                            <label name="name" class="col-md-8 col-form-label text-md-right">{{$user->data->phone}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label name="email" class="col-md-4 col-form-label text-md-right">Fecha de nacimiento:</label>
+
+                            <div class="col-md-6">
+                            <label name="name" class="col-md-8 col-form-label text-md-right">{{$user->data->birthday}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label name="email" class="col-md-4 col-form-label text-md-right">Se unió:</label>
 
                             <div class="col-md-6">
