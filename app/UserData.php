@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserData extends Model
 {
-    public function data()
+    public function userData()
     {
         return $this->belongsTo(User::class);
     }

@@ -43,6 +43,7 @@
                                 </label>
                             </div>
                         </div>
+                        @if($user->data)
                         <div class="form-group row">
                             <label name="email" class="col-md-4 col-form-label text-md-right">Nro de documento:</label>
 
@@ -71,6 +72,7 @@
                             <label name="name" class="col-md-8 col-form-label text-md-right">{{$user->data->birthday}}</label>
                             </div>
                         </div>
+                        @endif
                         <div class="form-group row">
                             <label name="email" class="col-md-4 col-form-label text-md-right">Se unió:</label>
 
