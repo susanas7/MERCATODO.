@@ -56,18 +56,6 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * @param string $email
-     */
-    /*public function scopeEmail(Builder $query, $email): Builder
-    {
-        if (null !== $email) {
-            return $this->searchByField($query, 'email', $email, '=');
-        }
-
-        return $query;
-    }*/
-
-    /**
      * @param strin $value
      */
     public function searchByField(Builder $query, string $field, string $value, string $operator = null): Builder

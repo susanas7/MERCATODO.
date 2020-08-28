@@ -2,11 +2,34 @@
 
 @section('content')
 
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card" id="box-search-crud">
+        <div class="card-body">
+        <form action=" {{route('categories.index')}} ">
+          <div class="row">
+            <div class="col" >
+              <input type="text" name="title" class="form-control form-control-navbar" value="{{old('title' , request('title'))}}">
+            </div>
+            <div class="col">
+            <button type="submit" id="btn-search-crud" class="btn btn-link">Buscar</button>
+            <a href="{{ route('categories.index') }}" id="btn-refresh-crud" class="btn btn-link">Regresar</a>
+            </div>
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><br>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12" >
             <div class="card"  id="box-crud">
-                <div class="card-header"><P ALIGN=center> {{ $categories->total() }} usuarios | página {{ $categories->currentPage() }} de {{ $categories->lastpage() }}</div>
+                <div class="card-header"><P ALIGN=center> {{ $categories->total() }} categorías | página {{ $categories->currentPage() }} de {{ $categories->lastpage() }}</div>
                   <div class="card-body">
                     <div>
                     @can('crear usuario')

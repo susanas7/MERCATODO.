@@ -103,7 +103,7 @@ return [
 
         'tdd'=> [
             'driver' => 'mysql',
-            'host' => env('DB_TEST_HOST', 'localhost'),
+            'host' => env('DB_HOST', 'localhost'),
             'database' => env('DB_TDD_DATABASE', 'tdd'),
             'username' => env('DB_TDD_USERNAME', 'root'),
             'password' => env('DB_TDD_PASSWORD', ''),

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ProductCategory;
+use Illuminate\Http\Request;
 use App\Http\Requests\Category\CreateRequest;
 use App\Http\Requests\Category\UpdateRequest;
 
@@ -18,9 +19,11 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categories = ProductCategory::paginate();
+        $title = $request->get('title');
+
+        $categories = ProductCategory::title($title)->paginate();
 
         return view('categories.index', ['categories' => $categories]);
     }

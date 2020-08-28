@@ -6,14 +6,10 @@
     <div class="col-md-8">
       <div class="card" id="box-search-crud">
         <div class="card-body">
-        <h6>Busqueda de productos</h6>
         <form action=" {{route('products.index')}} ">
           <div class="row">
             <div class="col" >
-              <input type="search" name="title" class="form-control form-control-navbar" placeholder="Nombre">
-            </div>
-            <div class="col" >
-              <input type="search" name="slug" class="form-control form-control-navbar" placeholder="Descripcion">
+              <input type="text" name="title" class="form-control form-control-navbar" value="{{old('title' , request('title'))}}">
             </div>
             <div class="col">
             <button type="submit" id="btn-search-crud" class="btn btn-link">Buscar</button>
@@ -42,6 +38,7 @@
                         <th>ID</th>
                         <th>&nbsp;</th>
                         <th>Producto</th>
+                        <th>Descripcion</th>
                         <th>Precio</th>
                         <th>Estado</th>
                         <th>Categoria</th>
@@ -56,6 +53,7 @@
                           <td>{{ $product->id }}</td>
                           <td><img src="{{ $product->get_image }}" class="card-img-top"> </td>
                           <td>{{ $product->title }}</td>
+                          <td>{{$product->slug}}</td>
                           <td>{{ number_format($product->price, 2) }}</td>
                           <td>
                           @if($product->is_active==1)
