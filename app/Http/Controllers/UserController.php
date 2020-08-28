@@ -32,16 +32,16 @@ class UserController extends Controller
         });
         Cache::get('users');*/
         $name = $request->get('name');
-        $email = $request->get('email');
+        //$email = $request->get('email');
 
-        $users = User::name($name)->email($email)->paginate();
+        $users = User::name($name)->paginate();
 
         $user = QueryBuilder::for(User::class)
         ->allowedFilters(['name', 'email'])
         ->get();
 
 
-        return view('users.index', ['users' => $users]);
+        return view('users.index', [ 'users' => $users]);
     }
 
     /**
