@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 
 class CreateTest extends TestCase
 {
-    //use RefreshDatabase;
+    use RefreshDatabase;
     use WithoutMiddleware;
 
     /**
