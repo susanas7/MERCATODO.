@@ -14,9 +14,6 @@
             <div class="col" >
               <input type="text" name="name" class="form-control form-control-navbar" placeholder="Nombre">
             </div>
-            <div class="col" >
-              <input type="text" name="email" class="form-control form-control-navbar" placeholder="Email">
-            </div>
             <div class="col">
             <button type="submit" id="btn-search-crud" class="btn btn-link">Buscar</button>
             <a href="{{ route('users.index') }}" id="btn-refresh-crud" class="btn btn-link">Regresar</a>
