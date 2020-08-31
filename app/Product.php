@@ -40,19 +40,8 @@ class Product extends Model
      */
     public function scopeTitle($query, $title)
     {
-        return $query->where('title', 'LIKE', "%{$title}%");
-    }
-
-    /**
-     * @param string $slug
-     */
-    public function scopeSlug(Builder $query, $slug): Builder
-    {
-        if (null !== $slug) {
-            return $this->searchByField($query, 'slug', $slug, '=');
-        }
-
-        return $query;
+        return $query->where('title', 'LIKE', "%{$title}%")
+            ->orWhere('slug', 'LIKE', "%{$title}%");
     }
 
     /**

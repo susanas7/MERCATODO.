@@ -33,7 +33,7 @@ class ProductController extends Controller
         $title = $request->get('title');
         $slug = $request->get('slug');
 
-        $products = Product::title($title)->slug($slug)->paginate(20);
+        $products = Product::title($title)->paginate();
 
         return view('products.index', ['products' => $products, 'data' => $data]);
     }

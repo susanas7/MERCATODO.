@@ -10,12 +10,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Spatie\Permission\Models\Role;
 
+use Spatie\QueryBuilder\QueryBuilder;
+
 class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['role:Gestor de usuarios|Super-administrador']);
-        $this->middleware(['verified']);
+        //$this->middleware(['role:Gestor de usuarios|Super-administrador']);
+        //$this->middleware(['verified']);
     }
 
     /**
@@ -25,16 +27,21 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Cache::remember('users', 6000, function () {
+        /*$data = Cache::remember('users', 6000, function () {
             return User::all();
         });
-        Cache::get('users');
+        Cache::get('users');*/
         $name = $request->get('name');
-        $email = $request->get('email');
+        //$email = $request->get('email');
 
-        $users = User::name($name)->email($email)->paginate(505);
+        $users = User::name($name)->paginate();
 
-        return view('users.index', ['users' => $users, 'data' => $data]);
+        $user = QueryBuilder::for(User::class)
+        ->allowedFilters(['name', 'email'])
+        ->get();
+
+
+        return view('users.index', [ 'users' => $users]);
     }
 
     /**
@@ -151,5 +158,14 @@ class UserController extends Controller
         }
 
         return redirect(route('users.index'));
+    }
+
+    public function search()
+    {
+        $users = QueryBuilder::for(User::class)
+            ->allowedFilters(['name', 'email'])
+            ->get();
+
+        return view('search', ['users' => $users]);
     }
 }

@@ -10,4 +10,15 @@ class ProductCategory extends Model
     {
         return $this->hasOne(Product::class);
     }
+
+    /**
+     * @param Builder $query
+     * @param string  $title
+     *
+     * @return Builder
+     */
+    public function scopeTitle($query, $title)
+    {
+        return $query->where('title', 'LIKE', "%{$title}%");
+    }
 }

@@ -8,14 +8,10 @@
     <div class="col-md-8">
       <div class="card" id="box-search-crud">
         <div class="card-body">
-        <h6>Busqueda de usuarios</h6>
         <form action=" {{route('users.index')}} ">
           <div class="row">
             <div class="col" >
-              <input type="text" name="name" class="form-control form-control-navbar" placeholder="Nombre">
-            </div>
-            <div class="col" >
-              <input type="text" name="email" class="form-control form-control-navbar" placeholder="Email">
+              <input type="text" name="name" class="form-control form-control-navbar" value="{{old('name' , request('name'))}}">
             </div>
             <div class="col">
             <button type="submit" id="btn-search-crud" class="btn btn-link">Buscar</button>
