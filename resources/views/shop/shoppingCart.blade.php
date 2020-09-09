@@ -43,7 +43,11 @@
     <hr>
     <div class="row">
         <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-            <button type="button" class="btn btn-success">Checkout</button> 
+        <form action="{{route('orders.store')}}" method="POST">
+            @csrf
+            <!--<a href="{{route('orders.store')}}" class="btn btn-success">Comprar</a> -->
+            <button type="submit">oli</button>
+        </form>
         </div>
     </div>
 @else
