@@ -38,7 +38,7 @@
                         </div>
                         <div class="form-group"><P ALIGN=center>
                         </div>
-                        <a href="{{route ('checkout')}}">Pagar</a>
+                        <a href="{{'/checkout/'.$order->id}}">Pagar</a>
                 </div>
             </div>
         </div>

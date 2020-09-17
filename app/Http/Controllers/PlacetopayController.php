@@ -5,12 +5,23 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Dnetix\Redirection\PlacetoPay as PlacetoPay;
 use App\Order;
+use App\Cart;
+use Session;
+use Auth;
 use Dnetix\Redirection\Exceptions\PlacetoPayException;
 
 class PlacetopayController extends Controller
 {
-    public function pay(Order $order)
+    public function pay($id)
     {
+        /*funciona pero no creo que sea funcional si se quieren pagar ordnes anteriores
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        $total = $cart->totalPrice;
+        $quantity = $cart->totalQty;*/
+
+        $order = Order::find($id);
+
         $placetopay = new PlacetoPay([
             'login' => '6dd490faf9cb87a9862245da41170ff2',
             'tranKey' => '024h1IlD',
@@ -20,12 +31,12 @@ class PlacetopayController extends Controller
         $request = [
             'locale' => 'es_CO',
             'buyer' => [
-                'name' => 'Kellie Gerhold',
-                'email' => 'flowe@anderson.com',
-                'document_type' => 'CC',
-                'document' => '1848839248',
-                'phone' => '3006108300',
-                'address' => '123 calle oscura'
+                'name' => $order->user->name,
+                'email' => $order->user->email,
+                'document_type' => $order->user->document_type,
+                'document' => $order->user->document,
+                'phone' => $order->user->phone,
+                'address' => $order->user->address
             ],
             'payment' => [
                 'reference' => $order->id,
@@ -33,18 +44,12 @@ class PlacetopayController extends Controller
                 "amount" => [
                     "currency" => "COP",
                     "total" => $order->total,
-                    "taxes" => [
-                        [
-                            "kind" => "iva",
-                            "amount" => 0.00
-                        ]
-                    ]
                 ],
             ],
             'expiration' => date('c', strtotime('+1 hour')),
-            'ipAddress' => '127.0.0.1',
-            'userAgent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.86 Safari/537.36',
-            'returnUrl' => 'http://dnetix.dev/p2p/client',
+            'ipAddress' => request()->ip(),
+            'userAgent' => request()->header('user-agent'),
+            'returnUrl' => 'http://google.com', 
             'cancelUrl' => 'https://dnetix.co',
             'skipResult' => false,
             'noBuyerFill' => false,
@@ -54,10 +59,19 @@ class PlacetopayController extends Controller
 
         $response = $placetopay->request($request);
 
-        if($response->isSuccessful()){
+        /*if($response->isSuccessful()){
             return 'ok';
         }else{
             return 'no';
+        }*/
+
+        //dd($request);
+        //dd($response);
+
+        if ($response->isSuccessful()) {
+            return redirect($response->processUrl());
+        } else {
+            $response->status()->message();
         }
 
     }
