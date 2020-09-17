@@ -27,19 +27,9 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        /*$data = Cache::remember('users', 6000, function () {
-            return User::all();
-        });
-        Cache::get('users');*/
         $name = $request->get('name');
-        //$email = $request->get('email');
 
         $users = User::name($name)->paginate();
-
-        $user = QueryBuilder::for(User::class)
-        ->allowedFilters(['name', 'email'])
-        ->get();
-
 
         return view('users.index', [ 'users' => $users]);
     }
