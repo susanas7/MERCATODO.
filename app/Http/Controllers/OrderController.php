@@ -55,9 +55,18 @@ class OrderController extends Controller
     public function show($id)
     {
         //$order = Order::where('user_id', auth()->user()->id);
-        $order = Order::find($id)
-;
+        $order = Order::find($id);
+
         return view('orders.show', [
+            'order' => $order,
+        ]);
+    }
+
+    public function orderSuccessful($id)
+    {
+        $order = Order::find($id);
+
+        return view('orders.successful', [
             'order' => $order,
         ]);
     }

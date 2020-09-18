@@ -49,8 +49,8 @@ class PlacetopayController extends Controller
             'expiration' => date('c', strtotime('+1 hour')),
             'ipAddress' => request()->ip(),
             'userAgent' => request()->header('user-agent'),
-            'returnUrl' => 'http://google.com', 
-            'cancelUrl' => 'https://dnetix.co',
+            'returnUrl' => route('orders.successful', [$order->id]),
+            'cancelUrl' => route('orders.show', [$order->id]),
             'skipResult' => false,
             'noBuyerFill' => false,
             'captureAddress' => false,
@@ -59,16 +59,14 @@ class PlacetopayController extends Controller
 
         $response = $placetopay->request($request);
 
-        /*if($response->isSuccessful()){
-            return 'ok';
-        }else{
-            return 'no';
-        }*/
-
         //dd($request);
         //dd($response);
+        Session::forget('cart');
 
         if ($response->isSuccessful()) {
+            $order->update([
+                'status' => $response->status()->status()
+            ]);
             return redirect($response->processUrl());
         } else {
             $response->status()->message();

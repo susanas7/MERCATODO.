@@ -46,5 +46,6 @@ Route::delete('/categories/{category}', 'CategoryController@destroy')->name('cat
 
 Route::post('/orders/store', 'OrderController@store')->name('orders.store');
 Route::get('/orders/{id}', 'OrderController@show')->name('orders.show');
+Route::get('/orders/successful/{id}', 'OrderController@orderSuccessful')->name('orders.successful');
 
 Route::get('checkout/{id}', 'PlacetopayController@pay')->name('checkout');
