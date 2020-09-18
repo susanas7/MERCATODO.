@@ -9,6 +9,7 @@ use App\Cart;
 use Session;
 use Auth;
 use Dnetix\Redirection\Exceptions\PlacetoPayException;
+use Dnetix\Redirection\Message;
 
 class PlacetopayController extends Controller
 {
@@ -61,13 +62,11 @@ class PlacetopayController extends Controller
 
         //dd($request);
         //dd($response);
-        Session::forget('cart');
+        //Session::forget('cart');
 
         if ($response->isSuccessful()) {
-            $order->update([
-                'status' => $response->status()->status()
-            ]);
-            return redirect($response->processUrl());
+                Session::forget('cart');
+                return redirect($response->processUrl());
         } else {
             $response->status()->message();
         }
