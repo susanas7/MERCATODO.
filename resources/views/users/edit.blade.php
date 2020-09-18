@@ -33,10 +33,10 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label name="email" class="col-md-4 col-form-label text-md-right">Nro de documento</label>
+                            <label name="document" class="col-md-4 col-form-label text-md-right">Nro de documento</label>
 
                             <div class="col-md-6">
-                                <input type="text" name="email" class="form-control" value="{{$user->data->document}}" >
+                                <input type="text" name="document" class="form-control" value="{{$user->data->document}}" >
                             </div>
                         </div>
                         <div class="form-group row">

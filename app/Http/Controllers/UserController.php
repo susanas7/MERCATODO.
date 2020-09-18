@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\User\CreateRequest;
 use App\Http\Requests\User\UpdateRequest;
 use App\User;
+use App\UserData;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -93,6 +94,7 @@ class UserController extends Controller
     {
         $roles = Role::all()->pluck('name', 'id');
         $user = User::find($id);
+        $userData = UserData::where('user_id', $id);
 
         return view('users.edit', ['user' => $user, 'roles' => $roles]);
     }
@@ -107,13 +109,20 @@ class UserController extends Controller
     public function update(UpdateRequest $request, $id)
     {
         $user = User::findOrFail($id);
+        //$userData = UserData::where('user_id', $id);
+        //$userData = UserData::find($id);
 
+        UserData::where('user_id',$id)->update(['document' => $request->document]);
+
+        //no actualizar los datos de UserData
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->data->document = $request->document;
+        //$userData->document = $request->document;
         $user->syncRoles($request->role);
         $user->save();
 
-        return redirect()->route('users.index');
+        //return redirect()->route('users.index');
     }
 
     /**

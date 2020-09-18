@@ -90,6 +90,7 @@
                         <div class="form-group"><P ALIGN=center>
                         </div>
                         <a href="{{route ('users.index')}}">Regresar</a>
+                        <a href="{{route ('users.edit', $user->id)}}">Editar</a>
                 </div>
             </div>
         </div>
