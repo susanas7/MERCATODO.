@@ -11,13 +11,10 @@
                       <thead>
                       <tr>
                         <th>ID</th>
-                        <th>&nbsp;</th>
-                        <th>Producto</th>
-                        <th>Descripcion</th>
-                        <th>Precio</th>
+                        <th>Comprador</th>
                         <th>Estado</th>
-                        <th>Categoria</th>
-                        <th>&nbsp;</th>
+                        <th>Total</th>
+                        <th>Fecha de creacion</th>
                         <th>&nbsp;</th>
                         <th>&nbsp;</th>
                         <th>&nbsp;</th>
@@ -27,7 +24,12 @@
                         <tr>
                           <td>{{ $order->id }}</td>
                           <td>{{ $order->user->name }}</td>
-                          <td>{{$product->slug}}</td>
+                          <td>{{ $order->status }}</td>
+                          <td>{{ $order->total }}</td>
+                          <td>{{ $order->created_at }}</td>
+                          <td>
+                            <a href="{{route('orders.show', $order->id) }}" id="show-crud" class="btn btn-link">Ver</a>
+                          </td>
                         </tr>
                         @endforeach
                       </tbody>

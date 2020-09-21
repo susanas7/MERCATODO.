@@ -38,7 +38,9 @@
                         </div>
                         <div class="form-group"><P ALIGN=center>
                         </div>
+                        @if(auth()->user()->id == $order->id)
                         <a href="{{'/checkout/'.$order->id}}">Pagar</a>
+                        @endif
                 </div>
             </div>
         </div>

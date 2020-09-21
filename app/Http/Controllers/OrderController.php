@@ -70,5 +70,19 @@ class OrderController extends Controller
             'order' => $order,
         ]);
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param App\Role $role
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index()
+    {
+        $orders = Order::paginate();
+
+        return view('orders.index', ['orders' => $orders]);
+    }
     
 }

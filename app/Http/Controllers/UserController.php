@@ -109,16 +109,16 @@ class UserController extends Controller
     public function update(UpdateRequest $request, $id)
     {
         $user = User::findOrFail($id);
-        //$userData = UserData::where('user_id', $id);
+        $data = UserData::where('user_id', $id);
         //$userData = UserData::find($id);
 
-        UserData::where('user_id',$id)->update(['document' => $request->document]);
+        //UserData::where('user_id',$id)->update(['document' => $request->document]);
 
         //no actualizar los datos de UserData
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->data->document = $request->document;
-        //$userData->document = $request->document;
+        //$user->data->document = $request->document;
+        $data->document = $request->document;
         $user->syncRoles($request->role);
         $user->save();
 

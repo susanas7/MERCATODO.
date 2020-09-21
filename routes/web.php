@@ -44,6 +44,7 @@ Route::get('/categories/{category}/edit', 'CategoryController@edit')->name('cate
 Route::put('/categories/{category}', 'CategoryController@update')->name('categories.update');
 Route::delete('/categories/{category}', 'CategoryController@destroy')->name('categories.destroy');
 
+Route::get('/orders', 'OrderController@index')->name('orders.index');
 Route::post('/orders/store', 'OrderController@store')->name('orders.store');
 Route::get('/orders/{id}', 'OrderController@show')->name('orders.show');
 Route::get('/orders/successful/{id}', 'OrderController@orderSuccessful')->name('orders.successful');
