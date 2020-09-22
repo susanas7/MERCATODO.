@@ -84,5 +84,13 @@ class OrderController extends Controller
 
         return view('orders.index', ['orders' => $orders]);
     }
+
+    public function myOrders()
+    {
+        $orders = Order::where('user_id', '=', auth()->user()->id)->paginate();
+
+        return view('orders.index', ['orders' => $orders]);
+
+    }
     
 }

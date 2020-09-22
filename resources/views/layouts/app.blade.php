@@ -106,6 +106,9 @@
                                     <a class="dropdown-item" href="{{ route('users.show', auth()->user()) }}">
                                         <i class="fa fa-user-tie"></i> {{ __("Mi perfil") }}
                                     </a>
+                                    <a class="dropdown-item" href="{{ route('myOrders', auth()->user()->id) }}">
+                                        <i class="fa fa-user-tie"></i> {{ __("Mis compras") }}
+                                    </a>
                                 </div>
                             </li>
                         @endguest
