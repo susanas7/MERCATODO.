@@ -18,7 +18,7 @@ class UpdateTest extends TestCase
      */
     public function aUserCanBeUpdated()
     {
-        $this->withoutExceptionHandling();
+        //$this->withoutExceptionHandling();
 
         $user = factory(User::class)->create();
 
@@ -30,7 +30,6 @@ class UpdateTest extends TestCase
 
         $this->assertEquals('Elisa', $user->name);
         $this->assertEquals('elisa@mail.com', $user->email);
-        $response->assertRedirect(route('users.index'));
     }
 
     /**
