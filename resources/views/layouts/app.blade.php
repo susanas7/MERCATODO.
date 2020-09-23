@@ -56,7 +56,11 @@
                                 <a id="title" class="nav-link" href="{{ route('categories.index')}}">Categorías</a>
                             </li>
                         @endcan
-                        
+                        @can('ver orden')
+                            <li class="nav-item">
+                                <a id="title" class="nav-link" href="{{ route('orders.index')}}">Ordenes</a>
+                            </li>
+                        @endcan
                     </ul>
 
                     </ul>
