@@ -13,21 +13,15 @@ use Dnetix\Redirection\Message;
 
 class PlacetopayController extends Controller
 {
-    public function pay($id)
+    public function pay($id, Placetopay $placetopay)
     {
-        /*funciona pero no creo que sea funcional si se quieren pagar ordnes anteriores
-        $oldCart = Session::get('cart');
-        $cart = new Cart($oldCart);
-        $total = $cart->totalPrice;
-        $quantity = $cart->totalQty;*/
-
         $order = Order::find($id);
 
-        $placetopay = new PlacetoPay([
+        /*$placetopay = new PlacetoPay([
             'login' => '6dd490faf9cb87a9862245da41170ff2',
             'tranKey' => '024h1IlD',
             'url' => 'https://test.placetopay.com/redirection',
-        ]);
+        ]);*/
 
         $request = [
             'locale' => 'es_CO',
