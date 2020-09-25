@@ -7,9 +7,15 @@ use App\Cart;
 use Session;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class OrderController extends Controller
 {
+    public function __construct(Order $orders)
+    {
+        $this->orders = $orders;
+    }
+
     public function store(Request $request)
     {
         /*if(Session::has('cart')){
@@ -80,9 +86,15 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::paginate();
+        //$orders = Order::paginate();
 
-        return view('orders.index', ['orders' => $orders]);
+        //return view('orders.index', ['orders' => $orders]);
+
+        $orders = Cache::remember('orders',  1200, function () {
+            return $this->orders->orderBy('name', 'asc')->paginate();
+        });
+
+        return view('orders.index')->with('orders', $orders);
     }
 
     public function myOrders()
