@@ -10,6 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Spatie\Permission\Models\Role;
+use Session;
 
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -166,5 +167,13 @@ class UserController extends Controller
             ->get();
 
         return view('search', ['users' => $users]);
+    }
+
+    public function myProfile()
+    {
+        $user = User::where('id', '=', auth()->user()->id)->first();
+
+        return view('users.show', ['user' => $user]);
+
     }
 }

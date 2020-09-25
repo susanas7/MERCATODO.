@@ -31,6 +31,7 @@ Route::get('/remove/{id}', 'HomeController@removeItem')->name('removeItem');
 
 Route::resource('/users', 'UserController');
 Route::get('/users/changeStatus/{id}', 'UserController@changeStatus')->name('users.changeStatus');
+Route::get('/myProfile' , 'UserController@myProfile')->name('myProfile');
 
 Route::resource('/products', 'ProductController');
 Route::get('/products/changeStatus/{id}', 'ProductController@changeStatus')->name('products.changeStatus');

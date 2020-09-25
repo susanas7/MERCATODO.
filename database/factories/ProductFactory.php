@@ -5,6 +5,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Product::class, function (Faker $faker) {
     return [
+        'id' => '1',
         'title' => $faker->sentence(4),
         'slug' => $faker->slug(4),
         'price' => rand('10', '20'),

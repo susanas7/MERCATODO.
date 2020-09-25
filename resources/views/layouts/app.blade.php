@@ -107,7 +107,7 @@
                                         @csrf
                                     </form>
                                     <a href="#"></a>
-                                    <a class="dropdown-item" href="{{ route('users.show', auth()->user()) }}">
+                                    <a class="dropdown-item" href="{{ route('myProfile', auth()->user()->id) }}">
                                         <i class="fa fa-user-tie"></i> {{ __("Mi perfil") }}
                                     </a>
                                     <a class="dropdown-item" href="{{ route('myOrders', auth()->user()->id) }}">

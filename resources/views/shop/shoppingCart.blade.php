@@ -45,14 +45,12 @@
         <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
         <form action="{{route('orders.store')}}" method="POST">
             @csrf
-            <!--<a href="{{route('orders.store')}}" class="btn btn-success">Comprar</a> -->
-            <button type="submit">oli</button>
+            <button id="confirm" type="submit">Confirmar</button>
         </form>
         </div>
     </div>
 @else
-    <div class="row">incremento	Retorna $a, y luego incrementa $a en uno.
---$a	Pre-decremento	Decrem
+    <div class="row">
         <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
             <strong>Total: {{ $totalPrice ?? '' }}</strong> 
         </div>
