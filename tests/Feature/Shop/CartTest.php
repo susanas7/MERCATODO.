@@ -15,6 +15,9 @@ use Session;
 
 class CartTest extends TestCase
 {
+    use RefreshDatabase;
+    use WithoutMiddleware;
+    
     /** @test */
     public function aUserCanAddAnItemToCart()
     {
@@ -28,10 +31,10 @@ class CartTest extends TestCase
         $this->actingAs($user)->get(route('shoppingCart'));
 
         $cart = Session::get('cart');
-        //$cart->add($product, $product->id);
 
         $response = $this->get('/add-to-cart/1')->assertSessionHas($cart);
 
-        //$this->assertEquals($cart->product->id, $product->id);
+        $this->assertEquals($cart, $product->id);
+
     }
 }
