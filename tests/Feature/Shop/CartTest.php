@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Orders;
+namespace Tests\Feature\Shop;
 
 use App\Order;
 use App\User;
@@ -13,29 +13,25 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
 use Session;
 
-class CreateTest extends TestCase
+class CartTest extends TestCase
 {
-    use RefreshDatabase;
-    use WithoutMiddleware;
-
     /** @test */
-    public function aUserCanStoreAnOrder()
+    public function aUserCanAddAnItemToCart()
     {
-        //$this->withoutExceptionHandling(); ¿Por que si dejo esto me sale error?
+        //$this->withoutExceptionHandling(); aqui pasa lo mismo,
+
+        Session::start();
         $user = factory(User::class)->make();
         factory(ProductCategory::class)->make();
         $product = factory(Product::class)->make();
 
         $this->actingAs($user)->get(route('shoppingCart'));
 
-        $cart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = Session::get('cart');
+        //$cart->add($product, $product->id);
 
-        $response = $this->get('/add-to-cart/1');
+        $response = $this->get('/add-to-cart/1')->assertSessionHas($cart);
 
-        $response->assertSessionHas($cart);
-
-        $response2 = $this->get(route('orders.store'));
-
-
+        //$this->assertEquals($cart->product->id, $product->id);
     }
 }
