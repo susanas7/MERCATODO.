@@ -4,10 +4,10 @@
 
 @if(Session::has('cart'))
     <div class="row">
-        <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-            <ul class="list-group">
+        <div class="container">
+            <ul id="cart0" class="list-group">
                 @foreach($products as $product)
-                    <li class="list-group-item">
+                    <li id="cart1" class="list-group-item">
                         <a class="btn btn-link" href="{{route('removeItem', ['id' => $product['item']['id']])}}">
                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -16,6 +16,7 @@
                             </svg>
                         </a>
                         <span class="badge">{{$product['qty']}}</span>
+                        <td>&nbsp;</td>
                         <strong>{{$product['item']['title']}}</strong>
                         <span class="label label-success">{{$product['price']}}</span>
                         <td>&nbsp;</td>
@@ -35,15 +36,18 @@
             </ul>
         </div>
     </div>
+    <br>
     <div class="row">
-        <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-            <strong>Total: {{$totalPrice}}</strong> 
+        <div class="container">
+            <div id="cart2">
+                <strong>Total: {{ number_format($totalPrice, 2) }}</strong> 
+            </div>
         </div>
     </div>
     <hr>
     <div class="row">
-        <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-        <form action="{{route('orders.store')}}" method="POST">
+        <div class="container">
+        <form id="cc" action="{{route('orders.store')}}" method="POST">
             @csrf
             <button id="confirm" type="submit">Confirmar</button>
         </form>
@@ -52,7 +56,7 @@
 @else
     <div class="row">
         <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-            <strong>Total: {{ $totalPrice ?? '' }}</strong> 
+            <strong>Total: {{ number_format($totalPrice ?? '') }}</strong> 
         </div>
     </div>
 
