@@ -91,7 +91,7 @@ class OrderController extends Controller
         //return view('orders.index', ['orders' => $orders]);
 
         $orders = Cache::remember('orders',  1200, function () {
-            return $this->orders->orderBy('name', 'asc')->paginate();
+            return $this->orders->orderBy('id', 'asc')->paginate();
         });
 
         return view('orders.index')->with('orders', $orders);

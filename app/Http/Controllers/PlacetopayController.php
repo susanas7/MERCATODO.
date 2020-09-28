@@ -44,7 +44,7 @@ class PlacetopayController extends Controller
             'expiration' => date('c', strtotime('+1 hour')),
             'ipAddress' => request()->ip(),
             'userAgent' => request()->header('user-agent'),
-            'returnUrl' => route('orders.successful', [$order->id]),
+            'returnUrl' => route('orders.show', [$order->id]),
             'cancelUrl' => route('orders.show', [$order->id]),
             'skipResult' => false,
             'noBuyerFill' => false,
@@ -60,6 +60,9 @@ class PlacetopayController extends Controller
 
         if ($response->isSuccessful()) {
                 Session::forget('cart');
+                $order->update([
+                    'status' => $response->status()->status(),
+                ]);
                 return redirect($response->processUrl());
         } else {
             $response->status()->message();
