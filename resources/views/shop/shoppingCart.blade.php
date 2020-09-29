@@ -56,7 +56,7 @@
 @else
     <div class="row">
         <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-            <strong>Total: {{ number_format($totalPrice ?? '') }}</strong> 
+            <strong>Total: {{ $totalPrice ?? '' }}</strong> 
         </div>
     </div>
 

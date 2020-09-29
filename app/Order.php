@@ -24,4 +24,9 @@ class Order extends Model
     protected $fillable = [
         'user_id', 'status', 'quantity', 'total',
     ];
+
+    public function invoice()
+    {
+        return $this->hasOne(Invoice::class);
+    }
 }

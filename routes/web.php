@@ -52,3 +52,5 @@ Route::get('/orders/successful/{id}', 'OrderController@orderSuccessful')->name('
 Route::get('/myOrders', 'OrderController@myOrders')->name('myOrders');
 
 Route::post('checkout/{id}', 'PlacetopayController@pay')->name('checkout');
+
+Route::get('invoices/{id}', 'InvoiceController@store')->name('invoices.store');
