@@ -23,7 +23,7 @@ class CreateTest extends TestCase
     {
         //$this->withoutExceptionHandling(); ¿Por que si dejo esto me sale error?
         $user = factory(User::class)->make();
-        factory(ProductCategory::class)->make();
+        $category = factory(ProductCategory::class)->make();
         $product = factory(Product::class)->make();
 
         $this->actingAs($user)->get(route('shoppingCart'));
