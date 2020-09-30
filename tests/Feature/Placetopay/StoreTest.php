@@ -28,16 +28,30 @@ class StoreTest extends TestCase
             'password' => '12345678',
         ]);
 
-        $order = $this->actingAs($user)->post(route('orders.store'), [
+        /*$order = $this->post(route('orders.store'), [
             'id' => '1',
-            'user_id' => $user,
+            'user_id' => '1',
             'status' => 'creada',
             'quantity' => '3',
             'total' => '15000'
+        ]);*/
+
+        $order = factory(Order::class)->make();
+
+
+        $this->assertDatabaseMissing('orders', [
+            'id' => $order->id,
+            'user_id' => $order->user_id,
+            'status' => $order->status,
+            'quantity' => $order->quantity,
+            'total' => $order->total,
+            'created_at' => $order->created_at,
+            'updated_at' => $order->updated_at,
         ]);
 
-        $response = $this->post('/checkout/1');
+        //$this->post('checkout/'.$order->id); completar
 
-        $response->assertSuccessful();
+
+        //$response->assertSuccessful();
     }
 }
