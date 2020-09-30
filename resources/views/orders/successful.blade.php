@@ -16,13 +16,6 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label name="email" class="col-md-4 col-form-label text-md-right">Estado:</label>
-
-                            <div class="col-md-6">
-                            <label name="name" class="col-md-8 col-form-label text-md-center">{{$order->status}}</label>
-                            </div>
-                        </div>
-                        <div class="form-group row">
                             <label name="email" class="col-md-4 col-form-label text-md-right">Referencia:</label>
 
                             <div class="col-md-6">

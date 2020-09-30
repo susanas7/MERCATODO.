@@ -24,7 +24,6 @@
                         <tr>
                           <td>{{ $order->id }}</td>
                           <td>{{ $order->user->name }}</td>
-                          <td>{{ $order->status }}</td>
                           <td>{{ $order->total }}</td>
                           <td>{{ $order->created_at }}</td>
                           <td>

@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Orden: {{$invoice->order->id}}</div>
+                <div class="card-header">Orden: {{$invoice->order_id}}</div>
 
                 <div class="card-body">
                         <div class="form-group row">

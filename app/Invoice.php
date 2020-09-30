@@ -15,6 +15,8 @@ class Invoice extends Model
         'order_id',
     ];
 
+    protected $table = 'invoices';
+
     public function order()
     {
         return $this->belongsTo(Order::class);

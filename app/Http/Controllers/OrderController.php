@@ -32,7 +32,6 @@ class OrderController extends Controller
         /*if (Session::has('cart')) {
             $order = new Order();
             $order->user_id = auth()->user()->id;
-            $order->status = 'created';
             $order->quantity = $totalQty;
             $order->total = $totalPrice;
 
@@ -49,7 +48,6 @@ class OrderController extends Controller
 
         $order = Order::create([
             'user_id' => auth()->user()->id,
-            'status' => 'created',
             'quantity' => $quantity,
             'total' => $total,
         ]);

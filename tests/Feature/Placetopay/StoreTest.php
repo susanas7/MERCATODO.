@@ -42,7 +42,6 @@ class StoreTest extends TestCase
         $this->assertDatabaseMissing('orders', [
             'id' => $order->id,
             'user_id' => $order->user_id,
-            'status' => $order->status,
             'quantity' => $order->quantity,
             'total' => $order->total,
             'created_at' => $order->created_at,
