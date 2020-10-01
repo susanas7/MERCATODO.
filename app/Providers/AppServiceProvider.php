@@ -12,20 +12,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        /*no funciona con las variables de entorno
         $placetopay = $this->app->singleton(PlacetoPay::class, function ($app) {
             return new PlacetoPay([
-                'login' => env('PLACETOPAY_LOGIN'),
-                'tranKey' => env('PLACETOPAY_TRANKEY'),
-                'url' => env('PLACETOPAY_URL'),
-            ]);
-        });*/
-
-        $placetopay = $this->app->singleton(PlacetoPay::class, function ($app) {
-            return new PlacetoPay([
-                'login' => '6dd490faf9cb87a9862245da41170ff2',
-                'tranKey' => '024h1IlD',
-                'url' => 'https://test.placetopay.com/redirection'
+                'login' => config('app.placetopay.login'),
+                'tranKey' => config('app.placetopay.trankey'),
+                'url' => config('app.placetopay.url'),
             ]);
         });
     }
