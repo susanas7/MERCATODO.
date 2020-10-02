@@ -4,7 +4,7 @@
 @isset($errors)
 <div class="row justify-content-center">
     <div class="col-md-4">
-        @include('products.fragment.error')
+        @include('fragment.errors')
     </div>
 </div>
 @endisset
