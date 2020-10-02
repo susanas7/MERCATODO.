@@ -51,7 +51,7 @@ Route::get('/orders/{id}', 'OrderController@show')->name('orders.show');
 Route::get('/orders/successful/{id}', 'OrderController@orderSuccessful')->name('orders.successful');
 Route::get('/myOrders', 'OrderController@myOrders')->name('myOrders');
 
-Route::post('checkout/{id}', 'PlacetopayController@pay')->name('checkout');
+Route::get('checkout/{id}', 'PlacetopayController@pay')->name('checkout');
 
 Route::get('/invoices/successful/{id}', 'InvoiceController@successful')->name('invoices.successful');
 Route::get('invoices/{id}', 'InvoiceController@store')->name('invoices.store');

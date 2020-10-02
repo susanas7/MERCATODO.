@@ -16,6 +16,9 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
+            $table->string('status');
+            $table->integer('requestId')->nullable();
+            $table->string('processUrl')->nullable();
             $table->integer('quantity');
             $table->decimal('total');
             $table->timestamps();

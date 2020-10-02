@@ -21,7 +21,7 @@ class PaymentTest extends TestCase
         $payment->shouldReceive('request')
             ->andReturn('isSuccessful');
         
-        //$this->assertEquals('isSuccessful', $payment->response->isSuccessful());
+        
 
     }
 }

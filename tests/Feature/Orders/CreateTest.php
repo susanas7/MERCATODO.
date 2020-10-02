@@ -12,6 +12,9 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
 use Session;
+use DB;
+use Auth;
+use Mockery;
 
 class CreateTest extends TestCase
 {
@@ -19,10 +22,10 @@ class CreateTest extends TestCase
     use WithoutMiddleware;
 
     /** @test */
-    public function aUserCanStoreAnOrder()
+    public function anUserCanStoreAnOrder()
     {
-        //$this->withoutExceptionHandling(); ¿Por que si dejo esto me sale error?
-        $user = factory(User::class)->make();
+        $this->withoutExceptionHandling();
+        /*$user = factory(User::class)->make();
         $category = factory(ProductCategory::class)->make();
         $product = factory(Product::class)->make();
 
@@ -34,7 +37,40 @@ class CreateTest extends TestCase
 
         $response->assertSessionHas($cart);
 
-        $response2 = $this->get(route('orders.store'));
+        $response2 = $this->get(route('orders.store'));*/
+
+        $product = factory(Product::class)->make();
+        factory(ProductCategory::class)->make();
+        $user = $this->post(route('users.store'), [
+            'id' => '1',
+            'name' => 'Juli',
+            'email' => 'juli@mail.com',
+            'password' => '12345678',
+        ]);
+
+        /*$cart = $this->actingAs($user)->get('/addToCart', [
+            'id' => $product->id
+        ]);*/
+
+        //$user1 = Auth::shouldReceive('user')->andReturn($user = Mockery::mock('user'));
+        //$response1 = $this->actingAs($user)->get('/shoppingCart');
+
+        //$response1->assertSee($product->name);
+
+        $total = $product->price;
+        $quantity = '1';
+        
+
+        $order = $this->actingAs($user)->post('/orders/store', [
+            'user_id' => $user->id,
+            'quantity' => $quantity,
+            'total' => $total,
+        ]);
+
+
+        $order->assertRedirect(route('orders.show'));
+
+        $this->assertCount(1, Order::all());
 
 
     }

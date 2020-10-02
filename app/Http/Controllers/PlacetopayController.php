@@ -10,9 +10,12 @@ use Session;
 use Auth;
 use Dnetix\Redirection\Exceptions\PlacetoPayException;
 use Dnetix\Redirection\Message;
-use Dnetix\Redirection\Entities\Status;
+use Dnetix\Redirection\Entities\Transaction;
 use Dnetix\Redirection\Contracts\Entity;
 use Dnetix\Redirection\Message\RedirectInformation;
+use Dnetix\Redirection\Message\RedirectResponse;
+use Dnetix\Redirection\Message\ReverseResponse;
+use Dnetix\Redirection\Traits\StatusTrair;
 
 class PlacetopayController extends Controller
 {
@@ -47,7 +50,7 @@ class PlacetopayController extends Controller
             'expiration' => date('c', strtotime('+1 hour')),
             'ipAddress' => request()->ip(),
             'userAgent' => request  ()->header('user-agent'),
-            'returnUrl' => route('invoices.successful', [$order->id]),
+            'returnUrl' => route('orders.show', [$order->id]), //route('invoices.successful', [$order->id]),
             'cancelUrl' => route('orders.show', [$order->id]),
             'skipResult' => false,
             'noBuyerFill' => false,
@@ -59,10 +62,15 @@ class PlacetopayController extends Controller
 
         if ($response->isSuccessful()) {
                 Session::forget('cart');
+                $order->update([
+                    'status' => $response->status()->status(),
+                    'requestId' => $response->requestId(),
+                    'processUrl' => $response->processUrl(),
+                ]);
                 return redirect($response->processUrl());
         } else {
             $response->status()->message();
         }
         
     }
-}
+    }

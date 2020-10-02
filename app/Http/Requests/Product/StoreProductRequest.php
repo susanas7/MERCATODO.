@@ -3,10 +3,8 @@
 namespace App\Http\Requests\Product;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Validation\Rule;
 
-class CreateRequest extends FormRequest
+class StoreProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -33,7 +31,4 @@ class CreateRequest extends FormRequest
             'image' => 'image',
         ];
     }
-
-    
-
 }

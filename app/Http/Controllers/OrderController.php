@@ -48,6 +48,7 @@ class OrderController extends Controller
 
         $order = Order::create([
             'user_id' => auth()->user()->id,
+            'status' => 'CREADO',
             'quantity' => $quantity,
             'total' => $total,
         ]);

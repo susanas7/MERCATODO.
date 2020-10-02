@@ -1,7 +1,13 @@
 @extends('layouts.app')
 @section('content')
 
-
+@isset($errors)
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        @include('products.fragment.error')
+    </div>
+</div>
+@endisset
 
 <div class="container">
     <div class="row justify-content-center">
@@ -54,7 +60,7 @@
                         </div>
                         <div class="form-group"><P ALIGN=center>
                         </div>
-                        <button class="btn btn-success" type="submit" >Actualizar</button>
+                        <button class="btn btn-success" type="submit" >Crear</button>
                     </form>
                 </div>
             </div>
