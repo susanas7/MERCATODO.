@@ -22,7 +22,7 @@ class Order extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'status', 'quantity', 'total',
+        'user_id', 'status', 'quantity', 'total', 'requestId', 'processUrl'
     ];
 
     public function invoice()

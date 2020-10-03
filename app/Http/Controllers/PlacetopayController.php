@@ -10,12 +10,12 @@ use Session;
 use Auth;
 use Dnetix\Redirection\Exceptions\PlacetoPayException;
 use Dnetix\Redirection\Message;
-use Dnetix\Redirection\Entities\Transaction;
+use Dnetix\Redirection\Entities\Status as Status;
 use Dnetix\Redirection\Contracts\Entity;
 use Dnetix\Redirection\Message\RedirectInformation;
 use Dnetix\Redirection\Message\RedirectResponse;
 use Dnetix\Redirection\Message\ReverseResponse;
-use Dnetix\Redirection\Traits\StatusTrair;
+use Dnetix\Redirection\Traits\StatusTrait as RevResp;
 
 class PlacetopayController extends Controller
 {
@@ -63,14 +63,20 @@ class PlacetopayController extends Controller
         if ($response->isSuccessful()) {
                 Session::forget('cart');
                 $order->update([
-                    'status' => $response->status()->status(),
+                    'status' => $response->status()->status().$response->status()->message(),
                     'requestId' => $response->requestId(),
                     'processUrl' => $response->processUrl(),
-                ]);
+                    ]);
                 return redirect($response->processUrl());
         } else {
             $response->status()->message();
         }
         
+        
     }
-    }
+
+    /*public function showStatus()
+    {
+        $this->$response->status()->status()-
+    }*/
+}

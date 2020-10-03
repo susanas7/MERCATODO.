@@ -17,6 +17,7 @@ class ShowTest extends TestCase
     /** @test */
     public function aUserCanSeeDetailsOfOrders()
     {
+        $this->withoutExceptionHandling();
         $user = factory(User::class)->create();
         $order = factory(Order::class)->create();
 
