@@ -19,7 +19,12 @@ class ShowTest extends TestCase
     {
         $this->withoutExceptionHandling();
         $user = factory(User::class)->create();
-        $order = factory(Order::class)->create();
+        $order = factory(Order::class)->create( [
+            'user_id' => $user->id,
+            'status' => 'created',
+            'quantity' => '1',
+            'total' => '20200'
+        ]);
 
         $response = $this->actingAs($user)->get(route('orders.show', $order));
         $response->assertStatus(200);
