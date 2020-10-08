@@ -10,6 +10,10 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ProductsExport;
+use Maatwebsite\Excel\Concerns\FromCollection;
+
 
 class ProductController extends Controller
 {
@@ -75,7 +79,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
 
         return view('products.show', [
             'product' => $product,
@@ -152,5 +156,10 @@ class ProductController extends Controller
         }
 
         return redirect(route('products.index'));
+    }
+
+    public function export()
+    {
+        return Excel::download(new ProductsExport, 'products.xlsx');
     }
 }

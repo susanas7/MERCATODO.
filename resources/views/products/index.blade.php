@@ -31,6 +31,7 @@
                   <div class="card-body">
                     <div>
                       <a href="{{route('products.create')}}" class="btn btn-primary">Crear</a>
+                      <a href="{{route('products.export')}}" class="btn btn-link" >Exportar</a>
                     </div><br>
                     <table class="table">
                       <thead>
