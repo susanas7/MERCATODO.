@@ -9,8 +9,22 @@ class Product extends Model
 {
     protected $table = 'products';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'title', 'slug', 'price', 'status', 'category_id', 'img_route',
+    ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'updated_at', 'img_route',
     ];
 
     public function category()
