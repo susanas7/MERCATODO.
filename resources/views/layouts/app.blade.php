@@ -56,7 +56,11 @@
                                 <a id="title" class="nav-link" href="{{ route('categories.index')}}">Categorías</a>
                             </li>
                         @endcan
-                        
+                        @can('ver orden')
+                            <li class="nav-item">
+                                <a id="title" class="nav-link" href="{{ route('orders.index')}}">Ordenes</a>
+                            </li>
+                        @endcan
                     </ul>
 
                     </ul>
@@ -103,6 +107,12 @@
                                         @csrf
                                     </form>
                                     <a href="#"></a>
+                                    <a class="dropdown-item" href="{{ route('myProfile', auth()->user()->id) }}">
+                                        <i class="fa fa-user-tie"></i> {{ __("Mi perfil") }}
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('myOrders', auth()->user()->id) }}">
+                                        <i class="fa fa-user-tie"></i> {{ __("Mis compras") }}
+                                    </a>
                                 </div>
                             </li>
                         @endguest

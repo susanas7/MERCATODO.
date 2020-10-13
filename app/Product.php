@@ -9,8 +9,22 @@ class Product extends Model
 {
     protected $table = 'products';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'title', 'slug', 'price', 'status', 'category_id', 'img_route',
+    ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'updated_at', 'img_route',
     ];
 
     public function category()
@@ -40,19 +54,8 @@ class Product extends Model
      */
     public function scopeTitle($query, $title)
     {
-        return $query->where('title', 'LIKE', "%{$title}%");
-    }
-
-    /**
-     * @param string $slug
-     */
-    public function scopeSlug(Builder $query, $slug): Builder
-    {
-        if (null !== $slug) {
-            return $this->searchByField($query, 'slug', $slug, '=');
-        }
-
-        return $query;
+        return $query->where('title', 'LIKE', "%{$title}%")
+            ->orWhere('slug', 'LIKE', "%{$title}%");
     }
 
     /**

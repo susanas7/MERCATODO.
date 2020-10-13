@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Product\CreateRequest;
+use App\Http\Requests\Product\StoreProductRequest;
 use App\Http\Requests\Product\UpdateRequest;
 use App\Product;
 use App\ProductCategory;
@@ -10,6 +10,11 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ProductsExport;
+use Maatwebsite\Excel\Concerns\FromCollection;
+use App\Imports\ProductsImport;
+
 
 class ProductController extends Controller
 {
@@ -33,7 +38,7 @@ class ProductController extends Controller
         $title = $request->get('title');
         $slug = $request->get('slug');
 
-        $products = Product::title($title)->slug($slug)->paginate(20);
+        $products = Product::title($title)->paginate();
 
         return view('products.index', ['products' => $products, 'data' => $data]);
     }
@@ -54,7 +59,7 @@ class ProductController extends Controller
      *
      * @return RedirectResponse
      */
-    public function store(CreateRequest $request)
+    public function store(StoreProductRequest $request)
     {
         $product = Product::create($request->all());
 
@@ -75,7 +80,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
 
         return view('products.show', [
             'product' => $product,
@@ -152,5 +157,20 @@ class ProductController extends Controller
         }
 
         return redirect(route('products.index'));
+    }
+
+    public function export()
+    {
+        return Excel::download(new ProductsExport, 'products.xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        
+        $file = $request->file('file')->store('import');
+        
+        (new ProductsImport)->import($file); //Excel::import(new ProductsImport, 'products.xlsx');
+
+        return redirect('/');
     }
 }

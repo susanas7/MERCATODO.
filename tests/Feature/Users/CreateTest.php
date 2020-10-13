@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Users;
 
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -18,6 +18,7 @@ class CreateTest extends TestCase
      */
     public function aUserCanViewTheUserCreateForm()
     {
+        
         $user = factory(User::class)->create();
 
         $response = $this->actingAs($user)->get(route('users.create'));

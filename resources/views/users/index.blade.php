@@ -8,14 +8,10 @@
     <div class="col-md-8">
       <div class="card" id="box-search-crud">
         <div class="card-body">
-        <h6>Busqueda de usuarios</h6>
         <form action=" {{route('users.index')}} ">
           <div class="row">
             <div class="col" >
-              <input type="text" name="name" class="form-control form-control-navbar" placeholder="Nombre">
-            </div>
-            <div class="col" >
-              <input type="text" name="email" class="form-control form-control-navbar" placeholder="Email">
+              <input type="text" name="name" class="form-control form-control-navbar" value="{{old('name' , request('name'))}}">
             </div>
             <div class="col">
             <button type="submit" id="btn-search-crud" class="btn btn-link">Buscar</button>
@@ -71,37 +67,6 @@
                           @can('ver usuario')
                             <a href="{{route('users.show', $user->id) }}" id="show-crud" class="btn btn-link">Ver</a>
                           @endcan
-                            <!--@can('ver usuario')
-                              <a class="btn btn-success"  id="#{{$user->id}}" data-toggle="modal" data-target="#{{$user->id}}" >Ver</a>
-                            @endcan
-                              
-                              <div class="modal fade" id="{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title" id="myModalLabel">Usuario</h4>
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div><P ALIGN=center>
-                                              <p><h4>Nombre: {{$user->name}}</h4></p> 
-                                              <p><h4>Email: {{$user->email}} </h4></p>
-                                              <p><h4>Rol: {{ $user->roles->implode('name', ',') }} </h4></p> 
-                                              <p><h4>Estado: {{$user->status}} </h4></p>
-                                              <p><h4>Email verificado: {{$user->email_verified_at}} </h4></p>
-                                              <p><h4>Fecha de creacion: {{$user->created_at}}</h4></p>  
-                                              <p><h4>Ultima actualizacion: {{$user->updated_at}} </h4></p>
-                                            </div>    
-                                        </div>
-                                        <div class="modal-footer">
-                                        @can('editar usuario')
-                                          <a class="btn btn-info" href="{{route('users.edit', $user->id)}}" >Editar</a>
-                                        @endcan                                           
-                                        </div>
-                                    </div>
-                                </div>
-                              
-                            </div>-->
                           </td>
                           <td>
                           @if($user->is_active==1)

@@ -2,14 +2,16 @@
 
 @section('content')
 
-<div class="row">
-
+<div class="table">
+<div class="th">
 <div class="filter">
   <h6> Categorias </h6>
     @foreach($categories as $cat)
       <a class="btn tbn-link" href="{{route('category', $cat->id )}}">{{$cat->title}}</a>
     @endforeach
 </div>
+</div>
+  <div class="th">
       <div class="card" id="box-search-crud">
         <div class="card-body">
         <form action=" {{route('home')}} ">
@@ -31,7 +33,7 @@
         </div>
       </div>
     <br>
-
+</div>
 </div>
 
 <div class="container2">

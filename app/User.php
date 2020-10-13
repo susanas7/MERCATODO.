@@ -21,7 +21,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role', 'status',
+        'id', 'name', 'email', 'password', 'role', 'status',
     ];
 
     /**
@@ -51,19 +51,8 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function scopeName($query, $name)
     {
-        return $query->where('name', 'LIKE', "%{$name}%");
-    }
-
-    /**
-     * @param string $email
-     */
-    public function scopeEmail(Builder $query, $email): Builder
-    {
-        if (null !== $email) {
-            return $this->searchByField($query, 'email', $email, '=');
-        }
-
-        return $query;
+        return $query->where('name', 'LIKE', "%{$name}%")
+            ->orWhere('email', 'LIKE', "%{$name}%");
     }
 
     /**
@@ -72,5 +61,20 @@ class User extends Authenticatable implements MustVerifyEmail
     public function searchByField(Builder $query, string $field, string $value, string $operator = null): Builder
     {
         return $query->where($field, $operator, $value);
+    }
+
+    public function data()
+    {
+        return $this->hasOne(UserData::class);
+    }
+
+    /**
+    * Relationship with orders
+    *
+    * @return relationship
+    */
+    public function orders()
+    {
+        return $this->hasMany('App\Order');
     }
 }
