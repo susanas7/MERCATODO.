@@ -3,6 +3,8 @@
 namespace App\Http\Requests\Product;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Validation\Rule;
 
 class CreateRequest extends FormRequest
 {
@@ -31,4 +33,7 @@ class CreateRequest extends FormRequest
             'image' => 'image',
         ];
     }
+
+    
+
 }

@@ -16,11 +16,11 @@ class CreateUserDataTable extends Migration
         Schema::create('user_data', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->enum('document_type', ['CC', 'TI']);
-            $table->integer('document')->unique();
-            $table->string('address');
-            $table->integer('phone');
-            $table->date('birthday');
+            $table->enum('document_type', ['CC', 'TI'])->nullable();
+            $table->integer('document')->unique()->nullable();
+            $table->string('address')->nullable();
+            $table->integer('phone')->nullable();
+            $table->date('birthday')->nullable();
             $table->timestamps();
         });
     }

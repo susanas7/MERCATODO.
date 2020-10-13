@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests\User\CreateRequest;
 use App\Http\Requests\User\UpdateRequest;
 use App\User;
+use App\UserData;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Spatie\Permission\Models\Role;
+use Session;
 
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -16,8 +18,8 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        //$this->middleware(['role:Gestor de usuarios|Super-administrador']);
-        //$this->middleware(['verified']);
+        $this->middleware(['role:Gestor de usuarios|Super-administrador']);
+        $this->middleware(['verified']);
     }
 
     /**
@@ -27,19 +29,9 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        /*$data = Cache::remember('users', 6000, function () {
-            return User::all();
-        });
-        Cache::get('users');*/
         $name = $request->get('name');
-        //$email = $request->get('email');
 
         $users = User::name($name)->paginate();
-
-        $user = QueryBuilder::for(User::class)
-        ->allowedFilters(['name', 'email'])
-        ->get();
-
 
         return view('users.index', [ 'users' => $users]);
     }
@@ -103,6 +95,7 @@ class UserController extends Controller
     {
         $roles = Role::all()->pluck('name', 'id');
         $user = User::find($id);
+        $userData = UserData::where('user_id', $id);
 
         return view('users.edit', ['user' => $user, 'roles' => $roles]);
     }
@@ -117,13 +110,20 @@ class UserController extends Controller
     public function update(UpdateRequest $request, $id)
     {
         $user = User::findOrFail($id);
+        $data = UserData::where('user_id', $id);
+        //$userData = UserData::find($id);
 
+        //UserData::where('user_id',$id)->update(['document' => $request->document]);
+
+        //no actualizar los datos de UserData
         $user->name = $request->name;
         $user->email = $request->email;
+        //$user->data->document = $request->document;
+        $data->document = $request->document;
         $user->syncRoles($request->role);
         $user->save();
 
-        return redirect()->route('users.index');
+        //return redirect()->route('users.index');
     }
 
     /**
@@ -167,5 +167,13 @@ class UserController extends Controller
             ->get();
 
         return view('search', ['users' => $users]);
+    }
+
+    public function myProfile()
+    {
+        $user = User::where('id', '=', auth()->user()->id)->first();
+
+        return view('users.show', ['user' => $user]);
+
     }
 }

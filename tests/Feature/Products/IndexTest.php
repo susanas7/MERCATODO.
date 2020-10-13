@@ -17,7 +17,6 @@ class IndexTest extends TestCase
      */
     public function aUserCanListProducts()
     {
-        $this->withoutExceptionHandling();
         $product = factory(Product::class)->make();
 
         $response = $this->get(route('products.index'));

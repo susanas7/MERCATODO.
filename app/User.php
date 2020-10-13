@@ -21,7 +21,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role', 'status',
+        'id', 'name', 'email', 'password', 'role', 'status',
     ];
 
     /**
@@ -66,5 +66,15 @@ class User extends Authenticatable implements MustVerifyEmail
     public function data()
     {
         return $this->hasOne(UserData::class);
+    }
+
+    /**
+    * Relationship with orders
+    *
+    * @return relationship
+    */
+    public function orders()
+    {
+        return $this->hasMany('App\Order');
     }
 }
