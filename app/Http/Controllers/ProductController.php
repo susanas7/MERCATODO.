@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ProductsExport;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use App\Imports\ProductsImport;
 
 
 class ProductController extends Controller
@@ -161,5 +162,15 @@ class ProductController extends Controller
     public function export()
     {
         return Excel::download(new ProductsExport, 'products.xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        
+        $file = $request->file('file')->store('import');
+        
+        (new ProductsImport)->import($file); //Excel::import(new ProductsImport, 'products.xlsx');
+
+        return redirect('/');
     }
 }

@@ -32,6 +32,11 @@
                     <div>
                       <a href="{{route('products.create')}}" class="btn btn-primary">Crear</a>
                       <a href="{{route('products.export')}}" class="btn btn-link" >Exportar</a>
+                      <form action="{{route('products.import')}}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <input type="file" name="file">
+                        <button typ="submit" class="btn btn-link">Importar</button>
+                      </form>
                     </div><br>
                     <table class="table">
                       <thead>
