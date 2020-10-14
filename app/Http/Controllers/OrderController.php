@@ -91,9 +91,11 @@ class OrderController extends Controller
 
     public function myOrders()
     {
-        $orders = Order::where('user_id', '=', auth()->user()->id)->paginate();
+        $orders = Order::where('user_id', '=', auth()->user()->id, null)->paginate();
 
         return view('orders.index', ['orders' => $orders]);
+        
+        
 
     }
     
