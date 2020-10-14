@@ -48,7 +48,8 @@
     <div class="row">
         <div class="container">
         <form id="cc" action="{{route('orders.store')}}" method="POST">
-            @csrf
+        {{ csrf_field() }}
+
             <button id="confirm" type="submit">Confirmar</button>
         </form>
         </div>

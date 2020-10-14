@@ -23,7 +23,7 @@ class CategoryController extends Controller
     {
         $title = $request->get('title');
 
-        $categories = ProductCategory::title($title)->paginate();
+        $categories = ProductCategory::categoriesCached();
 
         return view('categories.index', ['categories' => $categories]);
     }
