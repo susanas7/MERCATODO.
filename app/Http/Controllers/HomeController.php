@@ -165,4 +165,17 @@ class HomeController extends Controller
         return view('users.show', ['user' => $user]);
 
     }
+
+    /**
+     * Shows authenticated user data
+     * 
+     * @return \Illuminate\View\View
+     */
+    public function editMyProfile()
+    {
+        $user = User::where('id', '=', auth()->user()->id)->first();
+
+        return view('users.editMyProfile', ['user' => $user]);
+
+    }
 }

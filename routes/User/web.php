@@ -23,3 +23,5 @@ Route::get('/myProfile' , 'HomeController@myProfile')->name('myProfile');
 Route::get('/myOrders', 'OrderController@myOrders')->name('myOrders');
 
 Route::get('checkout/{id}', 'PlacetopayController@pay')->name('checkout');
+
+Route::get('/editMyProfile', 'HomeController@editMyProfile')->name('editMyProfile');
