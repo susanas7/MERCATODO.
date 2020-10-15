@@ -90,7 +90,7 @@
                         <div class="form-group"><P ALIGN=center>
                         </div>
                         <a href="{{route ('users.index')}}">Regresar</a>
-                        @if($user->id == auth()->user()->id)
+                        @if(auth()->user()->id == $user->id )
                             <a href="{{route ('editMyProfile', $user->id)}}">Editar</a>
                         @else
                         <a href="{{route ('users.edit', $user->id)}}">Editar</a>
