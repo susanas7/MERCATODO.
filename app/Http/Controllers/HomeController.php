@@ -9,6 +9,7 @@ use Session;
 use App\Cart;
 use App\ProductCategory;
 use App\User;
+use App\Http\Requests\User\UpdateRequest;
 
 class HomeController extends Controller
 {
@@ -175,5 +176,22 @@ class HomeController extends Controller
         $user = User::where('id', '=', auth()->user()->id)->first();
 
         return view('users.editMyProfile', ['user' => $user]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param int $id
+     *
+     * @return RedirectResponse
+     */
+    public function updateMyProfile(UpdateRequest $request)
+    {
+        $user = User::where('id', '=', auth()->user()->id)->first();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->save();
+
+        return redirect()->route('myProfile', ['user' => $user]);
     }
 }

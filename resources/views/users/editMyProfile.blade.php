@@ -16,7 +16,7 @@
                 <div class="card-header">Editar usuario</div>
 
                 <div class="card-body">
-                    <form action="{{route('users.update', $user)}}" method="POST">
+                    <form action="{{route('updateMyProfile', $user)}}" method="POST">
                         @csrf
                         @method('PUT')
 
