@@ -40,10 +40,6 @@
                         </div>
                         @if(auth()->user()->id == $order->user_id)
                             <a href="{{'/checkout/'.$order->id}}">Pagar</a>
-                            <form action="{{ route('checkout', $order->id) }}" method="POST">
-                                @csrf
-                                <button type="submit"> {{ __('Pay') }}</button>
-                            </form>
                         @endif
                 </div>
             </div>
