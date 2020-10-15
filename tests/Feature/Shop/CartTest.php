@@ -17,7 +17,7 @@ class CartTest extends TestCase
 {
     use RefreshDatabase;
     use WithoutMiddleware;
-    
+
     /** @test */
     public function anUserCanAddAnItemToCart()
     {
@@ -51,11 +51,9 @@ class CartTest extends TestCase
         $response->assertSee($product1->name);
         $response->assertSee($product2->name);
 
-
         $response2 = $this->actingAs($user)->get('/reduce', [
             'id' => $product1->id
         ]);
-        
 
         $response2->assertSee($product2->name);
         $response2->assertDontSeeText($product1);

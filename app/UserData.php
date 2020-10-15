@@ -16,7 +16,7 @@ class UserData extends Model
     protected $fillable = [
         'user_id', 'document_type', 'document', 'address', 'phone', 'birthday',
     ];
-    
+
     public function userData()
     {
         return $this->belongsTo(User::class);

@@ -18,9 +18,9 @@ class OrderController extends Controller
 
     /**
      * The cart data is stored in an order
-     * 
+     *
      * @param Request $request
-     * 
+     *
      * @return \Illuminate\View\View
      */
     public function store(Request $request)
@@ -36,16 +36,14 @@ class OrderController extends Controller
             'quantity' => $quantity,
             'total' => $total,
         ]);
-        return redirect('/orders/'.$order->id)->with('order');
-
-
+        return redirect('/orders/' . $order->id)->with('order');
     }
 
     /**
      * Displays all the orders
-     * 
+     *
      * @param int $id
-     * 
+     *
      * @return \Illuminate\View\View
      */
     public function show($id)
@@ -59,9 +57,9 @@ class OrderController extends Controller
 
     /**
      * Redirect from successful payment
-     * 
+     *
      * @param int $id
-     * 
+     *
      * @return \Illuminate\View\View
      */
     public function orderSuccessful($id)
@@ -95,7 +93,5 @@ class OrderController extends Controller
         $orders = Order::where('user_id', '=', auth()->user()->id, null)->paginate();
 
         return view('orders.index', ['orders' => $orders]);
-
     }
-    
 }

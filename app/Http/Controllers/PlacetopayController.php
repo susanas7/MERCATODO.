@@ -21,10 +21,10 @@ class PlacetopayController extends Controller
 {
     /**
      * Create the request to send to the gateway
-     * 
+     *
      * @param int $id
      * @param Placetopay $placetopay
-     * 
+     *
      * @return \Illuminate\View\View
      */
     public function pay($id, Placetopay $placetopay)
@@ -44,14 +44,14 @@ class PlacetopayController extends Controller
             'payment' => [
                 'reference' => $order->id,
                 'description' => 'Iusto sit et voluptatem.',
-                "amount" => [
-                    "currency" => "COP",
-                    "total" => $order->total,
+                'amount' => [
+                    'currency' => 'COP',
+                    'total' => $order->total,
                 ],
             ],
             'expiration' => date('c', strtotime('+1 hour')),
             'ipAddress' => request()->ip(),
-            'userAgent' => request  ()->header('user-agent'),
+            'userAgent' => request()->header('user-agent'),
             'returnUrl' => route('orders.show', [$order->id]),
             'cancelUrl' => route('orders.show', [$order->id]),
             'skipResult' => false,
@@ -63,17 +63,15 @@ class PlacetopayController extends Controller
         $response = $placetopay->request($request);
 
         if ($response->isSuccessful()) {
-                Session::forget('cart');
-                $order->update([
-                    'status' => $response->status()->status().$response->status()->message(),
-                    'requestId' => $response->requestId(),
-                    'processUrl' => $response->processUrl(),
-                    ]);
-                return redirect($response->processUrl());
+            Session::forget('cart');
+            $order->update([
+                'status' => $response->status()->status() . $response->status()->message(),
+                'requestId' => $response->requestId(),
+                'processUrl' => $response->processUrl(),
+            ]);
+            return redirect($response->processUrl());
         } else {
             $response->status()->message();
         }
-        
-        
     }
 }

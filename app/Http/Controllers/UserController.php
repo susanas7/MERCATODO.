@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Spatie\Permission\Models\Role;
 use Session;
-
 use Spatie\QueryBuilder\QueryBuilder;
 
 class UserController extends Controller
@@ -33,7 +32,7 @@ class UserController extends Controller
 
         $users = User::name($name)->paginate();
 
-        return view('users.index', [ 'users' => $users]);
+        return view('users.index', ['users' => $users]);
     }
 
     /**

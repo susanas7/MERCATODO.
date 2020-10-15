@@ -20,8 +20,5 @@ class PaymentTest extends TestCase
         $payment = Mockery::mock('Dnetix\Redirection\PlacetoPay');
         $payment->shouldReceive('request')
             ->andReturn('isSuccessful');
-        
-        
-
     }
 }

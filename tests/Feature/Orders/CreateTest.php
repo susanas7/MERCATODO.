@@ -36,6 +36,5 @@ class CreateTest extends TestCase
 
         $response->assertRedirect(route('orders.show', $order->id));
         $this->assertCount(1, Order::all());
-
     }
 }

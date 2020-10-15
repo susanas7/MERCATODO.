@@ -15,7 +15,6 @@ use App\Exports\ProductsExport;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use App\Imports\ProductsImport;
 
-
 class ProductController extends Controller
 {
     public function __construct()
@@ -166,9 +165,8 @@ class ProductController extends Controller
 
     public function import(Request $request)
     {
-        
         $file = $request->file('file')->store('import');
-        
+
         (new ProductsImport)->import($file);
 
         return redirect('/');

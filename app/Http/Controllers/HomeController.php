@@ -57,9 +57,9 @@ class HomeController extends Controller
 
     /**
      * List products by category
-     * 
+     *
      * @param int $id
-     * 
+     *
      * @return \Illuminate\View\View
      */
     public function showCategory($id)
@@ -72,10 +72,10 @@ class HomeController extends Controller
 
     /**
      * Add product to cart
-     * 
+     *
      * @param Request $request
      * @param int $id
-     * 
+     *
      * @return RedirectResponse
      */
     public function addToCart(Request $request, $id)
@@ -91,9 +91,9 @@ class HomeController extends Controller
 
     /**
      * Reduce a product from the cart
-     * 
+     *
      * @param int $id
-     * 
+     *
      * @return RedirectResponse
      */
     public function reduceByOne($id)
@@ -108,7 +108,7 @@ class HomeController extends Controller
 
     /**
      * Add a product from de cart
-     * 
+     *
      * @return RedirectResponse
      */
     public function addByOne($id)
@@ -123,9 +123,9 @@ class HomeController extends Controller
 
     /**
      * Remove the item from de cart
-     * 
+     *
      * @param int $id
-     * 
+     *
      * @return RedirectResponse
      */
     public function removeItem($id)
@@ -140,7 +140,7 @@ class HomeController extends Controller
 
     /**
      * Shows all current products in the cart
-     * 
+     *
      * @return \Illuminate\View\View
      */
     public function shoppingCart()
@@ -155,7 +155,7 @@ class HomeController extends Controller
 
     /**
      * Shows authenticated user data
-     * 
+     *
      * @return \Illuminate\View\View
      */
     public function myProfile()
@@ -163,12 +163,11 @@ class HomeController extends Controller
         $user = User::where('id', '=', auth()->user()->id)->first();
 
         return view('users.show', ['user' => $user]);
-
     }
 
     /**
      * Shows authenticated user data
-     * 
+     *
      * @return \Illuminate\View\View
      */
     public function editMyProfile()
@@ -176,6 +175,5 @@ class HomeController extends Controller
         $user = User::where('id', '=', auth()->user()->id)->first();
 
         return view('users.editMyProfile', ['user' => $user]);
-
     }
 }

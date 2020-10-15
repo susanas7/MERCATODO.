@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
 {
-
     public function successful($id)
     {
         $order = Order::find($id);
@@ -24,7 +23,7 @@ class InvoiceController extends Controller
 
         $invoice = Invoice::create([
             'order_id' => $id,
-            ]);
+        ]);
 
         return redirect(route('invoices.show', $order->id));
     }

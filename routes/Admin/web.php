@@ -11,7 +11,6 @@ Route::get('/products/changeStatus/{id}', 'ProductController@changeStatus')->nam
 Route::get('/products/export/o', 'ProductController@export')->name('products.export');
 Route::post('/products/import', 'ProductController@import')->name('products.import');
 
-
 Route::resource('/roles', 'RoleController');
 
 Route::resource('/categories', 'CategoryController');

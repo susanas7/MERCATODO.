@@ -33,7 +33,4 @@ class CreateRequest extends FormRequest
             'image' => 'image',
         ];
     }
-
-    
-
 }
