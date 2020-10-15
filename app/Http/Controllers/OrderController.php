@@ -7,7 +7,6 @@ use App\Cart;
 use Session;
 use Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 
 class OrderController extends Controller
 {
@@ -85,22 +84,18 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //$orders = Order::paginate();
+        $orders = Order::paginate();
 
-        //return view('orders.index', ['orders' => $orders]);
-
-        $orders = Cache::remember('orders',  1200, function () {
-            return $this->orders->orderBy('id', 'asc')->paginate();
-        });
-
-        return view('orders.index')->with('orders', $orders);
+        return view('orders.index', ['orders' => $orders]);
     }
 
     public function myOrders()
     {
-        $orders = Order::where('user_id', '=', auth()->user()->id)->paginate();
+        $orders = Order::where('user_id', '=', auth()->user()->id, null)->paginate();
 
         return view('orders.index', ['orders' => $orders]);
+        
+        
 
     }
     

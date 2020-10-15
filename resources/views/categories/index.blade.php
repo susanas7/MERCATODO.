@@ -29,7 +29,6 @@
     <div class="row justify-content-center">
         <div class="col-md-12" >
             <div class="card"  id="box-crud">
-                <div class="card-header"><P ALIGN=center> {{ $categories->total() }} categorías | página {{ $categories->currentPage() }} de {{ $categories->lastpage() }}</div>
                   <div class="card-body">
                     <div>
                     @can('crear usuario')
@@ -71,7 +70,6 @@
                         @endforeach
                       </tbody>
                     </table>
-                    {{$categories->links()}}
                   </div>
             </div>
         </div>
