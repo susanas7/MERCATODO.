@@ -25,7 +25,7 @@ class ProductCategory extends Model
     */
     public static function categoriesCached():Collection
     {
-        return Cache::remember('product_categories', 1200, function () {
+        return Cache::remember('product_categories', 100, function () {
             return ProductCategory::all();
         });
     }
