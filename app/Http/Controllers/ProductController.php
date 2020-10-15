@@ -169,7 +169,7 @@ class ProductController extends Controller
         
         $file = $request->file('file')->store('import');
         
-        (new ProductsImport)->import($file); //Excel::import(new ProductsImport, 'products.xlsx');
+        (new ProductsImport)->import($file);
 
         return redirect('/');
     }

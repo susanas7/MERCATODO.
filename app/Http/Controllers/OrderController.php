@@ -12,34 +12,19 @@ class OrderController extends Controller
 {
     public function __construct(Order $orders)
     {
+        $this->middleware(['role:Administrador de productos|Super-administrador']);
         $this->orders = $orders;
     }
 
+    /**
+     * The cart data is stored in an order
+     * 
+     * @param Request $request
+     * 
+     * @return \Illuminate\View\View
+     */
     public function store(Request $request)
     {
-        /*if(Session::has('cart')){
-            $order = Order::create([
-                'user_id' => auth()->user()->id,
-                'status' => 'created',
-                'quantity' => $totalQty,
-                'total' => $totalPrice,
-            ]);
-        }
-
-        return redirect('/orders/'.$order->id)->with('order');*/
-
-        /*if (Session::has('cart')) {
-            $order = new Order();
-            $order->user_id = auth()->user()->id;
-            $order->quantity = $totalQty;
-            $order->total = $totalPrice;
-
-            Auth::user()->orders()->save($order);
-
-            return redirect('/orders/'.$order->id)->with('order');
-
-        }*/
-
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
         $total = $cart->totalPrice;
@@ -56,9 +41,15 @@ class OrderController extends Controller
 
     }
 
+    /**
+     * Displays all the orders
+     * 
+     * @param int $id
+     * 
+     * @return \Illuminate\View\View
+     */
     public function show($id)
     {
-        //$order = Order::where('user_id', auth()->user()->id);
         $order = Order::find($id);
 
         return view('orders.show', [
@@ -66,6 +57,13 @@ class OrderController extends Controller
         ]);
     }
 
+    /**
+     * Redirect from successful payment
+     * 
+     * @param int $id
+     * 
+     * @return \Illuminate\View\View
+     */
     public function orderSuccessful($id)
     {
         $order = Order::find($id);
@@ -78,8 +76,6 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param App\Role $role
-     *
      * @return \Illuminate\View\View
      */
     public function index()
@@ -89,13 +85,16 @@ class OrderController extends Controller
         return view('orders.index', ['orders' => $orders]);
     }
 
+    /**
+     * Lists all orders of the authenticated user
+     *
+     * @return \Illuminate\View\View
+     */
     public function myOrders()
     {
         $orders = Order::where('user_id', '=', auth()->user()->id, null)->paginate();
 
         return view('orders.index', ['orders' => $orders]);
-        
-        
 
     }
     

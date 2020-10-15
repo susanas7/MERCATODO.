@@ -27,14 +27,14 @@ class Product extends Model
         'updated_at', 'img_route',
     ];
 
+    /**
+    * Relationship with the category
+    *
+    * @return relationship
+    */
     public function category()
     {
         return $this->belongsTo(ProductCategory::class);
-    }
-
-    public function imagesProducts()
-    {
-        return $this->hasMany('App\ImgProducts');
     }
 
     public function active()
@@ -66,6 +66,11 @@ class Product extends Model
         return $query->where($field, $operator, $value);
     }
 
+    /**
+    * Get the image of product
+    *
+    * @return image
+    */
     public function getGetImageAttribute()
     {
         if ($this->img_route) {

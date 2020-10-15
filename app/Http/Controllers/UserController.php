@@ -105,7 +105,7 @@ class UserController extends Controller
      *
      * @param int $id
      *
-     * @return \Illuminate\View\View
+     * @return RedirectResponse
      */
     public function update(UpdateRequest $request, $id)
     {
@@ -159,13 +159,5 @@ class UserController extends Controller
             ->get();
 
         return view('search', ['users' => $users]);
-    }
-
-    public function myProfile()
-    {
-        $user = User::where('id', '=', auth()->user()->id)->first();
-
-        return view('users.show', ['user' => $user]);
-
     }
 }

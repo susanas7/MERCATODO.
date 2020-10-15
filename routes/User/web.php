@@ -18,7 +18,7 @@ Route::get('/add/{id}', 'HomeController@addByOne')->name('addByOne');
 
 Route::get('/remove/{id}', 'HomeController@removeItem')->name('removeItem');
 
-Route::get('/myProfile' , 'UserController@myProfile')->name('myProfile');
+Route::get('/myProfile' , 'HomeController@myProfile')->name('myProfile');
 
 Route::get('/myOrders', 'OrderController@myOrders')->name('myOrders');
 

@@ -19,15 +19,17 @@ use Dnetix\Redirection\Traits\StatusTrait as RevResp;
 
 class PlacetopayController extends Controller
 {
+    /**
+     * Create the request to send to the gateway
+     * 
+     * @param int $id
+     * @param Placetopay $placetopay
+     * 
+     * @return \Illuminate\View\View
+     */
     public function pay($id, Placetopay $placetopay)
     {
         $order = Order::find($id);
-
-        /*$placetopay = new PlacetoPay([
-            'login' => '6dd490faf9cb87a9862245da41170ff2',
-            'tranKey' => '024h1IlD',
-            'url' => 'https://test.placetopay.com/redirection',
-        ]);*/
 
         $request = [
             'locale' => 'es_CO',
@@ -50,7 +52,7 @@ class PlacetopayController extends Controller
             'expiration' => date('c', strtotime('+1 hour')),
             'ipAddress' => request()->ip(),
             'userAgent' => request  ()->header('user-agent'),
-            'returnUrl' => route('orders.show', [$order->id]), //route('invoices.successful', [$order->id]),
+            'returnUrl' => route('orders.show', [$order->id]),
             'cancelUrl' => route('orders.show', [$order->id]),
             'skipResult' => false,
             'noBuyerFill' => false,
@@ -74,9 +76,4 @@ class PlacetopayController extends Controller
         
         
     }
-
-    /*public function showStatus()
-    {
-        $this->$response->status()->status()-
-    }*/
 }

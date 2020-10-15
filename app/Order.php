@@ -9,7 +9,7 @@ class Order extends Model
     protected $table = 'orders';
 
     /**
-    *Relationship with the user
+    * Relationship with the user
     *
     * @return relationship
     */
@@ -27,6 +27,11 @@ class Order extends Model
         'user_id', 'status', 'quantity', 'total', 'requestId', 'processUrl'
     ];
 
+    /**
+    * Relationship with the invoice
+    *
+    * @return relationship
+    */
     public function invoice()
     {
         return $this->hasOne(Invoice::class);
