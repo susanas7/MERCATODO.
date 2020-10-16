@@ -30,16 +30,12 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Cache::remember('products', 6000, function () {
-            return Product::all();
-        });
-        Cache::get('products');
         $title = $request->get('title');
         $slug = $request->get('slug');
 
         $products = Product::title($title)->paginate();
 
-        return view('products.index', ['products' => $products, 'data' => $data]);
+        return view('products.index', ['products' => $products]);
     }
 
     /**

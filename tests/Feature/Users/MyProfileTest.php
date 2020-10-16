@@ -40,16 +40,15 @@ class MyProfileTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($user)->put(route('updateMyProfile'),[
+        $response = $this->actingAs($user)->put(route('updateMyProfile'), [
             'name' => 'JELO',
             'email' => 'jelo@mail.com'
         ]);
-        
+
         $user = User::first();
 
         $this->assertEquals('JELO', $user->name);
         $this->assertEquals('jelo@mail.com', $user->email);
-        $response->assertRedirect('/myProfile?user=' .$user->id);
-
+        $response->assertRedirect('/myProfile?user=' . $user->id);
     }
 }
