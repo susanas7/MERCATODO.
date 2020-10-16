@@ -12,7 +12,7 @@ class OrderController extends Controller
 {
     public function __construct(Order $orders)
     {
-        $this->middleware(['role:Administrador de productos|Super-administrador']);
+        //$this->middleware(['role:Administrador de productos|Super-administrador']);
         $this->orders = $orders;
     }
 

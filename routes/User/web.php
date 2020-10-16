@@ -28,4 +28,5 @@ Route::get('/editMyProfile', 'HomeController@editMyProfile')->name('editMyProfil
 
 Route::put('/updateMyProfile', 'HomeController@updateMyProfile')->name('updateMyProfile');
 
+Route::get('/orders/payment/{id}', 'PlacetopayController@payment')->name('payment');
 
