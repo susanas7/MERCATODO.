@@ -1,6 +1,9 @@
 // Body
 $body-bg: #f8fafc;
 
+//Background
+$background: linear-gradient(90deg, #020024 0%, #090979 35%, #00d4ff 100%);
+
 // Typography
 $font-family-sans-serif: 'Nunito', sans-serif;
 $font-size-base: 0.9rem;
@@ -17,3 +20,8 @@ $yellow: #ffed4a;
 $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
+
+$container: #DDCCF1;
+
+// Login/Register
+$font-color-login: #0a00af;

@@ -8,8 +8,6 @@ class CreateProductCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
@@ -17,7 +15,6 @@ class CreateProductCategoriesTable extends Migration
             $table->id();
 
             $table->string('title');
-            $table->string('slug');
 
             $table->timestamps();
         });
@@ -25,8 +22,6 @@ class CreateProductCategoriesTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down()
     {

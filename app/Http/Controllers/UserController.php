@@ -2,116 +2,162 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\User\CreateRequest;
+use App\Http\Requests\User\UpdateRequest;
 use App\User;
+use App\UserData;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-// use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Cache;
+use Spatie\Permission\Models\Role;
+use Session;
+use Spatie\QueryBuilder\QueryBuilder;
 
 
 class UserController extends Controller
 {
-
     public function __construct()
     {
-      $this->middleware('admin');
+        $this->middleware(['role:Gestor de usuarios|Super-administrador']);
+        $this->middleware(['verified']);
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index(Request $request)
     {
-      $name = $request->get('name');
+        $name = $request->get('name');
 
-      $users = User::name($name)->paginate();
+        $users = User::name($name)->paginate();
 
-      return view('users.index', ['users' => $users]);
-
+        return view('users.index', ['users' => $users]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
-      return view('users.create');
+        $roles = Role::all()->pluck('name', 'id');
+
+        return view('users.create', compact('roles'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(CreateRequest $request)
     {
-      User::create([
-        'name' => $request->name,
-        'email' => $request->email,
-        'password' => $request->password,
-        'role' => $request->role,
-      ]);
-      return redirect('/users');
+        $user = new User();
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+
+        if ($user->save()) {
+            $user->assignRole($request->role);
+
+            return redirect()->route('users.index');
+        }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     *
+     * @return \Illuminate\View\View
      */
     public function show($id)
     {
         $user = User::find($id);
 
         return view('users.show', [
-          'user' => $user
+            'user' => $user,
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  string  $user 
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     *
+     * @return \Illuminate\View\View
      */
-    public function edit(User $user)
+    public function edit($id)
     {
-        return view('users.edit')->with('user', $user);
+        $roles = Role::all()->pluck('name', 'id');
+        $user = User::find($id);
+        $userData = UserData::where('user_id', $id);
+
+        return view('users.edit', ['user' => $user, 'roles' => $roles]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     *
+     * @return RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
-        //
-        $user = User::find($id);
-        $user->name = $request->get('name');
-        $user->email = $request->get('email');
-        $user->role = $request->get('role');
-        $user->status = $request->get('status');
+        $user = User::findOrFail($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->syncRoles($request->role);
         $user->save();
-        return redirect('/users')->with('notice', 'El usuario ha sido modificado');
-  
+
+        return redirect()->route('users.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  string $user
+     * @param string $user
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user)
     {
-      $user->delete();
-      return back();
+        $user->delete();
+
+        return back();
+    }
+
+    /**
+     * Enable or disable the status of a user.
+     *
+     * @param int $id
+     *
+     * @return RedirectResponse
+     */
+    public function changeStatus($id)
+    {
+        $user = User::find($id);
+
+        $user->is_active = !$user->is_active;
+
+        if ($user->save()) {
+            return redirect(route('users.index'));
+        }
+
+        return redirect(route('users.index'));
+    }
+
+    public function search()
+    {
+        $users = QueryBuilder::for(User::class)
+            ->allowedFilters(['name', 'email'])
+            ->get();
+
+        return view('search', ['users' => $users]);
     }
 }
