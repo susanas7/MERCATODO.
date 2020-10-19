@@ -13,6 +13,7 @@ use Spatie\Permission\Models\Role;
 use Session;
 use Spatie\QueryBuilder\QueryBuilder;
 
+
 class UserController extends Controller
 {
     public function __construct()

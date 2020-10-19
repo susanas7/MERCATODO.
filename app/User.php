@@ -77,4 +77,30 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany('App\Order');
     }
+
+    public function scopeName($query, $name){
+        return $query->where('name', 'LIKE', "%$name%");
+    }
+
+    public function scopeEmail(Builder $query, $email): Builder
+    {
+        //return $query->where('email', 'LIKE', "&$email%");
+        if (null !== $email) {
+            return $this->searchByField($query, 'email', $email, '=');
+        }
+
+        return $query;
+    }
+    private function searchByField(Builder $query, string $field, string $value, string $operator = null): Builder
+    {
+        return $query->where($field, $operator, $value);
+    }
+
+    public function scopeSearch($query, $type, $search)
+    {
+        if( ($type) && ($search) ){
+            return $query->where($type, 'like', "%$search%");            
+        }
+    }
+
 }
