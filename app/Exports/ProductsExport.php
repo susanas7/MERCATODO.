@@ -21,7 +21,7 @@ class ProductsExport implements FromCollection, ShouldAutoSize, WithHeadings
     {
         return [
             $product->id,
-            $product->category->created_at,
+            $product->category->title,
             $product->title,
             $product->slug,
             $product->is_active,

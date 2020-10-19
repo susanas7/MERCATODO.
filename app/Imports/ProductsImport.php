@@ -3,16 +3,17 @@
 namespace App\Imports;
 
 use App\Product;
+use Illuminate\Validation\Rule;
+use Maatwebsite\Excel\Concerns\WithValidation;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\SkipsOnError;
-use Maatwebsite\Excel\Concerns\ToCollection;
 use Throwable;
 use Illuminate\Support\Collection;
 
-class ProductsImport implements ToModel, SkipsOnError, ToCollection
+class ProductsImport implements ToModel, SkipsOnError
 {
     use Importable;
 
@@ -31,13 +32,14 @@ class ProductsImport implements ToModel, SkipsOnError, ToCollection
             'price' => $row['4'],
         ]);
     }
-
-    public function collection(Collection $collection)
+    public function rules()
     {
-        //  dd($collection);
+        return[
+            'category_id' => 'numeric|exists:product_categories,id'
+        ];
     }
 
     public function onError(Throwable $error)
     {
-    }
+    }  
 }

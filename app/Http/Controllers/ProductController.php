@@ -160,18 +160,11 @@ class ProductController extends Controller
         return Excel::download(new ProductsExport, 'products.xlsx');
     }
 
-    public function import(ImportRequest $request)
+    public function import(Request $request)
     {
-        /*$file = $request->file('file')->store('import');
-
-        (new ProductsImport)->import($file);
-
-        return redirect('/');*/
-
-        //Excel::import(new ProductsImport, request()->file('file'));
         $file = $request->file('file');
-        (new ProductsImport)->import($file);
 
+        (new ProductsImport)->import($file);
 
         return redirect(route('products.index'));
     }
