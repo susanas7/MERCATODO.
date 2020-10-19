@@ -32,6 +32,13 @@
                     <div>
                       <a href="{{route('products.create')}}" class="btn btn-primary">Crear</a>
                       <a href="{{route('products.export')}}" class="btn btn-link" >Exportar</a>
+                      @isset($errors)
+                      <div class="row justify-content-center">
+                          <div class="col-md-4">
+                              @include('fragment.errors')
+                          </div>
+                      </div>
+                      @endisset
                       <form action="{{route('products.import')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <input type="file" name="file">

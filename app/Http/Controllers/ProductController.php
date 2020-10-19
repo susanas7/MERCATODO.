@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Product\StoreProductRequest;
 use App\Http\Requests\Product\UpdateRequest;
+use App\Http\Requests\Product\ImportRequest;
 use App\Product;
 use App\ProductCategory;
 use Illuminate\Http\RedirectResponse;
@@ -159,12 +160,19 @@ class ProductController extends Controller
         return Excel::download(new ProductsExport, 'products.xlsx');
     }
 
-    public function import(Request $request)
+    public function import(ImportRequest $request)
     {
-        $file = $request->file('file')->store('import');
+        /*$file = $request->file('file')->store('import');
 
         (new ProductsImport)->import($file);
 
-        return redirect('/');
+        return redirect('/');*/
+
+        //Excel::import(new ProductsImport, request()->file('file'));
+        $file = $request->file('file');
+        (new ProductsImport)->import($file);
+
+
+        return redirect(route('products.index'));
     }
 }

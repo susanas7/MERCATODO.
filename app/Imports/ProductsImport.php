@@ -8,9 +8,11 @@ use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\SkipsOnError;
+use Maatwebsite\Excel\Concerns\ToCollection;
 use Throwable;
+use Illuminate\Support\Collection;
 
-class ProductsImport implements ToModel, SkipsOnError
+class ProductsImport implements ToModel, SkipsOnError, ToCollection
 {
     use Importable;
 
@@ -28,6 +30,11 @@ class ProductsImport implements ToModel, SkipsOnError
             'is_active' => $row['3'],
             'price' => $row['4'],
         ]);
+    }
+
+    public function collection(Collection $collection)
+    {
+        //  dd($collection);
     }
 
     public function onError(Throwable $error)
