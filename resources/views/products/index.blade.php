@@ -31,7 +31,23 @@
                   <div class="card-body">
                     <div>
                       <a href="{{route('products.create')}}" class="btn btn-primary">Crear</a>
-                      <a href="{{route('products.export')}}" class="btn btn-link" >Exportar</a>
+                      <form action="{{route('products.export')}}">
+                        <select name="category_id" id="category_id">
+                          <option value="">--</option>
+                          @foreach($categories as $category)
+                            <option value="{{$category->id}}"> {{$category->title}} </option>
+                          @endforeach
+                        </select>
+                        <select name="is_active" id="is_active">
+                            <option value="">--</option>
+                            <option value="0"> Inactivo </option>
+                            <option value="1"> Activo </option>
+                        </select>
+                        
+                        <button type="submit">Exportar</button>
+
+                      </form>
+                      
                       @isset($errors)
                       <div class="row justify-content-center">
                           <div class="col-md-4">

@@ -33,10 +33,11 @@ class ProductController extends Controller
     {
         $title = $request->get('title');
         $slug = $request->get('slug');
+        $categories = ProductCategory::all();
 
         $products = Product::title($title)->paginate();
 
-        return view('products.index', ['products' => $products]);
+        return view('products.index', ['products' => $products, 'categories' => $categories]);
     }
 
     /**
@@ -155,9 +156,14 @@ class ProductController extends Controller
         return redirect(route('products.index'));
     }
 
-    public function export()
+    public function export(Request $request)
     {
-        return Excel::download(new ProductsExport, 'products.xlsx');
+        $category_id = $request->input('category_id');
+        $is_active = $request->input('is_active');
+        $request = $request->input();
+        //return Excel::download(new ProductsExport, 'products.xlsx');
+        return (new ProductsExport($request))->download('productos.xlsx');
+
     }
 
     public function import(Request $request)
