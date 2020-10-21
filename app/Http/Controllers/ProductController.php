@@ -162,7 +162,7 @@ class ProductController extends Controller
         $is_active = $request->input('is_active');
         $request = $request->input();
         //return Excel::download(new ProductsExport, 'products.xlsx');
-        return (new ProductsExport($request))->download('productos.xlsx');
+        return (new ProductsExport($request))->download('products.xlsx');
 
     }
 
