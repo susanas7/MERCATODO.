@@ -13,40 +13,21 @@ class ProductsExport implements FromQuery, ShouldAutoSize, WithHeadings
     use Exportable;
 
     protected $request;
-    //protected $category_id;
-    //protected $is_active;
-
-    /*public function __construct(int $category_id, int $is_active)
-    {
-        $this->category_id = $category_id;
-        $this->is_active = $is_active;
-    }*/
 
     public function __construct($request)
     {
         $this->request = $request;
-
-        //$this->request['category_id'] = $category_id;
-        //$this->request['is_active'] = $is_active;
     }
 
     public function query()
     {
-        //dd($this->request);
         $category_id = $this->request['category_id'] ?? '';
+        
         $is_active = $this->request['is_active'] ?? '';
 
         return Product::query()->where('category_id', $category_id)
             ->where('is_active', $is_active);
-     }
-
-    /**
-    * @return \Illuminate\Support\Collection
-    */
-    /*public function collection()
-    {
-        return Product::all();
-    }*/
+    }
 
     public function map($product): array
     {
