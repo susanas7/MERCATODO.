@@ -3,12 +3,15 @@
 namespace App\Imports;
 
 use App\Product;
+use Illuminate\Validation\Rule;
+use Maatwebsite\Excel\Concerns\WithValidation;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\SkipsOnError;
 use Throwable;
+use Illuminate\Support\Collection;
 
 class ProductsImport implements ToModel, SkipsOnError
 {
@@ -29,8 +32,14 @@ class ProductsImport implements ToModel, SkipsOnError
             'price' => $row['4'],
         ]);
     }
+    public function rules()
+    {
+        return[
+            'category_id' => 'numeric|exists:product_categories,id'
+        ];
+    }
 
     public function onError(Throwable $error)
     {
-    }
+    }  
 }
