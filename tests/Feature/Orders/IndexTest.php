@@ -12,7 +12,7 @@ class IndexTest extends TestCase
 {
     use RefreshDatabase;
     use WithoutMiddleware;
-    
+
     /** @test */
     public function aUserCanListOrders()
     {

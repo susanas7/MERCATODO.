@@ -18,7 +18,6 @@ class CreateTest extends TestCase
      */
     public function aUserCanViewTheUserCreateForm()
     {
-        
         $user = factory(User::class)->create();
 
         $response = $this->actingAs($user)->get(route('users.create'));

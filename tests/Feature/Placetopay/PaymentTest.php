@@ -17,11 +17,7 @@ class PaymentTest extends TestCase
         $user = factory(User::class)->make();
         $order = factory(Order::class)->make();
 
-        $payment = Mockery::mock('Dnetix\Redirection\PlacetoPay');
-        $payment->shouldReceive('request')
-            ->andReturn('isSuccessful');
-        
-        
-
+        $placetopay = Mockery::mock('Dnetix\Redirection\PlacetoPay');
+        $placetopay->shouldReceive('pay')->andReturn('isSuccessful');
     }
 }

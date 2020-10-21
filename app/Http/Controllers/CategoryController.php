@@ -11,6 +11,7 @@ class CategoryController extends Controller
 {
     public function __construct()
     {
+        $this->middleware(['role:Administrador de productos|Super-administrador']);
         $this->middleware(['verified']);
     }
 
@@ -71,7 +72,7 @@ class CategoryController extends Controller
      *
      * @param int $id
      *
-     * @return \Illuminate\View\View
+     * @return RedirectResponse
      */
     public function update(UpdateRequest $request, $id)
     {
@@ -88,7 +89,7 @@ class CategoryController extends Controller
      *
      * @param string $user
      *
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
     public function destroy(ProductCategory $category)
     {

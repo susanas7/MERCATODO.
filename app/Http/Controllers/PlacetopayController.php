@@ -19,15 +19,17 @@ use Dnetix\Redirection\Traits\StatusTrait as RevResp;
 
 class PlacetopayController extends Controller
 {
+    /**
+     * Create the request to send to the gateway
+     *
+     * @param int $id
+     * @param Placetopay $placetopay
+     *
+     * @return \Illuminate\View\View
+     */
     public function pay($id, Placetopay $placetopay)
     {
         $order = Order::find($id);
-
-        /*$placetopay = new PlacetoPay([
-            'login' => '6dd490faf9cb87a9862245da41170ff2',
-            'tranKey' => '024h1IlD',
-            'url' => 'https://test.placetopay.com/redirection',
-        ]);*/
 
         $request = [
             'locale' => 'es_CO',
@@ -42,16 +44,16 @@ class PlacetopayController extends Controller
             'payment' => [
                 'reference' => $order->id,
                 'description' => 'Iusto sit et voluptatem.',
-                "amount" => [
-                    "currency" => "COP",
-                    "total" => $order->total,
+                'amount' => [
+                    'currency' => 'COP',
+                    'total' => $order->total,
                 ],
             ],
             'expiration' => date('c', strtotime('+1 hour')),
             'ipAddress' => request()->ip(),
-            'userAgent' => request  ()->header('user-agent'),
-            'returnUrl' => route('orders.show', [$order->id]), //route('invoices.successful', [$order->id]),
-            'cancelUrl' => route('orders.show', [$order->id]),
+            'userAgent' => request()->header('user-agent'),
+            'returnUrl' => route('payment', [$order->id]),
+            'cancelUrl' => route('home'), //route('orders.show', [$order->id]),
             'skipResult' => false,
             'noBuyerFill' => false,
             'captureAddress' => false,
@@ -61,22 +63,29 @@ class PlacetopayController extends Controller
         $response = $placetopay->request($request);
 
         if ($response->isSuccessful()) {
-                Session::forget('cart');
-                $order->update([
-                    'status' => $response->status()->status().$response->status()->message(),
-                    'requestId' => $response->requestId(),
-                    'processUrl' => $response->processUrl(),
-                    ]);
-                return redirect($response->processUrl());
+            Session::forget('cart');
+            $order->update([
+                'requestId' => $response->requestId(),
+                'processUrl' => $response->processUrl(),
+            ]);
+            return redirect($response->processUrl());
         } else {
             $response->status()->message();
         }
-        
-        
     }
 
-    /*public function showStatus()
+    public function payment($id, Placetopay $placetopay)
     {
-        $this->$response->status()->status()-
-    }*/
+        $order = Order::find($id);
+
+        $response = $placetopay->query($order->requestId);
+
+        $order->update([
+            'status' => $response->status()->status(),
+        ]);
+
+        return view('orders.payment',[
+            'order' => $order
+        ]);
+    }
 }

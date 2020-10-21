@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Product\StoreProductRequest;
 use App\Http\Requests\Product\UpdateRequest;
+use App\Http\Requests\Product\ImportRequest;
 use App\Product;
 use App\ProductCategory;
 use Illuminate\Http\RedirectResponse;
@@ -14,7 +15,6 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ProductsExport;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use App\Imports\ProductsImport;
-
 
 class ProductController extends Controller
 {
@@ -31,16 +31,13 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Cache::remember('products', 6000, function () {
-            return Product::all();
-        });
-        Cache::get('products');
         $title = $request->get('title');
         $slug = $request->get('slug');
+        $categories = ProductCategory::all();
 
         $products = Product::title($title)->paginate();
 
-        return view('products.index', ['products' => $products, 'data' => $data]);
+        return view('products.index', ['products' => $products, 'categories' => $categories]);
     }
 
     /**
@@ -159,18 +156,22 @@ class ProductController extends Controller
         return redirect(route('products.index'));
     }
 
-    public function export()
+    public function export(Request $request)
     {
-        return Excel::download(new ProductsExport, 'products.xlsx');
+        $category_id = $request->input('category_id');
+        $is_active = $request->input('is_active');
+        $request = $request->input();
+        //return Excel::download(new ProductsExport, 'products.xlsx');
+        return (new ProductsExport($request))->download('productos.xlsx');
+
     }
 
     public function import(Request $request)
     {
-        
-        $file = $request->file('file')->store('import');
-        
-        (new ProductsImport)->import($file); //Excel::import(new ProductsImport, 'products.xlsx');
+        $file = $request->file('file');
 
-        return redirect('/');
+        (new ProductsImport)->import($file);
+
+        return redirect(route('products.index'));
     }
 }

@@ -38,7 +38,6 @@ class StoreTest extends TestCase
 
         $order = factory(Order::class)->make();
 
-
         $this->assertDatabaseMissing('orders', [
             'id' => $order->id,
             'user_id' => $order->user_id,
@@ -49,7 +48,6 @@ class StoreTest extends TestCase
         ]);
 
         //$this->post('checkout/'.$order->id); completar
-
 
         //$response->assertSuccessful();
     }

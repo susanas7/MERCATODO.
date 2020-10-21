@@ -21,9 +21,8 @@ class ShowTest extends TestCase
         $this->withoutExceptionHandling();
         $userData = factory(UserData::class)->create();
         $user = factory(User::class)->create();
-        
 
-        $response = $this->get(route('users.show', $user));
+        $response = $this->actingAs($user)->get(route('users.show', $user));
 
         $response->assertStatus(200);
         $response->assertViewIs('users.show');

@@ -19,7 +19,7 @@ class ShowTest extends TestCase
     {
         $this->withoutExceptionHandling();
         $user = factory(User::class)->create();
-        $order = factory(Order::class)->create( [
+        $order = factory(Order::class)->create([
             'user_id' => $user->id,
             'status' => 'created',
             'quantity' => '1',
