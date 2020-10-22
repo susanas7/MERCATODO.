@@ -49,7 +49,7 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @return Builder
      */
-    public function scopeName($query, $name)
+    public function scopeName(Builder $query, $name): Builder
     {
         return $query->where('name', 'LIKE', "%{$name}%")
             ->orWhere('email', 'LIKE', "%{$name}%");

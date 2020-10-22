@@ -25,8 +25,7 @@ class OrderController extends Controller
     /**
      * Displays all the orders
      *
-     * @param int $id
-     *
+     * @param Order $order
      * @return \Illuminate\View\View
      */
     public function show(Order $order)
@@ -39,7 +38,6 @@ class OrderController extends Controller
      * The cart data is stored in an order
      *
      * @param Request $request
-     *
      * @return RedirectResponse
      */
     public function store(Request $request)

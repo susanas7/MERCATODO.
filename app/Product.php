@@ -52,14 +52,17 @@ class Product extends Model
      *
      * @return Builder
      */
-    public function scopeTitle($query, $title)
+    public function scopeTitle(Builder $query, string $title)
     {
         return $query->where('title', 'LIKE', "%{$title}%")
             ->orWhere('slug', 'LIKE', "%{$title}%");
     }
 
     /**
+     * @param Builder $query
+     * @param string $field
      * @param string $value
+     * @param string $operator
      */
     public function searchByField(Builder $query, string $field, string $value, string $operator = null): Builder
     {

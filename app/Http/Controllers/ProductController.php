@@ -135,7 +135,7 @@ class ProductController extends Controller
      * @param int $id
      * @return RedirectResponse
      */
-    public function changeStatus($id)
+    public function changeStatus(int $id)
     {
         $product = Product::find($id);
 

@@ -129,7 +129,7 @@ class UserController extends Controller
      *
      * @return RedirectResponse
      */
-    public function changeStatus($id)
+    public function changeStatus(int $id)
     {
         $user = User::find($id);
 
