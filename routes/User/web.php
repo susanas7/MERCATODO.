@@ -22,11 +22,11 @@ Route::get('/myProfile', 'HomeController@myProfile')->name('myProfile');
 
 Route::get('/myOrders', 'OrderController@myOrders')->name('myOrders');
 
-Route::get('checkout/{id}', 'PlacetopayController@pay')->name('checkout');
+Route::get('checkout/{order}', 'PlacetopayController@pay')->name('checkout');
 
 Route::get('/editMyProfile', 'HomeController@editMyProfile')->name('editMyProfile');
 
 Route::put('/updateMyProfile', 'HomeController@updateMyProfile')->name('updateMyProfile');
 
-Route::get('/orders/payment/{id}', 'PlacetopayController@payment')->name('payment');
+Route::get('/orders/payment/{order}', 'PlacetopayController@payment')->name('payment');
 

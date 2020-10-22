@@ -63,11 +63,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return $query->where($field, $operator, $value);
     }
 
-    public function data()
-    {
-        return $this->hasOne(UserData::class);
-    }
-
     /**
     * Relationship with orders
     *
