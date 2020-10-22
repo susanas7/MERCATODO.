@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ProductsExport;
+use App\Exports\ProductsExportAll;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use App\Imports\ProductsImport;
 
@@ -158,10 +159,13 @@ class ProductController extends Controller
 
     public function export(Request $request)
     {
+        if($request->input('category_id').$request->input('is_active') == null){
+            return Excel::download(new ProductsExportAll, 'products.xlsx');
+        }
         $category_id = $request->input('category_id');
         $is_active = $request->input('is_active');
         $request = $request->input();
-        //return Excel::download(new ProductsExport, 'products.xlsx');
+
         return (new ProductsExport($request))->download('products.xlsx');
 
     }
