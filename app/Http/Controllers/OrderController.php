@@ -10,18 +10,37 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    public function __construct(Order $orders)
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index()
     {
-        //$this->middleware(['role:Administrador de productos|Super-administrador']);
-        $this->orders = $orders;
+        $orders = Order::paginate();
+
+        return view('orders.index', ['orders' => $orders]);
     }
 
+    /**
+     * Displays all the orders
+     *
+     * @param Order $order
+     * @return \Illuminate\View\View
+     */
+    public function show(int $id)
+    {
+        $order = Order::find($id);
+        
+        return view('orders.show', [
+            'order' => $order,
+        ]);
+    }
     /**
      * The cart data is stored in an order
      *
      * @param Request $request
-     *
-     * @return \Illuminate\View\View
+     * @return RedirectResponse
      */
     public function store(Request $request)
     {
@@ -36,51 +55,8 @@ class OrderController extends Controller
             'quantity' => $quantity,
             'total' => $total,
         ]);
-        return redirect('/orders/' . $order->id)->with('order');
-    }
 
-    /**
-     * Displays all the orders
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\View\View
-     */
-    public function show($id)
-    {
-        $order = Order::find($id);
-
-        return view('orders.show', [
-            'order' => $order,
-        ]);
-    }
-
-    /**
-     * Redirect from successful payment
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\View\View
-     */
-    public function orderSuccessful($id)
-    {
-        $order = Order::find($id);
-
-        return view('orders.successful', [
-            'order' => $order,
-        ]);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function index()
-    {
-        $orders = Order::paginate();
-
-        return view('orders.index', ['orders' => $orders]);
+        return redirect(route('orders.show', $order))->with('order');
     }
 
     /**

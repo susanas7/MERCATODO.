@@ -18,6 +18,7 @@ class CategoryController extends Controller
     /**
      * Show the application dashboard.
      *
+     * @param Request $request
      * @return \Illuminate\View\View
      */
     public function index(Request $request)
@@ -42,6 +43,7 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param CreateRequest $request
      * @return RedirectResponse
      */
     public function store(CreateRequest $request)
@@ -56,28 +58,24 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
-     *
+     * @param ProductCategory $category
      * @return \Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(ProductCategory $category)
     {
-        $category = ProductCategory::find($id);
-
         return view('categories.edit', ['category' => $category]);
     }
 
     /**
      * Update the specified resource in storage.
      *
+     * @param UpdateRequest $request
      * @param int $id
-     *
      * @return RedirectResponse
      */
-    public function update(UpdateRequest $request, $id)
+    public function update(UpdateRequest $request, int $id)
     {
-        $category = ProductCategory::findOrFail($id);
-
+        $category = ProductCategory::find($id);
         $category->title = $request->title;
         $category->save();
 
@@ -87,8 +85,7 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param string $user
-     *
+     * @param ProductCategory $category
      * @return RedirectResponse
      */
     public function destroy(ProductCategory $category)

@@ -3,29 +3,21 @@
 namespace App\Exports;
 
 use App\Product;
-use Maatwebsite\Excel\Concerns\FromQuery;
+use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\Exportable;
 
-class ProductsExport implements FromQuery, ShouldAutoSize, WithHeadings
+class ProductsExportAll implements FromCollection, ShouldAutoSize, WithHeadings
 {
     use Exportable;
 
-    protected $request;
-
-    public function __construct($request)
+    /**
+    * @return \Illuminate\Support\Collection
+    */
+    public function collection()
     {
-        $this->request = $request;
-    }
-
-    public function query()
-    {
-        $category_id = $this->request['category_id'] ?? '';
-        $is_active = $this->request['is_active'] ?? '';
-
-        return Product::query()->where('category_id', $category_id)
-            ->where('is_active', $is_active);
+        return Product::all();
     }
 
     public function map($product): array

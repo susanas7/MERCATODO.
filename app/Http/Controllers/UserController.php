@@ -5,14 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\User\CreateRequest;
 use App\Http\Requests\User\UpdateRequest;
 use App\User;
-use App\UserData;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 use Spatie\Permission\Models\Role;
 use Session;
-use Spatie\QueryBuilder\QueryBuilder;
-
 
 class UserController extends Controller
 {
@@ -25,12 +21,12 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return \Illuminate\View\View
      */
     public function index(Request $request)
     {
         $name = $request->get('name');
-
         $users = User::name($name)->paginate();
 
         return view('users.index', ['users' => $users]);
@@ -51,6 +47,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param CreateRequest $request
      * @return RedirectResponse
      */
     public function store(CreateRequest $request)
@@ -71,14 +68,13 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $id
-     *
+     * @param User $user
      * @return \Illuminate\View\View
      */
-    public function show($id)
+    public function show(int $id)
     {
         $user = User::find($id);
-
+        
         return view('users.show', [
             'user' => $user,
         ]);
@@ -87,15 +83,12 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
-     *
+     * @param User $user
      * @return \Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(User $user)
     {
         $roles = Role::all()->pluck('name', 'id');
-        $user = User::find($id);
-        $userData = UserData::where('user_id', $id);
 
         return view('users.edit', ['user' => $user, 'roles' => $roles]);
     }
@@ -103,13 +96,13 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
+     * @param UpdateRequest $request
      * @param int $id
-     *
      * @return RedirectResponse
      */
-    public function update(UpdateRequest $request, $id)
+    public function update(UpdateRequest $request, int $id)
     {
-        $user = User::findOrFail($id);
+        $user = User::find($id);
         $user->name = $request->name;
         $user->email = $request->email;
         $user->syncRoles($request->role);
@@ -139,7 +132,7 @@ class UserController extends Controller
      *
      * @return RedirectResponse
      */
-    public function changeStatus($id)
+    public function changeStatus(int $id)
     {
         $user = User::find($id);
 
@@ -150,14 +143,5 @@ class UserController extends Controller
         }
 
         return redirect(route('users.index'));
-    }
-
-    public function search()
-    {
-        $users = QueryBuilder::for(User::class)
-            ->allowedFilters(['name', 'email'])
-            ->get();
-
-        return view('search', ['users' => $users]);
     }
 }
