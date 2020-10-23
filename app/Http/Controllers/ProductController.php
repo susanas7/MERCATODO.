@@ -4,16 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Product\StoreProductRequest;
 use App\Http\Requests\Product\UpdateRequest;
-use App\Http\Requests\Product\ImportRequest;
 use App\Product;
 use App\ProductCategory;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ProductsExport;
-use Maatwebsite\Excel\Concerns\FromCollection;
+use App\Exports\ProductsExportAll;
 use App\Imports\ProductsImport;
 
 class ProductController extends Controller
@@ -27,6 +24,7 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return \Illuminate\View\View
      */
     public function index(Request $request)
@@ -48,12 +46,14 @@ class ProductController extends Controller
     public function create()
     {
         $categories = ProductCategory::all();
+
         return view('products.create', ['categories' => $categories]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
+     * @param StoreProductRequest $request
      * @return RedirectResponse
      */
     public function store(StoreProductRequest $request)
@@ -71,14 +71,11 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param Product $product
+     * @return \Illuminate\View\View
      */
-    public function show($id)
+    public function show(Product $product)
     {
-        $product = Product::findOrFail($id);
-
         return view('products.show', [
             'product' => $product,
         ]);
@@ -87,13 +84,11 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
-     *
+     * @param Product $product
      * @return \Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        $product = Product::find($id);
         $categories = ProductCategory::all();
 
         return view('products.edit', ['product' => $product, 'categories' => $categories]);
@@ -102,11 +97,11 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
+     * @param UpdateRequest $request
      * @param int $id
-     *
      * @return RedirectResponse
      */
-    public function update(UpdateRequest $request, $id)
+    public function update(UpdateRequest $request, int $id)
     {
         $product = Product::find($id);
         $categories = ProductCategory::all();
@@ -124,8 +119,7 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param string $product
-     *
+     * @param Product $product
      * @return RedirectResponse
      */
     public function destroy(Product $product)
@@ -140,10 +134,9 @@ class ProductController extends Controller
      * Enable or disable the status of a product.
      *
      * @param int $id
-     *
      * @return RedirectResponse
      */
-    public function changeStatus($id)
+    public function changeStatus(int $id)
     {
         $product = Product::find($id);
 
@@ -156,16 +149,30 @@ class ProductController extends Controller
         return redirect(route('products.index'));
     }
 
+    /**
+     * Export products
+     * 
+     * @param Request $request
+     * @return Response
+     */
     public function export(Request $request)
     {
+        if ($request->input('category_id') . $request->input('is_active') == null) {
+            return Excel::download(new ProductsExportAll, 'products.xlsx');
+        }
         $category_id = $request->input('category_id');
         $is_active = $request->input('is_active');
         $request = $request->input();
-        //return Excel::download(new ProductsExport, 'products.xlsx');
-        return (new ProductsExport($request))->download('productos.xlsx');
 
+        return (new ProductsExport($request))->download('products.xlsx');
     }
 
+    /**
+     * Import Products
+     * 
+     * @param Request $request
+     * @return RedirectResponse
+     */
     public function import(Request $request)
     {
         $file = $request->file('file');

@@ -2,7 +2,7 @@
 
 namespace App;
 
-class Cart //extends Model
+class Cart 
 {
     public $items = null;
     public $totalQty = 0;
@@ -17,7 +17,13 @@ class Cart //extends Model
         }
     }
 
-    public function add($item, $id)
+    /** 
+     * Add an item to cart
+     * 
+     * @param object $item
+     * @param int $id
+     */
+    public function add(object $item, int $id)
     {
         $storedItem = ['qty' => 0, 'price' => $item->price, 'item' => $item];
         if ($this->items) {
@@ -32,7 +38,12 @@ class Cart //extends Model
         $this->totalPrice += $item->price;
     }
 
-    public function reduceByOne($id)
+    /**
+     * Reduce by one to cart
+     * 
+     * @param int $id
+     */
+    public function reduceByOne(int $id)
     {
         $this->items[$id]['qty']--;
         $this->items[$id]['price'] -= $this->items[$id]['item']['price'];
@@ -44,7 +55,12 @@ class Cart //extends Model
         }
     }
 
-    public function addByOne($id)
+    /**
+     * Add by one to cart
+     * 
+     * @param int $id
+     */
+    public function addByOne(int $id)
     {
         $this->items[$id]['qty']++;
         $this->items[$id]['price'] += $this->items[$id]['item']['price'];
@@ -52,7 +68,12 @@ class Cart //extends Model
         $this->totalPrice += $this->items[$id]['item']['price'];
     }
 
-    public function removeItem($id)
+    /**
+     * Remove all the item to cart
+     * 
+     * @param int $id
+     */
+    public function removeItem(int $id)
     {
         $this->totalQty -= $this->items[$id]['qty'];
         $this->totalPrice -= $this->items[$id]['price'];

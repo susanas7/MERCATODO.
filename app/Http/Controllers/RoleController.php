@@ -16,13 +16,10 @@ class RoleController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param App\Role $role
-     *
      * @return \Illuminate\View\View
      */
-    public function index(Role $role)
+    public function index()
     {
-        $id = Role::find($role);
         $roles = Role::paginate();
         $permissions = Permission::all()->pluck('name', 'id');
 
@@ -32,14 +29,11 @@ class RoleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $id
-     *
+     * @param Role $role
      * @return \Illuminate\View\View
      */
-    public function show($id)
+    public function show(Role $role)
     {
-        $role = Role::find($id);
-
         return view('roles.show', [
             'role' => $role,
         ]);

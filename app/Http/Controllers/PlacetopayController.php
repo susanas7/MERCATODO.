@@ -22,15 +22,12 @@ class PlacetopayController extends Controller
     /**
      * Create the request to send to the gateway
      *
-     * @param int $id
+     * @param Order $order
      * @param Placetopay $placetopay
-     *
-     * @return \Illuminate\View\View
+     * @return RedirectResponse
      */
-    public function pay($id, Placetopay $placetopay)
+    public function pay(Order $order, Placetopay $placetopay)
     {
-        $order = Order::find($id);
-
         $request = [
             'locale' => 'es_CO',
             'buyer' => [
@@ -74,10 +71,15 @@ class PlacetopayController extends Controller
         }
     }
 
-    public function payment($id, Placetopay $placetopay)
+    /**
+     * Show the payment result
+     * 
+     * @param Order $order
+     * @param Placetopay $placetopay
+     * @return \Illuminate\View\View
+     */
+    public function payment(Order $order, Placetopay $placetopay)
     {
-        $order = Order::find($id);
-
         $response = $placetopay->query($order->requestId);
 
         $order->update([

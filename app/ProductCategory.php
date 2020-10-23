@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Collection;
 
 class ProductCategory extends Model
 {
+    protected $table = 'product_categories';
+    
     /**
     * Relationship with the product
     *
@@ -36,7 +38,7 @@ class ProductCategory extends Model
      *
      * @return Builder
      */
-    public function scopeTitle($query, $title)
+    public function scopeTitle(Builder $query, string $title)
     {
         return $query->where('title', 'LIKE', "%{$title}%");
     }

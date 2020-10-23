@@ -50,9 +50,6 @@
                             @endforeach
                             </select>
                             </div>
-                            <!--<div class="col-md-6">
-                                <input type="text" name="role" class="form-control">
-                            </div>-->
                         </div>
                         <div class="form-group"><P ALIGN=center>
                         </div>

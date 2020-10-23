@@ -12,7 +12,7 @@
                             <label name="name" class="col-md-4 col-form-label text-md-right">Comprador:</label>
 
                             <div class="col-md-6">
-                            <label name="name" class="col-md-8 col-form-label text-md-center">{{$order->user->name}}</label>
+                            <label name="name" class="col-md-8 col-form-label text-md-center">{{$order->user->name ?? ''}}</label>
                             </div>
                         </div>
                         <div class="form-group row">

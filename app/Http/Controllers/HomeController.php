@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 use Session;
 use App\Cart;
 use App\ProductCategory;
@@ -25,32 +24,26 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      *
+     * @param Request $request
      * @return \Illuminate\View\View
      */
     public function index(Request $request)
     {
         $title = $request->get('title');
-        $data = Cache::remember('products', 6000, function () {
-            return Product::all();
-        });
-        Cache::get('products');
         $categories = ProductCategory::all();
         $products = Product::where('is_active', 1)->title($title)->paginate(20);
 
-        return view('home', compact('products', 'data', 'categories'));
+        return view('home', compact('products', 'categories'));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param int $id
-     *
+     * @param Product $product
      * @return \Illuminate\View\View
      */
-    public function show($id)
+    public function show(Product $product)
     {
-        $product = Product::find($id);
-
         return view('show', [
             'product' => $product,
         ]);
@@ -60,10 +53,9 @@ class HomeController extends Controller
      * List products by category
      *
      * @param int $id
-     *
      * @return \Illuminate\View\View
      */
-    public function showCategory($id)
+    public function showCategory(int $id)
     {
         $category = ProductCategory::all();
         $categories = Product::where('category_id', $id)->get();
@@ -76,10 +68,9 @@ class HomeController extends Controller
      *
      * @param Request $request
      * @param int $id
-     *
      * @return RedirectResponse
      */
-    public function addToCart(Request $request, $id)
+    public function addToCart(Request $request, int $id)
     {
         $product = Product::find($id);
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
@@ -94,10 +85,9 @@ class HomeController extends Controller
      * Reduce a product from the cart
      *
      * @param int $id
-     *
      * @return RedirectResponse
      */
-    public function reduceByOne($id)
+    public function reduceByOne(int $id)
     {
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
@@ -110,9 +100,10 @@ class HomeController extends Controller
     /**
      * Add a product from de cart
      *
+     * @param int $id
      * @return RedirectResponse
      */
-    public function addByOne($id)
+    public function addByOne(int $id)
     {
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
@@ -126,10 +117,9 @@ class HomeController extends Controller
      * Remove the item from de cart
      *
      * @param int $id
-     *
      * @return RedirectResponse
      */
-    public function removeItem($id)
+    public function removeItem(int $id)
     {
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
@@ -181,8 +171,7 @@ class HomeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param int $id
-     *
+     * @param UpdateRequest $request
      * @return RedirectResponse
      */
     public function updateMyProfile(UpdateRequest $request)
