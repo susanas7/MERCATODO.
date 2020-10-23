@@ -18,10 +18,6 @@ class CreateTest extends TestCase
      */
     public function aUserCanViewTheCreateCategoryForm()
     {
-        $this->withoutExceptionHandling();
-
-        $category = factory(ProductCategory::class)->make();
-
         $response = $this->get(route('categories.create'));
 
         $response->assertOk();
