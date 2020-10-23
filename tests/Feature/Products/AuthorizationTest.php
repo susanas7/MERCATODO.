@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\Feature\Categories;
+namespace Tests\Feature\Products;
 
-use App\ProductCategory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\User;
+use App\Product;
 
 class AuthorizationTest extends TestCase
 {
@@ -17,7 +17,7 @@ class AuthorizationTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($user)->get(route('categories.create'));
+        $response = $this->actingAs($user)->get(route('products.create'));
         
         $response->assertStatus(403);
     }
@@ -28,7 +28,7 @@ class AuthorizationTest extends TestCase
         $this->artisan('db:seed');
         $user = factory(User::class)->create()->assignRole('Super-administrador');
 
-        $response = $this->actingAs($user)->get(route('categories.create'));
+        $response = $this->actingAs($user)->get(route('products.create'));
         
         $response->assertStatus(200);
     }
@@ -38,7 +38,7 @@ class AuthorizationTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($user)->get(route('categories.create'));
+        $response = $this->actingAs($user)->get(route('products.create'));
         
         $response->assertStatus(403);
     }
@@ -48,9 +48,9 @@ class AuthorizationTest extends TestCase
     {
         $this->artisan('db:seed');
         $user = factory(User::class)->create()->assignRole('Super-administrador');
-        $category = factory(ProductCategory::class)->create();
+        $product = factory(Product::class)->create();
 
-        $response = $this->actingAs($user)->get(route('categories.edit', $category));
+        $response = $this->actingAs($user)->get(route('products.edit', $product));
         
         $response->assertStatus(200);
     }
@@ -60,7 +60,7 @@ class AuthorizationTest extends TestCase
     {
         $user = factory(User::class)->create();
         
-        $response = $this->actingAs($user)->get(route('categories.index'));
+        $response = $this->actingAs($user)->get(route('products.index'));
         
         $response->assertStatus(403);
     }
@@ -70,9 +70,9 @@ class AuthorizationTest extends TestCase
     {
         $this->artisan('db:seed');
         $user = factory(User::class)->create()->assignRole('Super-administrador');
-        factory(ProductCategory::class, 10)->create();
+        factory(Product::class, 10)->create();
 
-        $response = $this->actingAs($user)->get(route('categories.index'));
+        $response = $this->actingAs($user)->get(route('products.index'));
         
         $response->assertStatus(200);
     }
