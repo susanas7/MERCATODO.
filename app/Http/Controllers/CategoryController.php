@@ -70,11 +70,12 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param UpdateRequest $request
-     * @param ProductCategory $category
+     * @param int $id
      * @return RedirectResponse
      */
-    public function update(UpdateRequest $request, ProductCategory $category)
+    public function update(UpdateRequest $request, int $id)
     {
+        $category = ProductCategory::find($id);
         $category->title = $request->title;
         $category->save();
 

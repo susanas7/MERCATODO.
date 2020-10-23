@@ -28,8 +28,10 @@ class OrderController extends Controller
      * @param Order $order
      * @return \Illuminate\View\View
      */
-    public function show(Order $order)
+    public function show(int $id)
     {
+        $order = Order::find($id);
+        
         return view('orders.show', [
             'order' => $order,
         ]);

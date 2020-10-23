@@ -98,11 +98,12 @@ class ProductController extends Controller
      * Update the specified resource in storage.
      *
      * @param UpdateRequest $request
-     * @param Product $product
+     * @param int $id
      * @return RedirectResponse
      */
-    public function update(UpdateRequest $request, Product $product)
+    public function update(UpdateRequest $request, int $id)
     {
+        $product = Product::find($id);
         $categories = ProductCategory::all();
         $product->update($request->all());
 

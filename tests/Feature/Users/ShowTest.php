@@ -3,7 +3,6 @@
 namespace Tests\Feature\Users;
 
 use App\User;
-use App\UserData;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
@@ -19,7 +18,6 @@ class ShowTest extends TestCase
     public function aUserCanSeeDetailsOfUsers()
     {
         $this->withoutExceptionHandling();
-        $userData = factory(UserData::class)->create();
         $user = factory(User::class)->create();
 
         $response = $this->actingAs($user)->get(route('users.show', $user));

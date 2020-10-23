@@ -16,7 +16,7 @@ class CreateTest extends TestCase
     /**
      * @test
      */
-    /*public function aUserCanViewTheCreateCategoryForm()
+    public function aUserCanViewTheCreateCategoryForm()
     {
         $this->withoutExceptionHandling();
 

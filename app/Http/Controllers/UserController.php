@@ -71,8 +71,10 @@ class UserController extends Controller
      * @param User $user
      * @return \Illuminate\View\View
      */
-    public function show(User $user)
+    public function show(int $id)
     {
+        $user = User::find($id);
+        
         return view('users.show', [
             'user' => $user,
         ]);
@@ -95,11 +97,12 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param UpdateRequest $request
-     * @param User $user
+     * @param int $id
      * @return RedirectResponse
      */
-    public function update(UpdateRequest $request, User $user)
+    public function update(UpdateRequest $request, int $id)
     {
+        $user = User::find($id);
         $user->name = $request->name;
         $user->email = $request->email;
         $user->syncRoles($request->role);
