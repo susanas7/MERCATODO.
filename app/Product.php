@@ -80,4 +80,14 @@ class Product extends Model
             return url("storage/{$this->img_route}");
         }
     }
+
+    /**
+     * Relationship with the orders
+     * 
+     * @return relationship
+     */
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class);
+    }
 }

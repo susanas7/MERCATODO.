@@ -45,6 +45,16 @@
                                 <a href="{{'/checkout/'.$order->id}}">Pagar</a>
                             @endif
                         @endif
+                        <div class="form-group row">
+                            <label name="status" class="col-md-4 col-form-label text-md-right">products</label>
+                            
+                            <div class="col-md-6">
+                            @foreach($order->products as $product)
+                                <label name="name" class="col-md-8 col-form-label text-md-center">{{$product->title}} {{$product->price}}</label>
+                                @endforeach
+                            </div>
+                            
+                        </div>
                 </div>
             </div>
         </div>

@@ -32,8 +32,8 @@ class Order extends Model
     *
     * @return relationship
     */
-    public function invoice()
+    public function products()
     {
-        return $this->hasOne(Invoice::class);
+        return $this->belongsToMany(Product::class);
     }
 }

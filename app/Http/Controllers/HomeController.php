@@ -141,6 +141,7 @@ class HomeController extends Controller
         }
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
+        
         return view('shop.shoppingCart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
     }
 
