@@ -51,8 +51,6 @@ class OrderController extends Controller
         $cart = new Cart($oldCart);
         $total = $cart->totalPrice;
         $quantity = $cart->totalQty;
-        //$product = json_decode($request->getBody()->getContents())[0];
-
 
         $order = Order::create([
             'user_id' => auth()->user()->id,
@@ -63,14 +61,10 @@ class OrderController extends Controller
 
         foreach ($cart->items as $items) {
             $s = $items['item'];
-            //$s2 = $s->getAttributes();
             OrderProduct::create([
                 'order_id' => $order->id,
                 'product_id' => $s['id'],
             ]);
-            
-            //$s3 = $s['id'];
-            //dd($s3);
         }
 
         return redirect(route('orders.show', $order))->with('order');

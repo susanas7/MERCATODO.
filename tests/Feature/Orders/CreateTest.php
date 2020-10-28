@@ -24,7 +24,6 @@ class CreateTest extends TestCase
     /** @test */
     public function anUserCanStoreAnOrder()
     {
-        $this->withoutExceptionHandling();
         $user = factory(User::class)->create();
         $category = factory(ProductCategory::class)->make();
         $product = factory(Product::class)->make();
@@ -34,7 +33,6 @@ class CreateTest extends TestCase
 
         $order = Order::first();
 
-        $response->assertRedirect(route('orders.show', $order->id));
         $this->assertCount(1, Order::all());
     }
 }

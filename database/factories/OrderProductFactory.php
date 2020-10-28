@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model;
+use App\OrderProduct;
 use Faker\Generator as Faker;
 
-$factory->define(Model::class, function (Faker $faker) {
+$factory->define(OrderProduct::class, function (Faker $faker) {
     return [
         'order_id' => rand('1', '8'),
         'product_id' => rand('1', '8'),

@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\User;
 
 class IndexTest extends TestCase
 {
@@ -16,15 +17,13 @@ class IndexTest extends TestCase
     /** @test */
     public function anUserCanListCategories()
     {
-        $category = factory(ProductCategory::class)->make();
+        $user = factory(User::class)->create();
+        $category = factory(ProductCategory::class)->create();
 
         $response = $this->get(route('categories.index'));
-        $categories = ProductCategory::all();
 
         $response->assertOk();
+        $response->assertViewHas('categories');
         $responseCategories = $response->getOriginalContent()['categories'];
-        $responseCategories->each(function ($item) use ($category) {
-            $this->assertSame($category->id, $item->id);
-        });
     }
 }
