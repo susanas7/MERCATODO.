@@ -2,16 +2,12 @@
 
 namespace Tests\Feature\Shop;
 
-use App\Order;
-use App\User;
 use App\Product;
 use App\ProductCategory;
-use App\Cart;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
-use Session;
 
 class CartTest extends TestCase
 {
@@ -26,7 +22,7 @@ class CartTest extends TestCase
         $user = factory(User::class)->make();
 
         $this->actingAs($user)->get('/addToCart', [
-            'id' => $product->id
+            'id' => $product->id,
         ]);
 
         $response = $this->actingAs($user)->get('/shoppingCart');
@@ -42,17 +38,17 @@ class CartTest extends TestCase
         factory(ProductCategory::class)->make();
         $user = factory(User::class)->make();
         $this->actingAs($user)->get('/addToCart', [
-            'id' => $product1->id
+            'id' => $product1->id,
         ]);
         $this->actingAs($user)->get('/addToCart', [
-            'id' => $product2->id
+            'id' => $product2->id,
         ]);
         $response = $this->actingAs($user)->get('/shoppingCart');
         $response->assertSee($product1->name);
         $response->assertSee($product2->name);
 
         $response2 = $this->actingAs($user)->get('/reduce', [
-            'id' => $product1->id
+            'id' => $product1->id,
         ]);
 
         $response2->assertSee($product2->name);

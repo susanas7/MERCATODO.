@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Product;
-use Illuminate\Http\Request;
-use Session;
 use App\Cart;
+use App\Http\Requests\User\UpdateRequest;
+use App\Product;
 use App\ProductCategory;
 use App\User;
-use App\Http\Requests\User\UpdateRequest;
+use Illuminate\Http\Request;
+use Session;
 
 class HomeController extends Controller
 {
@@ -50,7 +50,7 @@ class HomeController extends Controller
     }
 
     /**
-     * List products by category
+     * List products by category.
      *
      * @param int $id
      * @return \Illuminate\View\View
@@ -64,7 +64,7 @@ class HomeController extends Controller
     }
 
     /**
-     * Add product to cart
+     * Add product to cart.
      *
      * @param Request $request
      * @param int $id
@@ -82,7 +82,7 @@ class HomeController extends Controller
     }
 
     /**
-     * Reduce a product from the cart
+     * Reduce a product from the cart.
      *
      * @param int $id
      * @return RedirectResponse
@@ -98,7 +98,7 @@ class HomeController extends Controller
     }
 
     /**
-     * Add a product from de cart
+     * Add a product from de cart.
      *
      * @param int $id
      * @return RedirectResponse
@@ -114,7 +114,7 @@ class HomeController extends Controller
     }
 
     /**
-     * Remove the item from de cart
+     * Remove the item from de cart.
      *
      * @param int $id
      * @return RedirectResponse
@@ -130,7 +130,7 @@ class HomeController extends Controller
     }
 
     /**
-     * Shows all current products in the cart
+     * Shows all current products in the cart.
      *
      * @return \Illuminate\View\View
      */
@@ -141,12 +141,12 @@ class HomeController extends Controller
         }
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
-        
+
         return view('shop.shoppingCart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
     }
 
     /**
-     * Shows authenticated user data
+     * Shows authenticated user data.
      *
      * @return \Illuminate\View\View
      */
@@ -158,7 +158,7 @@ class HomeController extends Controller
     }
 
     /**
-     * Shows authenticated user data
+     * Shows authenticated user data.
      *
      * @return \Illuminate\View\View
      */

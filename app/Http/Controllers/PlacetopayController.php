@@ -2,25 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Dnetix\Redirection\PlacetoPay as PlacetoPay;
 use App\Order;
-use App\Cart;
-use Session;
-use Auth;
-use Dnetix\Redirection\Exceptions\PlacetoPayException;
-use Dnetix\Redirection\Message;
-use Dnetix\Redirection\Entities\Status as Status;
-use Dnetix\Redirection\Contracts\Entity;
-use Dnetix\Redirection\Message\RedirectInformation;
 use Dnetix\Redirection\Message\RedirectResponse;
-use Dnetix\Redirection\Message\ReverseResponse;
-use Dnetix\Redirection\Traits\StatusTrait as RevResp;
+use Dnetix\Redirection\PlacetoPay as PlacetoPay;
+use Illuminate\Http\Request;
+use Session;
 
 class PlacetopayController extends Controller
 {
     /**
-     * Create the request to send to the gateway
+     * Create the request to send to the gateway.
      *
      * @param Order $order
      * @param Placetopay $placetopay
@@ -36,7 +27,7 @@ class PlacetopayController extends Controller
                 'document_type' => $order->user->document_type,
                 'document' => $order->user->document,
                 'phone' => $order->user->phone,
-                'address' => $order->user->address
+                'address' => $order->user->address,
             ],
             'payment' => [
                 'reference' => $order->id,
@@ -72,8 +63,8 @@ class PlacetopayController extends Controller
     }
 
     /**
-     * Show the payment result
-     * 
+     * Show the payment result.
+     *
      * @param Order $order
      * @param Placetopay $placetopay
      * @return \Illuminate\View\View
@@ -86,8 +77,8 @@ class PlacetopayController extends Controller
             'status' => $response->status()->status(),
         ]);
 
-        return view('orders.payment',[
-            'order' => $order
+        return view('orders.payment', [
+            'order' => $order,
         ]);
     }
 }

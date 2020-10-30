@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class CreateProductMetricsTable extends Migration
 {
@@ -41,7 +41,7 @@ EOT;
         $oli = now()->subYear()->format('Y-m-d');
         $dateTo = now()->format('Y-m-d');
 
-        DB::unprepared("call product_metrics_generate('$oli', '$dateTo')");    
+        DB::unprepared("call product_metrics_generate('$oli', '$dateTo')");
     }
 
     /**

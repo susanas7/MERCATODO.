@@ -2,13 +2,12 @@
 
 namespace Tests\Feature\Products;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
-use Maatwebsite\Excel\Facades\Excel;
-use App\User;
 use App\Product;
+use App\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
+use Maatwebsite\Excel\Facades\Excel;
+use Tests\TestCase;
 
 class ImportTest extends TestCase
 {
@@ -35,7 +34,7 @@ class ImportTest extends TestCase
         Excel::fake();
 
         $response = $this->actingAs($user)->post(route('products.import', [
-            'file' => UploadedFile::fake()->create('products.xlsx')
+            'file' => UploadedFile::fake()->create('products.xlsx'),
         ]));
 
         $response->assertSessionHasNoErrors();

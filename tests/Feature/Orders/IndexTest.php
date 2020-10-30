@@ -4,7 +4,6 @@ namespace Tests\Feature\Orders;
 
 use App\Order;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
 

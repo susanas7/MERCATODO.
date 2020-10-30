@@ -28,10 +28,10 @@ class Product extends Model
     ];
 
     /**
-    * Relationship with the category
-    *
-    * @return relationship
-    */
+     * Relationship with the category.
+     *
+     * @return relationship
+     */
     public function category()
     {
         return $this->belongsTo(ProductCategory::class);
@@ -70,10 +70,10 @@ class Product extends Model
     }
 
     /**
-    * Get the image of product
-    *
-    * @return image
-    */
+     * Get the image of product.
+     *
+     * @return image
+     */
     public function getGetImageAttribute()
     {
         if ($this->img_route) {
@@ -82,8 +82,8 @@ class Product extends Model
     }
 
     /**
-     * Relationship with the orders
-     * 
+     * Relationship with the orders.
+     *
      * @return relationship
      */
     public function orders()

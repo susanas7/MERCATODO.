@@ -2,12 +2,10 @@
 
 namespace Tests\Feature\Placetopay;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
-use App\User;
 use App\Order;
+use App\User;
 use Mockery;
+use Tests\TestCase;
 
 class PaymentTest extends TestCase
 {

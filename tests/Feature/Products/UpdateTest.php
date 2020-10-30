@@ -24,7 +24,7 @@ class UpdateTest extends TestCase
             'slug' => 'lorem ipsum etc',
             'price' => '32444',
             'category_id' => '1',
-            'img_route' => 'images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg'
+            'img_route' => 'images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg',
         ]);
         $product = Product::first();
 
@@ -46,7 +46,7 @@ class UpdateTest extends TestCase
             'slug' => 'lorem ipsum etc',
             'category_id' => '1',
             'price' => '32444',
-            'img_route' => 'images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg'
+            'img_route' => 'images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg',
         ]);
 
         $product = Product::first();
@@ -56,7 +56,7 @@ class UpdateTest extends TestCase
             'slug' => 'lorem ipsum etc',
             'category_id' => '1',
             'price' => '32444',
-            'img_route' => 'images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg'
+            'img_route' => 'images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg',
         ]);
 
         $this->assertCount(1, Product::all());
@@ -79,7 +79,7 @@ class UpdateTest extends TestCase
             'slug' => 'lorem ipsum etc',
             'category_id' => '1',
             'price' => '32444',
-            'img_route' => 'images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg'
+            'img_route' => 'images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg',
         ]);
 
         $product = Product::first();
@@ -89,7 +89,7 @@ class UpdateTest extends TestCase
             'slug' => '',
             'category_id' => '1',
             'price' => '32444',
-            'img_route' => 'images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg'
+            'img_route' => 'images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg',
         ]);
 
         $this->assertCount(1, Product::all());
@@ -112,7 +112,7 @@ class UpdateTest extends TestCase
             'slug' => 'lorem ipsum etc',
             'category_id' => '1',
             'price' => '32444',
-            'img_route' => 'images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg'
+            'img_route' => 'images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg',
         ]);
 
         $product = Product::first();
@@ -122,7 +122,7 @@ class UpdateTest extends TestCase
             'slug' => 'lorem ipsum etc',
             'category_id' => '',
             'price' => '32444',
-            'img_route' => 'images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg'
+            'img_route' => 'images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg',
         ]);
 
         $this->assertCount(1, Product::all());
@@ -145,7 +145,7 @@ class UpdateTest extends TestCase
             'slug' => 'lorem ipsum etc',
             'category_id' => '1',
             'price' => '32444',
-            'img_route' => 'images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg'
+            'img_route' => 'images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg',
         ]);
 
         $product = Product::first();
@@ -155,7 +155,7 @@ class UpdateTest extends TestCase
             'slug' => 'lorem ipsum etc',
             'category_id' => '1',
             'price' => '',
-            'img_route' => 'images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg'
+            'img_route' => 'images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg',
         ]);
 
         $this->assertCount(1, Product::all());

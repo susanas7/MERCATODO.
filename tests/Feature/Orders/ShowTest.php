@@ -5,7 +5,6 @@ namespace Tests\Feature\Orders;
 use App\Order;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
 
@@ -23,7 +22,7 @@ class ShowTest extends TestCase
             'user_id' => $user->id,
             'status' => 'created',
             'quantity' => '1',
-            'total' => '20200'
+            'total' => '20200',
         ]);
 
         $response = $this->actingAs($user)->get(route('orders.show', $order));

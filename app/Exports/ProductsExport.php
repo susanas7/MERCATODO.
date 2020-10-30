@@ -3,10 +3,10 @@
 namespace App\Exports;
 
 use App\Product;
+use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
-use Maatwebsite\Excel\Concerns\Exportable;
 
 class ProductsExport implements FromQuery, ShouldAutoSize, WithHeadings
 {
@@ -37,7 +37,7 @@ class ProductsExport implements FromQuery, ShouldAutoSize, WithHeadings
             $product->slug,
             $product->is_active,
             $product->price,
-            $product->created_at
+            $product->created_at,
         ];
     }
 

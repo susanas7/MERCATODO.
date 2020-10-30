@@ -8,7 +8,6 @@ use App\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
-use Session;
 
 class UserController extends Controller
 {
@@ -74,7 +73,7 @@ class UserController extends Controller
     public function show(int $id)
     {
         $user = User::find($id);
-        
+
         return view('users.show', [
             'user' => $user,
         ]);

@@ -3,7 +3,6 @@
 namespace Tests\Feature\Products;
 
 use App\Product;
-use App\User;
 use App\ProductCategory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
@@ -39,7 +38,7 @@ class CreateTest extends TestCase
             'slug' => 'lorem ipsum etc',
             'category_id' => '1',
             'price' => '32444',
-            'img_route' => 'images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg'
+            'img_route' => 'images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg',
         ]);
 
         $product = Product::first();
@@ -63,7 +62,7 @@ class CreateTest extends TestCase
             'slug' => 'lorem ipsum etc',
             'category_id' => '1',
             'price' => '32444',
-            'img_route' => 'images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg'
+            'img_route' => 'images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg',
         ]);
 
         $this->assertCount(0, Product::all());
@@ -79,7 +78,7 @@ class CreateTest extends TestCase
             'slug' => '',
             'category_id' => '1',
             'price' => '32444',
-            'img_route' => 'images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg'
+            'img_route' => 'images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg',
         ]);
 
         $this->assertCount(0, Product::all());
@@ -95,7 +94,7 @@ class CreateTest extends TestCase
             'slug' => 'lorem ipsum etc',
             'category_id' => '',
             'price' => '32444',
-            'img_route' => 'images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg'
+            'img_route' => 'images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg',
         ]);
 
         $this->assertCount(0, Product::all());
@@ -111,7 +110,7 @@ class CreateTest extends TestCase
             'slug' => 'lorem ipsum etc',
             'category_id' => '1',
             'price' => '',
-            'img_route' => 'images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg'
+            'img_route' => 'images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg',
         ]);
 
         $this->assertCount(0, Product::all());
@@ -127,7 +126,7 @@ class CreateTest extends TestCase
             'slug' => 'lorem ipsum etc ehshh agsj ahsuuu ajsue ajdh ays hejja sy ejdhahhyedhah dggajd agjdg asgas hahaha hsuuenmdimn uauus uauusujsujsu uujsn dd hj hahaha ujsu e8u oif syduaidy ia duiyud yiud iuay odsgbdljsg ok',
             'category_id' => '1',
             'price' => '32444',
-            'img_route' => 'images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg'
+            'img_route' => 'images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg',
         ]);
 
         $this->assertCount(0, Product::all());
@@ -143,7 +142,7 @@ class CreateTest extends TestCase
             'slug' => 'lorem ipsum etc',
             'category_id' => '1',
             'price' => 'husme',
-            'img_route' => 'images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg'
+            'img_route' => 'images/MfV3Uh8O9EBy7gfFBGhNMiCYQwnE1FA91irNMdim.jpeg',
         ]);
 
         $this->assertCount(0, Product::all());

@@ -2,10 +2,9 @@
 
 namespace Tests\Feature\Users;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
 use App\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class AuthorizationTest extends TestCase
 {
@@ -17,7 +16,7 @@ class AuthorizationTest extends TestCase
         $user = factory(User::class)->create();
 
         $response = $this->actingAs($user)->get(route('users.create'));
-        
+
         $response->assertStatus(403);
     }
 
@@ -28,7 +27,7 @@ class AuthorizationTest extends TestCase
         $user = factory(User::class)->create()->assignRole('Super-administrador');
 
         $response = $this->actingAs($user)->get(route('users.create'));
-        
+
         $response->assertStatus(200);
     }
 
@@ -38,7 +37,7 @@ class AuthorizationTest extends TestCase
         $user = factory(User::class)->create();
 
         $response = $this->actingAs($user)->get(route('users.create'));
-        
+
         $response->assertStatus(403);
     }
 
@@ -50,7 +49,7 @@ class AuthorizationTest extends TestCase
         $userB = factory(User::class)->create();
 
         $response = $this->actingAs($user)->get(route('users.edit', $userB));
-        
+
         $response->assertStatus(200);
     }
 
@@ -58,9 +57,9 @@ class AuthorizationTest extends TestCase
     public function anUnathorizedUserCanNotListUsers()
     {
         $user = factory(User::class)->create();
-        
+
         $response = $this->actingAs($user)->get(route('users.index'));
-        
+
         $response->assertStatus(403);
     }
 
@@ -72,7 +71,7 @@ class AuthorizationTest extends TestCase
         factory(User::class, 10)->create();
 
         $response = $this->actingAs($user)->get(route('users.index'));
-        
+
         $response->assertStatus(200);
     }
 }

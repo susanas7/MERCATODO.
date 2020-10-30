@@ -10,6 +10,6 @@ $factory->define(OrderProduct::class, function (Faker $faker) {
         'order_id' => rand('1', '8'),
         'product_id' => rand('1', '8'),
         'quantity' => rand('1', '3'),
-        'price' => rand('10', '18')
+        'price' => rand('10', '18'),
     ];
 });

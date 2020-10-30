@@ -9,10 +9,10 @@ class Order extends Model
     protected $table = 'orders';
 
     /**
-    * Relationship with the user
-    *
-    * @return relationship
-    */
+     * Relationship with the user.
+     *
+     * @return relationship
+     */
     public function user()
     {
         return $this->belongsTo('App\User');
@@ -24,14 +24,14 @@ class Order extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'status', 'quantity', 'total', 'requestId', 'processUrl'
+        'user_id', 'status', 'quantity', 'total', 'requestId', 'processUrl',
     ];
 
     /**
-    * Relationship with the invoice
-    *
-    * @return relationship
-    */
+     * Relationship with the invoice.
+     *
+     * @return relationship
+     */
     public function products()
     {
         return $this->belongsToMany(Product::class);

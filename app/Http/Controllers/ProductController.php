@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ProductsExport;
+use App\Exports\ProductsExportAll;
 use App\Http\Requests\Product\StoreProductRequest;
 use App\Http\Requests\Product\UpdateRequest;
+use App\Imports\ProductsImport;
 use App\Product;
 use App\ProductCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\ProductsExport;
-use App\Exports\ProductsExportAll;
-use App\Imports\ProductsImport;
 
 class ProductController extends Controller
 {
@@ -150,8 +150,8 @@ class ProductController extends Controller
     }
 
     /**
-     * Export products
-     * 
+     * Export products.
+     *
      * @param Request $request
      * @return Response
      */
@@ -168,8 +168,8 @@ class ProductController extends Controller
     }
 
     /**
-     * Import Products
-     * 
+     * Import Products.
+     *
      * @param Request $request
      * @return RedirectResponse
      */

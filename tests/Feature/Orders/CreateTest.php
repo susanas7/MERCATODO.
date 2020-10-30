@@ -3,18 +3,12 @@
 namespace Tests\Feature\Orders;
 
 use App\Order;
-use App\User;
 use App\Product;
 use App\ProductCategory;
-use App\Cart;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
-use Session;
-use DB;
-use Auth;
-use Mockery;
 
 class CreateTest extends TestCase
 {

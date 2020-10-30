@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Order;
 use App\Cart;
-use Session;
+use App\Order;
+use App\OrderProduct;
 use Auth;
 use Illuminate\Http\Request;
-use App\OrderProduct;
+use Session;
 
 class OrderController extends Controller
 {
@@ -24,7 +24,7 @@ class OrderController extends Controller
     }
 
     /**
-     * Displays all the orders
+     * Displays all the orders.
      *
      * @param Order $order
      * @return \Illuminate\View\View
@@ -32,15 +32,16 @@ class OrderController extends Controller
     public function show(int $id)
     {
         $order = Order::find($id);
-        
+
         return view('orders.show', [
             'order' => $order,
         ]);
 
         //return $order->products;
     }
+
     /**
-     * The cart data is stored in an order
+     * The cart data is stored in an order.
      *
      * @param Request $request
      * @return RedirectResponse
@@ -71,7 +72,7 @@ class OrderController extends Controller
     }
 
     /**
-     * Lists all orders of the authenticated user
+     * Lists all orders of the authenticated user.
      *
      * @return \Illuminate\View\View
      */

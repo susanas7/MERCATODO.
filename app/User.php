@@ -64,10 +64,10 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-    * Relationship with orders
-    *
-    * @return relationship
-    */
+     * Relationship with orders.
+     *
+     * @return relationship
+     */
     public function orders()
     {
         return $this->hasMany('App\Order');

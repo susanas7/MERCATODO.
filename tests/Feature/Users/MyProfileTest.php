@@ -2,11 +2,10 @@
 
 namespace Tests\Feature\Users;
 
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
-use App\User;
 
 class MyProfileTest extends TestCase
 {
@@ -42,7 +41,7 @@ class MyProfileTest extends TestCase
 
         $response = $this->actingAs($user)->put(route('updateMyProfile'), [
             'name' => 'JELO',
-            'email' => 'jelo@mail.com'
+            'email' => 'jelo@mail.com',
         ]);
 
         $user = User::first();
