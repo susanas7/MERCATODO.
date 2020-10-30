@@ -16,3 +16,5 @@ Route::resource('/roles', 'RoleController');
 Route::resource('/categories', 'CategoryController');
 
 Route::resource('/orders', 'OrderController');
+
+Route::get('/metrics', 'MetricsController@chart')->name('metric');
