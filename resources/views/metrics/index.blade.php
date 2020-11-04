@@ -5,7 +5,7 @@
   var data = <?php echo json_encode($d); ?>;
   console.log(data);
 </script>-->
-<metric-component>
+<metric-component d="{{$d}}">
             <div class="columns">
                 <div class="column">
                     <div class="card">
@@ -17,15 +17,13 @@
                     </div>
                 </div>
             </div>
+            <div id="form1">{{$d}}</div>
 </metric-component>
 
-<script>
-data = <?php echo $d; ?>;
 
-myObj = { "name":"John", "age":30, "car":null };
-x = myObj.name;
-console.log(data)
-
+<script type="text/javascript">
+var susana = "<?php echo $d; ?>" ;
 </script>
+
 
 @endsection

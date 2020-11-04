@@ -1914,18 +1914,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_1__);
 
 
-var data;
+/*export default {
+  name: 'App'
+};*/
+
 var myChart = document.getElementById('myChart').getContext('2d');
 var chart = new chart_js__WEBPACK_IMPORTED_MODULE_1___default.a(myChart, {
   type: "bar",
   data: {
-    labels: ["1", "2", "3", "4", "5", "6", "7", "8"],
+    labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17"],
     datasets: [{
       label: "bebid",
-      data: [1, 1, 1, 1, 1, 1, 1, 1]
+      data: susana
     }]
+  },
+  options: {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }]
+    }
   }
 });
+console.log(susana);
 
 /***/ }),
 

@@ -19,4 +19,10 @@ class MetricsController extends Controller
 
         return view('metrics.index', compact('data', 'd'));
     }
+
+    public function metric()
+    {
+        $metrics = MetricProduct::get();
+        return $metrics;
+    }
 }
