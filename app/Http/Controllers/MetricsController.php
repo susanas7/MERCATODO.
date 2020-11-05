@@ -6,6 +6,7 @@ use App\Jobs\MetricJob;
 use Carbon\Carbon;
 use App\MetricProduct;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Arr;
 
 class MetricsController extends Controller
 {
@@ -14,10 +15,12 @@ class MetricsController extends Controller
         $from = '2020-01-01';
         $to = '2020-11-03';
         $metric = MetricJob::dispatch($from, $to);
-        $data = MetricProduct::get();
+        $data = MetricProduct::orderBy('total', 'desc')->take(5);
         $d = $data->pluck('total');
+        $id = $data->pluck('product_id');
+        //dd($id);
 
-        return view('metrics.index', compact('data', 'd'));
+        return view('metrics.index', compact('data', 'd', 'id'));
     }
 
     public function metric()

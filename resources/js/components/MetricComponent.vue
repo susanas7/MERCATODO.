@@ -1,34 +1,32 @@
 <script>
 
-import Vue from 'vue';
 import Chart from 'chart.js';
-
-/*export default {
-  name: 'App'
-};*/
-
 
 let myChart = document.getElementById('myChart').getContext('2d');
 var chart = new Chart(myChart ,{
-    type:"bar",
+    type:"pie",
     data:{
-        labels:["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14" , "15", "16", "17"],
+        labels: [],
         datasets:[
             {
                 label: "bebid",
-                data: susana
+                data: d
             }
         ]
     },
     options:{
+        responsive: true,
                 scales:{
                     yAxes:[{
                             ticks:{
-                                beginAtZero:true
+                                stacked: false,
+                                beginAtZero:true,
+                                steps: 10,
+                                stepValue: 5,
+                                max: 20
                             }
                     }]
                 }
             }
 });
-console.log(susana);
 </script>

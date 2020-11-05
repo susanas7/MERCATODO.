@@ -1908,37 +1908,34 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/dist/Chart.js");
-/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_1__);
-
-
-/*export default {
-  name: 'App'
-};*/
+/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/dist/Chart.js");
+/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_0__);
 
 var myChart = document.getElementById('myChart').getContext('2d');
-var chart = new chart_js__WEBPACK_IMPORTED_MODULE_1___default.a(myChart, {
-  type: "bar",
+var chart = new chart_js__WEBPACK_IMPORTED_MODULE_0___default.a(myChart, {
+  type: "pie",
   data: {
-    labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17"],
+    labels: [],
     datasets: [{
       label: "bebid",
-      data: susana
+      data: d
     }]
   },
   options: {
+    responsive: true,
     scales: {
       yAxes: [{
         ticks: {
-          beginAtZero: true
+          stacked: false,
+          beginAtZero: true,
+          steps: 10,
+          stepValue: 5,
+          max: 20
         }
       }]
     }
   }
 });
-console.log(susana);
 
 /***/ }),
 

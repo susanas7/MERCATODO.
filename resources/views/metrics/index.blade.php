@@ -7,11 +7,11 @@
 </script>-->
 <metric-component d="{{$d}}">
             <div class="columns">
-                <div class="column">
+                <div class="col-md-4">
                     <div class="card">
                         <div class="card-content">
                             <div class="chart-container">
-                                <canvas id="myChart" height="200"></canvas>
+                                <canvas id="myChart" height="50" width="50"></canvas>
                             </div>
                         </div>
                     </div>
@@ -22,7 +22,10 @@
 
 
 <script type="text/javascript">
-var susana = "<?php echo $d; ?>" ;
+var d = "<?php echo $d; ?>" ;
+var id = "<?php echo $id; ?>" ;
+console.log(id);
+console.log(d);
 </script>
 
 
