@@ -25,7 +25,6 @@
 var d = "<?php echo $d; ?>" ;
 var id = "<?php echo $id; ?>" ;
 console.log(id);
-console.log(d);
 </script>
 
 

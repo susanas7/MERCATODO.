@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\MetricJob;
-use Carbon\Carbon;
 use App\MetricProduct;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Arr;
 
 class MetricsController extends Controller
 {
