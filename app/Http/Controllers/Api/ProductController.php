@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductResource as ProductResource;
 use App\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 
 class ProductController extends Controller
 {
@@ -18,9 +17,9 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::paginate();
-        //return ProductResource::collection($products);
+        return ProductResource::collection($products);
 
-        return new ProductResource($products);
+        //return new ProductResource($products);
     }
 
     /**
