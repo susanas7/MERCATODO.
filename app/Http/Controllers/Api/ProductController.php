@@ -20,7 +20,7 @@ class ProductController extends Controller
         $products = Product::paginate();
         //return ProductResource::collection($products);
 
-        return  new  ProductResource($products);
+        return new ProductResource($products);
     }
 
     /**
