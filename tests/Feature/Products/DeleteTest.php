@@ -17,10 +17,9 @@ class DeleteTest extends TestCase
      */
     public function aProductCanBeDeleted()
     {
-        $this->withoutExceptionHandling();
         $product = factory(Product::class)->create();
 
-        $this->delete('products/{$product->id}');
+        $this->delete(route('products.destroy', $product));
 
         $this->assertDatabaseMissing('products', [
             'id' => $product->id,
@@ -29,8 +28,8 @@ class DeleteTest extends TestCase
             'slug' => $product->slug,
             'is_active' => $product->is_active,
             'price' => $product->price,
-            'updated_at' => $product->updated_at,
-            'created_at' => $product->created_at,
+            'updated_at' => $product->updated_at->toDateString(),
+            'created_at' => $product->created_at->toDateString(),
             'img_route' => $product->img_route,
         ]);
     }
