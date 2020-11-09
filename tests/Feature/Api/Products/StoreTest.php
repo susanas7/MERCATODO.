@@ -15,7 +15,6 @@ class StoreTest extends TestCase
     /** @test */
     public function canStoreAProductFromApi()
     {
-        $this->withoutExceptionHandling();
         //Arrange
         $data = [
             'category_id' => rand('1', '5'),

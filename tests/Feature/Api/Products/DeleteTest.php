@@ -12,7 +12,7 @@ class DeleteTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function ola()
+    public function anApiProductCanBeDeleted()
     {
         //Arrange
         $product = factory(Product::class)->create();
