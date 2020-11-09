@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Product;
+use Illuminate\Support\Str;
 
 class StoreTest extends TestCase
 {
@@ -27,9 +28,9 @@ class StoreTest extends TestCase
         //Act
         $response = $this->postJson(route('api.products.store', $data))
             ->assertOk();
+        $product = Product::first();
 
         //Assert
-        $product = Product::first();
         $this->assertDatabaseHas('products', [
             'category_id' => $product->category_id,
             'title' => $product->title,
@@ -37,5 +38,41 @@ class StoreTest extends TestCase
             'is_active' => $product->is_active,
             'price' => $product->price,
         ]);
+    }
+
+    /** @test
+     * @dataProvider productsDataProvider
+     * @param string $field
+     * @param mixed|null $value
+     */
+    public function aProductCanNotBeCreatedWithInvalidData(string $field, $value = null)
+    {
+        // Arrange
+        $data = [
+            'category_id' => '1',
+            'title' => 'Pas',
+            'slug' => 'Lorem ipsum dae',
+            'is_active' => '1',
+            'price' => '12',
+        ];
+        $data[$field] = $value;
+
+        // Act
+        $response = $this->postJson(route('api.products.store', $data));
+        $product = Product::first();
+
+        // Assert
+        $response->assertStatus(422)->assertJsonPath('message', 'The given data was invalid.');
+    }
+
+    public function productsDataProvider(): array
+    {
+        return [
+            'Test title is required' => ['title', null],
+            'Test slug is required' => ['slug', null],
+            'Test slug is too long' => ['slug', Str::random(300)],
+            'Test category_id is required' => ['category_id', null],
+            'Test price is required' => ['price', null]
+        ];
     }
 }

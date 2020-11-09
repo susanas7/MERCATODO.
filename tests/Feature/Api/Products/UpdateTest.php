@@ -46,7 +46,7 @@ class UpdateTest extends TestCase
      * @param string $field
      * @param mixed|null $value
     */
-    public function itCannotSaveUserWhenDataIsIncorrect(string $field, $value = null)
+    public function aProductCanNotBeUpdatedWithInvalidData(string $field, $value = null)
     {
         // Arrange
         $product = factory(Product::class)->create();
