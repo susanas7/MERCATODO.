@@ -4,6 +4,7 @@ namespace Tests\Feature\Api\Products;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
 use App\Product;
 use Illuminate\Support\Str;
@@ -12,6 +13,7 @@ class StoreTest extends TestCase
 {
     use RefreshDatabase;
     use WithFaker;
+    use WithoutMiddleware;
 
     /** @test */
     public function canStoreAProductFromApi()

@@ -2,6 +2,7 @@
 
 use App\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class UsersSeeder extends Seeder
 {
@@ -30,6 +31,7 @@ class UsersSeeder extends Seeder
             'name' => 'Super admin',
             'email' => 'super.admin@mail.com',
             'password' => bcrypt('12345678'),
+            'api_token' => Str::random(50),
             'email_verified_at' => '2020-06-24 17:35:22',
         ]);
 

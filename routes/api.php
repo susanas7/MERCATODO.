@@ -21,7 +21,11 @@ use Illuminate\Support\Facades\Route;
 /*Route::middleware('auth:api')
         ->prefix('api')
         ->group(function() {
-            Route::apiResource('/api/products', 'Api/ProductController');
+            Route::apiResource('/products', 'Api\ProductController', ['as' => 'api']);
     });*/
 
-Route::apiResource('/products', 'Api\ProductController', ['as' => 'api']);
+/*Route::group(['middleware' => 'auth:api'], function() {
+    Route::apiResource('/products', 'Api\ProductController', ['as' => 'api']);
+});*/
+Route::apiResource('/products', 'Api\ProductController', ['as' => 'api'])->middleware('auth:api');
+

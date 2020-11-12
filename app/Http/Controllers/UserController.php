@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -59,6 +60,10 @@ class UserController extends Controller
 
         if ($user->save()) {
             $user->assignRole($request->role);
+            if ($user->hasAnyRole('Super-administrador')) {
+                $user->api_token = Str::random(50);
+                $user->save();
+            }
 
             return redirect()->route('users.index');
         }
@@ -105,6 +110,11 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->syncRoles($request->role);
+        if ($user->hasAnyRole('Super-administrador')) {
+            $user->api_token = Str::random(50);
+            $user->save();
+        }
+
         $user->save();
 
         return redirect()->route('users.index');

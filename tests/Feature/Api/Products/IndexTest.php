@@ -4,11 +4,13 @@ namespace Tests\Feature\Api\Products;
 
 use App\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
 
 class IndexTest extends TestCase
 {
     use RefreshDatabase;
+    use WithoutMiddleware;
 
     private $product;
     private $products;

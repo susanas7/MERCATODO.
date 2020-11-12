@@ -4,6 +4,7 @@ namespace Tests\Feature\Api\Products;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
 use App\Product;
 use App\ProductCategory;
@@ -13,6 +14,7 @@ class UpdateTest extends TestCase
 {
     use RefreshDatabase;
     use WithFaker;
+    use WithoutMiddleware;
 
     /** @test */
     public function anApiProductCanBeUpdatedWithValidData()
@@ -35,10 +37,12 @@ class UpdateTest extends TestCase
         $product->refresh();
 
         //Assert
-        $this->assertEquals($data['category_id'], $product->category_id);
-        $this->assertEquals($data['title'], $product->title);
-        $this->assertEquals($data['slug'], $product->slug);
-        $this->assertEquals($data['price'], $product->price);
+        $this->assertDatabaseHas('products', [
+            'category_id'   => $product->category_id,
+            'title'          => $product->title,
+            'slug'   => $product->slug,
+            'price' => $product->price,
+        ]);
     }
 
     /** @test 
