@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-use Dnetix\Redirection\PlacetoPay;
-use Illuminate\Support\ServiceProvider;
 use App\Observers\UserObserver;
 use App\User;
+use Dnetix\Redirection\PlacetoPay;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {

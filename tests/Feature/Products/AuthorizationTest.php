@@ -12,7 +12,7 @@ class AuthorizationTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function anUnathorizedUserCanNotViewTheCreateForm()
+    public function anUnathorizedUserCanNotViewTheCreateProductsForm()
     {
         $user = factory(User::class)->create();
 
@@ -22,7 +22,7 @@ class AuthorizationTest extends TestCase
     }
 
     /** @test */
-    public function anAthorizedUserCanViewTheCreateForm()
+    public function anAuthorizedUserCanViewTheCreateProductsForm()
     {
         $this->artisan('db:seed');
         $user = factory(User::class)->create()->assignRole('Super-administrador');
@@ -33,17 +33,18 @@ class AuthorizationTest extends TestCase
     }
 
     /** @test */
-    public function anUnathorizedUserCanNotViewTheUpdateForm()
+    public function anUnathorizedUserCanNotViewTheUpdateProductsForm()
     {
         $user = factory(User::class)->create();
+        $product = factory(Product::class)->create();
 
-        $response = $this->actingAs($user)->get(route('products.create'));
+        $response = $this->actingAs($user)->get(route('products.edit', $product));
 
         $response->assertStatus(403);
     }
 
     /** @test */
-    public function anAthorizedUserCanViewTheUpdateForm()
+    public function anAthorizedUserCanViewTheUpdateProductsForm()
     {
         $this->artisan('db:seed');
         $user = factory(User::class)->create()->assignRole('Super-administrador');
@@ -55,7 +56,7 @@ class AuthorizationTest extends TestCase
     }
 
     /** @test */
-    public function anUnathorizedUserCanNotListCategories()
+    public function anUnathorizedUserCanNotListProducts()
     {
         $user = factory(User::class)->create();
 
@@ -65,7 +66,7 @@ class AuthorizationTest extends TestCase
     }
 
     /** @test */
-    public function anAthorizedUserCanListCategories()
+    public function anAthorizedUserCanListProducts()
     {
         $this->artisan('db:seed');
         $user = factory(User::class)->create()->assignRole('Super-administrador');

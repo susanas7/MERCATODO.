@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\ProductResource as ProductResource;
-use App\Product;
-use Illuminate\Http\Request;
 use App\Http\Requests\Product\StoreProductRequest;
 use App\Http\Requests\Product\UpdateRequest;
+use App\Http\Resources\ProductResource as ProductResource;
+use App\Product;
 
 class ProductController extends Controller
 {
@@ -46,7 +45,7 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::find($id);
-        
+
         return response()->json($product);
     }
 
@@ -74,7 +73,7 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $product->delete();
-        
+
         return response()->json();
     }
 }

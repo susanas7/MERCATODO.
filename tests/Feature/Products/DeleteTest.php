@@ -12,9 +12,7 @@ class DeleteTest extends TestCase
     use RefreshDatabase;
     use WithoutMiddleware;
 
-    /**
-     * @test
-     */
+    /** @test */
     public function aProductCanBeDeleted()
     {
         $product = factory(Product::class)->create();

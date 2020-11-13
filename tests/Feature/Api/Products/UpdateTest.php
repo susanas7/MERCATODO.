@@ -2,13 +2,13 @@
 
 namespace Tests\Feature\Api\Products;
 
+use App\Product;
+use App\ProductCategory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Tests\TestCase;
-use App\Product;
-use App\ProductCategory;
 use Illuminate\Support\Str;
+use Tests\TestCase;
 
 class UpdateTest extends TestCase
 {
@@ -24,8 +24,8 @@ class UpdateTest extends TestCase
         factory(ProductCategory::class)->create();
         $data = [
             'category_id' => rand('1', '2'),
-            'title' => $this->faker->sentence(2, true), 
-            'slug' => $this->faker->sentence(4, true), 
+            'title' => $this->faker->sentence(2, true),
+            'slug' => $this->faker->sentence(4, true),
             'is_active' => rand('0', '1'),
             'price' => rand('10', '20'),
         ];
@@ -45,11 +45,11 @@ class UpdateTest extends TestCase
         ]);
     }
 
-    /** @test 
+    /** @test
      * @dataProvider productsDataProvider
      * @param string $field
      * @param mixed|null $value
-    */
+     */
     public function aProductCanNotBeUpdatedWithInvalidData(string $field, $value = null)
     {
         // Arrange
@@ -78,7 +78,7 @@ class UpdateTest extends TestCase
             'Test slug is required' => ['slug', null],
             'Test slug is too long' => ['slug', Str::random(300)],
             'Test category_id is required' => ['category_id', null],
-            'Test price is required' => ['price', null]
+            'Test price is required' => ['price', null],
         ];
     }
 }

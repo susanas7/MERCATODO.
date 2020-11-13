@@ -2,12 +2,12 @@
 
 namespace Tests\Feature\Api\Products;
 
+use App\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Tests\TestCase;
-use App\Product;
 use Illuminate\Support\Str;
+use Tests\TestCase;
 
 class StoreTest extends TestCase
 {
@@ -21,8 +21,8 @@ class StoreTest extends TestCase
         //Arrange
         $data = [
             'category_id' => rand('1', '5'),
-            'title' => $this->faker->sentence(2, true), 
-            'slug' => $this->faker->sentence(4, true), 
+            'title' => $this->faker->sentence(2, true),
+            'slug' => $this->faker->sentence(4, true),
             'is_active' => rand('0', '1'),
             'price' => rand('10', '20'),
         ];
@@ -74,7 +74,7 @@ class StoreTest extends TestCase
             'Test slug is required' => ['slug', null],
             'Test slug is too long' => ['slug', Str::random(300)],
             'Test category_id is required' => ['category_id', null],
-            'Test price is required' => ['price', null]
+            'Test price is required' => ['price', null],
         ];
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Observers;
 
 use App\User;
-use Spatie\Permission\Models\Role;
 use Illuminate\Support\Str;
 
 class UserObserver
@@ -16,7 +15,7 @@ class UserObserver
      */
     public function created(User $user)
     {
-        if($user->hasAnyRole('Super-administrador')){
+        if ($user->hasAnyRole('Super-administrador')) {
             $user->api_token = Str::random(50);
             $user->save();
         }

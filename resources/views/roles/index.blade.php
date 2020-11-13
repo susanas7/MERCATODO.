@@ -8,6 +8,7 @@
             <div class="card" >
                 <div class="card-header" ><P ALIGN=center> {{ $roles->total() }} roles | página {{ $roles->currentPage() }} de {{ $roles->lastpage() }}</div>
                   <div class="card-body">
+                  <a href="{{route('roles.create')}}" class="btn btn-primary">Crear</a>
                     <br>
                     <table class="table">
                       <thead>
@@ -24,37 +25,21 @@
                           <td>{{ $role->name }}</td>
                           <td>{{ $role->slug }}</td>
                           <td>
-                          <a id="show-crud" class="btn btn-link" href="{{route('roles.show', $role->id)}}">Ver</a>
-                            <!--
-                            @can('ver rol')
-                            <a class="btn btn-success" data-toggle="modal" data-target="#{{$role->name}}" >Ver</a>
-                            @endcan
-                            ventana emergente
-                            <div class="modal fade" id="{{$role->name}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title" id="muModalLabel">Rol: {{$role->name}}</h4>
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div><P ALIGN=center>
-                                              <p><h4>Nombre: {{$role->name}}</h4></p> 
-                                              <p><h4>Descripcion: {{$role->slug}} </h4></p>
-                                              <p><h4>Permisos:
-                                              <h4> {{ $role->permissions->implode('name' , ', ')}} </h4>
-                                              <p><h4>Fecha de creacion: {{$role->created_at}}</h4></p>  
-                                              <p><h4>Ultima actualizacion: {{$role->updated_at}} </h4></p>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                          @can('editar rol')
-                                          <a class="btn btn-info" href="{{route('roles.edit', $role->id)}}" >Editar</a>
-                                          @endcan                                          
-                                        </div>
-                                        </div>
-                                </div>
-                            </div>-->
+                          <a id="show-crud" class="btn btn-link" href="{{route('roles.show', $role)}}">Ver</a>
+                          </td>
+                          <td>
+                              <a class="btn btn-link" id="edit-crud" href="{{route('roles.edit', $role)}}">Editar</a>
+                          </td>
+                          <td>
+                            <form action="{{ route('roles.destroy', $role) }}" method="POST" >
+                                @method('DELETE')
+                                @csrf
+                                <input type="submit"
+                                value="Eliminar"
+                                class="btn btn-link"
+                                id="delete-crud"
+                                onclick="return confirm('¿Desea eliminar?')">
+                              </form>
                           </td>
                         </tr>
                         @endforeach

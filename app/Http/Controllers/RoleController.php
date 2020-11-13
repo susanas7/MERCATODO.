@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use App\Http\Requests\Role\UpdateRequest;
+use App\Http\Requests\Role\CreateRequest;
+use Session;
 
 class RoleController extends Controller
 {
@@ -26,6 +30,25 @@ class RoleController extends Controller
         return view('roles.index', compact('roles', 'permissions'));
     }
 
+    public function create()
+    {
+        $permissions = Permission::all();
+
+        return view('roles.create', compact('permissions'));
+    }
+
+    public function store(CreateRequest $request)
+    {
+        $role = new Role;
+
+        $role->name = $request->name;
+        $role->slug = $request->slug;
+        $role->syncPermissions($request->input('permissions'));
+        $role->save();
+
+        return redirect()->route('roles.index');
+    }
+
     /**
      * Display the specified resource.
      *
@@ -37,5 +60,39 @@ class RoleController extends Controller
         return view('roles.show', [
             'role' => $role,
         ]);
+    }
+
+    /**
+     * 
+     */
+    public function edit(Role $role)
+    {
+        $permissions = Permission::all();
+
+        return view('roles.edit', compact('role', 'permissions'));
+    }
+
+    /**
+     * 
+     */
+    public function update(UpdateRequest $request, Role $role)
+    {
+        $role->name = $request->name;
+        $role->slug = $request->slug;
+        $role->syncPermissions($request->input('permissions'));
+        $role->save();
+
+        return redirect()->route('roles.index');
+    }
+
+    /**
+     * 
+     */
+    public function destroy(int $id)
+    {
+        $role = Role::find($id);
+        $role->delete();
+
+        return back();
     }
 }

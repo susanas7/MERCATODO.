@@ -28,4 +28,3 @@ use Illuminate\Support\Facades\Route;
     Route::apiResource('/products', 'Api\ProductController', ['as' => 'api']);
 });*/
 Route::apiResource('/products', 'Api\ProductController', ['as' => 'api'])->middleware('auth:api');
-
