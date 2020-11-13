@@ -6,52 +6,56 @@ use App\Product;
 use App\ProductCategory;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
 
 class CartTest extends TestCase
 {
     use RefreshDatabase;
-    use WithoutMiddleware;
+
+    private $user;
+    private $productA;
+    private $productB;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->artisan('db:seed');
+        $this->user = factory(User::class)->create();
+        $this->productA = factory(Product::class)->create();
+        $this->productB = factory(Product::class)->create();
+    }
 
     /** @test */
     public function anUserCanAddAnItemToCart()
     {
-        $product = factory(Product::class)->make();
-        factory(ProductCategory::class)->make();
-        $user = factory(User::class)->make();
+        factory(ProductCategory::class)->create();
 
-        $this->actingAs($user)->get('/addToCart', [
-            'id' => $product->id,
+        $this->actingAs($this->user)->get('/addToCart', [
+            'id' => $this->productA->id,
         ]);
 
-        $response = $this->actingAs($user)->get('/shoppingCart');
-
-        $response->assertSee($product->name);
+        $response = $this->actingAs($this->user)->get('/shoppingCart');
+        $response->assertSee($this->productA->name);
     }
 
     /** @test */
     public function anUserCanRemoveAnItemFromCart()
     {
-        $product1 = factory(Product::class)->make();
-        $product2 = factory(Product::class)->make();
         factory(ProductCategory::class)->make();
-        $user = factory(User::class)->make();
-        $this->actingAs($user)->get('/addToCart', [
-            'id' => $product1->id,
-        ]);
-        $this->actingAs($user)->get('/addToCart', [
-            'id' => $product2->id,
-        ]);
-        $response = $this->actingAs($user)->get('/shoppingCart');
-        $response->assertSee($product1->name);
-        $response->assertSee($product2->name);
 
-        $response2 = $this->actingAs($user)->get('/reduce', [
-            'id' => $product1->id,
+        $this->actingAs($this->user)->get('/addToCart', [
+            'id' => $this->productA->id,
         ]);
+        $this->actingAs($this->user)->get('/addToCart', [
+            'id' => $this->productB->id,
+        ]);
+        $this->actingAs($this->user)->get('/shoppingCart')
+            ->assertSee($this->productA->name)
+            ->assertSee($this->productB->name);
 
-        $response2->assertSee($product2->name);
-        $response2->assertDontSeeText($product1);
+        $response = $this->actingAs($this->user)->get('/reduce', [
+            'id' => $this->productA->id,])
+            ->assertSee($this->productB->name)
+            ->assertDontSeeText($this->productA);
     }
 }
