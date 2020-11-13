@@ -12,41 +12,25 @@ class CreateTest extends TestCase
     use RefreshDatabase;
     use WithoutMiddleware;
 
-    /**
-     * @test
-     */
-    public function aUserCanViewTheCreateCategoryForm()
-    {
-        $response = $this->get(route('categories.create'));
-
-        $response->assertOk();
-        $response->assertStatus(200);
-    }
-
-    /**
-     * @test
-     */
-    public function aUserCanStoreACategory()
+    /** @test */
+    public function aCategoryCanBeStored()
     {
         $response = $this->post(route('categories.store'), [
             'title' => 'Dulces',
-        ]);
+        ])->assertSessionHasNoErrors();
 
         $category = ProductCategory::first();
         $this->assertCount(1, ProductCategory::all());
-
         $this->assertEquals('Dulces', $category->title);
         $response->assertRedirect(route('categories.index'));
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function aCategoryCanNotBeStoredWithEmptyTitle()
     {
-        $category = $this->post(route('categories.store'), [
+        $response = $this->post(route('categories.store'), [
             'title' => '',
-        ]);
+        ])->assertSessionHasErrors('title');
 
         $this->assertCount(0, ProductCategory::all());
     }

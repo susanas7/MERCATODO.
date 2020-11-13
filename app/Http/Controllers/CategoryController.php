@@ -56,6 +56,19 @@ class CategoryController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param ProductCategory $category
+     * @return \Illuminate\View\View
+     */
+    public function show(ProductCategory $category)
+    {
+        return view('categories.show', [
+            'category' => $category,
+        ]);
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param ProductCategory $category

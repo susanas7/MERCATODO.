@@ -14,15 +14,11 @@ class IndexTest extends TestCase
     use WithoutMiddleware;
 
     /** @test */
-    public function anUserCanListCategories()
+    public function categoriesCanBeListed()
     {
-        $user = factory(User::class)->create();
-        $category = factory(ProductCategory::class)->create();
-
-        $response = $this->get(route('categories.index'));
-
-        $response->assertOk();
-        $response->assertViewHas('categories');
+        $response = $this->get(route('categories.index'))
+            ->assertOk()
+            ->assertViewHas('categories');
         $responseCategories = $response->getOriginalContent()['categories'];
     }
 }
