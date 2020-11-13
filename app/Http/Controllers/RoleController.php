@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\Role\CreateRequest;
+use App\Http\Requests\Role\UpdateRequest;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
-use App\Http\Requests\Role\UpdateRequest;
-use App\Http\Requests\Role\CreateRequest;
-use Session;
 
 class RoleController extends Controller
 {
@@ -62,9 +60,6 @@ class RoleController extends Controller
         ]);
     }
 
-    /**
-     * 
-     */
     public function edit(Role $role)
     {
         $permissions = Permission::all();
@@ -72,9 +67,6 @@ class RoleController extends Controller
         return view('roles.edit', compact('role', 'permissions'));
     }
 
-    /**
-     * 
-     */
     public function update(UpdateRequest $request, Role $role)
     {
         $role->name = $request->name;
@@ -85,9 +77,6 @@ class RoleController extends Controller
         return redirect()->route('roles.index');
     }
 
-    /**
-     * 
-     */
     public function destroy(int $id)
     {
         $role = Role::find($id);

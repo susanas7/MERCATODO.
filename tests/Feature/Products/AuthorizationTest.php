@@ -11,69 +11,58 @@ class AuthorizationTest extends TestCase
 {
     use RefreshDatabase;
 
+    private $user;
+    private $userAuth;
+    private $product;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->artisan('db:seed');
+        $this->user = factory(User::class)->create();
+        $this->userAuth = factory(User::class)->create()->assignRole('Super-administrador');
+        $this->product = factory(Product::class)->create();
+    }
+
     /** @test */
     public function anUnathorizedUserCanNotViewTheCreateProductsForm()
     {
-        $user = factory(User::class)->create();
-
-        $response = $this->actingAs($user)->get(route('products.create'));
-
-        $response->assertStatus(403);
+        $response = $this->actingAs($this->user)->get(route('products.create'))
+            ->assertStatus(403);
     }
 
     /** @test */
     public function anAuthorizedUserCanViewTheCreateProductsForm()
     {
-        $this->artisan('db:seed');
-        $user = factory(User::class)->create()->assignRole('Super-administrador');
-
-        $response = $this->actingAs($user)->get(route('products.create'));
-
-        $response->assertStatus(200);
+        $response = $this->actingAs($this->userAuth)->get(route('products.create'))
+            ->assertStatus(200);
     }
 
     /** @test */
     public function anUnathorizedUserCanNotViewTheUpdateProductsForm()
     {
-        $user = factory(User::class)->create();
-        $product = factory(Product::class)->create();
-
-        $response = $this->actingAs($user)->get(route('products.edit', $product));
-
-        $response->assertStatus(403);
+        $response = $this->actingAs($this->user)->get(route('products.edit', $this->product))
+            ->assertStatus(403);
     }
 
     /** @test */
     public function anAthorizedUserCanViewTheUpdateProductsForm()
     {
-        $this->artisan('db:seed');
-        $user = factory(User::class)->create()->assignRole('Super-administrador');
-        $product = factory(Product::class)->create();
-
-        $response = $this->actingAs($user)->get(route('products.edit', $product));
-
-        $response->assertStatus(200);
+        $response = $this->actingAs($this->userAuth)->get(route('products.edit', $this->product))
+            ->assertStatus(200);
     }
 
     /** @test */
     public function anUnathorizedUserCanNotListProducts()
     {
-        $user = factory(User::class)->create();
-
-        $response = $this->actingAs($user)->get(route('products.index'));
-
-        $response->assertStatus(403);
+        $response = $this->actingAs($this->user)->get(route('products.index'))
+            ->assertStatus(403);
     }
 
     /** @test */
     public function anAthorizedUserCanListProducts()
     {
-        $this->artisan('db:seed');
-        $user = factory(User::class)->create()->assignRole('Super-administrador');
-        factory(Product::class, 10)->create();
-
-        $response = $this->actingAs($user)->get(route('products.index'));
-
-        $response->assertStatus(200);
+        $response = $this->actingAs($this->userAuth)->get(route('products.index'))
+            ->assertStatus(200);
     }
 }

@@ -3,12 +3,11 @@
 namespace Tests\Feature\Roles;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Support\Str;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+use Tests\TestCase;
 
 class UpdateTest extends TestCase
 {
@@ -31,10 +30,9 @@ class UpdateTest extends TestCase
         $role = Role::all()->last();
         $this->assertEquals($role->name, 'administrador');
         $this->assertEquals($role->slug, 'admin');
-
     }
 
-        /** @test
+    /** @test
      * @dataProvider rolesDataProvider
      * @param string $field
      * @param mixed|null $value

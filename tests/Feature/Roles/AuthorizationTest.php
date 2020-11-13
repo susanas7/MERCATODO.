@@ -2,12 +2,11 @@
 
 namespace Tests\Feature\Roles;
 
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
-use App\User;
-use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Tests\TestCase;
 
 class AuthorizationTest extends TestCase
 {
@@ -40,7 +39,7 @@ class AuthorizationTest extends TestCase
         $response = $this->actingAs($this->userAuth)->get(route('roles.index'))
             ->assertStatus(200);
     }
-    
+
     /** @test */
     public function anUnathorizedUserCanNotViewTheCreateRolesForm()
     {
