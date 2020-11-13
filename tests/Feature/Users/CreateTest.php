@@ -7,29 +7,17 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
+use Illuminate\Support\Str;
+use Illuminate\Foundation\Testing\WithFaker;
 
 class CreateTest extends TestCase
 {
     use RefreshDatabase;
     use WithoutMiddleware;
+    use WithFaker;
 
-    /**
-     * @test
-     */
-    public function aUserCanViewTheUserCreateForm()
-    {
-        $user = factory(User::class)->create();
-
-        $response = $this->actingAs($user)->get(route('users.create'));
-
-        $response->assertOk();
-        $response->assertViewIs('users.create');
-    }
-
-    /**
-     * @test
-     */
-    public function aUserCanStoreAnUser()
+    /** @test */
+    public function anUserCanBeStored()
     {
         $response = $this->post(route('users.store'), [
             'name' => 'Juli',
@@ -48,71 +36,32 @@ class CreateTest extends TestCase
 
     /**
      * @test
+     * @dataProvider dataProvider
+     * @param string $field
+     * @param mixed|null $value
      */
-    public function aUserCanNotBeStoredWithInvalidEmail()
+    public function anUserCanNotBeStoredWithInvalidData(string $field, $value = null)
     {
-        $user = $this->post(route('users.store'), [
-            'name' => 'Juli',
-            'email' => 'juli',
-            'password' => '12345678',
-        ]);
+        $data = [
+            'name' => $this->faker->sentence(1),
+            'email' => $this->faker->unique()->safeEmail,
+            'password' => Str::random(9),
+        ];
+        $data[$field] = $value;
 
-        $this->assertCount(0, User::all());
+        $response = $this->post(route('users.store'), $data)
+            ->assertRedirect()
+            ->assertSessionHasErrors($field);
     }
 
-    /**
-     * @test
-     */
-    public function aUserCanNotBeStoredWithInvalidPassword()
+    public function dataProvider(): array
     {
-        $user = $this->post(route('users.store'), [
-            'name' => 'Juli',
-            'email' => 'juli',
-            'password' => '123',
-        ]);
-
-        $this->assertCount(0, User::all());
-    }
-
-    /**
-     * @test
-     */
-    public function aUserCanNotBeStoredWithEmptyName()
-    {
-        $user = $this->post(route('users.store'), [
-            'name' => '',
-            'email' => 'juli',
-            'password' => '12345678',
-        ]);
-
-        $this->assertCount(0, User::all());
-    }
-
-    /**
-     * @test
-     */
-    public function aUserCanNotBeStoredWithEmptyEmail()
-    {
-        $user = $this->post(route('users.store'), [
-            'name' => 'juli',
-            'email' => '',
-            'password' => '12345678',
-        ]);
-
-        $this->assertCount(0, User::all());
-    }
-
-    /**
-     * @test
-     */
-    public function aUserCanNotBeStoredWithEmptyPassword()
-    {
-        $user = $this->post(route('users.store'), [
-            'name' => 'juli',
-            'email' => 'juli@mail.com',
-            'password' => '',
-        ]);
-
-        $this->assertCount(0, User::all());
+        return [
+            'Test name is required' => ['name', null],
+            'Test email is required' => ['email', null],
+            'Test email is not an email' => ['email', Str::random(12)],
+            'Test password is required' => ['password', null],
+            'Test password is too short' => ['password', Str::random(4)],
+        ];
     }
 }

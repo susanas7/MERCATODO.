@@ -12,11 +12,12 @@ class DeleteTest extends TestCase
     use RefreshDatabase;
     use WithoutMiddleware;
 
-    public function testAUserCanBeDeleted()
+    /** @test */
+    public function anUserCanBeDeleted()
     {
         $user = factory(User::class)->create();
 
-        $this->delete('users/{$user->id}');
+        $this->delete(route('users.destroy', $user->id));
 
         $this->assertDatabaseMissing('users', [
             'id' => $user->id,

@@ -13,7 +13,7 @@ class ShowTest extends TestCase
     use WithoutMiddleware;
 
     /** @test */
-    public function aUserCanSeeDetailsOfProducts()
+    public function aProductCanBeShown()
     {
         $product = factory(Product::class)->create();
 

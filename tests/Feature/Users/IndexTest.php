@@ -12,19 +12,16 @@ class IndexTest extends TestCase
     use RefreshDatabase;
     use WithoutMiddleware;
 
-    /**
-     * @test
-     */
-    public function aUserCanListUsers()
+    /** @test */
+    public function usersCanBeListed()
     {
         $user = factory(User::class)->create();
-
-        $response = $this->actingAs($user)->get(route('users.index'));
+        $response = $this->get(route('users.index'))
+            ->assertOk();
         $users = User::all();
 
-        $response->assertOk();
-        $responseUsers = $response->getOriginalContent()['users'];
-        $responseUsers->each(function ($item) use ($user) {
+        $responseUsers = $response->getOriginalContent()['users']
+            ->each(function ($item) use ($user) {
             $this->assertSame($user->id, $item->id);
         });
     }

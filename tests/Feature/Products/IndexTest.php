@@ -13,7 +13,7 @@ class IndexTest extends TestCase
     use WithoutMiddleware;
 
     /** @test */
-    public function aUserCanListProducts()
+    public function productsCanBeListed()
     {
         $product = factory(Product::class)->create();
         $products = Product::all();
