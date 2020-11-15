@@ -40,13 +40,24 @@ class IndexTest extends TestCase
         $response->assertStatus(200)->assertJson([
             'data' => [
                 [
+                    'type' => 'product',
                     'id' => $this->product->id,
-                    'category_id' => $this->product->category_id,
-                    'title' => $this->product->title,
-                    'slug' => $this->product->slug,
-                    'is_active' => $this->product->is_active,
-                    'price' => $this->product->price,
-                    'created_at' => $this->product->created_at->toDateString(),
+                    'attributes' => [
+                        'title' => $this->product->title,
+                        'slug' => $this->product->slug,
+                        'is_active' => $this->product->is_active,
+                        'price' => $this->product->price,
+                    ],
+                    'relationships' => [
+                        'category' => [
+                            'data' => [
+                                'type' => 'category',
+                                'id' => $this->product->category_id,
+
+                            ]
+                        ]
+                    ]
+                    
                 ],
             ],
         ]);

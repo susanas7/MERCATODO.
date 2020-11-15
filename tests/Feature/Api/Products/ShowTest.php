@@ -24,8 +24,18 @@ class ShowTest extends TestCase
         //Act
         $response = $this->actingAs($userAuth)->getJson(route('api.products.show', $product));
 
+        //dd($response->json());
         //Assert
-        $response->assertJson(['id' => $product->id, 'title' => $product->title])
+        $response->assertJson([
+            'product' => [
+                'id' => $product->id,
+                'category_id' => $product->category_id,
+                'title' => $product->title,
+                'slug' => $product->slug,
+                'is_active' => $product->is_active,
+                'price' => $product->price,
+            ]
+        ])
             ->assertStatus(200);
     }
 }
