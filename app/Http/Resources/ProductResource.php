@@ -54,14 +54,13 @@ class ProductResource extends JsonResource
                     'id' => (string)$this->category_id,
                 ],
             ],
-            'data'=> [ 'type'=> 'category', 'id'=> (string)$this->category_id ]
+            'data'=> ['type'=> 'category', 'id'=> (string)$this->category_id],
         ],
         'links'=> [
             'self' => route('api.products.show', $this),
-        ]
+        ],
     ];
     }
-
 
     /*public function with($request)
     {
@@ -69,5 +68,4 @@ class ProductResource extends JsonResource
             return ['included' => [new ProductCategoryResource($this->category)]];
         }
     }*/
-
 }

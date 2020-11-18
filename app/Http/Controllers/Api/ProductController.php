@@ -18,7 +18,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::paginate();
-        
+
         return ProductResource::collection($products);
     }
 
@@ -33,7 +33,7 @@ class ProductController extends Controller
         $product = Product::create($request->all());
 
         return response()->json([
-            'product' => $product
+            'product' => $product,
         ]);
     }
 
@@ -48,7 +48,7 @@ class ProductController extends Controller
         $product = Product::find($id);
 
         return response()->json([
-            'product' => $product
+            'product' => $product,
         ]);
     }
 
@@ -64,7 +64,7 @@ class ProductController extends Controller
         $product->update($request->all());
 
         return response()->json([
-            'product' => $product
+            'product' => $product,
         ]);
     }
 

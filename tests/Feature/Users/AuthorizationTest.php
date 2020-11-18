@@ -66,5 +66,5 @@ class AuthorizationTest extends TestCase
 
         $response = $this->actingAs($this->userAuth)->get(route('users.edit', $user))
             ->assertStatus(200);
-    } 
+    }
 }

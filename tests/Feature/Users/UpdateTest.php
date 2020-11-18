@@ -4,11 +4,10 @@ namespace Tests\Feature\Users;
 
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Support\Facades\Hash;
-use Tests\TestCase;
-use Illuminate\Support\Str;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Support\Str;
+use Tests\TestCase;
 
 class UpdateTest extends TestCase
 {

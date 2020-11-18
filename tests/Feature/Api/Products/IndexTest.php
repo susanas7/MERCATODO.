@@ -54,10 +54,10 @@ class IndexTest extends TestCase
                                 'type' => 'category',
                                 'id' => $this->product->category_id,
 
-                            ]
-                        ]
-                    ]
-                    
+                            ],
+                        ],
+                    ],
+
                 ],
             ],
         ]);

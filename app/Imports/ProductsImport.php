@@ -4,11 +4,11 @@ namespace App\Imports;
 
 use App\Product;
 use Maatwebsite\Excel\Concerns\Importable;
-use Maatwebsite\Excel\Concerns\SkipsOnError;
 use Maatwebsite\Excel\Concerns\ToModel;
-use Throwable;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithValidation;
 
-class ProductsImport implements ToModel, SkipsOnError
+class ProductsImport implements ToModel, WithHeadingRow, WithValidation
 {
     use Importable;
 
@@ -20,22 +20,30 @@ class ProductsImport implements ToModel, SkipsOnError
     public function model(array $row)
     {
         return new Product([
-            'category_id' => $row['0'],
-            'title' => $row['1'],
-            'slug' => $row['2'],
-            'is_active' => $row['3'],
-            'price' => $row['4'],
+            'category_id' => $row['category_id'],
+            'title' => $row['title'],
+            'slug' => $row['slug'],
+            'is_active' => $row['is_active'],
+            'price' => $row['price'],
         ]);
     }
 
-    public function rules()
+    public function rules(): array
     {
-        return[
-            'category_id' => 'numeric|exists:product_categories,id',
+        return [
+            'title' => 'required|unique:products,title',
+            'slug' => 'required|max:200',
+            'category_id' => 'required',
+            'price' => 'required|numeric|min:0',
         ];
     }
 
-    public function onError(Throwable $error)
+    /*public function onFailure(Failure ...$failures)
     {
     }
+
+    public function onError(\Throwable $errors)
+    {
+        // Handle the exception how you'd like.
+    }*/
 }

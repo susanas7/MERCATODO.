@@ -175,9 +175,8 @@ class ProductController extends Controller
      */
     public function import(Request $request)
     {
-        $file = $request->file('file');
-
-        (new ProductsImport)->import($file);
+        $import = new ProductsImport;
+        $import->import($request->file('file'));
 
         return redirect(route('products.index'));
     }

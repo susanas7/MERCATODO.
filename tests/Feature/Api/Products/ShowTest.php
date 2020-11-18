@@ -34,7 +34,7 @@ class ShowTest extends TestCase
                 'slug' => $product->slug,
                 'is_active' => $product->is_active,
                 'price' => $product->price,
-            ]
+            ],
         ])
             ->assertStatus(200);
     }

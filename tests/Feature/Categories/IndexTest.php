@@ -2,8 +2,6 @@
 
 namespace Tests\Feature\Categories;
 
-use App\ProductCategory;
-use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;

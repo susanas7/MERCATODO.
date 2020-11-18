@@ -54,7 +54,7 @@ class CartTest extends TestCase
             ->assertSee($this->productB->name);
 
         $response = $this->actingAs($this->user)->get('/reduce', [
-            'id' => $this->productA->id,])
+            'id' => $this->productA->id, ])
             ->assertSee($this->productB->name)
             ->assertDontSeeText($this->productA);
     }

@@ -22,7 +22,7 @@ class IndexTest extends TestCase
 
         $responseUsers = $response->getOriginalContent()['users']
             ->each(function ($item) use ($user) {
-            $this->assertSame($user->id, $item->id);
-        });
+                $this->assertSame($user->id, $item->id);
+            });
     }
 }
