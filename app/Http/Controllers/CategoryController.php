@@ -52,6 +52,7 @@ class CategoryController extends Controller
         $category->title = $request->title;
         $category->save();
 
+        toast('Categoria creada correctamente','success');
         return redirect()->route('categories.index');
     }
 
@@ -92,6 +93,7 @@ class CategoryController extends Controller
         $category->title = $request->title;
         $category->save();
 
+        toast('Categoria actualizada correctamente','success');
         return redirect()->route('categories.index');
     }
 

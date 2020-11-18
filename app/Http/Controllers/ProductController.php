@@ -65,6 +65,7 @@ class ProductController extends Controller
             $product->save();
         }
 
+        toast('Producto creado correctamente','success');
         return redirect()->route('products.index');
     }
 
@@ -113,6 +114,7 @@ class ProductController extends Controller
             $product->save();
         }
 
+        toast('Producto actualizado correctamente','success');
         return redirect()->route('products.index');
     }
 

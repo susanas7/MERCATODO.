@@ -65,6 +65,7 @@ class UserController extends Controller
                 $user->save();
             }
 
+            toast('Usuario creado correctamente','success');
             return redirect()->route('users.index');
         }
     }
@@ -117,6 +118,7 @@ class UserController extends Controller
 
         $user->save();
 
+        toast('Usuario actualizado correctamente','success');
         return redirect()->route('users.index');
     }
 

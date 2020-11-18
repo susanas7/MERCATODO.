@@ -21,6 +21,7 @@
         "maatwebsite/excel": "^3.1",
         "nesbot/carbon": "^2.41",
         "phpoffice/phpspreadsheet": "^1.15",
+        "realrashid/sweet-alert": "^3.1",
         "spatie/laravel-permission": "^3.13",
         "spatie/laravel-query-builder": "^3.0"
     },

@@ -44,6 +44,7 @@ class RoleController extends Controller
         $role->syncPermissions($request->input('permissions'));
         $role->save();
 
+        toast('Rol creado correctamente','success');
         return redirect()->route('roles.index');
     }
 
@@ -74,6 +75,7 @@ class RoleController extends Controller
         $role->syncPermissions($request->input('permissions'));
         $role->save();
 
+        toast('Rol actualizado correctamente','success');
         return redirect()->route('roles.index');
     }
 
