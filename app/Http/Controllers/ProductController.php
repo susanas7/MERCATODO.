@@ -12,13 +12,13 @@ use App\ProductCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Policies\ProductPolicy;
 
 class ProductController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['role:Administrador de productos|Super-administrador']);
-        $this->middleware(['verified']);
+        $this->authorizeResource(Product::class, 'product');
     }
 
     /**
@@ -28,7 +28,7 @@ class ProductController extends Controller
      * @return \Illuminate\View\View
      */
     public function index(Request $request)
-    {
+    {        
         $title = $request->get('title');
         $slug = $request->get('slug');
         $categories = ProductCategory::all();
@@ -159,6 +159,7 @@ class ProductController extends Controller
      */
     public function export(Request $request)
     {
+        $this->authorize('update', auth()->user());
         if ($request->input('category_id') . $request->input('is_active') == null) {
             return Excel::download(new ProductsExportAll, 'products.xlsx');
         }

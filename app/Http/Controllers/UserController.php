@@ -14,8 +14,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['role:Gestor de usuarios|Super-administrador']);
-        $this->middleware(['verified']);
+        $this->authorizeResource(User::class, 'user');
     }
 
     /**
@@ -26,6 +25,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+        //$this->authorize('viewAny', auth()->user());
         $name = $request->get('name');
         $users = User::name($name)->paginate();
 
@@ -39,6 +39,7 @@ class UserController extends Controller
      */
     public function create()
     {
+        //$this->authorize('create', auth()->user());
         $roles = Role::all()->pluck('name', 'id');
 
         return view('users.create', compact('roles'));
@@ -78,6 +79,7 @@ class UserController extends Controller
      */
     public function show(int $id)
     {
+        //$this->authorize('viewAny', auth()->user());
         $user = User::find($id);
 
         return view('users.show', [
@@ -93,6 +95,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        //$this->authorize('update', auth()->user());
         $roles = Role::all()->pluck('name', 'id');
 
         return view('users.edit', ['user' => $user, 'roles' => $roles]);
@@ -131,6 +134,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        //$this->authorize('create', auth()->user());
         $user->delete();
 
         return back();
@@ -145,6 +149,7 @@ class UserController extends Controller
      */
     public function changeStatus(int $id)
     {
+        //$this->authorize('update', auth()->user());
         $user = User::find($id);
 
         $user->is_active = !$user->is_active;

@@ -11,6 +11,10 @@ use Session;
 
 class OrderController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Order::class, 'order');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -36,8 +40,6 @@ class OrderController extends Controller
         return view('orders.show', [
             'order' => $order,
         ]);
-
-        //return $order->products;
     }
 
     /**

@@ -11,8 +11,7 @@ class CategoryController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['role:Administrador de productos|Super-administrador']);
-        $this->middleware(['verified']);
+        $this->authorizeResource(ProductCategory::class, 'category');
     }
 
     /**
