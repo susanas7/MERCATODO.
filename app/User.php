@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Support\Str;
+use App\Observers\UserObserver;
+use App\Events\UserCreatedEvent;
+use App\Listeners\UserCreateListener;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -21,7 +25,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'id', 'name', 'email', 'password', 'role', 'status',
+        'id', 'name', 'email', 'password', 'role', 'status', 'api_token'
     ];
 
     /**
@@ -72,4 +76,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany('App\Order');
     }
+
+    protected $dispatchEvents = [
+        'created' => UserCreatedEvent::class,
+    ];
+    
 }

@@ -26,6 +26,7 @@ class UpdateTest extends TestCase
     /** @test */
     public function anUserCanBeUpdated()
     {
+        $this->withoutExceptionHandling();
         $response = $this->put(route('users.update', $this->user), [
             'name' => 'Elisa',
             'email' => 'elisa@mail.com',

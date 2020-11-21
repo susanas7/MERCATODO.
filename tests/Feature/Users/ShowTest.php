@@ -19,7 +19,6 @@ class ShowTest extends TestCase
 
         $response = $this->actingAs($user)->get(route('users.show', $user))
             ->assertStatus(200)
-            ->assertViewIs('users.show')
-            ->assertViewHas('user', $user);
+            ->assertViewIs('users.show');
     }
 }

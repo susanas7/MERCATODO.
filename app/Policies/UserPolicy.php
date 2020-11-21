@@ -27,7 +27,7 @@ class UserPolicy
      * @param  \App\User  $user
      * @return mixed
      */
-    public function view(User $user, User $model)
+    public function view(User $user, User $userB)
     {
         return $user->can('ver usuario');
     }

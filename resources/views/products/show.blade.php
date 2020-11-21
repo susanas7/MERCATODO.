@@ -18,6 +18,7 @@
             </div>
         </div>
     </div>
+    <a href="{{route ('products.index')}}">Regresar</a>
 </div>
 
 @endsection

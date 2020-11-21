@@ -21,7 +21,6 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //$this->authorize('viewAny', auth()->user());
         $roles = Role::paginate();
         $permissions = Permission::all()->pluck('name', 'id');
 
@@ -30,7 +29,6 @@ class RoleController extends Controller
 
     public function create()
     {
-        //$this->authorize('create', auth()->user());
         $permissions = Permission::all();
 
         return view('roles.create', compact('permissions'));
@@ -57,8 +55,6 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-        //$this->authorize('viewAny', auth()->user());
-
         return view('roles.show', [
             'role' => $role,
         ]);
@@ -66,7 +62,6 @@ class RoleController extends Controller
 
     public function edit(Role $role)
     {
-        //$this->authorize('update', auth()->user());
         $permissions = Permission::all();
 
         return view('roles.edit', compact('role', 'permissions'));
@@ -85,7 +80,6 @@ class RoleController extends Controller
 
     public function destroy(int $id)
     {
-        //$this->authorize('create', auth()->user());
         $role = Role::find($id);
         $role->delete();
 

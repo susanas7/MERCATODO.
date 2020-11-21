@@ -37,6 +37,8 @@ class RolesAndPermissions extends Seeder
 
         Permission::create(['name' => 'ver orden']);
 
+        Permission::create(['name' => 'api']);
+
         //create roles and assign created permissions
 
         $role = Role::create(['name' => 'Gestor de usuarios', 'slug' => 'Tiene permiso para ver, editar, crear, y eliminar usuarios']);

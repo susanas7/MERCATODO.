@@ -9,6 +9,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Spatie\Permission\Models\Role;
+use App\Observers\UserObserver;
+use App\Events\UserCreatedEvent;
+use App\Listeners\UserCreateListener;
 
 class UserController extends Controller
 {
@@ -25,7 +28,6 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        //$this->authorize('viewAny', auth()->user());
         $name = $request->get('name');
         $users = User::name($name)->paginate();
 
@@ -39,7 +41,6 @@ class UserController extends Controller
      */
     public function create()
     {
-        //$this->authorize('create', auth()->user());
         $roles = Role::all()->pluck('name', 'id');
 
         return view('users.create', compact('roles'));
@@ -53,22 +54,33 @@ class UserController extends Controller
      */
     public function store(CreateRequest $request)
     {
-        $user = new User();
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+        ])->assignRole($request->role);
+        event(new UserCreatedEvent($user));
 
+        /*$user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
+        $user->assignRole($request->role);
+        if ($user->hasPermissionTo('api')) {
+            dd('uuuuas');
+            $user->api_token = Str::random(50);
+            $user->save();
+        }*/
 
-        if ($user->save()) {
+
+        toast('Usuario creado correctamente','success');
+        return redirect()->route('users.index');
+
+        /*if ($user->save()) {
             $user->assignRole($request->role);
-            if ($user->hasAnyRole('Super-administrador')) {
-                $user->api_token = Str::random(50);
-                $user->save();
-            }
-
             toast('Usuario creado correctamente','success');
             return redirect()->route('users.index');
-        }
+        }*/
     }
 
     /**
@@ -77,11 +89,8 @@ class UserController extends Controller
      * @param User $user
      * @return \Illuminate\View\View
      */
-    public function show(int $id)
+    public function show(User $user)
     {
-        //$this->authorize('viewAny', auth()->user());
-        $user = User::find($id);
-
         return view('users.show', [
             'user' => $user,
         ]);
@@ -108,18 +117,13 @@ class UserController extends Controller
      * @param int $id
      * @return RedirectResponse
      */
-    public function update(UpdateRequest $request, int $id)
+    public function update(UpdateRequest $request, User $user)
     {
-        $user = User::find($id);
         $user->name = $request->name;
         $user->email = $request->email;
         $user->syncRoles($request->role);
-        if ($user->hasAnyRole('Super-administrador')) {
-            $user->api_token = Str::random(50);
-            $user->save();
-        }
-
         $user->save();
+        event(new UserCreatedEvent($user));
 
         toast('Usuario actualizado correctamente','success');
         return redirect()->route('users.index');
@@ -134,7 +138,6 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //$this->authorize('create', auth()->user());
         $user->delete();
 
         return back();
@@ -149,7 +152,6 @@ class UserController extends Controller
      */
     public function changeStatus(int $id)
     {
-        //$this->authorize('update', auth()->user());
         $user = User::find($id);
 
         $user->is_active = !$user->is_active;
