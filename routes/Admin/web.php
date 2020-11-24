@@ -19,4 +19,4 @@ Route::resource('/orders', 'OrderController');
 
 Route::get('/metrics', 'MetricsController@chart')->name('metric');
 
-Route::get('/metric', 'MetricsController@metric')->name('m');
+Route::get('/metrics/data', 'MetricsController@metric')->name('m');

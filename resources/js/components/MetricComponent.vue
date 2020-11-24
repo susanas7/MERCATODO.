@@ -1,9 +1,11 @@
-<script>
 
+<script>
 import Chart from 'chart.js';
 
-let myChart = document.getElementById('myChart').getContext('2d');
-var chart = new Chart(myChart ,{
+export default {
+    mounted() {
+    let ctx = document.getElementById('grafico');
+    new Chart(myChart ,{
     type:"pie",
     data:{
         labels: [],
@@ -29,4 +31,6 @@ var chart = new Chart(myChart ,{
                 }
             }
 });
+}
+}
 </script>
