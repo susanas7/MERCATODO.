@@ -2,7 +2,7 @@
     <canvas id="grafico"></canvas>
 </template>
 <script>
-import MetricComponent from './MetricComponent';
+import Chart from 'chart.js';
 
 export default{
     name: 'Metric',

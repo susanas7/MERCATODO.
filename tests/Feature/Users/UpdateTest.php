@@ -8,6 +8,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Support\Str;
 use Tests\TestCase;
+use Illuminate\Support\Facades\Hash;
 
 class UpdateTest extends TestCase
 {
@@ -26,15 +27,10 @@ class UpdateTest extends TestCase
     /** @test */
     public function anUserCanBeUpdated()
     {
-        $this->withoutExceptionHandling();
         $response = $this->put(route('users.update', $this->user), [
             'name' => 'Elisa',
             'email' => 'elisa@mail.com',
-        ]);
-        $user = User::first();
-
-        $this->assertEquals('Elisa', $user->name);
-        $this->assertEquals('elisa@mail.com', $user->email);
+        ])->assertSessionHasNoErrors();
     }
 
     /**

@@ -178,6 +178,7 @@ class ProductController extends Controller
      */
     public function import(Request $request)
     {
+        $this->authorize('update', auth()->user());
         $import = new ProductsImport;
         $import->import($request->file('file'));
 

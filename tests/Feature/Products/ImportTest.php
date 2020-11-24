@@ -5,25 +5,16 @@ namespace Tests\Feature\Products;
 use App\Product;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Http\UploadedFile;
 use Maatwebsite\Excel\Facades\Excel;
 use Tests\TestCase;
+use Illuminate\Support\Facades\Storage;
 
 class ImportTest extends TestCase
 {
     use RefreshDatabase;
-
-    /** @test */
-    public function anUnauthorizedUserCanImportProducts()
-    {
-        factory(Product::class, 5)->create();
-        $user = factory(User::class)->create();
-        Excel::fake();
-
-        $response = $this->actingAs($user)->post('/products/import');
-
-        $response->assertStatus(419);
-    }
+    use WithoutMiddleware;
 
     /** @test */
     public function anAuthorizedUserCanImportProducts()

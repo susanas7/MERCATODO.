@@ -3,12 +3,8 @@
 @section('content')
 
 <div>
-    <metric>
-    </metric>
+    <metric></metric>
 
 </div>
-
-
-
 
 @endsection
