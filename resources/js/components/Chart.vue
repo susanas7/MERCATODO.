@@ -1,5 +1,9 @@
 <template>
-    <canvas id="grafico"></canvas>
+    <div>
+        <h1>{{datos}}</h1>
+        <canvas id="grafico"></canvas>
+    </div>
+    
 </template>
 <script>
 import Chart from 'chart.js';

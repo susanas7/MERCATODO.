@@ -28,6 +28,7 @@ class ImportTest extends TestCase
             'file' => UploadedFile::fake()->create('products.xlsx'),
         ]));
 
+        $this->assertCount(0, Product::all());
         $response->assertSessionHasNoErrors();
     }
 }

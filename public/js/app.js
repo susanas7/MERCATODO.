@@ -1913,6 +1913,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Metric',
@@ -75313,7 +75317,11 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("canvas", { attrs: { id: "grafico" } })
+  return _c("div", [
+    _c("h1", [_vm._v(_vm._s(_vm.datos))]),
+    _vm._v(" "),
+    _c("canvas", { attrs: { id: "grafico" } })
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

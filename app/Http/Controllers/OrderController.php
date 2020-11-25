@@ -11,10 +11,11 @@ use Session;
 
 class OrderController extends Controller
 {
+    /* con esto no me deja redireccionar al checkout
     public function __construct()
     {
         $this->authorizeResource(Order::class, 'order');
-    }
+    }*/
     /**
      * Display a listing of the resource.
      *

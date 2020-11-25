@@ -14,12 +14,13 @@ class PaymentTest extends TestCase
     /** @test */
     public function payment()
     {
+        $this->withoutExceptionHandling();
         $user = factory(User::class)->create();
         $order = factory(Order::class)->create([
             'user_id' => $user->id,
         ]);
 
-        $response = $this->actingAs($user)->get(route('checkout', $order))
-            ->assertRedirect();
+        $response = $this->actingAs($user)->get(route('checkout', $order->id));
+        $response->assertRedirect();
     }
 }
