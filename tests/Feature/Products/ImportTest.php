@@ -20,7 +20,6 @@ class ImportTest extends TestCase
     public function anAuthorizedUserCanImportProducts()
     {
         $this->artisan('db:seed');
-        factory(Product::class, 5)->create();
         $user = factory(User::class)->create()->assignRole('Super-administrador');
         Excel::fake();
 
@@ -28,7 +27,6 @@ class ImportTest extends TestCase
             'file' => UploadedFile::fake()->create('products.xlsx'),
         ]));
 
-        $this->assertCount(0, Product::all());
         $response->assertSessionHasNoErrors();
     }
 }

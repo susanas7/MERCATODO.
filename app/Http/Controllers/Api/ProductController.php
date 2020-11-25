@@ -7,6 +7,7 @@ use App\Http\Requests\Product\StoreProductRequest;
 use App\Http\Requests\Product\UpdateRequest;
 use App\Http\Resources\ProductResource as ProductResource;
 use App\Product;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -31,6 +32,10 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         $product = Product::create($request->all());
+        if ($request->file('photo')) {
+            $product->img_route = $request->file('photo')->store('images', 'public');
+            $product->save();
+        }
 
         return response()->json([
             'product' => $product,
@@ -62,6 +67,11 @@ class ProductController extends Controller
     public function update(UpdateRequest $request, Product $product)
     {
         $product->update($request->all());
+        if ($request->file('photo')) {
+            Storage::disk('public')->delete($product->img_route);
+            $product->img_route = $request->file('photo')->store('images', 'public');
+            $product->save();
+        }
 
         return response()->json([
             'product' => $product,
