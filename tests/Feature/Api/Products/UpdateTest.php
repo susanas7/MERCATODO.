@@ -23,7 +23,7 @@ class UpdateTest extends TestCase
         $product = factory(Product::class)->create();
         factory(ProductCategory::class)->create();
         $data = [
-            'category_id' => rand('1', '2'),
+            'category_id' => 1, //rand('1', '2'),
             'title' => $this->faker->sentence(2, true),
             'slug' => $this->faker->sentence(4, true),
             'is_active' => rand('0', '1'),
@@ -38,10 +38,10 @@ class UpdateTest extends TestCase
 
         //Assert
         $this->assertDatabaseHas('products', [
-            'category_id'   => $product->category_id,
-            'title'          => $product->title,
-            'slug'   => $product->slug,
-            'price' => $product->price,
+            'category_id' => $data['category_id'],
+            'title' => $data['title'],
+            'slug' => $data['slug'],
+            'price' => $data['price'],
         ]);
     }
 
