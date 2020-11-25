@@ -4,9 +4,7 @@ namespace App\Observers;
 
 use App\User;
 use Illuminate\Support\Str;
-use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Auth\Access\Gate;
 
 class UserObserver
 {
@@ -33,7 +31,7 @@ class UserObserver
      */
     public function updated(User $user)
     {
-        if($user->hasPermissionTo('api')){
+        if ($user->hasPermissionTo('api')) {
             $user->api_token = Str::random(50);
             $user->save();
         }

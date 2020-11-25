@@ -2,14 +2,12 @@
 
 namespace Tests\Feature\Products;
 
-use App\Product;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Http\UploadedFile;
 use Maatwebsite\Excel\Facades\Excel;
 use Tests\TestCase;
-use Illuminate\Support\Facades\Storage;
 
 class ImportTest extends TestCase
 {

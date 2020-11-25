@@ -2,16 +2,10 @@
 
 namespace App\Events;
 
-use Illuminate\Broadcasting\Channel;
+use App\User;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use App\User;
-use App\Listeners\UserCreateListener;
-
 
 class UserCreatedEvent
 {
@@ -27,5 +21,4 @@ class UserCreatedEvent
     {
         $this->user = $user;
     }
-
 }

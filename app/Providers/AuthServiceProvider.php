@@ -2,17 +2,17 @@
 
 namespace App\Providers;
 
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use App\User;
-use Spatie\Permission\Models\Role;
+use App\Order;
+use App\Policies\OrderPolicy;
+use App\Policies\ProductCategoryPolicy;
+use App\Policies\ProductPolicy;
+use App\Policies\RolePolicy;
+use App\Policies\UserPolicy;
 use App\Product;
 use App\ProductCategory;
-use App\Order;
-use App\Policies\UserPolicy;
-use App\Policies\RolePolicy;
-use App\Policies\ProductPolicy;
-use App\Policies\ProductCategoryPolicy;
-use App\Policies\OrderPolicy;
+use App\User;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Spatie\Permission\Models\Role;
 
 class AuthServiceProvider extends ServiceProvider
 {

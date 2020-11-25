@@ -78,7 +78,7 @@ class HomeController extends Controller
         $cart->add($product, $product->id);
 
         $request->session()->put('cart', $cart);
-        toast('Producto agregado correctamente','success');
+        toast('Producto agregado correctamente', 'success');
         return back();
     }
 

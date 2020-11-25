@@ -21,6 +21,7 @@ before_script:
 script:
   - php artisan optimize
   - php artisan migrate:refresh
+  - composer phpcs
   - vendor/bin/phpunit
 
 notifications:

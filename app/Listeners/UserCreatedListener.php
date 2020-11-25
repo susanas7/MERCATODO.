@@ -2,11 +2,8 @@
 
 namespace App\Listeners;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 use App\Events\UserCreatedEvent;
 use Illuminate\Support\Str;
-
 
 class UserCreatedListener
 {
@@ -17,7 +14,6 @@ class UserCreatedListener
      */
     public function __construct()
     {
-        
     }
 
     /**
@@ -30,7 +26,7 @@ class UserCreatedListener
     {
         $user = $event->user;
 
-        if($user->can('api')){
+        if ($user->can('api')) {
             $user->api_token = Str::random(50);
             $user->save();
         }

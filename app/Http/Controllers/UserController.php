@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\UserCreatedEvent;
 use App\Http\Requests\User\CreateRequest;
 use App\Http\Requests\User\UpdateRequest;
 use App\User;
@@ -9,9 +10,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Spatie\Permission\Models\Role;
-use App\Observers\UserObserver;
-use App\Events\UserCreatedEvent;
-use App\Listeners\UserCreateListener;
 
 class UserController extends Controller
 {
@@ -72,8 +70,7 @@ class UserController extends Controller
             $user->save();
         }*/
 
-
-        toast('Usuario creado correctamente','success');
+        toast('Usuario creado correctamente', 'success');
         return redirect()->route('users.index');
 
         /*if ($user->save()) {
@@ -125,7 +122,7 @@ class UserController extends Controller
         $user->save();
         event(new UserCreatedEvent($user));
 
-        toast('Usuario actualizado correctamente','success');
+        toast('Usuario actualizado correctamente', 'success');
         return redirect()->route('users.index');
     }
 

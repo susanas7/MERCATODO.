@@ -12,7 +12,6 @@ use App\ProductCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Policies\ProductPolicy;
 
 class ProductController extends Controller
 {
@@ -28,7 +27,7 @@ class ProductController extends Controller
      * @return \Illuminate\View\View
      */
     public function index(Request $request)
-    {        
+    {
         $title = $request->get('title');
         $slug = $request->get('slug');
         $categories = ProductCategory::all();
@@ -65,7 +64,7 @@ class ProductController extends Controller
             $product->save();
         }
 
-        toast('Producto creado correctamente','success');
+        toast('Producto creado correctamente', 'success');
         return redirect()->route('products.index');
     }
 
@@ -114,7 +113,7 @@ class ProductController extends Controller
             $product->save();
         }
 
-        toast('Producto actualizado correctamente','success');
+        toast('Producto actualizado correctamente', 'success');
         return redirect()->route('products.index');
     }
 
