@@ -9,6 +9,9 @@ install:
 services:
   - mysql
 
+cache:
+  - vendor
+
 deploy:
   github-token: $GITHUB_TOKEN
 
