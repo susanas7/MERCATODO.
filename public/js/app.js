@@ -1934,40 +1934,43 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('/metrics/data').then(function (_ref) {
         var data = _ref.data;
-        return _this.datos = data.data;
+        _this.datos = data.data;
+
+        _this.chart();
       })["catch"](function (error) {
         console.log(error);
         _this.loading = false;
       });
+    },
+    chart: function chart() {
+      var ctx = document.getElementById('grafico').getContext('2d');
+      new chart_js__WEBPACK_IMPORTED_MODULE_0___default.a(ctx, {
+        type: "pie",
+        data: {
+          labels: [],
+          datasets: [{
+            label: "bebid",
+            data: this.datos
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            yAxes: [{
+              ticks: {
+                stacked: false,
+                beginAtZero: true,
+                steps: 10,
+                stepValue: 5,
+                max: 20
+              }
+            }]
+          }
+        }
+      });
     }
   },
-  mounted: function mounted() {
-    var ctx = document.getElementById('grafico').getContext('2d');
-    new chart_js__WEBPACK_IMPORTED_MODULE_0___default.a(ctx, {
-      type: "pie",
-      data: {
-        labels: [],
-        datasets: [{
-          label: "bebid",
-          data: this.datos
-        }]
-      },
-      options: {
-        responsive: true,
-        scales: {
-          yAxes: [{
-            ticks: {
-              stacked: false,
-              beginAtZero: true,
-              steps: 10,
-              stepValue: 5,
-              max: 20
-            }
-          }]
-        }
-      }
-    });
-  }
+  mounted: function mounted() {}
 });
 
 /***/ }),

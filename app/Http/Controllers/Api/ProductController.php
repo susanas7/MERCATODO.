@@ -65,9 +65,10 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateRequest $request, int $id)
+    public function update(UpdateRequest $request, Product $product)
     {
-        $product = Product::find($id);
+        //$product = Product::find($id);
+        dd($product);
         $product->update($request->all());
         if ($request->file('img_route')) {
             Storage::disk('public')->delete($product->img_route);

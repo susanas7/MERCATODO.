@@ -20,3 +20,7 @@ Route::resource('/orders', 'OrderController');
 Route::get('/metrics', 'MetricsController@chart')->name('metric');
 
 Route::get('/metrics/data', 'MetricsController@metric')->name('m');
+
+/*Route::get('/j', function(){
+    return Auth::user()->createToken('Mercatodo');
+});*/

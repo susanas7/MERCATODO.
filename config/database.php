@@ -88,30 +88,6 @@ return [
             'prefix' => '',
             'prefix_indexes' => true,
         ],
-
-        'testing' => [
-            'driver' => 'mysql',
-            'host' => env('DB_TEST_HOST', 'localhost'),
-            'database' => env('DB_TEST_DATABASE', 'testing'),
-            'username' => env('DB_TEST_USERNAME', 'root'),
-            'password' => env('DB_TEST_PASSWORD', ''),
-            'charset' => 'utf8',
-            'collation' => 'utf8_unicode_ci',
-            'prefix' => '',
-            'strict' => false,
-        ],
-
-        'tdd' => [
-            'driver' => 'mysql',
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'database' => env('DB_TDD_DATABASE', 'tdd'),
-            'username' => env('DB_TDD_USERNAME', 'root'),
-            'password' => env('DB_TDD_PASSWORD', ''),
-            'charset' => 'utf8',
-            'collation' => 'utf8_unicode_ci',
-            'prefix' => '',
-            'strict' => false,
-        ],
     ],
 
     /*

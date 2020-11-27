@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-//use App\Observers\UserObserver;
-//use App\User;
+use App\Observers\UserObserver;
+use App\User;
 use Dnetix\Redirection\PlacetoPay;
 use Illuminate\Support\ServiceProvider;
 
@@ -28,6 +28,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //User::observe(UserObserver::class);
+        User::observe(UserObserver::class);
     }
 }

@@ -35,7 +35,7 @@
     <br>
 </div>
 </div>
-
+<metric></metric>
 <div class="container2">
   @foreach($products as $product)
     <div class="card">

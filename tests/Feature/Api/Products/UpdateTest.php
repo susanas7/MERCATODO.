@@ -19,6 +19,7 @@ class UpdateTest extends TestCase
     /** @test */
     public function anApiProductCanBeUpdatedWithValidData()
     {
+        $this->withoutExceptionHandling();
         //Arrange
         $product = factory(Product::class)->create();
         factory(ProductCategory::class)->create();

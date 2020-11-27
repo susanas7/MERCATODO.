@@ -102,11 +102,11 @@ class ProductController extends Controller
      * @param int $id
      * @return RedirectResponse
      */
-    public function update(UpdateRequest $request, Product $product)
+    public function update(UpdateRequest $request, int $id)
     {
         auth()->user()->can('update', $product);
         $categories = ProductCategory::all();
-        $categories = ProductCategory::all();
+        $product = Product::find($id);
         $product->update($request->all());
 
         if ($request->file('img_route')) {

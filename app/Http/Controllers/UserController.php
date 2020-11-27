@@ -8,7 +8,6 @@ use App\Http\Requests\User\UpdateRequest;
 use App\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
@@ -59,25 +58,8 @@ class UserController extends Controller
         ])->assignRole($request->role);
         event(new UserCreatedEvent($user));
 
-        /*$user = new User;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password);
-        $user->assignRole($request->role);
-        if ($user->hasPermissionTo('api')) {
-            dd('uuuuas');
-            $user->api_token = Str::random(50);
-            $user->save();
-        }*/
-
         toast('Usuario creado correctamente', 'success');
         return redirect()->route('users.index');
-
-        /*if ($user->save()) {
-            $user->assignRole($request->role);
-            toast('Usuario creado correctamente','success');
-            return redirect()->route('users.index');
-        }*/
     }
 
     /**

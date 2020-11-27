@@ -21,41 +21,45 @@ export default{
     methods: {
         getMetrics() {
             axios.get('/metrics/data')
-            .then(({data}) => this.datos = data.data)
+            .then(({data}) => {this.datos = data.data
+            this.chart()})
             .catch(error => {
                 console.log(error);
                 this.loading = false;
             })
+        },
+        chart(){
+            let ctx = document.getElementById('grafico').getContext('2d');
+                new Chart(ctx ,{
+                type:"pie",
+                data:{
+                    labels: [],
+                    datasets:[
+                        {
+                            label: "bebid",
+                            data: this.datos,
+                        }
+                    ]
+                },
+                options:{
+                    responsive: true,
+                            scales:{
+                                yAxes:[{
+                                        ticks:{
+                                            stacked: false,
+                                            beginAtZero:true,
+                                            steps: 10,
+                                            stepValue: 5,
+                                            max: 20
+                                        }
+                                }]
+                            }
+                        }
+            });
         }
     },
     mounted() {
-    let ctx = document.getElementById('grafico').getContext('2d');
-    new Chart(ctx ,{
-    type:"pie",
-    data:{
-        labels: [],
-        datasets:[
-            {
-                label: "bebid",
-                data: this.datos,
-            }
-        ]
-    },
-    options:{
-        responsive: true,
-                scales:{
-                    yAxes:[{
-                            ticks:{
-                                stacked: false,
-                                beginAtZero:true,
-                                steps: 10,
-                                stepValue: 5,
-                                max: 20
-                            }
-                    }]
-                }
-            }
-});
+    
 }
 }
 </script>

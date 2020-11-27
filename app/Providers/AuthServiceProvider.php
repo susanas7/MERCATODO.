@@ -12,6 +12,7 @@ use App\Product;
 use App\ProductCategory;
 use App\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Laravel\Passport\Passport;
 use Spatie\Permission\Models\Role;
 
 class AuthServiceProvider extends ServiceProvider
@@ -35,5 +36,11 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+
+        Passport::routes();
+
+        //Passport::personalAccessClientId(3);
+
+        Passport::cookie('APITOKEN');
     }
 }
