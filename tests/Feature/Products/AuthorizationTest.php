@@ -46,8 +46,9 @@ class AuthorizationTest extends TestCase
     }
 
     /** @test */
-    public function anAthorizedUserCanViewTheUpdateProductsForm()
+    public function anAuthorizedUserCanViewTheUpdateProductsForm()
     {
+        //$this->withoutExceptionHandling();
         $response = $this->actingAs($this->userAuth)->get(route('products.edit', $this->product))
             ->assertStatus(200);
     }
@@ -60,7 +61,7 @@ class AuthorizationTest extends TestCase
     }
 
     /** @test */
-    public function anAthorizedUserCanListProducts()
+    public function anAuthorizedUserCanListProducts()
     {
         $response = $this->actingAs($this->userAuth)->get(route('products.index'))
             ->assertStatus(200);

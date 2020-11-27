@@ -9,6 +9,7 @@ use App\Http\Requests\Product\UpdateRequest;
 use App\Imports\ProductsImport;
 use App\Product;
 use App\ProductCategory;
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
@@ -17,7 +18,7 @@ class ProductController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(Product::class, 'product');
+        $this->authorizeResource(Product::class, auth()->user());
     }
 
     /**
@@ -101,9 +102,10 @@ class ProductController extends Controller
      * @param int $id
      * @return RedirectResponse
      */
-    public function update(UpdateRequest $request, int $id)
+    public function update(UpdateRequest $request, Product $product)
     {
-        $product = Product::find($id);
+        auth()->user()->can('update', $product);
+        $categories = ProductCategory::all();
         $categories = ProductCategory::all();
         $product->update($request->all());
 

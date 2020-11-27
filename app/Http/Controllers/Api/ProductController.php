@@ -31,12 +31,14 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         $product = Product::create($request->all());
-        if ($request->file('image')) {
-            $product->img_route = $request->file('image')->store('images', 'public');
+        if ($request->file('img_route')) {
+            $product->img_route = $request->file('img_route')->store('images', 'public');
             $product->save();
         }
 
         return response()->json([
+            'Status' => '200',
+            'Message' => 'Product created successfully',
             'product' => $product,
         ]);
     }
@@ -63,16 +65,19 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateRequest $request, Product $product)
+    public function update(UpdateRequest $request, int $id)
     {
+        $product = Product::find($id);
         $product->update($request->all());
-        if ($request->file('image')) {
+        if ($request->file('img_route')) {
             Storage::disk('public')->delete($product->img_route);
-            $product->img_route = $request->file('image')->store('images', 'public');
+            $product->img_route = $request->file('img_route')->store('images', 'public');
             $product->save();
         }
 
         return response()->json([
+            'Status' => '200',
+            'Message' => 'Product updated successfully',
             'product' => $product,
         ]);
     }
@@ -80,15 +85,18 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Product  $product
      * @return JsonResponse
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
         $product = Product::find($id);
         $product->delete();
 
-        return response()->json();
+        return response()->json([
+            'Status' => '200',
+            'Message' => 'Product deleted successfully',
+        ]);
     }
 
     public function image($img_route)
