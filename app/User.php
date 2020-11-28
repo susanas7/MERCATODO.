@@ -8,15 +8,12 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
     use HasRoles;
-    use HasApiTokens;
-
-    protected $table = 'users';
 
     /**
      * The attributes that are mass assignable.
@@ -24,7 +21,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'id', 'name', 'email', 'password', 'role', 'status',
+        'id', 'name', 'email', 'password', 'role', 'status', 'api_token',
     ];
 
     /**
@@ -79,4 +76,12 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $dispatchEvents = [
         'created' => UserCreatedEvent::class,
     ];
+
+    public function generateToken()
+    {
+        $this->api_token = Str::random(60);
+        $this->save();
+
+        return $this->api_token;
+    }
 }

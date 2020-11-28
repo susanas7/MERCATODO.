@@ -24,11 +24,11 @@ class UserCreatedListener
      */
     public function handle(UserCreatedEvent $event)
     {
-        /*$user = $event->user;
+        $user = $event->user;
 
         if ($user->can('api')) {
             $user->api_token = Str::random(50);
             $user->save();
-        }*/
+        }
     }
 }

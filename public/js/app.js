@@ -1929,6 +1929,11 @@ __webpack_require__.r(__webpack_exports__);
     this.getMetrics();
   },
   methods: {
+    getToken: function getToken() {
+      axios.get('/sanctum/csrf-cookie').then(function (response) {
+        return console.log(response);
+      });
+    },
     getMetrics: function getMetrics() {
       var _this = this;
 

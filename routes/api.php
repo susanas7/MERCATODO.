@@ -31,3 +31,6 @@ Route::name('api.')->group( function() {
 
 /*Route::get('/storage/{img_route}', 'Api\ProductController@image', ['as' => 'api'])
     ->name('api.products.image');*/
+
+    Route::get('/api/login', 'Api\AuthController@login')->name('z.api.login');
+    Route::get('/api/logout', 'Api\AuthController@logout')->name('z.api.logout');
