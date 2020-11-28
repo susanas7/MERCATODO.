@@ -18,13 +18,13 @@ class UserObserver
      */
     public function created(User $user)
     {
-        if ($user->can('api')) {
+        /*if ($user->can('api')) {
             $user->api_token = 'di';
             $user->save();
         } else {
             $user->api_token = null;
             $user->save();
-        }
+        }*/
 
         /*$user->can('api');
         $user->api_token = Str::random(50);
@@ -39,10 +39,10 @@ class UserObserver
      */
     public function updated(User $user)
     {
-        if ($user->hasPermissionTo('api')) {
+        /*if ($user->hasPermissionTo('api')) {
             $user->api_token = Str::random(50);
             $user->save();
-        }
+        }*/
     }
 
     /**

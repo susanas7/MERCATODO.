@@ -7,6 +7,7 @@ use App\Http\Requests\Product\StoreProductRequest;
 use App\Http\Requests\Product\UpdateRequest;
 use App\Http\Resources\ProductResource as ProductResource;
 use App\Product;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -61,14 +62,13 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function update(UpdateRequest $request, Product $product)
+    public function update(Request $request, int $id)
     {
-        //$product = Product::find($id);
-        dd($product);
+        $product = Product::find($id);
         $product->update($request->all());
         if ($request->file('img_route')) {
             Storage::disk('public')->delete($product->img_route);

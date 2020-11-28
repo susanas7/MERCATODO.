@@ -19,7 +19,6 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->enum('role', ['admin', 'user'])->nullable();
             $table->boolean('is_active')->default(1);
-            $table->string('api_token')->nullable()->unique();
             $table->rememberToken();
             $table->timestamps();
         });
