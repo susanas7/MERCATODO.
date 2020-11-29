@@ -17,7 +17,7 @@ class DeleteTest extends TestCase
     {
         $category = factory(ProductCategory::class)->create();
 
-        $this->delete(route('categories.destroy', $category));
+        $this->delete(route('admin.categories.destroy', $category));
 
         $this->assertDatabaseMissing('product_categories', [
             'id' => $category->id,

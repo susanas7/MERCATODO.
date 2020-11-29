@@ -35,7 +35,6 @@
     <br>
 </div>
 </div>
-<metric></metric>
 <div class="container2">
   @foreach($products as $product)
     <div class="card">
@@ -45,35 +44,10 @@
         <h4>{{$product->title}}</h4>
         <p>{{$product->slug}}</p>
         <p class="price">$ {{number_format($product->price)}}</p>
-        <a class="add" href="{{route('addToCart', ['id' => $product->id ])}}">Agregar</a> 
+        <a class="add" href="{{route('user.addToCart', ['id' => $product->id ])}}">Agregar</a> 
     </div>
   @endforeach
 </div>
 {{$products->links()}} 
 
 @endsection
-
-
-<!--<div class="container">
-    <div class="col-md-12">
-        <div class="card" id="box-home">
-            <div class="card-header"> Bienvenido</div>
-            <div class="card-header"><P ALIGN=center> {{ $products->total() }} productos | página {{ $products->currentPage() }} de {{ $products->lastpage() }}</div>
-            <div class="card-header justify-content-center">
-                <div class="row">
-                    @foreach($products as $product)
-                        <div class="col-md-4 tect-md-center" id="row-home" align="center">
-                          <br><a class="btn btn-light" href="{{route('home.show', $product->id) }}"> <h3>{{ $product->title }}</h3></a>
-                            <img src="{{ $product->get_image }}" class="card-img-top">
-                            <h4>Precio COP {{ number_format($product->price, 2) }} </h4>
-                            <a class="btn btn-link" href="{{route('home.show', $product->id) }}" id="btn-show-home" >Detalles</a>
-                            <a href="{{route('addToCart', ['id' => $product->id ])}}" type="button" class="btn btn-link" id="btn-add-home">Agregar</a> 
-                        </div>
-                    @endforeach
-                </div>
-                <br>
-                {{$products->links()}}  
-            </div>                 
-        </div>
-    </div>
-</div>-->

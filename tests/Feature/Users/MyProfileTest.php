@@ -17,7 +17,7 @@ class MyProfileTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($user)->get(route('myProfile'))
+        $response = $this->actingAs($user)->get(route('user.myProfile'))
             ->assertSessionHasNoErrors()
             ->assertStatus(200)
             ->assertSee($user->name);
@@ -28,10 +28,10 @@ class MyProfileTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($user)->get(route('editMyProfile'));
+        $response = $this->actingAs($user)->get(route('user.editMyProfile'));
 
         $response->assertOk();
-        $response->assertViewIs('users.editMyProfile');
+        $response->assertViewIs('user.editMyProfile');
     }
 
     /** @test */
@@ -39,7 +39,7 @@ class MyProfileTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($user)->put(route('updateMyProfile'), [
+        $response = $this->actingAs($user)->put(route('user.updateMyProfile'), [
             'name' => 'JELO',
             'email' => 'jelo@mail.com',
         ]);
@@ -48,6 +48,6 @@ class MyProfileTest extends TestCase
 
         $this->assertEquals('JELO', $user->name);
         $this->assertEquals('jelo@mail.com', $user->email);
-        $response->assertRedirect('/myProfile?user=' . $user->id);
+        $response->assertRedirect('/user/myProfile?user=' . $user->id);
     }
 }

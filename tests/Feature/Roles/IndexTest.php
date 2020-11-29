@@ -21,7 +21,7 @@ class IndexTest extends TestCase
 
         $role = factory(Role::class)->create();
 
-        $response = $this->get(route('roles.index'));
+        $response = $this->get(route('admin.roles.index'));
         $response->assertOk();
         $responseRoles = $response->getOriginalContent()['roles'];
         $responseRoles->each(function ($item) use ($role) {

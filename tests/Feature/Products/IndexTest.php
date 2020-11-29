@@ -18,7 +18,7 @@ class IndexTest extends TestCase
         $product = factory(Product::class)->create();
         $products = Product::all();
 
-        $response = $this->get(route('products.index'))
+        $response = $this->get(route('admin.products.index'))
             ->assertOk();
         $responseProducts = $response->getOriginalContent()['products']
             ->each(function ($item) use ($product) {

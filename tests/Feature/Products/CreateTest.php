@@ -36,7 +36,7 @@ class CreateTest extends TestCase
         $this->assertEquals('lorem ipsum etc', $product->slug);
         $this->assertEquals('1', $product->category_id);
         $this->assertEquals('32444', $product->price);
-        $response->assertRedirect(route('products.index'));
+        $response->assertRedirect(route('admin.products.index'));
     }
 
     /**

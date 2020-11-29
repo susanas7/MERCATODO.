@@ -40,7 +40,7 @@ class UpdateTest extends TestCase
         $this->assertEquals('1', $product->category_id);
         $this->assertEquals('32444', $product->price);
         $this->assertEquals('images/MfV3Uh.jpeg', $product->img_route);
-        $response->assertRedirect(route('products.index'));
+        $response->assertRedirect(route('admin.products.index'));
     }
 
     /**

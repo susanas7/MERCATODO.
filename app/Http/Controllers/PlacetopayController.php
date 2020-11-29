@@ -40,7 +40,7 @@ class PlacetopayController extends Controller
             'expiration' => date('c', strtotime('+1 hour')),
             'ipAddress' => request()->ip(),
             'userAgent' => request()->header('user-agent'),
-            'returnUrl' => route('payment', [$order->id]),
+            'returnUrl' => route('user.payment', [$order->id]),
             'cancelUrl' => route('home'), //route('orders.show', [$order->id]),
             'skipResult' => false,
             'noBuyerFill' => false,

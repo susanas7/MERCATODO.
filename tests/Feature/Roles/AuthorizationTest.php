@@ -29,14 +29,14 @@ class AuthorizationTest extends TestCase
     /** @test */
     public function anUnathorizedUserCanNotListRoles()
     {
-        $response = $this->actingAs($this->user)->get(route('roles.index'))
+        $response = $this->actingAs($this->user)->get(route('admin.roles.index'))
             ->assertStatus(403);
     }
 
     /** @test */
     public function anAthorizedUserCanListProducts()
     {
-        $response = $this->actingAs($this->userAuth)->get(route('roles.index'))
+        $response = $this->actingAs($this->userAuth)->get(route('admin.roles.index'))
             ->assertStatus(200);
     }
 

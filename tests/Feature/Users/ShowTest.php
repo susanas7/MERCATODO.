@@ -17,8 +17,8 @@ class ShowTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($user)->get(route('users.show', $user))
+        $response = $this->actingAs($user)->get(route('admin.users.show', $user))
             ->assertStatus(200)
-            ->assertViewIs('users.show');
+            ->assertViewIs('admin.users.show');
     }
 }

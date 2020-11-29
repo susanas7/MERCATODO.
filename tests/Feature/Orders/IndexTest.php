@@ -17,7 +17,7 @@ class IndexTest extends TestCase
     {
         $order = factory(Order::class)->make();
 
-        $response = $this->get(route('orders.index'));
+        $response = $this->get(route('admin.orders.index'));
         $orders = Order::all();
 
         $response->assertOk();

@@ -14,7 +14,7 @@ class IndexTest extends TestCase
     /** @test */
     public function categoriesCanBeListed()
     {
-        $response = $this->get(route('categories.index'))
+        $response = $this->get(route('admin.categories.index'))
             ->assertOk()
             ->assertViewHas('categories');
         $responseCategories = $response->getOriginalContent()['categories'];

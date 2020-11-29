@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
             Route::apiResource('/products', 'Api\ProductController', ['as' => 'api']);
     });*/
 
-Route::name('api.')->group( function() {
+Route::name('api.')->group(function () {
     Route::apiResource('/products', 'Api\ProductController');
 });
 //Route::apiResource('/products', 'Api\ProductController', ['as' => 'api'])->middleware('auth:sanctum');

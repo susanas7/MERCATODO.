@@ -56,14 +56,14 @@ class AuthorizationTest extends TestCase
     /** @test */
     public function anUnathorizedUserCanNotListProducts()
     {
-        $response = $this->actingAs($this->user)->get(route('products.index'))
+        $response = $this->actingAs($this->user)->get(route('admin.products.index'))
             ->assertStatus(403);
     }
 
     /** @test */
     public function anAuthorizedUserCanListProducts()
     {
-        $response = $this->actingAs($this->userAuth)->get(route('products.index'))
+        $response = $this->actingAs($this->userAuth)->get(route('admin.products.index'))
             ->assertStatus(200);
     }
 

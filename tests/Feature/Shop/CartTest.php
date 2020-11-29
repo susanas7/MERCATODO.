@@ -34,7 +34,7 @@ class CartTest extends TestCase
             'id' => $this->productA->id,
         ]);
 
-        $response = $this->actingAs($this->user)->get('/shoppingCart');
+        $response = $this->actingAs($this->user)->get(route('user.shoppingCart'));
         $response->assertSee($this->productA->name);
     }
 
@@ -49,7 +49,7 @@ class CartTest extends TestCase
         $this->actingAs($this->user)->get('/addToCart', [
             'id' => $this->productB->id,
         ]);
-        $this->actingAs($this->user)->get('/shoppingCart')
+        $this->actingAs($this->user)->get(route('user.shoppingCart'))
             ->assertSee($this->productA->name)
             ->assertSee($this->productB->name);
 

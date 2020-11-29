@@ -26,7 +26,7 @@ class UpdateTest extends TestCase
     /** @test */
     public function anUserCanBeUpdated()
     {
-        $response = $this->put(route('users.update', $this->user), [
+        $response = $this->put(route('admin.users.update', $this->user), [
             'name' => 'Elisa',
             'email' => 'elisa@mail.com',
         ])->assertSessionHasNoErrors();
@@ -46,7 +46,7 @@ class UpdateTest extends TestCase
         ];
         $data[$field] = $value;
 
-        $response = $this->put(route('users.update', $this->user), $data)
+        $response = $this->put(route('admin.users.update', $this->user), $data)
             ->assertRedirect()
             ->assertSessionHasErrors($field);
     }

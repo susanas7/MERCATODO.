@@ -16,7 +16,7 @@ class IndexTest extends TestCase
     public function usersCanBeListed()
     {
         $user = factory(User::class)->create();
-        $response = $this->get(route('users.index'))
+        $response = $this->get(route('admin.users.index'))
             ->assertOk();
         $users = User::all();
 

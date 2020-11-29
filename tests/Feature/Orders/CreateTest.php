@@ -22,7 +22,7 @@ class CreateTest extends TestCase
         $category = factory(ProductCategory::class)->make();
         $product = factory(Product::class)->make();
 
-        $response = $this->actingAs($user)->post(route('orders.store'))
+        $response = $this->actingAs($user)->post(route('user.store.order'))
             ->assertSessionHasNoErrors();
 
         $order = Order::first();

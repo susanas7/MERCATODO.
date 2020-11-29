@@ -15,20 +15,20 @@ class CreateTest extends TestCase
     /** @test */
     public function aCategoryCanBeStored()
     {
-        $response = $this->post(route('categories.store'), [
+        $response = $this->post(route('admin.categories.store'), [
             'title' => 'Dulces',
         ])->assertSessionHasNoErrors();
 
         $category = ProductCategory::first();
         $this->assertCount(1, ProductCategory::all());
         $this->assertEquals('Dulces', $category->title);
-        $response->assertRedirect(route('categories.index'));
+        $response->assertRedirect(route('admin.categories.index'));
     }
 
     /** @test */
     public function aCategoryCanNotBeStoredWithEmptyTitle()
     {
-        $response = $this->post(route('categories.store'), [
+        $response = $this->post(route('admin.categories.store'), [
             'title' => '',
         ])->assertSessionHasErrors('title');
 

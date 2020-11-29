@@ -25,28 +25,28 @@ class AuthorizationTest extends TestCase
     /** @test */
     public function anUnathorizedUserCanNotListUsers()
     {
-        $response = $this->actingAs($this->user)->get(route('users.index'))
+        $response = $this->actingAs($this->user)->get(route('admin.users.index'))
             ->assertStatus(403);
     }
 
     /** @test */
     public function anAthorizedUserCanListUsers()
     {
-        $response = $this->actingAs($this->userAuth)->get(route('users.index'))
+        $response = $this->actingAs($this->userAuth)->get(route('admin.users.index'))
             ->assertStatus(200);
     }
 
     /** @test */
     public function anUnathorizedUserCanNotViewTheCreateUsersForm()
     {
-        $response = $this->actingAs($this->user)->get(route('users.create'))
+        $response = $this->actingAs($this->user)->get(route('admin.users.create'))
             ->assertStatus(403);
     }
 
     /** @test */
     public function anAthorizedUserCanViewTheCreateUsersForm()
     {
-        $response = $this->actingAs($this->userAuth)->get(route('users.create'))
+        $response = $this->actingAs($this->userAuth)->get(route('admin.users.create'))
             ->assertStatus(200);
     }
 
@@ -55,7 +55,7 @@ class AuthorizationTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($user)->get(route('users.edit', $user))
+        $response = $this->actingAs($user)->get(route('admin.users.edit', $user))
             ->assertStatus(403);
     }
 
@@ -64,7 +64,7 @@ class AuthorizationTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($this->userAuth)->get(route('users.edit', $user))
+        $response = $this->actingAs($this->userAuth)->get(route('admin.users.edit', $user))
             ->assertStatus(200);
     }
 }

@@ -19,7 +19,7 @@ class CreateTest extends TestCase
     /** @test */
     public function anUserCanBeStored()
     {
-        $response = $this->post(route('users.store'), [
+        $response = $this->post(route('admin.users.store'), [
             'name' => 'Juli',
             'email' => 'juli@mail.com',
             'password' => '12345678',
@@ -31,7 +31,7 @@ class CreateTest extends TestCase
         $this->assertEquals('Juli', $user->name);
         $this->assertEquals('juli@mail.com', $user->email);
         $this->assertTrue(Hash::check('12345678', $user->password));
-        $response->assertRedirect(route('users.index'));
+        $response->assertRedirect(route('admin.users.index'));
     }
 
     /**
@@ -49,7 +49,7 @@ class CreateTest extends TestCase
         ];
         $data[$field] = $value;
 
-        $response = $this->post(route('users.store'), $data)
+        $response = $this->post(route('admin.users.store'), $data)
             ->assertRedirect()
             ->assertSessionHasErrors($field);
     }

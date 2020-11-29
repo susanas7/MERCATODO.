@@ -43,7 +43,7 @@
         <h4>{{$product->title}}</h4>
         <p>{{$product->slug}}</p>
         <p class="price">$ {{number_format($product->price)}}</p>
-        <a class="add" href="{{route('addToCart', ['id' => $product->id ])}}">Agregar</a> 
+        <a class="add" href="{{route('user.addToCart', ['id' => $product->id ])}}">Agregar</a> 
     </div>
   @endforeach
 </div>

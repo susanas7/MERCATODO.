@@ -23,7 +23,7 @@ class UpdateTest extends TestCase
         $category->refresh();
 
         $this->assertEquals('Agua', $category->title);
-        $response->assertRedirect(route('categories.index'));
+        $response->assertRedirect(route('admin.categories.index'));
     }
 
     /** @test */
