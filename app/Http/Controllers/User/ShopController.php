@@ -12,6 +12,11 @@ use Session;
 
 class ShopController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Add product to cart.
      *

@@ -59,4 +59,13 @@ class UpdateTest extends TestCase
             'Test email is not an email' => ['email', Str::random(12)],
         ];
     }
+
+    /** @test */
+    public function anUserCanBeEnableOrDisable()
+    {
+        $response = $this->put(route('admin.users.changeStatus', $this->user))
+            ->assertSessionHasNoErrors();
+
+        $this->assertEquals($this->user->is_active, 0);
+    }
 }

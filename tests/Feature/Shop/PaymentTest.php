@@ -12,15 +12,15 @@ class PaymentTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
-    public function payment()
+    /* @test */
+    /*public function payment()
     {
-        /*$user = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $order = factory(Order::class)->create([
             'user_id' => $user->id,
         ]);
 
         $response = $this->actingAs($user)->get(route('user.checkout', $order->id));
-        $response->assertRedirect();*/
-    }
+        $response->assertRedirect();
+    }*/
 }

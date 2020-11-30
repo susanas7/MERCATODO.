@@ -28,11 +28,7 @@ class CartTest extends TestCase
     /** @test */
     public function anUserCanAddAnItemToCart()
     {
-        factory(ProductCategory::class)->create();
-
-        $this->actingAs($this->user)->get('/addToCart', [
-            'id' => $this->productA->id,
-        ]);
+        $this->get(route('user.addToCart', $this->productA->id));
 
         $response = $this->actingAs($this->user)->get(route('user.shoppingCart'));
         $response->assertSee($this->productA->name);
@@ -43,18 +39,15 @@ class CartTest extends TestCase
     {
         factory(ProductCategory::class)->make();
 
-        $this->actingAs($this->user)->get('/addToCart', [
-            'id' => $this->productA->id,
-        ]);
-        $this->actingAs($this->user)->get('/addToCart', [
-            'id' => $this->productB->id,
-        ]);
+        $this->actingAs($this->user)->get(route('user.addToCart', $this->productA->id));
+
+        $this->actingAs($this->user)->get(route('user.addToCart', $this->productB->id));
+
         $this->actingAs($this->user)->get(route('user.shoppingCart'))
             ->assertSee($this->productA->name)
             ->assertSee($this->productB->name);
 
-        $response = $this->actingAs($this->user)->get('/reduce', [
-            'id' => $this->productA->id, ])
+        $response = $this->actingAs($this->user)->get(route('user.reduceByOne', $this->productA->id))
             ->assertSee($this->productB->name)
             ->assertDontSeeText($this->productA);
     }

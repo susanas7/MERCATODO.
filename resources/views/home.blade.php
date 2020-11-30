@@ -44,7 +44,9 @@
         <h4>{{$product->title}}</h4>
         <p>{{$product->slug}}</p>
         <p class="price">$ {{number_format($product->price)}}</p>
-        <a class="add" href="{{route('user.addToCart', ['id' => $product->id ])}}">Agregar</a> 
+        @if(auth()->user())
+          <a class="add" href="{{route('user.addToCart', ['id' => $product->id ])}}">Agregar</a> 
+        @endif
     </div>
   @endforeach
 </div>

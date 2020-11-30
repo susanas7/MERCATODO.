@@ -11,7 +11,9 @@
             <h2>{{ $product->title }}</h2><br><br>
             <h4>{{$product->slug}}</h4><br>
             <h3>${{number_format($product->price, 2)}}</h3><br>
-            <a href="{{route('user.addToCart', ['id' => $product->id ])}}">Agregar</a> 
+            @if(auth()->user())
+                <a href="{{route('user.addToCart', ['id' => $product->id ])}}">Agregar</a> 
+            @endif
         </div>
     </div>
 </div>

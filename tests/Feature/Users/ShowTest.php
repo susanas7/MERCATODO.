@@ -15,6 +15,7 @@ class ShowTest extends TestCase
     /** @test */
     public function anUserCanBeShown()
     {
+        $this->withoutExceptionHandling();
         $user = factory(User::class)->create();
 
         $response = $this->actingAs($user)->get(route('admin.users.show', $user))

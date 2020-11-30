@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UpdateRequest;
 use App\Order;
 use App\User;
+use Illuminate\Support\Str;
 
 class UserAuthController extends Controller
 {
@@ -59,5 +60,27 @@ class UserAuthController extends Controller
         $orders = Order::where('user_id', '=', auth()->user()->id, null)->paginate();
 
         return view('admin.orders.index', ['orders' => $orders]);
+    }
+
+    public function newApiToken()
+    {
+        $user = User::where('id', '=', auth()->user()->id)->first();
+
+        $user->update([
+            'api_token' => Str::random(80),
+        ]);
+
+        return back();
+    }
+
+    public function deleteApiToken()
+    {
+        $user = User::where('id', '=', auth()->user()->id)->first();
+
+        $user->update([
+            'api_token' => null,
+        ]);
+
+        return back();
     }
 }

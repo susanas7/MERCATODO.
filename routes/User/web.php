@@ -13,9 +13,9 @@ Route::as('user.')->prefix('user/')->namespace('User')->group(function () {
     Route::get('/myOrders', 'UserAuthController@myOrders')->name('myOrders');
     Route::get('/editMyProfile', 'UserAuthController@editMyProfile')->name('editMyProfile');
     Route::put('/updateMyProfile', 'UserAuthController@updateMyProfile')->name('updateMyProfile');
+    Route::get('/newAPiToken', 'UserAuthController@newApiToken')->name('newApiToken');
+    Route::get('/deleteAPiToken', 'UserAuthController@deleteApiToken')->name('deleteApiToken');
     Route::get('checkout/{order}', 'PaymentController@pay')->name('checkout');
     Route::get('/orders/payment/{order}', 'PaymentController@payment')->name('payment');
     Route::post('/storeOrder', 'ShopController@storeCart')->name('store.order');
 });
-
-//Route::get('checkout/{order}', 'PlacetopayController@pay')->name('checkout');
