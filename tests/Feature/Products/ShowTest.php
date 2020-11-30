@@ -17,8 +17,8 @@ class ShowTest extends TestCase
     {
         $product = factory(Product::class)->create();
 
-        $response = $this->get(route('products.show', $product))
+        $response = $this->get(route('admin.products.show', $product))
             ->assertStatus(200)
-            ->assertViewIs('products.show');
+            ->assertViewIs('admin.products.show');
     }
 }

@@ -21,7 +21,7 @@ class ImportTest extends TestCase
         $user = factory(User::class)->create()->assignRole('Super-administrador');
         Excel::fake();
 
-        $response = $this->actingAs($user)->post(route('products.import', [
+        $response = $this->actingAs($user)->post(route('admin.products.import', [
             'file' => UploadedFile::fake()->create('products.xlsx'),
         ]));
 

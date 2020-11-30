@@ -65,7 +65,7 @@ class ProductController extends Controller
      * @param  int  $id
      * @return JsonResponse
      */
-    public function update(Request $request, int $id)
+    public function update(StoreProductRequest $request, int $id)
     {
         $product = Product::find($id);
         $product->update($request->all());

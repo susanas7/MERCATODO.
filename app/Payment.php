@@ -47,7 +47,7 @@ class Payment extends Model
                 'requestId' => $response->requestId(),
                 'processUrl' => $response->processUrl(),
             ]);
-            return redirect($response->processUrl());
+            return response()->json(['La petición se ha procesado correctamente']);
         } else {
             $response->status()->message();
         }

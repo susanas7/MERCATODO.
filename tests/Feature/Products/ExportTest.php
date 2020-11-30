@@ -20,7 +20,7 @@ class ExportTest extends TestCase
         Excel::fake();
 
         $response = $this->actingAs($user)
-            ->get(route('products.export'))
+            ->get(route('admin.products.export'))
             ->assertStatus(403);
     }
 
@@ -34,7 +34,7 @@ class ExportTest extends TestCase
         Excel::fake();
 
         $response = $this->actingAs($user)
-            ->get(route('products.export'))
+            ->get(route('admin.products.export'))
             ->assertOk();
 
         Excel::assertDownloaded('products.xlsx');

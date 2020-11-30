@@ -18,7 +18,7 @@ class DeleteTest extends TestCase
         $this->artisan('db:seed');
         $role = Role::all()->last();
 
-        $response = $this->delete(route('roles.destroy', $role));
+        $response = $this->delete(route('admin.roles.destroy', $role));
 
         $this->assertDatabaseMissing('roles', [
             'id' => $role->id,

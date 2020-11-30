@@ -20,7 +20,7 @@ class CreateTest extends TestCase
         $this->artisan('db:seed');
         $permission = Permission::all()->random();
 
-        $response = $this->post(route('roles.store'), [
+        $response = $this->post(route('admin.roles.store'), [
             'name' => 'administrador',
             'slug' => 'admin',
             'permissions' => $permission,
@@ -46,7 +46,7 @@ class CreateTest extends TestCase
         $data[$field] = $value;
 
         // Act
-        $response = $this->post(route('roles.store', $data));
+        $response = $this->post(route('admin.roles.store', $data));
 
         // Assert
         $response->assertRedirect();

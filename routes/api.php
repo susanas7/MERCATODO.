@@ -35,9 +35,8 @@ use Illuminate\Support\Facades\Route;
     //Route::get('/api/login', 'Api\AuthController@login')->name('z.api.login');
     //Route::get('/api/logout', 'Api\AuthController@logout')->name('z.api.logout');
 
-
 Route::as('api.')->namespace('Api')->middleware('auth:api')->group(function () {
     Route::apiResource('/products', 'ProductController');
     Route::get('/login', 'AuthController@login')->name('login');
     Route::get('/logout', 'AuthController@logout')->name('logout');
-    });
+});

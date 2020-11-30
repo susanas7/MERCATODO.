@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Order;
 use App\Payment;
 use Dnetix\Redirection\PlacetoPay as PlacetoPay;
-use Illuminate\Http\Request;
-use Session;
 
 class PaymentController extends Controller
 {

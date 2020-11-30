@@ -17,6 +17,11 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Product::class, 'product');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -41,6 +46,7 @@ class ProductController extends Controller
      */
     public function create()
     {
+        //$this->authorize('create', $product);
         $categories = ProductCategory::all();
 
         return view('admin.products.create', ['categories' => $categories]);
@@ -54,7 +60,6 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        $this->authorize('viewAny', $product);
         $product = Product::create($request->all());
 
         if ($request->file('img_route')) {
@@ -74,7 +79,6 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $this->authorize('view', $product);
         return view('admin.products.show', [
             'product' => $product,
         ]);
@@ -88,7 +92,6 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        $this->authorize('update', $product);
         $categories = ProductCategory::all();
 
         return view('admin.products.edit', ['product' => $product, 'categories' => $categories]);
@@ -103,7 +106,6 @@ class ProductController extends Controller
      */
     public function update(UpdateRequest $request, Product $product)
     {
-        $this->authorize('update', $product);
         $categories = ProductCategory::all();
         $product->update($request->all());
 
@@ -125,7 +127,6 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        $this->authorize('delete', $product);
         Storage::disk('public')->delete($product->img_route);
         $product->delete();
 
@@ -140,7 +141,6 @@ class ProductController extends Controller
      */
     public function changeStatus(int $id)
     {
-        $this->authorize('update', $product);
         $product = Product::find($id);
 
         $product->is_active = !$product->is_active;
@@ -179,7 +179,7 @@ class ProductController extends Controller
      */
     public function import(Request $request)
     {
-        $this->authorize('update', $product);
+        $this->authorize('update', auth()->user());
         $import = new ProductsImport;
         $import->import($request->file('file'));
 

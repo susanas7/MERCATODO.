@@ -17,7 +17,7 @@ class UpdateTest extends TestCase
     {
         $category = factory(ProductCategory::class)->create();
 
-        $response = $this->put(route('categories.update', $category), [
+        $response = $this->put(route('admin.categories.update', $category), [
             'title' => 'Agua',
         ]);
         $category->refresh();
@@ -31,7 +31,7 @@ class UpdateTest extends TestCase
     {
         $category = factory(ProductCategory::class)->create();
 
-        $response = $this->put(route('categories.update', $category), [
+        $response = $this->put(route('admin.categories.update', $category), [
             'title' => '',
         ])->assertSessionHasErrors('title');
     }

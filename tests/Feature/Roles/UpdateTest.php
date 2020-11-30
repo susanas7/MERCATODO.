@@ -21,7 +21,7 @@ class UpdateTest extends TestCase
         $permission = Permission::all()->random();
         $role = Role::all()->last();
 
-        $response = $this->put(route('roles.update', $role), [
+        $response = $this->put(route('admin.roles.update', $role), [
             'name' => 'administrador',
             'slug' => 'admin',
             'permissions' => $permission,
@@ -49,7 +49,7 @@ class UpdateTest extends TestCase
         $data[$field] = $value;
 
         // Act
-        $response = $this->put(route('roles.update', $role), $data);
+        $response = $this->put(route('admin.roles.update', $role), $data);
 
         // Assert
         $response->assertRedirect();

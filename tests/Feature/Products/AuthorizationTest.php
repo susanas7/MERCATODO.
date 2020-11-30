@@ -18,8 +18,9 @@ class AuthorizationTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->artisan('db:seed');
         $this->user = factory(User::class)->create();
+        $this->artisan('db:seed');
+
         $this->userAuth = factory(User::class)->create()->assignRole('Super-administrador');
         $this->product = factory(Product::class)->create();
     }
@@ -27,21 +28,22 @@ class AuthorizationTest extends TestCase
     /** @test */
     public function anUnathorizedUserCanNotViewTheCreateProductsForm()
     {
-        $response = $this->actingAs($this->user)->get(route('products.create'))
+        //$user = factory(User::class)->create();
+        $response = $this->actingAs($this->user)->get(route('admin.products.create'))
             ->assertStatus(403);
     }
 
     /** @test */
     public function anAuthorizedUserCanViewTheCreateProductsForm()
     {
-        $response = $this->actingAs($this->userAuth)->get(route('products.create'))
+        $response = $this->actingAs($this->userAuth)->get(route('admin.products.create'))
             ->assertStatus(200);
     }
 
     /** @test */
     public function anUnathorizedUserCanNotViewTheUpdateProductsForm()
     {
-        $response = $this->actingAs($this->user)->get(route('products.edit', $this->product))
+        $response = $this->actingAs($this->user)->get(route('admin.products.edit', $this->product))
             ->assertStatus(403);
     }
 
@@ -49,7 +51,7 @@ class AuthorizationTest extends TestCase
     public function anAuthorizedUserCanViewTheUpdateProductsForm()
     {
         //$this->withoutExceptionHandling();
-        $response = $this->actingAs($this->userAuth)->get(route('products.edit', $this->product))
+        $response = $this->actingAs($this->userAuth)->get(route('admin.products.edit', $this->product))
             ->assertStatus(200);
     }
 
@@ -70,7 +72,8 @@ class AuthorizationTest extends TestCase
     /** @test */
     public function anUnauthorizedUserCanImportProducts()
     {
-        $response = $this->actingAs($this->user)->post(route('products.import'))
-            ->assertStatus(419);
+        //$this->withoutExceptionHandling();
+        $response = $this->actingAs($this->user)->post(route('admin.products.import'))
+            ->assertStatus(403);
     }
 }

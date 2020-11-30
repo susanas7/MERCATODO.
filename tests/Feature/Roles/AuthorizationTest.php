@@ -43,42 +43,42 @@ class AuthorizationTest extends TestCase
     /** @test */
     public function anUnathorizedUserCanNotViewTheCreateRolesForm()
     {
-        $response = $this->actingAs($this->user)->get(route('roles.create'))
+        $response = $this->actingAs($this->user)->get(route('admin.roles.create'))
             ->assertStatus(403);
     }
 
     /** @test */
     public function anAuthorizedUserCanViewTheCreateRolesForm()
     {
-        $response = $this->actingAs($this->userAuth)->get(route('roles.create'))
+        $response = $this->actingAs($this->userAuth)->get(route('admin.roles.create'))
             ->assertStatus(200);
     }
 
     /** @test */
     public function anUnathorizedUserCanNotViewTheUpdateRolesForm()
     {
-        $response = $this->actingAs($this->user)->get(route('roles.edit', $this->role))
+        $response = $this->actingAs($this->user)->get(route('admin.roles.edit', $this->role))
             ->assertStatus(403);
     }
 
     /** @test */
     public function anAthorizedUserCanViewTheUpdateRolesForm()
     {
-        $response = $this->actingAs($this->userAuth)->get(route('roles.edit', $this->role))
+        $response = $this->actingAs($this->userAuth)->get(route('admin.roles.edit', $this->role))
             ->assertStatus(200);
     }
 
     /** @test */
     public function anUnathorizedUserCanNotDeleteARole()
     {
-        $response = $this->actingAs($this->user)->get(route('roles.destroy', $this->role))
+        $response = $this->actingAs($this->user)->get(route('admin.roles.destroy', $this->role))
             ->assertStatus(403);
     }
 
     /** @test */
     public function anAuthorizedUserCanDeleteARole()
     {
-        $response = $this->actingAs($this->userAuth)->get(route('roles.destroy', $this->role))
+        $response = $this->actingAs($this->userAuth)->get(route('admin.roles.destroy', $this->role))
             ->assertStatus(200);
     }
 }

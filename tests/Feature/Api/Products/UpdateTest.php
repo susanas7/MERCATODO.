@@ -53,7 +53,7 @@ class UpdateTest extends TestCase
      */
     public function aProductCanNotBeUpdatedWithInvalidData(string $field, $value = null)
     {
-        $this->withoutExceptionHandling();
+        //$this->withoutExceptionHandling();
         // Arrange
         $product = factory(Product::class)->create();
         $data = [
@@ -76,7 +76,7 @@ class UpdateTest extends TestCase
     public function productsDataProvider(): array
     {
         return [
-            'Test title is required' => ['title', null],
+            'Test title can not be null' => ['title', null],
             'Test slug is required' => ['slug', null],
             'Test slug is too long' => ['slug', Str::random(300)],
             'Test category_id is required' => ['category_id', null],

@@ -25,8 +25,8 @@ class ShowTest extends TestCase
             'total' => '20200',
         ]);
 
-        $response = $this->actingAs($user)->get(route('orders.show', $order));
+        $response = $this->actingAs($user)->get(route('admin.orders.show', $order));
         $response->assertStatus(200);
-        $response->assertViewIs('orders.show');
+        $response->assertViewIs('admin.orders.show');
     }
 }

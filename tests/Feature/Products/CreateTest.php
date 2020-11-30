@@ -21,7 +21,7 @@ class CreateTest extends TestCase
     {
         factory(ProductCategory::class)->create();
 
-        $response = $this->post(route('products.store'), [
+        $response = $this->post(route('admin.products.store'), [
             'title' => 'Agua',
             'slug' => 'lorem ipsum etc',
             'category_id' => '1',
@@ -55,7 +55,7 @@ class CreateTest extends TestCase
         ];
         $data[$field] = $value;
 
-        $response = $this->post(route('products.store'), $data)
+        $response = $this->post(route('admin.products.store'), $data)
             ->assertRedirect()
             ->assertSessionHasErrors($field);
     }

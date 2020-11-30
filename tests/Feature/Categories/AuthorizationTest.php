@@ -46,7 +46,7 @@ class AuthorizationTest extends TestCase
     }
 
     /** @test */
-    public function anAthorizedUserCanViewTheUpdateForm()
+    public function anAuthorizedUserCanViewTheUpdateForm()
     {
         $response = $this->actingAs($this->userAuth)->get(route('admin.categories.edit', $this->category))
             ->assertStatus(200);

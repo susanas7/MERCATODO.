@@ -26,6 +26,7 @@ class MyProfileTest extends TestCase
     /** @test */
     public function anUserCanViewTheUpdateForm()
     {
+        $this->withoutExceptionHandling();
         $user = factory(User::class)->create();
 
         $response = $this->actingAs($user)->get(route('user.editMyProfile'));
@@ -39,7 +40,7 @@ class MyProfileTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($user)->put(route('user.updateMyProfile'), [
+        $response = $this->actingAs($user)->put(route('user.updateMyProfile', $user->id), [
             'name' => 'JELO',
             'email' => 'jelo@mail.com',
         ]);

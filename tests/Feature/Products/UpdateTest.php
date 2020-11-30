@@ -26,7 +26,7 @@ class UpdateTest extends TestCase
     /** @test */
     public function aProductCanBeUpdated()
     {
-        $response = $this->put(route('products.update', $this->product), [
+        $response = $this->put(route('api.products.update', $this->product), [
             'title' => 'Agua',
             'slug' => 'lorem ipsum etc',
             'price' => '32444',
@@ -40,7 +40,8 @@ class UpdateTest extends TestCase
         $this->assertEquals('1', $product->category_id);
         $this->assertEquals('32444', $product->price);
         $this->assertEquals('images/MfV3Uh.jpeg', $product->img_route);
-        $response->assertRedirect(route('admin.products.index'));
+        $response->assertStatus(200);
+        $response->assertSessionHasNoErrors();
     }
 
     /**
@@ -59,7 +60,7 @@ class UpdateTest extends TestCase
         ];
         $data[$field] = $value;
 
-        $response = $this->put(route('products.update', $this->product), $data)
+        $response = $this->put(route('api.products.update', $this->product), $data)
             ->assertRedirect()
             ->assertSessionHasErrors($field);
     }
