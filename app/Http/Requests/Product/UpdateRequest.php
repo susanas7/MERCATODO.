@@ -24,7 +24,7 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required',
+            'title' => 'required|unique:products,title',
             'slug' => 'required|max:200',
             'category_id' => 'required',
             'price' => 'required|numeric|min:0',

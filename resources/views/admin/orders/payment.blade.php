@@ -39,7 +39,11 @@
                         <div class="form-group"><P ALIGN=center>
                         </div>
                         @if(auth()->user()->id == $order->user_id)
-                            <a href="{{route('user.checkout'.$order->id}}">Pagar</a>
+                            @if($order->status == 'APPROVED')
+                            <a href="{{$order->processUrl}}">Ver pago</a>
+                            @else
+                            <a href="{{route('user.checkout',$order->id)}}">Pagar</a>
+                            @endif
                         @endif
                 </div>
             </div>

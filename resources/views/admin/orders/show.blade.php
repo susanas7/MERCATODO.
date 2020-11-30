@@ -42,7 +42,7 @@
                             @if($order->status == 'APPROVED')
                                 <a href="{{$order->processUrl}}">Ver transacción</a>
                             @else
-                                <a href="{{'/checkout/'.$order->id}}">Pagar</a>
+                                <a href="{{'/user/checkout/'.$order->id}}">Pagar</a>
                             @endif
                         @endif
                         <div class="form-group row">

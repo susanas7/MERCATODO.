@@ -18,4 +18,4 @@ Route::as('user.')->prefix('user/')->namespace('User')->group(function () {
     Route::post('/storeOrder', 'ShopController@storeCart')->name('store.order');
 });
 
-Route::get('checkout/{order}', 'PlacetopayController@pay')->name('checkout');
+//Route::get('checkout/{order}', 'PlacetopayController@pay')->name('checkout');

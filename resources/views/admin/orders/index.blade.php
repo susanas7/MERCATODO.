@@ -28,7 +28,7 @@
                           <td>{{ $order->total }}</td>
                           <td>{{ $order->created_at }}</td>
                           <td>
-                            <a href="{{route('orders.show', $order->id) }}" id="show-crud" class="btn btn-link">Ver</a>
+                            <a href="{{route('admin.orders.show', $order->id) }}" id="show-crud" class="btn btn-link">Ver</a>
                           </td>
                         </tr>
                         @endforeach

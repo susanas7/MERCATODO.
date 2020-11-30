@@ -24,13 +24,20 @@ use Illuminate\Support\Facades\Route;
             Route::apiResource('/products', 'Api\ProductController', ['as' => 'api']);
     });*/
 
-Route::name('api.')->group(function () {
+/*Route::name('api.')->middleware('auth:api')->group(function () {
     Route::apiResource('/products', 'Api\ProductController');
-});
+});*/
 //Route::apiResource('/products', 'Api\ProductController', ['as' => 'api'])->middleware('auth:sanctum');
 
 /*Route::get('/storage/{img_route}', 'Api\ProductController@image', ['as' => 'api'])
     ->name('api.products.image');*/
 
-    Route::get('/api/login', 'Api\AuthController@login')->name('z.api.login');
-    Route::get('/api/logout', 'Api\AuthController@logout')->name('z.api.logout');
+    //Route::get('/api/login', 'Api\AuthController@login')->name('z.api.login');
+    //Route::get('/api/logout', 'Api\AuthController@logout')->name('z.api.logout');
+
+
+Route::as('api.')->namespace('Api')->middleware('auth:api')->group(function () {
+    Route::apiResource('/products', 'ProductController');
+    Route::get('/login', 'AuthController@login')->name('login');
+    Route::get('/logout', 'AuthController@logout')->name('logout');
+    });

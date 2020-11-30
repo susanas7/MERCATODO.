@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use Illuminate\Support\Str;
 
 class AuthorizationTest extends TestCase
 {
@@ -22,7 +23,9 @@ class AuthorizationTest extends TestCase
         parent::setUp();
         $this->artisan('db:seed');
         $this->user = factory(User::class)->create();
-        $this->userAuth = factory(User::class)->create()->assignRole('Super-administrador');
+        $this->userAuth = factory(User::class)
+            ->create(['api_token' => Str::random(70)])
+            ->assignRole('Super-administrador');
         $this->product = factory(Product::class)->create();
     }
 
@@ -36,7 +39,6 @@ class AuthorizationTest extends TestCase
     /** @test */
     public function anAuthorizedUserCanListApiProducts()
     {
-        //Act & Assert
         $this->actingAs($this->userAuth, 'api')->getJson(route('api.products.index'), [
             'api_token' => $this->userAuth->api_token,
         ])
@@ -46,7 +48,6 @@ class AuthorizationTest extends TestCase
     /** @test */
     public function anUnathorizedUserCanNotViewAnApiProduct()
     {
-        //Act & Assert
         $response = $this->actingAs($this->user)->getJson(route('api.products.show', $this->product))
             ->assertStatus(401);
     }
@@ -63,7 +64,6 @@ class AuthorizationTest extends TestCase
     /** @test */
     public function anUnathorizedUserCanNotCreateAnApiProduct()
     {
-        //Act & Assert
         $response = $this->actingAs($this->user)->postJson(route('api.products.store'))
             ->assertStatus(401);
     }
@@ -71,7 +71,6 @@ class AuthorizationTest extends TestCase
     /** @test */
     public function anAuthorizedUserCanCreateAnApiProduct()
     {
-        //Arrange
         $data = [
             'category_id' => rand('1', '5'),
             'title' => $this->faker->sentence(2, true),
@@ -80,7 +79,6 @@ class AuthorizationTest extends TestCase
             'price' => rand('10', '20'),
         ];
 
-        //Act & Assert
         $response = $this->actingAs($this->userAuth, 'api')->postJson(route('api.products.store', $data), [
             'api_token' => $this->userAuth->api_token,
         ])
@@ -90,10 +88,8 @@ class AuthorizationTest extends TestCase
     /** @test */
     public function anUnathorizedUserCanNotUpdateAnApiProduct()
     {
-        //Arrange
         $data = [];
 
-        //Act & Assert
         $response = $this->actingAs($this->user)->putJson(route('api.products.update', $this->product), $data)
             ->assertStatus(401);
     }
@@ -101,7 +97,6 @@ class AuthorizationTest extends TestCase
     /** @test */
     public function anAuthorizedUserCanUpdateAnApiProduct()
     {
-        //Arrange
         $data = [
             'category_id' => rand('1', '5'),
             'title' => $this->faker->sentence(2, true),
@@ -110,7 +105,6 @@ class AuthorizationTest extends TestCase
             'price' => rand('10', '20'),
         ];
 
-        //Act & Assert
         $response = $this->actingAs($this->userAuth, 'api')->putJson(route('api.products.update', $this->product), $data, [
             'api_token' => $this->userAuth->api_token, ])
             ->assertStatus(200);
@@ -119,7 +113,6 @@ class AuthorizationTest extends TestCase
     /** @test */
     public function anUnathorizedUserCanNotDeleteAnApiProduct()
     {
-        //Act & Assert
         $response = $this->actingAs($this->user)->deleteJson(route('api.products.destroy',
             $this->product))->assertStatus(401);
     }
@@ -127,7 +120,6 @@ class AuthorizationTest extends TestCase
     /** @test */
     public function anAuthorizedUserCanDeleteAnApiProduct()
     {
-        //Act & Assert
         $response = $this->actingAs($this->userAuth)->deleteJson(route('api.products.destroy', $this->product), [
             'api_token' => $this->userAuth->api_token, ])
             ->assertStatus(200);
