@@ -90,4 +90,9 @@ class Product extends Model
     {
         return $this->belongsToMany(Order::class);
     }
+
+    public function metrics()
+    {
+        return $this->belongsTo(MetricProduct::class);
+    }
 }

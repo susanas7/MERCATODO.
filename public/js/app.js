@@ -1917,29 +1917,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Metric',
   data: function data() {
     return {
-      datos: []
+      datos: [],
+      title: []
     };
   },
   created: function created() {
     this.getMetrics();
   },
   methods: {
-    getToken: function getToken() {
-      axios.get('/sanctum/csrf-cookie').then(function (response) {
-        return console.log(response);
-      });
-    },
     getMetrics: function getMetrics() {
       var _this = this;
 
-      axios.get('/metrics/data').then(function (_ref) {
+      axios.get('/admin/metrics/data').then(function (_ref) {
         var data = _ref.data;
-        _this.datos = data.data;
+        _this.datos = data.data, _this.title = data.total;
 
         _this.chart();
       })["catch"](function (error) {
@@ -1952,10 +1949,11 @@ __webpack_require__.r(__webpack_exports__);
       new chart_js__WEBPACK_IMPORTED_MODULE_0___default.a(ctx, {
         type: "pie",
         data: {
-          labels: [],
+          labels: this.title,
           datasets: [{
-            label: "bebid",
-            data: this.datos
+            label: this.title,
+            data: this.datos,
+            backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)']
           }]
         },
         options: {
@@ -75325,13 +75323,20 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("h1", [_vm._v(_vm._s(_vm.datos))]),
-    _vm._v(" "),
-    _c("canvas", { attrs: { id: "grafico" } })
-  ])
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("div", { staticClass: "container" }, [
+        _c("canvas", { attrs: { id: "grafico", height: "80" } })
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 

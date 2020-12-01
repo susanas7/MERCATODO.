@@ -8,6 +8,8 @@ class MetricProduct extends Model
 {
     protected $table = 'product_metrics';
 
+    protected $appends = ['title'];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -16,4 +18,14 @@ class MetricProduct extends Model
     protected $fillable = [
         'id', 'date', 'product_id', 'total',
     ];
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
+
+    public function getTitleAttribute()
+    {
+        return $this->product->title;
+    }
 }

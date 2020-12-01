@@ -1,7 +1,8 @@
 <template>
     <div>
-        <h1>{{datos}}</h1>
-        <canvas id="grafico"></canvas>
+        <div class="container">
+            <canvas id="grafico" height="80"></canvas>
+        </div>
     </div>
     
 </template>
@@ -12,7 +13,8 @@ export default{
     name: 'Metric',
     data(){
       return {
-        datos:[]
+        datos:[],
+        title: []
       }
     },
     created() {
@@ -20,8 +22,8 @@ export default{
     },
     methods: {
         getMetrics() {
-            axios.get('/metrics/data')
-            .then(({data}) => {this.datos = data.data
+            axios.get('/admin/metrics/data')
+            .then(({data}) => {this.datos = data.data, this.title = data.total
             this.chart()})
             .catch(error => {
                 console.log(error);
@@ -33,11 +35,18 @@ export default{
                 new Chart(ctx ,{
                 type:"pie",
                 data:{
-                    labels: [],
+                    labels: this.title,
                     datasets:[
                         {
-                            label: "bebid",
+                            label: this.title,
                             data: this.datos,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)'
+                            ],
                         }
                     ]
                 },
@@ -59,7 +68,6 @@ export default{
         }
     },
     mounted() {
-    
 }
 }
 </script>

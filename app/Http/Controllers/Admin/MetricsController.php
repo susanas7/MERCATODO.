@@ -13,18 +13,19 @@ class MetricsController extends Controller
         $from = '2020-01-01';
         $to = '2020-12-12';
         $metric = MetricJob::dispatch($from, $to);
-        $data = MetricProduct::orderBy('total', 'desc')->take(5);
-        $d = $data->pluck('total');
 
-        return view('metrics.index', compact('data', 'd'));
+        return view('admin.metrics.index');
     }
 
     public function metric()
     {
-        $data = MetricProduct::orderBy('total', 'desc')->take(5);
+        $data = MetricProduct::orderBy('total', 'desc')->take(5)->get();
         $d = $data->pluck('total');
+        $c = $data->pluck('title');
+
         return response()->json([
             'data' => $d,
+            'total' => $c,
         ]);
     }
 }
