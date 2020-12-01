@@ -1,0 +1,26 @@
+.container{
+    align-items: center;
+    justify-content: center;
+}
+.container-metric{
+    display: grid;
+    width: 500px;
+    grid-template-columns: auto auto auto;
+}
+.card-metric{
+    display: grid;
+    margin: auto;
+}
+
+#most-selled-products{
+    display: grid;
+    float: left;
+}
+#void{
+    width: 50px;
+}
+
+#less-selled-products{
+    display: grid;
+    float: right;
+}

@@ -15,4 +15,6 @@ Route::as('admin.')->prefix('admin/')->namespace('Admin')->group(function () {
     Route::resource('/orders', 'OrderController');
     Route::get('/metrics', 'MetricsController@chart')->name('metric');
     Route::get('/metrics/data', 'MetricsController@metric')->name('m');
+    Route::get('/metrics/dato', 'MetricsController@met')->name('me');
+
 });

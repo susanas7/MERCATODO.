@@ -1918,17 +1918,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Metric',
   data: function data() {
     return {
       datos: [],
-      title: []
+      title: [],
+      datos2: [],
+      title2: []
     };
   },
   created: function created() {
     this.getMetrics();
+    this.getMetric();
   },
   methods: {
     getMetrics: function getMetrics() {
@@ -1937,15 +1943,25 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('/admin/metrics/data').then(function (_ref) {
         var data = _ref.data;
         _this.datos = data.data, _this.title = data.total;
-
-        _this.chart();
       })["catch"](function (error) {
         console.log(error);
         _this.loading = false;
       });
     },
-    chart: function chart() {
-      var ctx = document.getElementById('grafico').getContext('2d');
+    getMetric: function getMetric() {
+      var _this2 = this;
+
+      axios.get('/admin/metrics/dato').then(function (_ref2) {
+        var data = _ref2.data;
+        _this2.datos2 = data.data2, _this2.title2 = data.total2;
+        _this2.mostSelledProductsChart(), _this2.lessSelledProductsChart();
+      })["catch"](function (error) {
+        console.log(error);
+        _this2.loading = false;
+      });
+    },
+    mostSelledProductsChart: function mostSelledProductsChart() {
+      var ctx = document.getElementById('most-selled-products').getContext('2d');
       new chart_js__WEBPACK_IMPORTED_MODULE_0___default.a(ctx, {
         type: "pie",
         data: {
@@ -1957,6 +1973,42 @@ __webpack_require__.r(__webpack_exports__);
           }]
         },
         options: {
+          title: {
+            display: true,
+            text: 'Productos mas vendidos en los ultimos 6 meses'
+          },
+          responsive: true,
+          scales: {
+            yAxes: [{
+              ticks: {
+                stacked: false,
+                beginAtZero: true,
+                steps: 10,
+                stepValue: 5,
+                max: 20
+              }
+            }]
+          }
+        }
+      });
+    },
+    lessSelledProductsChart: function lessSelledProductsChart() {
+      var ctx = document.getElementById('less-selled-products').getContext('2d');
+      new chart_js__WEBPACK_IMPORTED_MODULE_0___default.a(ctx, {
+        type: "pie",
+        data: {
+          labels: this.title2,
+          datasets: [{
+            label: this.title2,
+            data: this.datos2,
+            backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)']
+          }]
+        },
+        options: {
+          title: {
+            display: true,
+            text: 'Productos menos vendidos en los ultimos 6 meses'
+          },
           responsive: true,
           scales: {
             yAxes: [{
@@ -75330,9 +75382,13 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { staticClass: "container" }, [
-        _c("canvas", { attrs: { id: "grafico", height: "80" } })
+    return _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "container-metric" }, [
+        _c("canvas", { attrs: { id: "most-selled-products" } }),
+        _vm._v(" "),
+        _c("div", { attrs: { id: "void" } }),
+        _vm._v(" "),
+        _c("canvas", { attrs: { id: "less-selled-products" } })
       ])
     ])
   }
