@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Jobs\MetricJob;
 use App\MetricProduct;
 use Carbon\Carbon;
-use DB;
 
 class MetricsController extends Controller
 {

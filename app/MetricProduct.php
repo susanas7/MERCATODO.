@@ -31,11 +31,11 @@ class MetricProduct extends Model
 
     public function getFirst()
     {
-        return MetricProduct::orderBy('total', 'desc')->take(5)->get();
+        return self::orderBy('total', 'desc')->take(5)->get();
     }
 
     public function getLast()
     {
-        return MetricProduct::orderBy('total', 'asc')->take(5)->get();
+        return self::orderBy('total', 'asc')->take(5)->get();
     }
 }
