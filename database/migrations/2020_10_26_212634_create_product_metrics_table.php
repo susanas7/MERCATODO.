@@ -23,25 +23,25 @@ class CreateProductMetricsTable extends Migration
         });
 
         $sql = <<<'EOT'
-CREATE PROCEDURE `product_metrics_generate` (p_from date, p_until date)
-BEGIN
-    START TRANSACTION;
-    DELETE FROM `product_metrics` WHERE `date` BETWEEN p_from AND DATE_ADD(p_until, INTERVAL 1 DAY);
-    INSERT INTO `product_metrics` (`date`, `product_id`, `total`)
-    SELECT DATE(`created_at`) AS date, `product_id` as product_id, COUNT(*) as total
-        FROM order_product
-    WHERE `created_at` BETWEEN p_from AND DATE_ADD(p_until, INTERVAL 1 DAY)
-    GROUP BY `date`, `product_id`;
-    COMMIT;
-END
-EOT;
-        DB::unprepared('DROP PROCEDURE IF EXISTS product_metrics_generate');
-        DB::unprepared($sql);
+        CREATE PROCEDURE `product_metrics_generate` (p_from date, p_until date)
+        BEGIN
+            START TRANSACTION;
+            DELETE FROM `product_metrics` WHERE `date` BETWEEN p_from AND DATE_ADD(p_until, INTERVAL 1 DAY);
+            INSERT INTO `product_metrics` (`date`, `product_id`, `total`)
+            SELECT DATE(`created_at`) AS date, `product_id` as product_id, COUNT(*) as total
+                FROM order_product
+            WHERE `created_at` BETWEEN p_from AND DATE_ADD(p_until, INTERVAL 1 DAY)
+            GROUP BY `date`, `product_id`;
+            COMMIT;
+        END
+        EOT;
+                DB::unprepared('DROP PROCEDURE IF EXISTS product_metrics_generate');
+                DB::unprepared($sql);
 
-        $oli = now()->subYear()->format('Y-m-d');
-        $dateTo = now()->format('Y-m-d');
+                $oli = now()->subYear()->format('Y-m-d');
+                $dateTo = now()->format('Y-m-d');
 
-        DB::unprepared("call product_metrics_generate('$oli', '$dateTo')");
+                DB::unprepared("call product_metrics_generate('$oli', '$dateTo')");
     }
 
     /**

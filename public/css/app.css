@@ -11369,3 +11369,16 @@ form .txt_field {
   float: right;
 }
 
+#most-frequent-users {
+  display: grid;
+}
+
+#metric-center {
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  display: flex;
+  width: 600px;
+  padding: 3% 3% 3% 3%;
+}
+

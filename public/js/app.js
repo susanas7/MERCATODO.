@@ -1921,6 +1921,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Metric',
@@ -1929,12 +1931,15 @@ __webpack_require__.r(__webpack_exports__);
       datos: [],
       title: [],
       datos2: [],
-      title2: []
+      title2: [],
+      datos3: [],
+      title3: []
     };
   },
   created: function created() {
     this.getMetrics();
     this.getMetric();
+    this.getUserMetric();
   },
   methods: {
     getMetrics: function getMetrics() {
@@ -1954,10 +1959,22 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('/admin/metrics/dato').then(function (_ref2) {
         var data = _ref2.data;
         _this2.datos2 = data.data2, _this2.title2 = data.total2;
-        _this2.mostSelledProductsChart(), _this2.lessSelledProductsChart();
+        _this2.mostSelledProductsChart(), _this2.lessSelledProductsChart(), _this2.mostFrequentUsersChart();
       })["catch"](function (error) {
         console.log(error);
         _this2.loading = false;
+      });
+    },
+    getUserMetric: function getUserMetric() {
+      var _this3 = this;
+
+      axios.get('/admin/metrics/user-data').then(function (_ref3) {
+        var data = _ref3.data;
+        _this3.datos3 = data.data3, _this3.title3 = data.total3;
+        _this3.mostSelledProductsChart(), _this3.lessSelledProductsChart(), _this3.mostFrequentUsersChart();
+      })["catch"](function (error) {
+        console.log(error);
+        _this3.loading = false;
       });
     },
     mostSelledProductsChart: function mostSelledProductsChart() {
@@ -1969,26 +1986,16 @@ __webpack_require__.r(__webpack_exports__);
           datasets: [{
             label: this.title,
             data: this.datos,
-            backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)']
+            backgroundColor: ['rgb(88, 61, 114)', 'rgb(156, 160, 179)', 'rgba(207, 209, 218)', 'rgba(235, 236, 239)', 'rgba(235, 207, 196)']
           }]
         },
         options: {
           title: {
             display: true,
-            text: 'Productos mas vendidos en los ultimos 6 meses'
+            text: 'Productos mas vendidos en los ultimos 6 meses',
+            fontSize: 14
           },
-          responsive: true,
-          scales: {
-            yAxes: [{
-              ticks: {
-                stacked: false,
-                beginAtZero: true,
-                steps: 10,
-                stepValue: 5,
-                max: 20
-              }
-            }]
-          }
+          responsive: true
         }
       });
     },
@@ -2001,26 +2008,38 @@ __webpack_require__.r(__webpack_exports__);
           datasets: [{
             label: this.title2,
             data: this.datos2,
-            backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)']
+            backgroundColor: ['rgb(255, 240, 240)', 'rgb(235, 212, 212)', 'rgb(131, 88, 88)', 'rgb(70, 51, 51)', 'rgb(108, 79, 87)']
           }]
         },
         options: {
           title: {
             display: true,
-            text: 'Productos menos vendidos en los ultimos 6 meses'
+            text: 'Productos menos vendidos en los ultimos 6 meses',
+            fontSize: 14
           },
-          responsive: true,
-          scales: {
-            yAxes: [{
-              ticks: {
-                stacked: false,
-                beginAtZero: true,
-                steps: 10,
-                stepValue: 5,
-                max: 20
-              }
-            }]
-          }
+          responsive: true
+        }
+      });
+    },
+    mostFrequentUsersChart: function mostFrequentUsersChart() {
+      var ctx = document.getElementById('most-frequent-users').getContext('2d');
+      new chart_js__WEBPACK_IMPORTED_MODULE_0___default.a(ctx, {
+        type: "pie",
+        data: {
+          labels: this.title3,
+          datasets: [{
+            label: this.title3,
+            data: this.datos3,
+            backgroundColor: ['rgb(20, 40, 80', 'rgb(39, 73, 109)', 'rgba(0, 144, 158)', 'rgba(218, 225, 231)', 'rgba(164, 197, 198)']
+          }]
+        },
+        options: {
+          title: {
+            display: true,
+            text: 'Usuarios mas frecuentes en los ultimos 6 meses',
+            fontSize: 14
+          },
+          responsive: true
         }
       });
     }
@@ -75389,6 +75408,10 @@ var staticRenderFns = [
         _c("div", { attrs: { id: "void" } }),
         _vm._v(" "),
         _c("canvas", { attrs: { id: "less-selled-products" } })
+      ]),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "metric-center" } }, [
+        _c("canvas", { attrs: { id: "most-frequent-users" } })
       ])
     ])
   }
