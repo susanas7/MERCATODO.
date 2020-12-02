@@ -8,6 +8,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Http\UploadedFile;
 use Maatwebsite\Excel\Facades\Excel;
 use Tests\TestCase;
+use App\Product;
 
 class ImportTest extends TestCase
 {
@@ -18,13 +19,27 @@ class ImportTest extends TestCase
     public function anAuthorizedUserCanImportProducts()
     {
         $this->artisan('db:seed');
+        $file = new UploadedFile(base_path('tests/Feature/Products/products.xlsx'),
+            'products.xlsx', null, null, true);
+
         $user = factory(User::class)->create()->assignRole('Super-administrador');
-        Excel::fake();
 
-        $response = $this->actingAs($user)->post(route('admin.products.import', [
-            'file' => UploadedFile::fake()->create('products.xlsx'),
-        ]));
+        $response = $this->actingAs($user)->post(route('admin.products.import'), ['file' => $file]);
+        $response->assertSessionHasNoErrors(); 
+    }
 
-        $response->assertSessionHasNoErrors();
+    /** @test */
+    public function canNotImportAFileWithInvalidData()
+    {
+        $this->artisan('db:seed');
+        $file = new UploadedFile(base_path('tests/Feature/Products/prod.xlsx'),
+            'prod.xlsx', null, null, true);
+
+        $user = factory(User::class)->create()->assignRole('Super-administrador');
+
+        $response = $this->actingAs($user)->post(route('admin.products.import'), ['file' => $file]); 
+
+        $response->assertSessionHasErrors();
+        $this->assertDatabaseCount('products', 0);
     }
 }

@@ -13,6 +13,8 @@ use App\ProductCategory;
 use App\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Spatie\Permission\Models\Role;
+use App\MetripProduct;
+use App\Policies\MetricPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -27,6 +29,7 @@ class AuthServiceProvider extends ServiceProvider
          Product::class => ProductPolicy::class,
          ProductCategory::class => ProductCategoryPolicy::class,
          Order::class => OrderPolicy::class,
+         MetricProduct::class => MetricPolicy::class,
     ];
 
     /**

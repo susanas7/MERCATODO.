@@ -1,45 +1,51 @@
 
 # Mercatodo
 
-Creado en laravel, este proyecto se trata de una tienda online. Posee todo lo necesario para vender cualquier producto por medio de la web.
+Created with laravel and php, this project is about an online store. It has everything you need to sell any product on the web.
 
+## Functionalities
+- Login system
+- Allows you to manage products, users, roles, categories
+- Generation of reports for market analysis
+- Allows you to pay through the Placetopay gateway
+- Allows you to manage products through API Rest
+- Import and export products
 
 ## Instalación
 
-- Clona el repositorio.
+- Clone the repository.
     ```
     git clone https://github.com/susanas7/MERCATODO..git
     ```
-- Instala paquetes y dependencias.
+- Install packages and dependencies.
     ```
     composer install
     ```
-- Copia el archivo .env.example y configura tu entorno.
+- Copy the .env.example file and configure your environment.
     ```
     cp .env.example .env
     ```
-- Crea tu base de datos y configurala en tu archivo .env.
-- Ejecuta las migraciones y los seeders para tener acceso a los usuarios administradores.
+- Create your database and configure it in your .env file.
+- Run migrations and seeders to access admin users.
     ```
     php artisan migrate
     php artisan db:seed
     ```
-- Genera la APP_KEY.
+- Generate the APP_KEY.
     ```
     php artisan key:generate
     ```
-- Crea los enlaces configurados en la app.
+- Create the links configured in the app.
     ```
     php artisan storage:link
     ```
-- Instala los paquetes para node.js y compila.
+- Install the packages for node.js and compile.
     ```
     npm install
-    npm run dev
+    npm run dev or npm run prod
     ```
-- Configura mailtrap para el envío de emails:
-    - Crea una cuenta en mailtrap, en caso de que no la tengas.
-    - En el archivo .env configura los siguientes campos, un ejemplo:
+- Configure mailtrap for sending emails:
+    - In the .env file configure the following fields, an example:
         ```
         MAIL_MAILER=smtp
         MAIL_HOST=smtp.mailtrap.io
@@ -50,6 +56,6 @@ Creado en laravel, este proyecto se trata de una tienda online. Posee todo lo ne
         MAIL_FROM_ADDRESS=norequest@mailtrap
         MAIL_FROM_NAME="${APP_NAME}"
         ```
-- Para usar correctamente del servicio API, puedes leer la documentacion [aqui](https://documenter.getpostman.com/view/11883657/TVmHDfGU).
+- To use API Rest correctly, you can read the documentation [here](https://documenter.getpostman.com/view/11883657/TVmHDfGU).
 
-### ¡Eso sería todo!
+### It is done!
