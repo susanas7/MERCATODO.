@@ -64,12 +64,15 @@ class UserAuthController extends Controller
 
     public function newApiToken()
     {
-        $user = User::where('id', '=', auth()->user()->id)->first();
+        if (auth()->user()->can('api')) {
+            $user = User::where('id', '=', auth()->user()->id)->first();
 
-        $user->update([
+            $user->update([
             'api_token' => Str::random(80),
-        ]);
+            ]);
 
+            return back();
+        }
         return back();
     }
 

@@ -35,13 +35,13 @@ class CreateProductMetricsTable extends Migration
             COMMIT;
         END
         EOT;
-                DB::unprepared('DROP PROCEDURE IF EXISTS product_metrics_generate');
-                DB::unprepared($sql);
+        DB::unprepared('DROP PROCEDURE IF EXISTS product_metrics_generate');
+        DB::unprepared($sql);
 
-                $oli = now()->subYear()->format('Y-m-d');
-                $dateTo = now()->format('Y-m-d');
+        $oli = now()->subYear()->format('Y-m-d');
+        $dateTo = now()->format('Y-m-d');
 
-                DB::unprepared("call product_metrics_generate('$oli', '$dateTo')");
+        DB::unprepared("call product_metrics_generate('$oli', '$dateTo')");
     }
 
     /**

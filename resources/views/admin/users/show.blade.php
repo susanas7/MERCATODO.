@@ -57,6 +57,7 @@
                             <label name="name" class="col-md-8 col-form-label text-md-center">{{$user->email_verified_at}}</label>
                             </div>
                         </div>
+                        @if($user->can('api'))
                         @if($user->id == auth()->user()->id)
                         <div class="form-group row">
                             <label name="email" class="col-md-4 col-form-label text-md-right">API TOKEN:</label>
@@ -75,6 +76,7 @@
                             </a>
                             </div>
                         </div>
+                        @endif
                         @endif
                         <div class="form-group"><P ALIGN=center>
                         </div>

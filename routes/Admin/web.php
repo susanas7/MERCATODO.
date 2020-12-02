@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Auth::routes(['verify' => 'true']);
-Route::as('admin.')->prefix('admin/')->namespace('Admin')->group(function () {
+Route::as('admin.')->prefix('admin/')->middleware('verified')->namespace('Admin')->group(function () {
     Route::resource('/users', 'UserController');
     Route::get('/users/changeStatus/{id}', 'UserController@changeStatus')->name('users.changeStatus');
     Route::resource('/products', 'ProductController');
@@ -12,9 +12,9 @@ Route::as('admin.')->prefix('admin/')->namespace('Admin')->group(function () {
     Route::post('/products/import', 'ProductController@import')->name('products.import');
     Route::resource('/roles', 'RoleController');
     Route::resource('/categories', 'CategoryController');
-    Route::resource('/orders', 'OrderController');
+    Route::get('/orders', 'OrderController@index')->name('orders.index');
+    Route::get('/orders/{order}', 'OrderController@show')->name('orders.show');
     Route::get('/metrics', 'MetricsController@chart')->name('metric');
-    Route::get('/metrics/data', 'MetricsController@metric')->name('m');
-    Route::get('/metrics/dato', 'MetricsController@met')->name('me');
-    Route::get('/metrics/user-data', 'MetricsController@userMetric')->name('mu');
+    Route::get('/metrics/data', 'MetricsController@metricData')->name('metricData');
+    Route::get('/metrics/data2', 'MetricsController@metricData2')->name('metricData2');
 });

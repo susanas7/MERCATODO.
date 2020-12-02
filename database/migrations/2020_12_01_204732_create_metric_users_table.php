@@ -34,13 +34,13 @@ class CreateMetricUsersTable extends Migration
             COMMIT;
         END
         EOT;
-                DB::unprepared('DROP PROCEDURE IF EXISTS user_metrics_generate');
-                DB::unprepared($sql);
-        
-                $oli = now()->subYear()->format('Y-m-d');
-                $dateTo = now()->format('Y-m-d');
-        
-                DB::unprepared("call user_metrics_generate('$oli', '$dateTo')");
+        DB::unprepared('DROP PROCEDURE IF EXISTS user_metrics_generate');
+        DB::unprepared($sql);
+
+        $oli = now()->subYear()->format('Y-m-d');
+        $dateTo = now()->format('Y-m-d');
+
+        DB::unprepared("call user_metrics_generate('$oli', '$dateTo')");
     }
 
     /**

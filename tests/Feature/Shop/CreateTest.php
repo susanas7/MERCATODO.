@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Orders;
+namespace Tests\Feature\Shop;
 
 use App\Order;
 use App\Product;

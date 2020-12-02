@@ -18,12 +18,12 @@ export default{
     name: 'Metric',
     data(){
       return {
-        datos:[],
-        title: [],
+        productData:[],
+        productTitle: [],
         datos2: [],
         title2: [],
-        datos3: [],
-        title3: []
+        userData: [],
+        userTitle: []
       }
     },
     created() {
@@ -34,26 +34,16 @@ export default{
     methods: {
         getMetrics() {
             axios.get('/admin/metrics/data')
-            .then(({data}) => {this.datos = data.data, this.title = data.total})
+            .then(({data}) => {this.productData = data.productData, this.productTitle = data.productTitle,
+            this.userData = data.userData, this.userTitle = data.userTitle})
             .catch(error => {
                 console.log(error);
                 this.loading = false;
             })
         },
         getMetric() {
-            axios.get('/admin/metrics/dato')
+            axios.get('/admin/metrics/data2')
             .then(({data}) => {this.datos2 = data.data2, this.title2 = data.total2
-            this.mostSelledProductsChart(),
-            this.lessSelledProductsChart(),
-            this.mostFrequentUsersChart()})
-            .catch(error => {
-                console.log(error);
-                this.loading = false;
-            })
-        },
-        getUserMetric() {
-            axios.get('/admin/metrics/user-data')
-            .then(({data}) => {this.datos3 = data.data3, this.title3 = data.total3
             this.mostSelledProductsChart(),
             this.lessSelledProductsChart(),
             this.mostFrequentUsersChart()})
@@ -67,11 +57,11 @@ export default{
                 new Chart(ctx ,{
                 type:"pie",
                 data:{
-                    labels: this.title,
+                    labels: this.productTitle,
                     datasets:[
                         {
-                            label: this.title,
-                            data: this.datos,
+                            label: this.productTitle,
+                            data: this.productData,
                             backgroundColor: [
                                 'rgb(88, 61, 114)',
                                 'rgb(156, 160, 179)',
@@ -127,11 +117,11 @@ export default{
                 new Chart(ctx ,{
                 type:"pie",
                 data:{
-                    labels: this.title3,
+                    labels: this.userTitle,
                     datasets:[
                         {
-                            label: this.title3,
-                            data: this.datos3,
+                            label: this.userTitle,
+                            data: this.userData,
                             backgroundColor: [
                                 'rgb(20, 40, 80',
                                 'rgb(39, 73, 109)',

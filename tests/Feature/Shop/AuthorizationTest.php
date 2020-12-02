@@ -70,4 +70,12 @@ class AuthorizationTest extends TestCase
         $response = $this->actingAs($this->user)->get(route('user.reduceByOne', $this->product->id))
             ->assertRedirect();
     }
+
+    /** @test */
+    public function anUnauthenticatedUserCanStoreAnOrder()
+    {
+        $response = $this->post(route('user.store.order'))
+            ->assertStatus(302)
+            ->assertRedirect(route('login'));
+    }
 }

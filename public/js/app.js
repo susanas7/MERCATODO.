@@ -1928,12 +1928,12 @@ __webpack_require__.r(__webpack_exports__);
   name: 'Metric',
   data: function data() {
     return {
-      datos: [],
-      title: [],
+      productData: [],
+      productTitle: [],
       datos2: [],
       title2: [],
-      datos3: [],
-      title3: []
+      userData: [],
+      userTitle: []
     };
   },
   created: function created() {
@@ -1947,7 +1947,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('/admin/metrics/data').then(function (_ref) {
         var data = _ref.data;
-        _this.datos = data.data, _this.title = data.total;
+        _this.productData = data.productData, _this.productTitle = data.productTitle, _this.userData = data.userData, _this.userTitle = data.userTitle;
       })["catch"](function (error) {
         console.log(error);
         _this.loading = false;
@@ -1956,7 +1956,7 @@ __webpack_require__.r(__webpack_exports__);
     getMetric: function getMetric() {
       var _this2 = this;
 
-      axios.get('/admin/metrics/dato').then(function (_ref2) {
+      axios.get('/admin/metrics/data2').then(function (_ref2) {
         var data = _ref2.data;
         _this2.datos2 = data.data2, _this2.title2 = data.total2;
         _this2.mostSelledProductsChart(), _this2.lessSelledProductsChart(), _this2.mostFrequentUsersChart();
@@ -1965,27 +1965,15 @@ __webpack_require__.r(__webpack_exports__);
         _this2.loading = false;
       });
     },
-    getUserMetric: function getUserMetric() {
-      var _this3 = this;
-
-      axios.get('/admin/metrics/user-data').then(function (_ref3) {
-        var data = _ref3.data;
-        _this3.datos3 = data.data3, _this3.title3 = data.total3;
-        _this3.mostSelledProductsChart(), _this3.lessSelledProductsChart(), _this3.mostFrequentUsersChart();
-      })["catch"](function (error) {
-        console.log(error);
-        _this3.loading = false;
-      });
-    },
     mostSelledProductsChart: function mostSelledProductsChart() {
       var ctx = document.getElementById('most-selled-products').getContext('2d');
       new chart_js__WEBPACK_IMPORTED_MODULE_0___default.a(ctx, {
         type: "pie",
         data: {
-          labels: this.title,
+          labels: this.productTitle,
           datasets: [{
-            label: this.title,
-            data: this.datos,
+            label: this.productTitle,
+            data: this.productData,
             backgroundColor: ['rgb(88, 61, 114)', 'rgb(156, 160, 179)', 'rgba(207, 209, 218)', 'rgba(235, 236, 239)', 'rgba(235, 207, 196)']
           }]
         },
@@ -2026,10 +2014,10 @@ __webpack_require__.r(__webpack_exports__);
       new chart_js__WEBPACK_IMPORTED_MODULE_0___default.a(ctx, {
         type: "pie",
         data: {
-          labels: this.title3,
+          labels: this.userTitle,
           datasets: [{
-            label: this.title3,
-            data: this.datos3,
+            label: this.userTitle,
+            data: this.userData,
             backgroundColor: ['rgb(20, 40, 80', 'rgb(39, 73, 109)', 'rgba(0, 144, 158)', 'rgba(218, 225, 231)', 'rgba(164, 197, 198)']
           }]
         },

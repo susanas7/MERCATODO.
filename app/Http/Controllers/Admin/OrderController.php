@@ -7,6 +7,12 @@ use App\Order;
 
 class OrderController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Order::class, 'category');
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *

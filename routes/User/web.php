@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Auth::routes(['verify' => 'true']);
-Route::as('user.')->prefix('user/')->namespace('User')->group(function () {
+Route::as('user.')->prefix('user/')->middleware('verified')->namespace('User')->group(function () {
     Route::get('/add-to-cart/{id}', 'ShopController@addToCart')->name('addToCart');
     Route::get('/shoppingCart', 'ShopController@shoppingCart')->name('shoppingCart');
     Route::get('/reduce/{id}', 'ShopController@reduceByOne')->name('reduceByOne');

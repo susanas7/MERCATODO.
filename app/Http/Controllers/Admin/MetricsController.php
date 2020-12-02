@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Jobs\MetricJob;
 use App\Jobs\UserMetricJob;
 use App\MetricProduct;
-use Carbon\Carbon;
 use App\MetricUser;
+use Carbon\Carbon;
 
 class MetricsController extends Controller
 {
@@ -21,19 +21,25 @@ class MetricsController extends Controller
         return view('admin.metrics.index');
     }
 
-    public function metric()
+    public function metricData()
     {
         $data = MetricProduct::orderBy('total', 'desc')->take(5)->get();
         $d = $data->pluck('total');
         $c = $data->pluck('title');
 
+        $userData = MetricUser::orderBy('total', 'desc')->take(5)->get();
+        $a = $userData->pluck('total');
+        $b = $userData->pluck('name');
+
         return response()->json([
-            'data' => $d,
-            'total' => $c,
+            'productData' => $d,
+            'productTitle' => $c,
+            'userData' => $a,
+            'userTitle' => $b,
         ]);
     }
 
-    public function met()
+    public function metricData2()
     {
         $data2 = MetricProduct::orderBy('total', 'asc')->take(5)->get();
         $x = $data2->pluck('total');
@@ -42,18 +48,6 @@ class MetricsController extends Controller
         return response()->json([
             'data2' => $x,
             'total2' => $z,
-        ]);
-    }
-
-    public function userMetric()
-    {
-        $data = MetricUser::orderBy('total', 'desc')->take(5)->get();
-        $d = $data->pluck('total');
-        $c = $data->pluck('name');
-
-        return response()->json([
-            'data3' => $d,
-            'total3' => $c,
         ]);
     }
 }
