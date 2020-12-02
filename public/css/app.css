@@ -11259,6 +11259,35 @@ form .txt_field {
   padding-bottom: 5px;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+#footer {
+  background-image: linear-gradient(130deg, #ff9259 0, #ff2426 70%);
+  color: blanchedalmond;
+}
+
+#footer-div {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+#footer-div h2 {
+  margin: 0 auto;
+  margin-top: 40px;
+}
+
+#footer-subtitle {
+  margin-right: 30px;
+  justify-content: right;
+}
+
 .container_show {
   width: 75%;
   height: 400px;
@@ -11346,7 +11375,7 @@ form .txt_field {
 
 .container-metric {
   display: grid;
-  width: 500px;
+  width: 532px;
   grid-template-columns: auto auto auto;
 }
 
@@ -11358,6 +11387,8 @@ form .txt_field {
 #most-selled-products {
   display: grid;
   float: left;
+  border: 1px solid grey;
+  border-radius: 20px;
 }
 
 #void {
@@ -11367,6 +11398,8 @@ form .txt_field {
 #less-selled-products {
   display: grid;
   float: right;
+  border: 1px solid grey;
+  border-radius: 20px;
 }
 
 #most-frequent-users {
@@ -11377,8 +11410,10 @@ form .txt_field {
   justify-content: center;
   align-items: center;
   margin: 0 auto;
+  margin-top: 15px;
   display: flex;
   width: 600px;
-  padding: 3% 3% 3% 3%;
+  border: 1px solid grey;
+  border-radius: 20px;
 }
 

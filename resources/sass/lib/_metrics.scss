@@ -4,7 +4,7 @@
 }
 .container-metric{
     display: grid;
-    width: 500px;
+    width: 532px;
     grid-template-columns: auto auto auto;
 }
 .card-metric{
@@ -15,6 +15,8 @@
 #most-selled-products{
     display: grid;
     float: left;
+    border: 1px solid grey;
+    border-radius: 20px;
 }
 #void{
     width: 50px;
@@ -23,6 +25,8 @@
 #less-selled-products{
     display: grid;
     float: right;
+    border: 1px solid grey;
+    border-radius: 20px;
 }
 
 #most-frequent-users{
@@ -33,7 +37,9 @@
     justify-content: center;
     align-items: center;
     margin: 0 auto;
+    margin-top: 15px;
     display: flex;
     width: 600px;
-    padding: 3% 3% 3% 3%;
+    border: 1px solid grey;
+    border-radius: 20px;
 }

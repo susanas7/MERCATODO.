@@ -51,5 +51,15 @@
   @endforeach
 </div>
 {{$products->links()}} 
-
+<div class="footer" id="footer">
+            <div id="footer-div">
+                <h2>Mercatodo</h2>
+                <h7>2020 ©</h7>    
+            </div>
+            <div id="footer-subtitle" align="right">
+                <h4>Contactenos</h4>
+                <h6>267-37-29 / 300-738-2903</h6>
+                <h6>mercatodo@support.com.co</h6>  
+            </div>
+        </div>
 @endsection
