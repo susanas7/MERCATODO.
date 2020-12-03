@@ -17,7 +17,7 @@ class CreateTest extends TestCase
     /** @test */
     public function aRoleCanBeStored()
     {
-        $this->artisan('db:seed');
+        $this->artisan('migrate:refresh --seed');
         $permission = Permission::all()->random();
 
         $response = $this->post(route('admin.roles.store'), [

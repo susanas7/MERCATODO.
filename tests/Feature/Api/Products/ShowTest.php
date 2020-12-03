@@ -17,7 +17,7 @@ class ShowTest extends TestCase
     public function anApiCanShowAProduct()
     {
         //Arrange
-        $this->artisan('db:seed');
+        $this->artisan('migrate:refresh --seed');
         $product = factory(Product::class)->create();
         $userAuth = factory(User::class)->create()->assignRole('Super-administrador');
 

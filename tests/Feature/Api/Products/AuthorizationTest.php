@@ -21,7 +21,7 @@ class AuthorizationTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->artisan('db:seed');
+        $this->artisan('migrate:refresh --seed');
         $this->user = factory(User::class)->create();
         $this->userAuth = factory(User::class)
             ->create(['api_token' => Str::random(70)])
@@ -39,6 +39,7 @@ class AuthorizationTest extends TestCase
     /** @test */
     public function anAuthorizedUserCanListApiProducts()
     {
+        $this->withoutExceptionHandling();
         $this->actingAs($this->userAuth, 'api')->getJson(route('api.products.index'), [
             'api_token' => $this->userAuth->api_token,
         ])

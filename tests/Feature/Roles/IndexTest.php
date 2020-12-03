@@ -17,15 +17,11 @@ class IndexTest extends TestCase
      */
     public function aUserCanListRoles()
     {
-        $this->withoutExceptionHandling();
-
         $role = factory(Role::class)->create();
 
-        $response = $this->get(route('admin.roles.index'));
-        $response->assertOk();
-        $responseRoles = $response->getOriginalContent()['roles'];
-        $responseRoles->each(function ($item) use ($role) {
-            $this->assertSame($role->id, $item->id);
-        });
+        $response = $this->get(route('admin.roles.index'))
+            ->assertOk()
+            ->assertViewis('admin.roles.index')
+            ->assertSee($role->name);
     }
 }

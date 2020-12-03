@@ -17,7 +17,7 @@ class UpdateTest extends TestCase
     /** @test */
     public function aRoleCanBeUpdated()
     {
-        $this->artisan('db:seed');
+        $this->artisan('migrate:refresh --seed');
         $permission = Permission::all()->random();
         $role = Role::all()->last();
 
@@ -40,7 +40,7 @@ class UpdateTest extends TestCase
     public function aRoleCanNotBeUpdatedWithInvalidData(string $field, $value = null)
     {
         // Arrange
-        $this->artisan('db:seed');
+        $this->artisan('migrate:refresh --seed');
         $role = Role::all()->last();
         $data = [
             'name' => 'epsum',

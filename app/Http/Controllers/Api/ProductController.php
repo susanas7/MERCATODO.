@@ -4,12 +4,20 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\StoreProductRequest;
+use App\Http\Requests\Product\UpdateRequest;
 use App\Http\Resources\ProductResource as ProductResource;
 use App\Product;
+use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    private $productRepository;
+
+    public function __construct(ProductRepository $productRepository)
+    {
+        $this->productRepository = $productRepository;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -30,11 +38,7 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        $product = Product::create($request->all());
-        if ($request->file('img_route')) {
-            $product->img_route = $request->file('img_route')->store('images', 'public');
-            $product->save();
-        }
+        $product = $this->productRepository->storeProduct($request);
 
         return response()->json([
             'Status' => '200',
@@ -65,15 +69,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return JsonResponse
      */
-    public function update(StoreProductRequest $request, int $id)
+    public function update(UpdateRequest $request, Product $product)
     {
-        $product = Product::find($id);
-        $product->update($request->all());
-        if ($request->file('img_route')) {
-            Storage::disk('public')->delete($product->img_route);
-            $product->img_route = $request->file('img_route')->store('images', 'public');
-            $product->save();
-        }
+        $this->productRepository->updateProduct($request, $product);
 
         return response()->json([
             'Status' => '200',

@@ -18,7 +18,7 @@ class AuthorizationTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->artisan('db:seed');
+        $this->artisan('migrate:refresh --seed');
         $this->user = factory(User::class)->create();
         $this->userAuth = factory(User::class)->create()->assignRole('Super-administrador');
         $this->category = factory(ProductCategory::class)->create();

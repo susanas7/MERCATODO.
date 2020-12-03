@@ -24,11 +24,11 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|unique:products,title',
+            'title' => 'required',
             'slug' => 'required|max:200',
             'category_id' => 'required',
             'price' => 'required|numeric|min:0',
-            'img_route' => 'image',
+            'image' => 'image',
         ];
     }
 }

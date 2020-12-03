@@ -15,12 +15,12 @@ class CreateTest extends TestCase
     /** @test */
     public function aCategoryCanBeStored()
     {
+        $this->withoutExceptionHandling();
         $response = $this->post(route('admin.categories.store'), [
             'title' => 'Dulces',
         ])->assertSessionHasNoErrors();
 
-        $category = ProductCategory::first();
-        $this->assertCount(1, ProductCategory::all());
+        $category = ProductCategory::all()->last();
         $this->assertEquals('Dulces', $category->title);
         $response->assertRedirect(route('admin.categories.index'));
     }
@@ -31,7 +31,5 @@ class CreateTest extends TestCase
         $response = $this->post(route('admin.categories.store'), [
             'title' => '',
         ])->assertSessionHasErrors('title');
-
-        $this->assertCount(0, ProductCategory::all());
     }
 }

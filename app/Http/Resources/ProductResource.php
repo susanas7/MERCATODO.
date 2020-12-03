@@ -14,28 +14,6 @@ class ProductResource extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    /*public function toArray($request)
-    {
-        return [
-            'type'          => 'products',
-            'id'            => (string)$this->id,
-            'attributes'    => [
-                'title' => $this->title,
-            ],
-            'relationships' => [
-                'category' => [
-                    'data' => [
-                        'type' => 'category',
-                        'id' => (string) $this->category_id,
-                     ]
-                ]
-            ]
-        ];
-    }
-    public function with($request)
-    {
-        return ['included' => [new ProductCategoryResource($this->category)]];
-    }*/
     public function toArray($request)
     {
         return [
@@ -62,11 +40,4 @@ class ProductResource extends JsonResource
         ],
     ];
     }
-
-    /*public function with($request)
-    {
-        if ($this->whenLoaded('category')) {
-            return ['included' => [new ProductCategoryResource($this->category)]];
-        }
-    }*/
 }

@@ -17,12 +17,8 @@ class IndexTest extends TestCase
     {
         $user = factory(User::class)->create();
         $response = $this->get(route('admin.users.index'))
-            ->assertOk();
-        $users = User::all();
-
-        $responseUsers = $response->getOriginalContent()['users']
-            ->each(function ($item) use ($user) {
-                $this->assertSame($user->id, $item->id);
-            });
+            ->assertOk()
+            ->assertViewis('admin.users.index')
+            ->assertSee($user->name);
     }
 }

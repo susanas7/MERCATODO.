@@ -11,7 +11,7 @@ Created with laravel and php, this project is about an online store. It has ever
 - Allows you to manage products through API Rest
 - Import and export products
 
-## Instalación
+## Installation
 
 - Clone the repository.
     ```

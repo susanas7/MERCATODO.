@@ -15,7 +15,7 @@ class DeleteTest extends TestCase
     /** @test */
     public function aRoleCanBeDeleted()
     {
-        $this->artisan('db:seed');
+        $this->artisan('migrate:refresh --seed');
         $role = Role::all()->last();
 
         $response = $this->delete(route('admin.roles.destroy', $role));

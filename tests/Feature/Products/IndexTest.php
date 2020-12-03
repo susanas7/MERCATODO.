@@ -19,10 +19,8 @@ class IndexTest extends TestCase
         $products = Product::all();
 
         $response = $this->get(route('admin.products.index'))
-            ->assertOk();
-        $responseProducts = $response->getOriginalContent()['products']
-            ->each(function ($item) use ($product) {
-                $this->assertSame($product->id, $item->id);
-            });
+            ->assertOk()
+            ->assertViewis('admin.products.index')
+            ->assertSee($product->title);
     }
 }

@@ -25,8 +25,7 @@ class CreateTest extends TestCase
             'password' => '12345678',
         ]);
 
-        $user = User::first();
-        $this->assertCount(1, User::all());
+        $user = User::all()->last();
 
         $this->assertEquals('Juli', $user->name);
         $this->assertEquals('juli@mail.com', $user->email);

@@ -27,7 +27,7 @@ class ExportTest extends TestCase
     /** @test */
     public function anAuthorizedUserCanExportProducts()
     {
-        $this->artisan('db:seed');
+        $this->artisan('migrate:refresh --seed');
 
         factory(Product::class, 5)->create();
         $user = factory(User::class)->create()->assignRole('Super-administrador');

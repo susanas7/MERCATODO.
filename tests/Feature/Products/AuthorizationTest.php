@@ -18,9 +18,9 @@ class AuthorizationTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->user = factory(User::class)->create();
-        $this->artisan('db:seed');
+        $this->artisan('migrate:refresh --seed');
 
+        $this->user = factory(User::class)->create();
         $this->userAuth = factory(User::class)->create()->assignRole('Super-administrador');
         $this->product = factory(Product::class)->create();
     }
@@ -28,7 +28,6 @@ class AuthorizationTest extends TestCase
     /** @test */
     public function anUnathorizedUserCanNotViewTheCreateProductsForm()
     {
-        //$user = factory(User::class)->create();
         $response = $this->actingAs($this->user)->get(route('admin.products.create'))
             ->assertStatus(403);
     }
@@ -50,7 +49,6 @@ class AuthorizationTest extends TestCase
     /** @test */
     public function anAuthorizedUserCanViewTheUpdateProductsForm()
     {
-        //$this->withoutExceptionHandling();
         $response = $this->actingAs($this->userAuth)->get(route('admin.products.edit', $this->product))
             ->assertStatus(200);
     }
@@ -72,7 +70,6 @@ class AuthorizationTest extends TestCase
     /** @test */
     public function anUnauthorizedUserCanImportProducts()
     {
-        //$this->withoutExceptionHandling();
         $response = $this->actingAs($this->user)->post(route('admin.products.import'))
             ->assertStatus(403);
     }

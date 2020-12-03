@@ -11,6 +11,13 @@ class ProductCategory extends Model
     protected $table = 'product_categories';
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['title'];
+
+    /**
      * Relationship with the product.
      *
      * @return relationship

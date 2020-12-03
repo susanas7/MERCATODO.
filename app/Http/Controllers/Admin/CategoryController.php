@@ -48,9 +48,7 @@ class CategoryController extends Controller
      */
     public function store(CreateRequest $request)
     {
-        $category = new ProductCategory();
-        $category->title = $request->title;
-        $category->save();
+        $category = ProductCategory::create($request->all());
 
         toast('Categoria creada correctamente', 'success');
         return redirect()->route('admin.categories.index');

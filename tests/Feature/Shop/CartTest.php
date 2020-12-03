@@ -19,7 +19,7 @@ class CartTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->artisan('db:seed');
+        $this->artisan('migrate:refresh --seed');
         $this->user = factory(User::class)->create();
         $this->productA = factory(Product::class)->create();
         $this->productB = factory(Product::class)->create();

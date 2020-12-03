@@ -2,17 +2,11 @@
 
 namespace Tests\Feature\Metrics;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
-use App\User;
-use App\Jobs\MetricJob;
-use App\Product;
-use App\Order;
-use App\OrderProduct;
-use DB;
 use App\MetricProduct;
 use App\MetricUser;
+use App\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class IndexTest extends TestCase
 {
@@ -26,16 +20,12 @@ class IndexTest extends TestCase
         $response = $this->actingAs($user)->get(route('admin.metric'))
             ->assertStatus(403);
     }
-    
+
     /** @test */
     public function anAuthorizedUserCanSeeMetricsAndJobsWorks()
     {
-        $this->withoutExceptionHandling();
-        $this->artisan('db:seed');
+        $this->artisan('migrate:refresh --seed');
         $user = factory(User::class)->create()->assignRole('Super-administrador');
-        factory(Product::class, 50)->create();
-        factory(Order::class,50)->create();
-        factory(OrderProduct::class, 50)->create();
 
         $response = $this->actingAs($user)->get(route('admin.metric'))
             ->assertOk();

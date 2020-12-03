@@ -10,6 +10,7 @@ use App\Http\Requests\Product\UpdateRequest;
 use App\Imports\ProductsImport;
 use App\Product;
 use App\ProductCategory;
+use App\Repositories\ProductRepository;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -17,9 +18,12 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
-    public function __construct()
+    private $productRepository;
+
+    public function __construct(ProductRepository $productRepository)
     {
         $this->authorizeResource(Product::class, 'product');
+        $this->productRepository = $productRepository;
     }
 
     /**
@@ -46,7 +50,6 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //$this->authorize('create', $product);
         $categories = ProductCategory::all();
 
         return view('admin.products.create', ['categories' => $categories]);
@@ -60,12 +63,7 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        $product = Product::create($request->all());
-
-        if ($request->file('img_route')) {
-            $product->img_route = $request->file('img_route')->store('images', 'public');
-            $product->save();
-        }
+        $this->productRepository->storeProduct($request);
 
         toast('Producto creado correctamente', 'success');
         return redirect()->route('admin.products.index');
@@ -106,14 +104,7 @@ class ProductController extends Controller
      */
     public function update(UpdateRequest $request, Product $product)
     {
-        $categories = ProductCategory::all();
-        $product->update($request->all());
-
-        if ($request->file('img_route')) {
-            Storage::disk('public')->delete($product->img_route);
-            $product->img_route = $request->file('img_route')->store('images', 'public');
-            $product->save();
-        }
+        $this->productRepository->updateProduct($request, $product);
 
         toast('Producto actualizado correctamente', 'success');
         return redirect()->route('admin.products.index');
