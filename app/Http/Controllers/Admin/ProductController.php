@@ -146,20 +146,13 @@ class ProductController extends Controller
     /**
      * Export products.
      *
-     * @param Request $request
      * @return Response
      */
-    public function export(Request $request)
+    public function export()
     {
         $this->authorize('update', auth()->user());
-        if ($request->input('category_id') . $request->input('is_active') == null) {
-            return Excel::download(new ProductsExportAll, 'products.xlsx');
-        }
-        $category_id = $request->input('category_id');
-        $is_active = $request->input('is_active');
-        $request = $request->input();
-
-        return (new ProductsExport($request))->download('products.xlsx');
+        
+        return Excel::download(new ProductsExportAll, 'products.xlsx');
     }
 
     /**

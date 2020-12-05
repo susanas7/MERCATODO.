@@ -68,7 +68,7 @@ class AuthorizationTest extends TestCase
     }
 
     /** @test */
-    public function anUnauthorizedUserCanImportProducts()
+    public function anUnauthorizedUserCanNotImportProducts()
     {
         $response = $this->actingAs($this->user)->post(route('admin.products.import'))
             ->assertStatus(403);

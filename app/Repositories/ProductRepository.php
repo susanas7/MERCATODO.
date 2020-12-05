@@ -6,6 +6,7 @@ use App\Http\Requests\Product\StoreProductRequest;
 use App\Http\Requests\Product\UpdateRequest;
 use App\Product;
 use App\ProductCategory;
+use Illuminate\Support\Facades\Storage;
 
 class ProductRepository
 {

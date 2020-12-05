@@ -29,37 +29,57 @@
             <div class="card" id="box-crud" >
                 <div class="card-header"><P ALIGN=center> {{ $products->total() }} productos | página {{ $products->currentPage() }} de {{ $products->lastpage() }} </div>
                   <div class="card-body">
-                    <div>
-                      <a href="{{route('admin.products.create')}}" class="btn btn-primary">Crear</a>
-                      <form action="{{route('admin.products.export')}}">
-                        <select name="category_id" id="category_id">
-                          <option value="">--</option>
-                          @foreach($categories as $category)
-                            <option value="{{$category->id}}"> {{$category->title}} </option>
-                          @endforeach
-                        </select>
-                        <select name="is_active" id="is_active">
-                            <option value="">--</option>
-                            <option value="0"> Inactivo </option>
-                            <option value="1"> Activo </option>
-                        </select>
-                        
-                        <button type="submit">Exportar</button>
-
-                      </form>
-                      
-                      @isset($errors)
+                  @isset($errors)
                       <div class="row justify-content-center">
                           <div class="col-md-8">
                               @include('fragment.errors')
                           </div>
                       </div>
                       @endisset
+                    <div>
+                    <table class="egt">
+
+                      <tr>
+
+                        <td><a href="{{route('admin.products.create')}}" class="btn btn-primary">Crear</a></td>
+
+                        <td><form action="{{route('admin.products.export')}}">
+                        <button type="submit" class="btn btn-primary">Exportar</button>
+                      </form></td>
+
+                        <td><form action="{{route('admin.products.import')}}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                          Importar
+                        </button>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Importar productos</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
                       <form action="{{route('admin.products.import')}}" method="post" enctype="multipart/form-data">
                         @csrf
-                        <input type="file" name="file">
-                        <button typ="submit" class="btn btn-link">Importar</button>
+                        <img src="{{ url('storage/images/import.example.png') }}" class="card-img-top">
+                        <input type="file" name="file" required>
                       </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button typ="submit" class="btn btn-link">Importar</button>
+                        </form></td>
+
+                      </tr>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                        
                     </div><br>
                     <table class="table">
                       <thead>

@@ -29,7 +29,6 @@ class ProductsExportAll implements FromCollection, ShouldAutoSize, WithHeadings
             $product->slug,
             $product->is_active,
             $product->price,
-            $product->created_at,
         ];
     }
 
@@ -42,7 +41,6 @@ class ProductsExportAll implements FromCollection, ShouldAutoSize, WithHeadings
             'SLUG',
             'STATUS',
             'PRICE',
-            'CREATED AT',
         ];
     }
 }
