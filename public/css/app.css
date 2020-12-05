@@ -2198,11 +2198,6 @@ pre code {
   opacity: 1;
 }
 
-.form-control::-ms-input-placeholder {
-  color: #6c757d;
-  opacity: 1;
-}
-
 .form-control::placeholder {
   color: #6c757d;
   opacity: 1;
@@ -11264,6 +11259,35 @@ form .txt_field {
   padding-bottom: 5px;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+#footer {
+  background-image: linear-gradient(130deg, #ff9259 0, #ff2426 70%);
+  color: blanchedalmond;
+}
+
+#footer-div {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+#footer-div h2 {
+  margin: 0 auto;
+  margin-top: 40px;
+}
+
+#footer-subtitle {
+  margin-right: 30px;
+  justify-content: right;
+}
+
 .container_show {
   width: 75%;
   height: 400px;
@@ -11342,5 +11366,54 @@ form .txt_field {
   margin-bottom: 10px;
   background-image: linear-gradient(130deg, #ff9259 0, #ff2426 70%);
   color: white;
+}
+
+.container {
+  align-items: center;
+  justify-content: center;
+}
+
+.container-metric {
+  display: grid;
+  width: 532px;
+  grid-template-columns: auto auto auto;
+}
+
+.card-metric {
+  display: grid;
+  margin: auto;
+}
+
+#most-selled-products {
+  display: grid;
+  float: left;
+  border: 1px solid grey;
+  border-radius: 20px;
+}
+
+#void {
+  width: 50px;
+}
+
+#less-selled-products {
+  display: grid;
+  float: right;
+  border: 1px solid grey;
+  border-radius: 20px;
+}
+
+#most-frequent-users {
+  display: grid;
+}
+
+#metric-center {
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  margin-top: 15px;
+  display: flex;
+  width: 600px;
+  border: 1px solid grey;
+  border-radius: 20px;
 }
 

@@ -6,13 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    protected $table = 'orders';
-
     /**
-    * Relationship with the user
-    *
-    * @return relationship
-    */
+     * Relationship with the user.
+     *
+     * @return relationship
+     */
     public function user()
     {
         return $this->belongsTo('App\User');
@@ -24,16 +22,16 @@ class Order extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'status', 'quantity', 'total', 'requestId', 'processUrl'
+        'user_id', 'status', 'quantity', 'total', 'requestId', 'processUrl',
     ];
 
     /**
-    * Relationship with the invoice
-    *
-    * @return relationship
-    */
-    public function invoice()
+     * Relationship with the invoice.
+     *
+     * @return relationship
+     */
+    public function products()
     {
-        return $this->hasOne(Invoice::class);
+        return $this->belongsToMany(Product::class);
     }
 }

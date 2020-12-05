@@ -5,7 +5,6 @@ namespace Tests\Feature\Categories;
 use App\ProductCategory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class CreateTest extends TestCase
@@ -13,42 +12,24 @@ class CreateTest extends TestCase
     use RefreshDatabase;
     use WithoutMiddleware;
 
-    /**
-     * @test
-     */
-    public function aUserCanViewTheCreateCategoryForm()
+    /** @test */
+    public function aCategoryCanBeStored()
     {
-        $response = $this->get(route('categories.create'));
-
-        $response->assertOk();
-        $response->assertStatus(200);
-    }
-
-    /**
-     * @test
-     */
-    public function aUserCanStoreACategory()
-    {
-        $response = $this->post(route('categories.store'), [
+        $this->withoutExceptionHandling();
+        $response = $this->post(route('admin.categories.store'), [
             'title' => 'Dulces',
-        ]);
+        ])->assertSessionHasNoErrors();
 
-        $category = ProductCategory::first();
-        $this->assertCount(1, ProductCategory::all());
-
+        $category = ProductCategory::all()->last();
         $this->assertEquals('Dulces', $category->title);
-        $response->assertRedirect(route('categories.index'));
+        $response->assertRedirect(route('admin.categories.index'));
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function aCategoryCanNotBeStoredWithEmptyTitle()
     {
-        $category = $this->post(route('categories.store'), [
+        $response = $this->post(route('admin.categories.store'), [
             'title' => '',
-        ]);
-
-        $this->assertCount(0, ProductCategory::all());
+        ])->assertSessionHasErrors('title');
     }
 }

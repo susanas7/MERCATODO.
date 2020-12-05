@@ -12,18 +12,14 @@ class ShowTest extends TestCase
     use RefreshDatabase;
     use WithoutMiddleware;
 
-    /**
-     * @test
-     */
-    public function aUserCanSeeDetailsOfUsers()
+    /** @test */
+    public function anUserCanBeShown()
     {
         $this->withoutExceptionHandling();
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($user)->get(route('users.show', $user));
-
-        $response->assertStatus(200);
-        $response->assertViewIs('users.show');
-        $response->assertViewHas('user', $user);
+        $response = $this->actingAs($user)->get(route('admin.users.show', $user))
+            ->assertStatus(200)
+            ->assertViewIs('admin.users.show');
     }
 }

@@ -9,6 +9,9 @@ install:
 services:
   - mysql
 
+cache:
+  - vendor
+
 deploy:
   github-token: $GITHUB_TOKEN
 
@@ -20,6 +23,8 @@ before_script:
 
 script:
   - php artisan optimize
+  - php artisan migrate:refresh
+  - composer phpcs
   - vendor/bin/phpunit
 
 notifications:

@@ -2,7 +2,7 @@
 
 namespace App;
 
-class Cart 
+class Cart
 {
     public $items = null;
     public $totalQty = 0;
@@ -17,9 +17,9 @@ class Cart
         }
     }
 
-    /** 
-     * Add an item to cart
-     * 
+    /**
+     * Add an item to cart.
+     *
      * @param object $item
      * @param int $id
      */
@@ -39,8 +39,8 @@ class Cart
     }
 
     /**
-     * Reduce by one to cart
-     * 
+     * Reduce by one to cart.
+     *
      * @param int $id
      */
     public function reduceByOne(int $id)
@@ -56,8 +56,8 @@ class Cart
     }
 
     /**
-     * Add by one to cart
-     * 
+     * Add by one to cart.
+     *
      * @param int $id
      */
     public function addByOne(int $id)
@@ -69,8 +69,8 @@ class Cart
     }
 
     /**
-     * Remove all the item to cart
-     * 
+     * Remove all the item to cart.
+     *
      * @param int $id
      */
     public function removeItem(int $id)

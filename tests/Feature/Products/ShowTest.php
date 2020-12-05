@@ -12,13 +12,13 @@ class ShowTest extends TestCase
     use RefreshDatabase;
     use WithoutMiddleware;
 
-    public function testAUserCanSeeDetailsOfProducts()
+    /** @test */
+    public function aProductCanBeShown()
     {
         $product = factory(Product::class)->create();
 
-        $response = $this->get(route('products.show', $product));
-
-        $response->assertStatus(200);
-        $response->assertViewIs('products.show');
+        $response = $this->get(route('admin.products.show', $product))
+            ->assertStatus(200)
+            ->assertViewIs('admin.products.show');
     }
 }

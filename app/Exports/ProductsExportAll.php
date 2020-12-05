@@ -3,18 +3,18 @@
 namespace App\Exports;
 
 use App\Product;
+use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
-use Maatwebsite\Excel\Concerns\Exportable;
 
 class ProductsExportAll implements FromCollection, ShouldAutoSize, WithHeadings
 {
     use Exportable;
 
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * @return \Illuminate\Support\Collection
+     */
     public function collection()
     {
         return Product::all();
@@ -29,7 +29,6 @@ class ProductsExportAll implements FromCollection, ShouldAutoSize, WithHeadings
             $product->slug,
             $product->is_active,
             $product->price,
-            $product->created_at
         ];
     }
 
@@ -42,7 +41,6 @@ class ProductsExportAll implements FromCollection, ShouldAutoSize, WithHeadings
             'SLUG',
             'STATUS',
             'PRICE',
-            'CREATED AT',
         ];
     }
 }

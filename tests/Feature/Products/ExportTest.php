@@ -2,12 +2,11 @@
 
 namespace Tests\Feature\Products;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
-use Maatwebsite\Excel\Facades\Excel;
-use App\User;
 use App\Product;
+use App\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Maatwebsite\Excel\Facades\Excel;
+use Tests\TestCase;
 
 class ExportTest extends TestCase
 {
@@ -21,23 +20,23 @@ class ExportTest extends TestCase
         Excel::fake();
 
         $response = $this->actingAs($user)
-            ->get(route('products.export'))
+            ->get(route('admin.products.export'))
             ->assertStatus(403);
     }
-    
+
     /** @test */
     public function anAuthorizedUserCanExportProducts()
     {
-        $this->artisan('db:seed');
+        $this->artisan('migrate:refresh --seed');
 
         factory(Product::class, 5)->create();
         $user = factory(User::class)->create()->assignRole('Super-administrador');
         Excel::fake();
 
         $response = $this->actingAs($user)
-            ->get(route('products.export'))
+            ->get(route('admin.products.export'))
             ->assertOk();
 
-        Excel::assertDownloaded("products.xlsx");
+        Excel::assertDownloaded('products.xlsx');
     }
 }

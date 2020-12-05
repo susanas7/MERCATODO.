@@ -25,11 +25,6 @@ class RolesAndPermissions extends Seeder
         Permission::create(['name' => 'editar rol']);
         Permission::create(['name' => 'eliminar rol']);
 
-        Permission::create(['name' => 'crear permission']);
-        Permission::create(['name' => 'ver permission']);
-        Permission::create(['name' => 'editar permission']);
-        Permission::create(['name' => 'eliminar permission']);
-
         Permission::create(['name' => 'crear producto']);
         Permission::create(['name' => 'ver producto']);
         Permission::create(['name' => 'editar producto']);
@@ -41,6 +36,8 @@ class RolesAndPermissions extends Seeder
         Permission::create(['name' => 'eliminar categoria']);
 
         Permission::create(['name' => 'ver orden']);
+
+        Permission::create(['name' => 'api']);
 
         //create roles and assign created permissions
 

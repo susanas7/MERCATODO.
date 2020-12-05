@@ -4,106 +4,68 @@ namespace Tests\Feature\Users;
 
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Support\Str;
 use Tests\TestCase;
-use Illuminate\Support\Facades\Hash;
 
 class UpdateTest extends TestCase
 {
     use RefreshDatabase;
     use WithoutMiddleware;
+    use WithFaker;
 
-    /**
-     * @test
-     */
-    public function aUserCanBeUpdated()
+    private $user;
+
+    public function setUp(): void
     {
-        //$this->withoutExceptionHandling();
+        parent::setUp();
+        $this->user = factory(User::class)->create();
+    }
 
-        $user = factory(User::class)->create();
-
-        $response = $this->put(route('users.update', $user), [
+    /** @test */
+    public function anUserCanBeUpdated()
+    {
+        $response = $this->put(route('admin.users.update', $this->user), [
             'name' => 'Elisa',
             'email' => 'elisa@mail.com',
-        ]);
-        $user = User::first();
-
-        $this->assertEquals('Elisa', $user->name);
-        $this->assertEquals('elisa@mail.com', $user->email);
+        ])->assertSessionHasNoErrors();
     }
 
     /**
      * @test
+     * @dataProvider dataProvider
+     * @param string $field
+     * @param mixed|null $value
      */
-    public function aUserCanNotBeUpdatedWithInvalidEmail()
+    public function anUserCanNotBeUpdatedWithInvalidData(string $field, $value = null)
     {
-        $response = $this->post(route('users.store'), [
-            'name' => 'Juli',
-            'email' => 'juli@mail.com',
-            'password' => '12345678',
-        ]);
+        $data = [
+            'name' => $this->faker->sentence(1),
+            'email' => $this->faker->unique()->safeEmail,
+        ];
+        $data[$field] = $value;
 
-        $user = User::first();
-
-        $response2 = $this->put(route('users.update', $user), [
-            'name' => 'Elisa',
-            'email' => 'elisa',
-        ]);
-
-        $this->assertCount(1, User::all());
-        $this->assertEquals('Juli', $user->name);
-        $this->assertEquals('juli@mail.com', $user->email);
-        $this->assertTrue(Hash::check('12345678', $user->password));
-        $response->assertRedirect(route('users.index'));
+        $response = $this->put(route('admin.users.update', $this->user), $data)
+            ->assertRedirect()
+            ->assertSessionHasErrors($field);
     }
 
-    /**
-     * @test
-     */
-    public function aUserCanNotBeUpdatedWithEmptyName()
+    public function dataProvider(): array
     {
-        $response = $this->post(route('users.store'), [
-            'name' => 'Juli',
-            'email' => 'juli@mail.com',
-            'password' => '12345678',
-        ]);
-
-        $user = User::first();
-
-        $response2 = $this->put(route('users.update', $user), [
-            'name' => '',
-            'email' => 'elisa@mail.com',
-        ]);
-
-        $this->assertCount(1, User::all());
-        $this->assertEquals('Juli', $user->name);
-        $this->assertEquals('juli@mail.com', $user->email);
-        $this->assertTrue(Hash::check('12345678', $user->password));
-        $response->assertRedirect(route('users.index'));
+        return [
+            'Test name is required' => ['name', null],
+            'Test email is required' => ['email', null],
+            'Test email is not an email' => ['email', Str::random(12)],
+        ];
     }
 
-    /**
-     * @test
-     */
-    public function aUserCanNotBeUpdatedWithEmptyEmail()
+    /** @test */
+    public function anUserCanBeEnableOrDisable()
     {
-        $response = $this->post(route('users.store'), [
-            'name' => 'Juli',
-            'email' => 'juli@mail.com',
-            'password' => '12345678',
-        ]);
+        $response = $this->put(route('admin.users.changeStatus', $this->user))
+            ->assertSessionHasNoErrors();
 
-        $user = User::first();
-
-        $response2 = $this->put(route('users.update', $user), [
-            'name' => 'Elisa',
-            'email' => '',
-        ]);
-
-        $this->assertCount(1, User::all());
-        $this->assertEquals('Juli', $user->name);
-        $this->assertEquals('juli@mail.com', $user->email);
-        $this->assertTrue(Hash::check('12345678', $user->password));
-        $response->assertRedirect(route('users.index'));
+        $this->assertEquals($this->user->is_active, 0);
     }
 }

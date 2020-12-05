@@ -5,7 +5,6 @@ namespace Tests\Feature\Categories;
 use App\ProductCategory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class UpdateTest extends TestCase
@@ -13,40 +12,27 @@ class UpdateTest extends TestCase
     use RefreshDatabase;
     use WithoutMiddleware;
 
-    /**
-     * @test
-     */
+    /** @test */
     public function aCategoryCanBeUpdated()
     {
         $category = factory(ProductCategory::class)->create();
 
-        $response = $this->put(route('categories.update', $category), [
+        $response = $this->put(route('admin.categories.update', $category), [
             'title' => 'Agua',
         ]);
-        $category = ProductCategory::first();
+        $category->refresh();
 
         $this->assertEquals('Agua', $category->title);
-        $response->assertRedirect(route('categories.index'));
+        $response->assertRedirect(route('admin.categories.index'));
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function aCategoryCanNotBeUpdatedWithEmptyTitle()
     {
-        $response = $this->post(route('categories.store'), [
-            'title' => 'Agua',
-        ]);
+        $category = factory(ProductCategory::class)->create();
 
-        $category = ProductCategory::first();
-
-        $response2 = $this->put(route('categories.update', $category), [
+        $response = $this->put(route('admin.categories.update', $category), [
             'title' => '',
-        ]);
-
-        $this->assertCount(1, ProductCategory::all());
-
-        $this->assertEquals('Agua', $category->title);
-        $response->assertRedirect(route('categories.index'));
+        ])->assertSessionHasErrors('title');
     }
 }

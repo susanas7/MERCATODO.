@@ -2,78 +2,75 @@
 
 namespace Tests\Feature\Products;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
-use App\User;
 use App\Product;
+use App\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class AuthorizationTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
-    public function anUnathorizedUserCanNotViewTheCreateForm()
-    {
-        $user = factory(User::class)->create();
+    private $user;
+    private $userAuth;
+    private $product;
 
-        $response = $this->actingAs($user)->get(route('products.create'));
-        
-        $response->assertStatus(403);
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->artisan('migrate:refresh --seed');
+
+        $this->user = factory(User::class)->create();
+        $this->userAuth = factory(User::class)->create()->assignRole('Super-administrador');
+        $this->product = factory(Product::class)->create();
     }
 
     /** @test */
-    public function anAthorizedUserCanViewTheCreateForm()
+    public function anUnathorizedUserCanNotViewTheCreateProductsForm()
     {
-        $this->artisan('db:seed');
-        $user = factory(User::class)->create()->assignRole('Super-administrador');
-
-        $response = $this->actingAs($user)->get(route('products.create'));
-        
-        $response->assertStatus(200);
+        $response = $this->actingAs($this->user)->get(route('admin.products.create'))
+            ->assertStatus(403);
     }
 
     /** @test */
-    public function anUnathorizedUserCanNotViewTheUpdateForm()
+    public function anAuthorizedUserCanViewTheCreateProductsForm()
     {
-        $user = factory(User::class)->create();
-
-        $response = $this->actingAs($user)->get(route('products.create'));
-        
-        $response->assertStatus(403);
+        $response = $this->actingAs($this->userAuth)->get(route('admin.products.create'))
+            ->assertStatus(200);
     }
 
     /** @test */
-    public function anAthorizedUserCanViewTheUpdateForm()
+    public function anUnathorizedUserCanNotViewTheUpdateProductsForm()
     {
-        $this->artisan('db:seed');
-        $user = factory(User::class)->create()->assignRole('Super-administrador');
-        $product = factory(Product::class)->create();
-
-        $response = $this->actingAs($user)->get(route('products.edit', $product));
-        
-        $response->assertStatus(200);
+        $response = $this->actingAs($this->user)->get(route('admin.products.edit', $this->product))
+            ->assertStatus(403);
     }
 
     /** @test */
-    public function anUnathorizedUserCanNotListCategories()
+    public function anAuthorizedUserCanViewTheUpdateProductsForm()
     {
-        $user = factory(User::class)->create();
-        
-        $response = $this->actingAs($user)->get(route('products.index'));
-        
-        $response->assertStatus(403);
+        $response = $this->actingAs($this->userAuth)->get(route('admin.products.edit', $this->product))
+            ->assertStatus(200);
     }
 
     /** @test */
-    public function anAthorizedUserCanListCategories()
+    public function anUnathorizedUserCanNotListProducts()
     {
-        $this->artisan('db:seed');
-        $user = factory(User::class)->create()->assignRole('Super-administrador');
-        factory(Product::class, 10)->create();
+        $response = $this->actingAs($this->user)->get(route('admin.products.index'))
+            ->assertStatus(403);
+    }
 
-        $response = $this->actingAs($user)->get(route('products.index'));
-        
-        $response->assertStatus(200);
+    /** @test */
+    public function anAuthorizedUserCanListProducts()
+    {
+        $response = $this->actingAs($this->userAuth)->get(route('admin.products.index'))
+            ->assertStatus(200);
+    }
+
+    /** @test */
+    public function anUnauthorizedUserCanNotImportProducts()
+    {
+        $response = $this->actingAs($this->user)->post(route('admin.products.import'))
+            ->assertStatus(403);
     }
 }

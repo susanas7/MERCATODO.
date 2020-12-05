@@ -24,14 +24,14 @@ class Product extends Model
      * @var array
      */
     protected $hidden = [
-        'updated_at', 'img_route',
+        'created_at', 'updated_at', 'img_route'
     ];
 
     /**
-    * Relationship with the category
-    *
-    * @return relationship
-    */
+     * Relationship with the category.
+     *
+     * @return relationship
+     */
     public function category()
     {
         return $this->belongsTo(ProductCategory::class);
@@ -70,14 +70,29 @@ class Product extends Model
     }
 
     /**
-    * Get the image of product
-    *
-    * @return image
-    */
+     * Get the image of product.
+     *
+     * @return image
+     */
     public function getGetImageAttribute()
     {
         if ($this->img_route) {
             return url("storage/{$this->img_route}");
         }
+    }
+
+    /**
+     * Relationship with the orders.
+     *
+     * @return relationship
+     */
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class);
+    }
+
+    public function metrics()
+    {
+        return $this->belongsTo(MetricProduct::class);
     }
 }

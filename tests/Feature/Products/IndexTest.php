@@ -12,20 +12,15 @@ class IndexTest extends TestCase
     use RefreshDatabase;
     use WithoutMiddleware;
 
-    /**
-     * @test
-     */
-    public function aUserCanListProducts()
+    /** @test */
+    public function productsCanBeListed()
     {
-        $product = factory(Product::class)->make();
-
-        $response = $this->get(route('products.index'));
+        $product = factory(Product::class)->create();
         $products = Product::all();
 
-        $response->assertOk();
-        $responseProducts = $response->getOriginalContent()['products'];
-        $responseProducts->each(function ($item) use ($product) {
-            $this->assertSame($product->id, $item->id);
-        });
+        $response = $this->get(route('admin.products.index'))
+            ->assertOk()
+            ->assertViewis('admin.products.index')
+            ->assertSee($product->title);
     }
 }

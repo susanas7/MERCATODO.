@@ -5,7 +5,6 @@ namespace Tests\Feature\Categories;
 use App\ProductCategory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class IndexTest extends TestCase
@@ -14,17 +13,13 @@ class IndexTest extends TestCase
     use WithoutMiddleware;
 
     /** @test */
-    public function anUserCanListCategories()
+    public function categoriesCanBeListed()
     {
-        $category = factory(ProductCategory::class)->make();
+        $category = factory(ProductCategory::class)->create();
 
-        $response = $this->get(route('categories.index'));
-        $categories = ProductCategory::all();
-
-        $response->assertOk();
-        $responseCategories = $response->getOriginalContent()['categories'];
-        $responseCategories->each(function ($item) use ($category) {
-            $this->assertSame($category->id, $item->id);
-        });
+        $response = $this->get(route('admin.categories.index'))
+            ->assertOk()
+            ->assertViewis('admin.categories.index')
+            ->assertSee($category->name);
     }
 }

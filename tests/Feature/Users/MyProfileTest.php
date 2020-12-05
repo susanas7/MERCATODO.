@@ -2,11 +2,10 @@
 
 namespace Tests\Feature\Users;
 
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
-use App\User;
 
 class MyProfileTest extends TestCase
 {
@@ -18,7 +17,7 @@ class MyProfileTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($user)->get(route('myProfile'))
+        $response = $this->actingAs($user)->get(route('user.myProfile'))
             ->assertSessionHasNoErrors()
             ->assertStatus(200)
             ->assertSee($user->name);
@@ -27,12 +26,13 @@ class MyProfileTest extends TestCase
     /** @test */
     public function anUserCanViewTheUpdateForm()
     {
+        $this->withoutExceptionHandling();
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($user)->get(route('editMyProfile'));
+        $response = $this->actingAs($user)->get(route('user.editMyProfile'));
 
         $response->assertOk();
-        $response->assertViewIs('users.editMyProfile');
+        $response->assertViewIs('user.editMyProfile');
     }
 
     /** @test */
@@ -40,15 +40,16 @@ class MyProfileTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($user)->put(route('updateMyProfile'), [
+        $response = $this->actingAs($user)->put(route('user.updateMyProfile'), [
             'name' => 'JELO',
-            'email' => 'jelo@mail.com'
+            'email' => 'jelo@mail.com',
+        ])->assertSessionHasNoErrors()
+        ->assertRedirect('/user/myProfile?user=' . $user->id);
+
+        $this->assertDatabaseHas('users', [
+            'id' => $user->id,
+            'name' => 'JELO',
+            'email' => 'jelo@mail.com',
         ]);
-
-        $user = User::first();
-
-        $this->assertEquals('JELO', $user->name);
-        $this->assertEquals('jelo@mail.com', $user->email);
-        $response->assertRedirect('/myProfile?user=' . $user->id);
     }
 }

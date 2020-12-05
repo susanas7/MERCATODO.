@@ -2,10 +2,12 @@
 
 namespace App;
 
+use App\Events\UserCreatedEvent;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -13,15 +15,13 @@ class User extends Authenticatable implements MustVerifyEmail
     use Notifiable;
     use HasRoles;
 
-    protected $table = 'users';
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'id', 'name', 'email', 'password', 'role', 'status',
+        'id', 'name', 'email', 'password', 'role', 'status', 'api_token',
     ];
 
     /**
@@ -64,12 +64,24 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-    * Relationship with orders
-    *
-    * @return relationship
-    */
+     * Relationship with orders.
+     *
+     * @return relationship
+     */
     public function orders()
     {
         return $this->hasMany('App\Order');
+    }
+
+    protected $dispatchEvents = [
+        'created' => UserCreatedEvent::class,
+    ];
+
+    public function generateToken()
+    {
+        $this->api_token = Str::random(60);
+        $this->save();
+
+        return $this->api_token;
     }
 }
