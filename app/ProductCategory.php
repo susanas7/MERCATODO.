@@ -1,21 +1,52 @@
 <?php
 
-/*
- * This file is part of PHP CS Fixer.
- * (c) Fabien Potencier <fabien@symfony.com>
- *     Dariusz Rumiński <dariusz.ruminski@gmail.com>
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
- */
-
 namespace App;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class ProductCategory extends Model
 {
+    protected $table = 'product_categories';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['title'];
+
+    /**
+     * Relationship with the product.
+     *
+     * @return relationship
+     */
     public function products()
     {
-        return $this->hasOne(Product::class);
+        return $this->belongsTo(Product::class);
+    }
+
+    /**
+     * Get all the categories cached.
+     *
+     * @return ProductCategory
+     */
+    public static function categoriesCached():Collection
+    {
+        return Cache::remember('product_categories', 100, function () {
+            return self::all();
+        });
+    }
+
+    /**
+     * @param Builder $query
+     * @param string  $title
+     *
+     * @return Builder
+     */
+    public function scopeTitle(Builder $query, string $title)
+    {
+        return $query->where('title', 'LIKE', "%{$title}%");
     }
 }

@@ -1,13 +1,5 @@
 <?php
 
-/*
- * This file is part of PHP CS Fixer.
- * (c) Fabien Potencier <fabien@symfony.com>
- *     Dariusz Rumiński <dariusz.ruminski@gmail.com>
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
- */
-
 return [
     /*
     |--------------------------------------------------------------------------
@@ -46,7 +38,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool)env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -126,7 +118,7 @@ return [
     |
     */
 
-    'key' => env('APP_KEY'),
+    'key' => env('APP_KEY', 'local'),
 
     'cipher' => 'AES-256-CBC',
 
@@ -225,5 +217,11 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+    ],
+
+    'placetopay' => [
+        'login' => env('PLACETOPAY_LOGIN'),
+        'trankey' => env('PLACETOPAY_TRANKEY'),
+        'url' => env('PLACETOPAY_URL'),
     ],
 ];

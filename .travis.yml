@@ -9,6 +9,9 @@ install:
 services:
   - mysql
 
+cache:
+  - vendor
+
 deploy:
   github-token: $GITHUB_TOKEN
 
@@ -17,9 +20,11 @@ before_script:
   - sudo mysql -e 'CREATE DATABASE `testing`;'
   - composer install
   - php artisan key:generate
-  - composer require predis/predis
 
 script:
+  - php artisan optimize
+  - php artisan migrate:refresh
+  - composer phpcs
   - vendor/bin/phpunit
 
 notifications:

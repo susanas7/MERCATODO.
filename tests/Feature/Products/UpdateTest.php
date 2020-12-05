@@ -1,47 +1,72 @@
 <?php
 
-/*
- * This file is part of PHP CS Fixer.
- * (c) Fabien Potencier <fabien@symfony.com>
- *     Dariusz Rumiński <dariusz.ruminski@gmail.com>
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
- */
-
 namespace Tests\Feature\Products;
 
 use App\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
-/**
- * @internal
- * @coversNothing
- */
-final class UpdateTest extends TestCase
+class UpdateTest extends TestCase
 {
     use RefreshDatabase;
     use WithoutMiddleware;
+    use WithFaker;
 
-    public function testAProductCanBeUpdated()
+    private $product;
+
+    public function setUp(): void
     {
-        $product = factory(Product::class)->create();
+        parent::setUp();
+        $this->product = factory(Product::class)->create();
+    }
 
-        $this->put(route('products.update', $product), [
-            'title' => 'pan pita',
-            'slug' => 'masa texturizada',
-            'price' => '19',
-            'category_id' => '2',
-            'img_route' => 'images/sDFKDt03wBqktBU1KYYqDcJPEPPO4bOpdD8CzK7M.jpeg',
-        ]);
+    /** @test */
+    public function aProductCanBeUpdated()
+    {
+        $response = $this->put(route('admin.products.update', $this->product), [
+            'title' => 'Agua',
+            'slug' => 'lorem ipsum etc',
+            'price' => '32444',
+            'category_id' => '1',
+            'img_route' => 'images/MfV3Uh.jpeg',
+        ])->assertRedirect(route('admin.products.index'))
+        ->assertSessionHasNoErrors();
 
-        $this->assertDatabaseHas('products', [
-            'title' => 'pan pita',
-            'slug' => 'masa texturizada',
-            'price' => '19',
-            'category_id' => '2',
-            'img_route' => 'images/sDFKDt03wBqktBU1KYYqDcJPEPPO4bOpdD8CzK7M.jpeg',
-        ]);
+        $this->assertDatabaseHas('products', ['id' => $this->product->id]);
+    }
+
+    /**
+     * @test
+     * @dataProvider dataProvider
+     * @param string $field
+     * @param mixed|null $value
+     */
+    public function aProductCanNotBeUpdatedWithInvalidData(string $field, $value = null)
+    {
+        $data = [
+            'title' => $this->faker->sentence(1),
+            'slug' => $this->faker->sentence(5),
+            'category_id' => rand('1', '5'),
+            'price' => rand('10', '20'),
+        ];
+        $data[$field] = $value;
+
+        $response = $this->put(route('admin.products.update', $this->product), $data)
+            ->assertRedirect()
+            ->assertSessionHasErrors($field);
+    }
+
+    public function dataProvider(): array
+    {
+        return [
+            'Test title is required' => ['title', null],
+            'Test slug is required' => ['slug', null],
+            'Test category_id is required' => ['category_id', null],
+            'Test price is required' => ['price', null],
+            'Test price is not numeric' => ['price', Str::random(5)],
+        ];
     }
 }

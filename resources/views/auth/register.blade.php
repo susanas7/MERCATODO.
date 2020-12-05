@@ -14,7 +14,7 @@
                 </span>
             @enderror
             <span></span>
-            <label>Nombre</label>
+            <label id="label">Nombre</label>
         </div>
         <div class="txt_field">
             <input type="email" name="email" class="form-control @error('email') is-invalid @enderror">
@@ -24,7 +24,7 @@
                 </span>
             @enderror
             <span></span>
-            <label>Email</label>
+            <label id="label">Email</label>
         </div>
         <div class="txt_field">
             <input type="password" name="password" class="form-control @error('password') is-invalid @enderror">
@@ -34,12 +34,12 @@
                 </span>
             @enderror
             <span></span>
-            <label>Contraseña</label>
+            <label  id="label">Contraseña</label>
         </div>
         <div class="txt_field">
             <input type="password" name="password_confirmation">
             <span></span>
-            <label>Confirmar contraseña</label>
+            <label id="label">Confirmar contraseña</label>
         </div>
         <div>
             <input id="btn-login-register" type="submit" value="Registrarse">

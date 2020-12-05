@@ -1,0 +1,45 @@
+.container{
+    align-items: center;
+    justify-content: center;
+}
+.container-metric{
+    display: grid;
+    width: 532px;
+    grid-template-columns: auto auto auto;
+}
+.card-metric{
+    display: grid;
+    margin: auto;
+}
+
+#most-selled-products{
+    display: grid;
+    float: left;
+    border: 1px solid grey;
+    border-radius: 20px;
+}
+#void{
+    width: 50px;
+}
+
+#less-selled-products{
+    display: grid;
+    float: right;
+    border: 1px solid grey;
+    border-radius: 20px;
+}
+
+#most-frequent-users{
+    display: grid;
+}
+
+#metric-center{
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    margin-top: 15px;
+    display: flex;
+    width: 600px;
+    border: 1px solid grey;
+    border-radius: 20px;
+}

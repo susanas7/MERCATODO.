@@ -1,5 +1,6 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
 
 // Variables
 @import 'variables';
@@ -19,4 +20,8 @@
 
 @import 'lib/_home';
 
-@import 'node_modules/toastr/toastr.scss';
+@import 'lib/_show';
+
+@import 'lib/_cart';
+
+@import 'lib/_metrics';

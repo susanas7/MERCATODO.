@@ -1,43 +1,71 @@
 <?php
 
-/*
- * This file is part of PHP CS Fixer.
- * (c) Fabien Potencier <fabien@symfony.com>
- *     Dariusz Rumiński <dariusz.ruminski@gmail.com>
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
- */
-
 namespace Tests\Feature\Users;
 
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
-/**
- * @internal
- * @coversNothing
- */
-final class UpdateTest extends TestCase
+class UpdateTest extends TestCase
 {
     use RefreshDatabase;
     use WithoutMiddleware;
+    use WithFaker;
 
-    public function testAUserCanBeUpdated()
+    private $user;
+
+    public function setUp(): void
     {
-        $this->withoutExceptionHandling();
+        parent::setUp();
+        $this->user = factory(User::class)->create();
+    }
 
-        $user = factory(User::class)->create();
-
-        $this->put(route('users.update', $user), [
+    /** @test */
+    public function anUserCanBeUpdated()
+    {
+        $response = $this->put(route('admin.users.update', $this->user), [
             'name' => 'Elisa',
             'email' => 'elisa@mail.com',
-        ]);
+        ])->assertSessionHasNoErrors();
+    }
 
-        $this->assertDatabaseHas('users', [
-            'name' => 'Elisa',
-            'email' => 'elisa@mail.com',
-        ]);
+    /**
+     * @test
+     * @dataProvider dataProvider
+     * @param string $field
+     * @param mixed|null $value
+     */
+    public function anUserCanNotBeUpdatedWithInvalidData(string $field, $value = null)
+    {
+        $data = [
+            'name' => $this->faker->sentence(1),
+            'email' => $this->faker->unique()->safeEmail,
+        ];
+        $data[$field] = $value;
+
+        $response = $this->put(route('admin.users.update', $this->user), $data)
+            ->assertRedirect()
+            ->assertSessionHasErrors($field);
+    }
+
+    public function dataProvider(): array
+    {
+        return [
+            'Test name is required' => ['name', null],
+            'Test email is required' => ['email', null],
+            'Test email is not an email' => ['email', Str::random(12)],
+        ];
+    }
+
+    /** @test */
+    public function anUserCanBeEnableOrDisable()
+    {
+        $response = $this->put(route('admin.users.changeStatus', $this->user))
+            ->assertSessionHasNoErrors();
+
+        $this->assertEquals($this->user->is_active, 0);
     }
 }

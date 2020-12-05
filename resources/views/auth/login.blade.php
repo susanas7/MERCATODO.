@@ -14,7 +14,7 @@
                 </span>
             @enderror
             <span></span>
-            <label>Email</label>
+            <label id="label">Email</label>
         </div>
         <div class="txt_field">
             <input type="password" name="password" class="form-control @error('password') is-invalid @enderror">
@@ -24,7 +24,7 @@
                         </span>
             @enderror
             <span></span>
-            <label>Password</label>
+            <label id="label">Password</label>
         </div>
         <div>
         @if (Route::has('password.request'))

@@ -1,19 +1,13 @@
 <?php
 
-/*
- * This file is part of PHP CS Fixer.
- * (c) Fabien Potencier <fabien@symfony.com>
- *     Dariusz Rumiński <dariusz.ruminski@gmail.com>
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
- */
-
 namespace App;
 
+use App\Events\UserCreatedEvent;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -21,15 +15,13 @@ class User extends Authenticatable implements MustVerifyEmail
     use Notifiable;
     use HasRoles;
 
-    protected $table = 'users';
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role', 'status',
+        'id', 'name', 'email', 'password', 'role', 'status', 'api_token',
     ];
 
     /**
@@ -53,41 +45,45 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * @param Builder
      * @param string $name
-<<<<<<< HEAD
-=======
      * @param mixed  $query
      *
->>>>>>> develop
      * @return Builder
      */
-    public function scopeName($query, $name)
+    public function scopeName(Builder $query, $name): Builder
     {
-        return $query->where('name', 'LIKE', "%{$name}%");
+        return $query->where('name', 'LIKE', "%{$name}%")
+            ->orWhere('email', 'LIKE', "%{$name}%");
     }
 
     /**
-<<<<<<< HEAD
      * @param Builder $query
-     * @param string $email
-     * @return Builder
-=======
-     * @param string $email
->>>>>>> develop
-     */
-    public function scopeEmail(Builder $query, $email): Builder
-    {
-        if (null !== $email) {
-            return $this->searchByField($query, 'email', $email, '=');
-        }
-
-        return $query;
-    }
-
-    /**
-     * @param strin $value
+     * @param string $field
+     * @param string $value
      */
     public function searchByField(Builder $query, string $field, string $value, string $operator = null): Builder
     {
         return $query->where($field, $operator, $value);
+    }
+
+    /**
+     * Relationship with orders.
+     *
+     * @return relationship
+     */
+    public function orders()
+    {
+        return $this->hasMany('App\Order');
+    }
+
+    protected $dispatchEvents = [
+        'created' => UserCreatedEvent::class,
+    ];
+
+    public function generateToken()
+    {
+        $this->api_token = Str::random(60);
+        $this->save();
+
+        return $this->api_token;
     }
 }
