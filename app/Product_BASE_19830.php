@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Product_BASE_19830 extends Model
 {
     protected $table = 'products';
 
@@ -22,10 +22,11 @@ class Product extends Model
         return $this->hasMany('App\ImgProducts');
     }
 
-    public function active(){
-        if($this->status=='active'){
-          return true;
+    public function active()
+    {
+        if ($this->status == 'active') {
+            return true;
         }
         return false;
-      }
+    }
 }

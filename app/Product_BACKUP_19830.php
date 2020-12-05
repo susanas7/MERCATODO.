@@ -2,10 +2,10 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Product_BACKUP_19830 extends Model
 {
     protected $table = 'products';
 
@@ -25,7 +25,7 @@ class Product extends Model
 
     public function active()
     {
-        if ($this->status=='active') {
+        if ($this->status == 'active') {
             return true;
         }
         return false;
@@ -35,8 +35,7 @@ class Product extends Model
     {
         return $query->where('title', 'LIKE', "%$title%");
     }
-  
-  
+
     public function scopeSlug(Builder $query, $slug): Builder
     {
         if (null !== $slug) {
@@ -44,7 +43,7 @@ class Product extends Model
         }
         return $query;
     }
-  
+
     public function searchByField(Builder $query, string $field, string $value, string $operator = null): Builder
     {
         return $query->where($field, $operator, $value);
