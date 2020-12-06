@@ -87577,7 +87577,7 @@ module.exports = function(module) {
   !*** ./resources/js/app.js ***!
   \*****************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -87588,9 +87588,12 @@ var _require = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jqu
     nodeName = _require.nodeName,
     data = _require.data;
 
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+/*const { nodeName } = require('jquery');
 
-window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+require('./bootstrap');
+
+window.Vue = require('vue');*/
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

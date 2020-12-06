@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Exports\ProductsExport;
 use App\Exports\ProductsExportAll;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\StoreProductRequest;
@@ -151,7 +150,7 @@ class ProductController extends Controller
     public function export()
     {
         $this->authorize('update', auth()->user());
-        
+
         return Excel::download(new ProductsExportAll, 'products.xlsx');
     }
 

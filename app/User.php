@@ -56,7 +56,9 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * @param strin $value
+     * @param Builder $query
+     * @param string $field
+     * @param string $value
      */
     public function searchByField(Builder $query, string $field, string $value, string $operator = null): Builder
     {

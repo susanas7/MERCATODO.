@@ -12,9 +12,6 @@ services:
 cache:
   - vendor
 
-deploy:
-  github-token: $GITHUB_TOKEN
-
 before_script:
   - cp .env.travis .env
   - sudo mysql -e 'CREATE DATABASE `testing`;'
