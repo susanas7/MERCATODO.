@@ -12,15 +12,6 @@ services:
 cache:
   - vendor
 
-deploy:
-  provider: heroku
-  keep-history: true
-  api_key: e26df04c-2d59-42f4-9f45-744c202f12bd
-  app: mercatodo
-  on:
-    repo: susanas7/MERCATODO.
-  github-token: $GITHUB_TOKEN
-
 before_script:
   - cp .env.travis .env
   - sudo mysql -e 'CREATE DATABASE `testing`;'

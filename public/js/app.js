@@ -87584,12 +87584,9 @@ module.exports = function(module) {
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-<<<<<<< HEAD
-=======
 var _require = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js"),
     nodeName = _require.nodeName,
     data = _require.data;
->>>>>>> develop
 
 /*const { nodeName } = require('jquery');
 
@@ -87607,24 +87604,13 @@ window.Vue = require('vue');*/
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-<<<<<<< HEAD
-/*Vue.component('example-component', require('./components/ExampleComponent.vue').default);*/
-
-=======
 Vue.component('metric', __webpack_require__(/*! ./components/Chart.vue */ "./resources/js/components/Chart.vue")["default"]);
->>>>>>> develop
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-<<<<<<< HEAD
-/*const app = new Vue({
-    el: '#app',
-});*/
-toastr.success('Mensaje');
-=======
 var app = new Vue({
   el: '#app'
 });
@@ -87742,7 +87728,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Chart_vue_vue_type_template_id_30973183___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
->>>>>>> develop
 
 /***/ }),
 
