@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\Paginator;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Category\CreateRequest;
 use App\Http\Requests\Category\UpdateRequest;
@@ -24,8 +25,7 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         $title = $request->get('title');
-
-        $categories = ProductCategory::categoriesCached();
+        $categories = Paginator::paginate($request, ProductCategory::categoriesCached());
 
         return view('admin.categories.index', ['categories' => $categories]);
     }
@@ -49,6 +49,7 @@ class CategoryController extends Controller
     public function store(CreateRequest $request)
     {
         $category = ProductCategory::create($request->all());
+        ProductCategory::flushCache();
 
         toast('Categoria creada correctamente', 'success');
         return redirect()->route('admin.categories.index');
@@ -85,11 +86,11 @@ class CategoryController extends Controller
      * @param int $id
      * @return RedirectResponse
      */
-    public function update(UpdateRequest $request, int $id)
+    public function update(UpdateRequest $request, ProductCategory $category)
     {
-        $category = ProductCategory::find($id);
         $category->title = $request->title;
         $category->save();
+        ProductCategory::flushCache();
 
         toast('Categoria actualizada correctamente', 'success');
         return redirect()->route('admin.categories.index');
@@ -104,6 +105,7 @@ class CategoryController extends Controller
     public function destroy(ProductCategory $category)
     {
         $category->delete();
+        ProductCategory::flushCache();
 
         return back();
     }

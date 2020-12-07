@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Events\UserCreatedEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\CreateRequest;
 use App\Http\Requests\User\UpdateRequest;
@@ -57,7 +56,6 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
         ])->assignRole($request->role);
-        event(new UserCreatedEvent($user));
 
         toast('Usuario creado correctamente', 'success');
         return redirect()->route('admin.users.index');
@@ -103,7 +101,6 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->syncRoles($request->role);
         $user->save();
-        event(new UserCreatedEvent($user));
 
         toast('Usuario actualizado correctamente', 'success');
         return redirect()->route('admin.users.index');

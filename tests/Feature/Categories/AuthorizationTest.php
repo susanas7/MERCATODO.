@@ -19,6 +19,7 @@ class AuthorizationTest extends TestCase
     {
         parent::setUp();
         $this->artisan('migrate:refresh --seed');
+        $this->artisan('optimize:clear');
         $this->user = factory(User::class)->create();
         $this->userAuth = factory(User::class)->create()->assignRole('Super-administrador');
         $this->category = factory(ProductCategory::class)->create();

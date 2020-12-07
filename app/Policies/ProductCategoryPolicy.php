@@ -28,7 +28,7 @@ class ProductCategoryPolicy
      * @param  \App\ProductCategory  $productCategory
      * @return mixed
      */
-    public function view(User $user, ProductCategory $productCategory)
+    public function view(User $user, ProductCategory $category)
     {
         return $user->can('ver categoria');
     }

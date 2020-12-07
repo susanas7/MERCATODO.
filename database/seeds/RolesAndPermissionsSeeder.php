@@ -37,6 +37,8 @@ class RolesAndPermissions extends Seeder
 
         Permission::create(['name' => 'ver orden']);
 
+        Permission::create(['name' => 'ver reportes']);
+
         Permission::create(['name' => 'api']);
 
         //create roles and assign created permissions
@@ -48,6 +50,7 @@ class RolesAndPermissions extends Seeder
         $role->givePermissionTo('eliminar usuario');
         $role->givePermissionTo('ver rol');
         $role->givePermissionTo('ver orden');
+        $role->givePermissionTo('ver reportes');
 
         $role = Role::create(['name' => 'Administrador de productos', 'slug' => 'Tiene permiso para ver, editar, crear, y eliminar productos']);
         $role->givePermissionTo('crear producto');
@@ -59,6 +62,7 @@ class RolesAndPermissions extends Seeder
         $role->givePermissionTo('editar categoria');
         $role->givePermissionTo('eliminar categoria');
         $role->givePermissionTo('ver orden');
+        $role->givePermissionTo('ver reportes');
 
         $role = Role::create(['name' => 'Super-administrador', 'slug' => 'Administrador global']);
         $role->givePermissionTo(Permission::all());

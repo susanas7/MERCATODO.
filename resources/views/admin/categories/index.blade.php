@@ -2,7 +2,6 @@
 
 @section('content')
 
-
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-8">
@@ -30,8 +29,10 @@
         <div class="col-md-12" >
             <div class="card"  id="box-crud">
                   <div class="card-body">
+                  <div class="card-header"><P ALIGN=center> {{ $categories->total() }} categorias | página {{ $categories->currentPage() }} de {{ $categories->lastpage() }}</div>
+
                     <div>
-                    @can('crear usuario')
+                    @can('crear categoria')
                       <a href="{{route('admin.categories.create')}}" class="btn btn-primary">Crear</a>
                     @endcan
                     </div><br>
@@ -70,6 +71,7 @@
                         @endforeach
                       </tbody>
                     </table>
+                    {{$categories->links()}}
                   </div>
             </div>
         </div>

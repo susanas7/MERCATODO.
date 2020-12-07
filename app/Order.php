@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
@@ -44,7 +44,7 @@ class Order extends Model
                 [
                 'user_name' => User::select('name')
                     ->whereColumn('orders.user_id', 'id')
-                    ->limit(1)
+                    ->limit(1),
                 ]
             );
     }

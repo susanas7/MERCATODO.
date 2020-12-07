@@ -102,7 +102,7 @@ class Product extends Model
                 [
                 'category_title' => ProductCategory::select('title')
                     ->whereColumn('products.category_id', 'id')
-                    ->limit(1)
+                    ->limit(1),
                 ]
             );
     }

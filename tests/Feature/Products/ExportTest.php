@@ -30,12 +30,13 @@ class ExportTest extends TestCase
         $this->artisan('migrate:refresh --seed');
 
         factory(Product::class, 5)->create();
-        $user = factory(User::class)->create()->assignRole('Super-administrador');
+        $user = User::all()->last(); //factory(User::class)->create()->assignRole('Super-administrador');
         Excel::fake();
 
         $response = $this->actingAs($user)
             ->get(route('admin.products.export'))
-            ->assertOk();
+            ->assertSessionHasNoErrors()
+            ->assertStatus(200);
 
         Excel::assertDownloaded('products.xlsx');
     }
