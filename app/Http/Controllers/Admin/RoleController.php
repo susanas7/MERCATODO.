@@ -22,10 +22,11 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::paginate();
-        $permissions = Permission::all()->pluck('name', 'id');
+        $roles = Role::query()
+            ->forIndex()
+            ->paginate();
 
-        return view('admin.roles.index', compact('roles', 'permissions'));
+        return view('admin.roles.index', compact('roles'));
     }
 
     public function create()

@@ -112,7 +112,7 @@
                               Inactivo
                             @endif
                           </td>
-                          <td> {{$product->category->title ?? ''}} </td>
+                          <td> {{$product->category_title ?? ''}} </td>
                           <td></td>
                           <td>
                           @can('ver producto')

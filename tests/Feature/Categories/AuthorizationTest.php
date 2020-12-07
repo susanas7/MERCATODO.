@@ -32,7 +32,7 @@ class AuthorizationTest extends TestCase
     }
 
     /** @test */
-    public function anAthorizedUserCanViewTheCreateForm()
+    public function anAuthorizedUserCanViewTheCreateForm()
     {
         $response = $this->actingAs($this->userAuth)->get(route('admin.categories.create'))
             ->assertStatus(200);
@@ -60,7 +60,7 @@ class AuthorizationTest extends TestCase
     }
 
     /** @test */
-    public function anAthorizedUserCanListCategories()
+    public function anAuthorizedUserCanListCategories()
     {
         $response = $this->actingAs($this->userAuth)->get(route('admin.categories.index'))
             ->assertStatus(200);

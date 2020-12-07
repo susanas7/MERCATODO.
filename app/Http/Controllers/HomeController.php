@@ -16,9 +16,12 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $title = $request->get('title');
         $categories = ProductCategory::all();
-        $products = Product::where('is_active', 1)->title($title)->paginate(20);
+        $products = Product::query()
+            ->forIndex()
+            ->where('is_active', 1)
+            ->title($request->title)
+            ->paginate();
 
         return view('home', compact('products', 'categories'));
     }

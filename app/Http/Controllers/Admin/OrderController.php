@@ -9,7 +9,7 @@ class OrderController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(Order::class, 'category');
+        $this->authorizeResource(Order::class, 'order');
         $this->middleware('auth');
     }
 
@@ -20,7 +20,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::paginate();
+        $orders = Order::query()
+            ->forIndex()
+            ->paginate();
 
         return view('admin.orders.index', ['orders' => $orders]);
     }

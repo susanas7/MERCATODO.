@@ -35,7 +35,7 @@ class ProductCategory extends Model
     public static function categoriesCached():Collection
     {
         return Cache::remember('product_categories', 100, function () {
-            return self::all();
+            return ProductCategory::select('id', 'title')->orderBy('title')->get();
         });
     }
 

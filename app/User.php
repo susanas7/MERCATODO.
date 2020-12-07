@@ -9,6 +9,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use Spatie\Permission\Traits\HasRoles;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Cache;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -75,10 +78,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany('App\Order');
     }
 
-    protected $dispatchEvents = [
-        'created' => UserCreatedEvent::class,
-    ];
-
     public function generateToken()
     {
         $this->api_token = Str::random(60);
@@ -86,4 +85,24 @@ class User extends Authenticatable implements MustVerifyEmail
 
         return $this->api_token;
     }
+
+    /*public function getPermissionsAttribute() {
+        $permissions = Cache::rememberForever('permissions', function() {
+          return Permission::select('permissions.*', 'model_has_permissions.*')
+            ->join('model_has_permissions', 'permissions.id', '=', 'model_has_permissions.permission_id')
+            ->get();
+        });
+    
+        return $permissions->where('model_id', $this->id);
+      }*/
+    
+    /*public function getRolesAttribute() {
+        $roles = Cache::rememberForever('roles',  function () {
+            return Role::select('roles.*', 'model_has_roles.*')
+            ->join('model_has_roles', 'roles.id', '=', 'model_has_roles.role_id')
+            ->get();
+        });
+    
+        return $roles->where('model_id', $this->id);
+    }*/
 }

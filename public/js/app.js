@@ -87577,7 +87577,7 @@ module.exports = function(module) {
   !*** ./resources/js/app.js ***!
   \*****************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -87588,12 +87588,9 @@ var _require = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jqu
     nodeName = _require.nodeName,
     data = _require.data;
 
-/*const { nodeName } = require('jquery');
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-require('./bootstrap');
-
-window.Vue = require('vue');*/
-
+window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -87645,7 +87642,8 @@ try {
 
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'; //toastr = require('toastr');
+
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
