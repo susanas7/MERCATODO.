@@ -27,7 +27,7 @@
                             <label name="role" class="col-md-4 col-form-label text-md-right">Categoria:</label>
 
                             <div class="col-md-6">
-                                <label name="name" class="col-md-8 col-form-label text-md-center">{{ $product->category->title}}</label>
+                                <label name="name" class="col-md-8 col-form-label text-md-center">{{ $product->category->title ?? ''}}</label>
                             </div>
                         </div>
                         <div class="form-group row">
