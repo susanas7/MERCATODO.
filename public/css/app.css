@@ -11173,7 +11173,7 @@ form .txt_field {
   display: grid;
   padding: 1% 1% 1% 1%;
   grid-template: 180px 600px 100px/ 250px 1fr;
-  grid-template-areas: "left-navigation search-input" "content content" "void-navigation content";
+  grid-template-areas: "left-navigation search-input" "content content" "content content";
   gap: 10px;
 }
 
@@ -11190,13 +11190,16 @@ form .txt_field {
 
 .container-home .search-input-home {
   grid-area: search-input;
+  justify-content: center;
 }
 
 .container-home .content-home {
   grid-area: content;
-  grid-column: 2 / span 1;
+  grid-column: 1 / span 2;
   grid-row: 2 / span 2;
   display: grid;
+  padding: 1% 1% 1% 1%;
+  grid-template: repeat(4, 1fr)/repeat(3, 1fr);
 }
 
 .container-home .content-home .card {
@@ -11232,17 +11235,17 @@ form .txt_field {
   height: 40px;
 }
 
-.container-home .card .price {
+.container-home .content-home .card .price {
   text-align: right;
 }
 
-.container-home .card a {
+.container-home .content-home .card a {
   font-weight: 500;
   text-decoration: none;
   color: #3498db;
 }
 
-.container-home .card .add {
+.container-home .content-home .card .add {
   background-image: linear-gradient(130deg, #ff9259 0, #ff2426 70%);
   color: white;
   margin: auto;
@@ -11280,8 +11283,6 @@ form .txt_field {
 }
 
 body {
-  display: flex;
-  flex-direction: column;
   height: 100%;
 }
 

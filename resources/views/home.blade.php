@@ -11,7 +11,9 @@
     </div>
   </div>
   <div class="void-navigation-home"></div>
-  <div class="search-input-home">#3</div>
+  <div class="search-input-home">
+    <input type="text">
+  </div>
   <div class="content-home">
       @foreach($products as $product)
         <div class="card">
