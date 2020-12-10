@@ -14,7 +14,7 @@ cache:
 
 before_script:
   - cp .env.travis .env
-  - sudo mysql -e 'CREATE DATABASE `testing`;
+  - sudo mysql -e 'CREATE DATABASE IF NOT EXISTS `testing`; USE `testing`;
   - composer install
   - php artisan key:generate
 
