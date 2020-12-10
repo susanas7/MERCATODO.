@@ -2,14 +2,18 @@
 
 @section('content')
 
-<div class="table">
+<section class="container-home">
+  <div class="left-navigation-home">#1</div>
+  <div class="search-input-home">#2</div>
+  <div class="content-home">#3</div>
+</section>
+
+
+@endsection
+
+<!--<div class="table">
 <div class="th">
-<div class="filter">
-  <h6> Categorias </h6>
-    @foreach($categories as $cat)
-      <a class="btn tbn-link" href="{{route('category', $cat->id )}}">{{$cat->title}}</a>
-    @endforeach
-</div>
+
 </div>
   <div class="th">
       <div class="card" id="box-search-crud">
@@ -35,7 +39,7 @@
     <br>
 </div>
 </div>
-<div class="container2">
+<div class="container-home">
   @foreach($products as $product)
     <div class="card">
         <a href="{{route('home.show', $product->id) }}" id="btn-show-home" >
@@ -61,5 +65,4 @@
                 <h6>267-37-29 / 300-738-2903</h6>
                 <h6>mercatodo@support.com.co</h6>  
             </div>
-        </div>
-@endsection
+        </div>-->
