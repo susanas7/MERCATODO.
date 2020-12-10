@@ -1,16 +1,22 @@
 .container-home{
-    width: auto;
     display: grid;
-    grid-template: repeat(2, 1fr)/ repeat(2, 1fr);
+    padding: 1% 1% 1% 1%;
+    grid-template: 180px 600px 100px/ 250px 1fr;
     grid-template-areas: "left-navigation search-input"
-                         "left-navigation content" ;
-    gap: 5px;
+                         "content content"
+                         "void-navigation content"  ;
+    gap: 10px;
 }
 
 .container-home .left-navigation-home{
-    background-color: #3498db;
     grid-area: left-navigation;
-    
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 1;
+    overflow: auto;
+}
+
+.container-home .void-navigation-home{
+    grid-area: void-navigation;
 }
 
 .container-home .search-input-home{
@@ -19,11 +25,14 @@
 }
 
 .container-home .content-home{
-    //background-color: red;
     grid-area: content;
+    grid-column: 2 / span 1;
+    grid-row: 2 / span 2;
+    display: grid;
+
 }
 
-.container-home .card{
+.container-home .content-home .card{
     width: 330px;
     height: 430px;
     border-radius: 8px;
@@ -33,23 +42,23 @@
     transition: all 0.25;
 }
 
-.container-home .card:hover{
+.container-home .content-home .card:hover{
     transform: translateY(-5px);
     box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);
 }
 
-.container-home .card img{
+.container-home .content-home .card img{
     width: 330px;
     height: 220px;
 }
 
-.container-home .card h4{
+.container-home .content-home .card h4{
     font-weight: 600;
     justify-content: left;
     margin-left: 10px;
 }
 
-.container-home .card p{
+.container-home .content-home .card p{
     padding: 0 1rem;
     font-size: 16px;
     margin: 10px;
