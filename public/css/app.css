@@ -11190,7 +11190,7 @@ form .txt_field {
 
 .container-home .search-input-home {
   grid-area: search-input;
-  justify-content: center;
+  justify-items: end;
 }
 
 .container-home .content-home {

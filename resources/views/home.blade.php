@@ -12,7 +12,8 @@
   </div>
   <div class="void-navigation-home"></div>
   <div class="search-input-home">
-    <input type="text">
+    <input type="text" placeholder="Search...">
+    <label for="check"><i class="fas fa-search"></i></label>
   </div>
   <div class="content-home">
       @foreach($products as $product)

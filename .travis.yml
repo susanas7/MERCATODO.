@@ -12,9 +12,11 @@ services:
 cache:
   - vendor
 
+before_install:
+    - sudo mysql -e 'CREATE DATABASE testing;'
+
 before_script:
   - cp .env.travis .env
-  - sudo mysql -e 'CREATE DATABASE testing;'
   - composer install
   - php artisan key:generate
 
