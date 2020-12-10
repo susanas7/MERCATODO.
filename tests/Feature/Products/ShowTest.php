@@ -16,7 +16,6 @@ class ShowTest extends TestCase
     /** @test */
     public function aProductCanBeShown()
     {
-        //$this->withoutExceptionHandling();
         factory(ProductCategory::class, 50)->create();
         $product = factory(Product::class)->create();
 
