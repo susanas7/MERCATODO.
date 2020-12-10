@@ -11172,7 +11172,7 @@ form .txt_field {
 .container-home {
   display: grid;
   padding: 1% 1% 1% 1%;
-  grid-template: 180px 600px 100px/ 250px 1fr;
+  grid-template: 180px 600px 100px/ 300px 1fr;
   grid-template-areas: "left-navigation search-input" "content content" "content content";
   gap: 10px;
 }
@@ -11190,7 +11190,31 @@ form .txt_field {
 
 .container-home .search-input-home {
   grid-area: search-input;
-  justify-items: end;
+  justify-self: end;
+  align-self: center;
+}
+
+.container-home .search-input-home div {
+  border: 1px solid grey;
+  border-radius: 20px;
+  width: 300px;
+  height: 30px;
+}
+
+.container-home .search-input-home input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding-bottom: 1%;
+  padding-left: 5%;
+  font-size: 10px;
+  width: 280px;
+}
+
+.container-home .search-input-home a {
+  width: 10px;
+  height: 10px;
+  color: black;
 }
 
 .container-home .content-home {

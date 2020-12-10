@@ -9,6 +9,9 @@ install:
 services:
   - mysql
 
+dist: 
+  - precise
+
 cache:
   - vendor
 

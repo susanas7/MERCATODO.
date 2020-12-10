@@ -12,8 +12,13 @@
   </div>
   <div class="void-navigation-home"></div>
   <div class="search-input-home">
-    <input type="text" placeholder="Search...">
-    <label for="check"><i class="fas fa-search"></i></label>
+    <div>
+      <form action=" {{route('home')}} ">
+        <input type="search" name="title" placeholder="Search..." >
+        <a href="{{ route('home') }}">x
+        </a>
+      </form>
+    </div>
   </div>
   <div class="content-home">
       @foreach($products as $product)
