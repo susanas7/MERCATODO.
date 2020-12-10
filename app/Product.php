@@ -97,7 +97,7 @@ class Product extends Model
     public function scopeForIndex(Builder $query): Builder
     {
         return $query
-            ->select('id', 'title', 'slug', 'is_active', 'price')
+            ->select('id', 'title', 'slug', 'is_active', 'price', 'img_route')
             ->addSelect(
                 [
                 'category_title' => ProductCategory::select('title')

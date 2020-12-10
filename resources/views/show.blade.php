@@ -12,7 +12,7 @@
             <h4>{{$product->slug}}</h4><br>
             <h3>${{number_format($product->price, 2)}}</h3><br>
             @if(auth()->user())
-                <a href="{{route('user.addToCart', ['id' => $product->id ])}}">Agregar</a> 
+                <a href="{{route('user.addToCart', ['id' => $product->id ])}}">add +</a> 
             @endif
         </div>
     </div>

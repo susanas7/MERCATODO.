@@ -5,6 +5,7 @@
 <section class="container-home">
   <div class="left-navigation-home">
     <div class="categories">
+      <h5>Categorias</h5  >
       @foreach($categories as $cat)
         <a class="btn tbn-link" href="{{route('category', $cat->id )}}">{{$cat->title}}</a><br>
       @endforeach
@@ -30,7 +31,7 @@
             <p>{{$product->slug}}</p>
             <p class="price">$ {{number_format($product->price)}}</p>
             @if(auth()->user())
-              <a class="add" href="{{route('user.addToCart', ['id' => $product->id ])}}">Agregar</a> 
+              <a class="add" href="{{route('user.addToCart', ['id' => $product->id ])}}">add +</a> 
             @endif
         </div>
         {{$products->links()}} 

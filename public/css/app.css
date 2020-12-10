@@ -11182,6 +11182,17 @@ form .txt_field {
   grid-column: 1 / span 1;
   grid-row: 1 / span 1;
   overflow: auto;
+  padding: 2% 2% 2% 2%;
+  background-color: #EFEFEF;
+  border-radius: 15px;
+}
+
+.container-home .left-navigation-home .categories h5 {
+  justify-self: center;
+}
+
+.container-home .left-navigation-home .categories a {
+  justify-self: start;
 }
 
 .container-home .void-navigation-home {
@@ -11190,7 +11201,7 @@ form .txt_field {
 
 .container-home .search-input-home {
   grid-area: search-input;
-  justify-self: end;
+  justify-self: center;
   align-self: center;
 }
 
@@ -11199,6 +11210,7 @@ form .txt_field {
   border-radius: 20px;
   width: 300px;
   height: 30px;
+  background-color: #EFEFEF;
 }
 
 .container-home .search-input-home input {
@@ -11241,7 +11253,7 @@ form .txt_field {
   box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);
 }
 
-.container-home .content-home .card img {
+.container-home .content-home .card a img {
   width: 330px;
   height: 220px;
 }
@@ -11276,7 +11288,7 @@ form .txt_field {
   text-align: center;
   border-radius: 15px;
   height: 45px;
-  width: 80%;
+  width: 50%;
   font-size: 16px;
   font-family: 'Rubik', sans-serif;
   padding: 8.5px 14px;
