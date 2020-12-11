@@ -1,0 +1,23 @@
+.container-shoppingcart{
+    margin: 4% 4% 4% 4%;
+}
+
+.shoppingcart-header{
+    //background-color: lightblue;
+    display: grid;
+    background-color: #EFEFEF;
+    grid-template: auto/ repeat(4, auto);
+    grid-template-areas: "items items quantity subtotal";
+}
+
+.shoppingcart-items{
+    grid-area: items;
+}
+
+.shoppingcart-quantity{
+    grid-area: quantity;
+}
+
+.shoppingcart-subtotal{
+    grid-area: subtotal;
+}
