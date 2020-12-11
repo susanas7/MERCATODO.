@@ -3,7 +3,10 @@
 }
 .shoppingcart-header{
     display: grid;
-    grid-template: 1fr / repeat(4, 1fr);
+    background-color: #EFEFEF;
+    border-radius: 15px;
+    padding: 0 0 0 1%;
+    grid-template: 40px / repeat(4, 1fr);
     grid-template-areas: "items items quantities subtotals";
 }
 
@@ -28,27 +31,35 @@
 
 .shoppingcart-content{ 
     overflow: auto;
-    max-height: 200px;
+    max-height: 400px;
 }
 
 .shoppingcart-content-container{
-    background-color: lightcoral;
+    background-color: transparent;
     display: grid;
-    grid-template: auto/ repeat(4, 1fr);
+    grid-template: 300px/ repeat(4, 1fr);
     grid-template-areas: "item item quantity subtotal";
 }
 
 .shoppingcart-item{
     grid-area: item;
     grid-column: 1 / span 2;
+    padding: 1% 1% 1% 1%;
+    align-self: center;
+}
+
+.shoppingcart-item img{
+    width: 200px;
 }
 
 .shoppingcart-quantity{
     grid-area: quantity;
     grid-column: 3 / span 1;
+    align-self: center;
 }
 
 .shoppingcart-subtotal{
     grid-area: subtotal;
     grid-column: 4 / span 1;
+    align-self: center;
 }

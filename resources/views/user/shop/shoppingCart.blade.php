@@ -19,8 +19,11 @@
         @foreach($products as $product)
             <div class="shoppingcart-content-container">
                 <div class="shoppingcart-item">
+                    <?php $img = $product['item']['img_route'] ?>
+                    <img src="{{url("storage/$img")}}">
                     {{$product['item']['title']}}<br>
-                    
+                    <?php $pU = $product['price']/$product['qty'] ?>
+                    $ {{number_format($pU, 2)}}
                     <a class="btn btn-link" href="{{route('user.removeItem', ['id' => $product['item']['id']])}}">
                         Remove
                     </a>
