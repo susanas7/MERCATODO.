@@ -34,7 +34,7 @@ class AuthorizationTest extends TestCase
     }
 
     /** @test */
-    public function anAthorizedUserCanListProducts()
+    public function anAthorizedUserCanListRoles()
     {
         $response = $this->actingAs($this->userAuth)->get(route('admin.roles.index'))
             ->assertStatus(200);
