@@ -47,9 +47,9 @@ class HomeController extends Controller
      */
     public function showCategory(int $id)
     {
-        $category = ProductCategory::all();
-        $categories = Product::where('category_id', $id)->get();
+        $categories = ProductCategory::all();
+        $products = Product::where('category_id', $id)->paginate();
         $id_ = $id;
-        return view('category', compact('categories', 'id_', 'category'));
+        return view('home', compact('products', 'id_', 'categories'));
     }
 }
