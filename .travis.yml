@@ -1,7 +1,7 @@
 language: php
 
 php:
-  7.4.3
+  7.4
 
 install:
   composer install
@@ -16,12 +16,13 @@ cache:
   - vendor
 
 before_install:
-    - sudo mysql -e 'CREATE DATABASE testing;'
+  - cp .env.travis .env
+  - sudo mysql -e 'CREATE DATABASE testing;'
 
 before_script:
-  - cp .env.travis .env
   - composer install
   - php artisan key:generate
+  - npm install
 
 script:
   - php artisan optimize
