@@ -11480,20 +11480,53 @@ body {
 
 .shoppingcart-header {
   display: grid;
-  background-color: #EFEFEF;
-  grid-template: auto/repeat(4, auto);
-  grid-template-areas: "items items quantity subtotal";
+  grid-template: 1fr/repeat(4, 1fr);
+  grid-template-areas: "items items quantities subtotals";
 }
 
 .shoppingcart-items {
   grid-area: items;
+  align-self: center;
+  grid-column: 1 / span 2;
+  grid-row: 1 / span 1;
+}
+
+.shoppingcart-quantities {
+  grid-area: quantities;
+  align-self: center;
+  grid-column: 3 / span 1;
+}
+
+.shoppingcart-subtotals {
+  grid-area: subtotals;
+  align-self: center;
+  grid-column: 4 / span 1;
+}
+
+.shoppingcart-content {
+  overflow: auto;
+  max-height: 200px;
+}
+
+.shoppingcart-content-container {
+  background-color: lightcoral;
+  display: grid;
+  grid-template: auto/repeat(4, 1fr);
+  grid-template-areas: "item item quantity subtotal";
+}
+
+.shoppingcart-item {
+  grid-area: item;
+  grid-column: 1 / span 2;
 }
 
 .shoppingcart-quantity {
   grid-area: quantity;
+  grid-column: 3 / span 1;
 }
 
 .shoppingcart-subtotal {
   grid-area: subtotal;
+  grid-column: 4 / span 1;
 }
 

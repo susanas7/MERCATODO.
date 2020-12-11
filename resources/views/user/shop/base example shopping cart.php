@@ -1,4 +1,4 @@
-<!--base example shopping cart
+base example shopping cart
 
 @extends('layouts.app')
 
@@ -67,4 +67,4 @@
 @endif
 
 
-@endsection-->
+@endsection

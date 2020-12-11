@@ -34,8 +34,8 @@
               <a class="add" href="{{route('user.addToCart', ['id' => $product->id ])}}">add +</a> 
             @endif
         </div>
-        {{$products->links()}} 
       @endforeach
+      {{$products->links()}} 
   </div>
 </section>
 
