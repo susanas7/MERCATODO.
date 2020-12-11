@@ -37,7 +37,7 @@
 .shoppingcart-content-container{
     background-color: transparent;
     display: grid;
-    grid-template: 300px/ repeat(4, 1fr);
+    grid-template: 180px/ repeat(4, 1fr);
     grid-template-areas: "item item quantity subtotal";
 }
 
@@ -49,7 +49,7 @@
 }
 
 .shoppingcart-item img{
-    width: 200px;
+    width: 150px;
 }
 
 .shoppingcart-quantity{
@@ -61,5 +61,28 @@
 .shoppingcart-subtotal{
     grid-area: subtotal;
     grid-column: 4 / span 1;
+    align-self: center;
+}
+.shoppingcart-subtotal a{
+    margin-right: 0px;
+}
+
+.shoppingcart-footer{
+    display: grid;
+    grid-template: 30px/ repeat(4, 1fr);
+    grid-template-areas: "total totalprice";
+}
+
+.shoppingcart-total{
+    background-color: #EFEFEF;
+    grid-area: total;
+    grid-column: 3  / span 1;
+    align-self: center;
+}
+
+.shoppingcart-totalprice{
+    background-color: #EFEFEF;
+    grid-area: totalprice;
+    grid-column: 4  / span 1;
     align-self: center;
 }
