@@ -57,6 +57,12 @@
             {{ number_format($totalPrice, 2) }}
         </div>
     </div>
+    <div class="shoppingcart-confirm">
+        <form class="shoppingcart-confirm-order" action="{{route('user.store.order')}}" method="POST">
+            {{ csrf_field() }}  
+            <button  class="btn btn-dark" type="submit">Confirmar</button>
+        </form>
+    </div>
 </section>
 
 @endif

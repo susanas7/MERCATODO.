@@ -11565,3 +11565,15 @@ body {
   align-self: center;
 }
 
+.shoppingcart-confirm {
+  display: grid;
+  grid-template: auto/repeat(4, 1fr);
+}
+
+.shoppingcart-confirm-order {
+  grid-area: confirmorder;
+  grid-column: 4  / span 1;
+  margin-top: 10px;
+  justify-self: center;
+}
+
