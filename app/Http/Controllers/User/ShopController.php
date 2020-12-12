@@ -97,6 +97,7 @@ class ShopController extends Controller
         }
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
+        //dd($cart);
 
         return view('user.shop.shoppingCart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
     }
@@ -126,6 +127,7 @@ class ShopController extends Controller
             OrderProduct::create([
                 'order_id' => $order->id,
                 'product_id' => $s['id'],
+                'quantity' => $items['qty'],
             ]);
         }
 

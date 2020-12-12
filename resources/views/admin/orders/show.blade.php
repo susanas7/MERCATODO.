@@ -1,6 +1,33 @@
 @extends('layouts.app')
 @section('content')
 
+<section class="order-show-container">
+    <div class="order-info-container">
+        <div class="order-ref">
+            <p>Referencia</p>
+            <p>Comprador</p>
+            <p>&nbsp;</p>
+            <p>
+            @foreach($order->products as $product)
+                <p>{{$product->title}}</p>
+            @endforeach
+            </p>
+            
+        </div>
+        <div class="order-info">
+            <p>{{$order->id}}</p>
+            <p>{{$order->user->name ?? ''}}</p>
+            <p>&nbsp;</p>
+            @foreach($order->products as $product)
+                {{$orderProduct->quantity}}
+            @endforeach
+        </div>
+    </div>
+</section>
+
+@endsection
+
+<!--
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -61,5 +88,4 @@
     </div>
 </div>
 
-
-@endsection
+-->

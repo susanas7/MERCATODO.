@@ -13,8 +13,7 @@ cache:
   - vendor
 
 before_script:
-  - cp .env.travis .env
-  - sudo mysql -e 'CREATE DATABASE `testing`;'
+  - sudo mysql -e 'CREATE DATABASE `tdd`;'
   - composer install
   - php artisan key:generate
 

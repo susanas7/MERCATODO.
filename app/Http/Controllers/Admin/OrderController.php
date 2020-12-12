@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Order;
+use App\OrderProduct;
 
 class OrderController extends Controller
 {
@@ -36,9 +37,11 @@ class OrderController extends Controller
     public function show(int $id)
     {
         $order = Order::find($id);
+        $orderProduct = OrderProduct::where('order_id', $id);
 
         return view('admin.orders.show', [
             'order' => $order,
+            'orderProduct' => $orderProduct
         ]);
     }
 }

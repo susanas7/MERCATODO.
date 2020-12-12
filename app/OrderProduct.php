@@ -15,4 +15,13 @@ class OrderProduct extends Model
     protected $fillable = [
         'id', 'order_id', 'product_id', 'quantity', 'price',
     ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'price',
+    ];
 }
