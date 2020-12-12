@@ -33,13 +33,12 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $title = $request->get('title');
-        $slug = $request->get('slug');
-        $categories = ProductCategory::all();
+        $products = Product::query()
+            ->forIndex()
+            ->title($request->title)
+            ->paginate();
 
-        $products = Product::title($title)->paginate();
-
-        return view('admin.products.index', ['products' => $products, 'categories' => $categories]);
+        return view('admin.products.index', ['products' => $products]);
     }
 
     /**

@@ -8,7 +8,7 @@ use Faker\Generator as Faker;
 $factory->define(Order::class, function (Faker $faker) {
     return [
         'user_id' => rand('1', '15'),
-        'status' => rand('1', '15'),
+        'status' => 'created',
         'quantity' => rand('1', '8'),
         'total' => rand('10', '80'),
     ];

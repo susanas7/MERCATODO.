@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected $table = 'products';
-
     /**
      * The attributes that are mass assignable.
      *
@@ -52,7 +50,7 @@ class Product extends Model
      *
      * @return Builder
      */
-    public function scopeTitle(Builder $query, string $title = null)
+    public function scopeTitle(Builder $query, string $title = null):Builder
     {
         return $query->where('title', 'LIKE', "%{$title}%")
             ->orWhere('slug', 'LIKE', "%{$title}%");
@@ -94,5 +92,18 @@ class Product extends Model
     public function metrics()
     {
         return $this->belongsTo(MetricProduct::class);
+    }
+
+    public function scopeForIndex(Builder $query): Builder
+    {
+        return $query
+            ->select('id', 'title', 'slug', 'is_active', 'price', 'img_route')
+            ->addSelect(
+                [
+                'category_title' => ProductCategory::select('title')
+                    ->whereColumn('products.category_id', 'id')
+                    ->limit(1),
+                ]
+            );
     }
 }

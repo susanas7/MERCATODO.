@@ -11,9 +11,13 @@ use Carbon\Carbon;
 
 class MetricsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:ver reportes');
+    }
+
     public function chart()
     {
-        $this->authorize('viewAny', auth()->user());
         $from = Carbon::now()->subMonths(6);
         $to = Carbon::now();
         $metric = MetricJob::dispatch($from, $to);

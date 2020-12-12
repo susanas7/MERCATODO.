@@ -19,11 +19,11 @@ class UpdateTest extends TestCase
 
         $response = $this->put(route('admin.categories.update', $category), [
             'title' => 'Agua',
-        ]);
-        $category->refresh();
+        ])->assertRedirect(route('admin.categories.index'))
+        ->assertSessionHasNoErrors();
+        $category = ProductCategory::all()->last();
 
         $this->assertEquals('Agua', $category->title);
-        $response->assertRedirect(route('admin.categories.index'));
     }
 
     /** @test */

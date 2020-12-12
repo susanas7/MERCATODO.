@@ -35,7 +35,7 @@ class ProductCategory extends Model
     public static function categoriesCached():Collection
     {
         return Cache::remember('product_categories', 100, function () {
-            return self::all();
+            return self::select('id', 'title')->orderBy('title')->get();
         });
     }
 
@@ -48,5 +48,10 @@ class ProductCategory extends Model
     public function scopeTitle(Builder $query, string $title)
     {
         return $query->where('title', 'LIKE', "%{$title}%");
+    }
+
+    public static function flushCache(): void
+    {
+        Cache::forget('product_categories');
     }
 }
