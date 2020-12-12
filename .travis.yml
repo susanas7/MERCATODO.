@@ -1,7 +1,7 @@
 language: php
 
 php:
-  7.4
+  7.4.7
 
 install:
   composer install
@@ -12,14 +12,11 @@ services:
 cache:
   - vendor
 
-before_install:
-  - cp .env.travis .env
-  - sudo mysql -e 'CREATE DATABASE testing;'
-
 before_script:
+  - cp .env.travis .env
+  - sudo mysql -e 'CREATE DATABASE `testing`;'
   - composer install
   - php artisan key:generate
-  - npm install
 
 script:
   - php artisan optimize
@@ -32,4 +29,3 @@ notifications:
     recipients:
       - susana.s7@hotmail.com
     on_success: always
-    on_failure: always
