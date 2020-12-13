@@ -15,7 +15,6 @@ cache:
 before_script:
   - sudo mysql -e 'CREATE DATABASE `tdd`;'
   - composer install
-  - php artisan key:generate
 
 script:
   - php artisan optimize
