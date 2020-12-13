@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use App\OrderProduct;
 
 class Order extends Model
 {
@@ -27,7 +28,7 @@ class Order extends Model
     ];
 
     /**
-     * Relationship with the invoice.
+     * Relationship with the products.
      *
      * @return relationship
      */
@@ -47,5 +48,15 @@ class Order extends Model
                     ->limit(1),
                 ]
             );
+    }
+
+    /**
+     * Relationship with the details.
+     *
+     * @return relationship
+     */
+    public function orderDetail()
+    {
+        return $this->belongsTo(OrderProduct::class);
     }
 }

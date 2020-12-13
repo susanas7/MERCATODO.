@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
+use App\Observers\OrderPaymentSuccessfulObserver;
+use App\Order;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -21,5 +23,7 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         parent::boot();
+
+        Order::observe(OrderPaymentSuccessfulObserver::class);
     }
 }

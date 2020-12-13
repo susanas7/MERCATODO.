@@ -32,7 +32,7 @@ class PaymentController extends Controller
             'status' => $response->status()->status(),
         ]);
 
-        return view('admin.orders.payment', [
+        return view('admin.orders.show', [
             'order' => $order,
         ]);
     }
