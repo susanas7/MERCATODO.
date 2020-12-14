@@ -41,7 +41,7 @@ class OrderController extends Controller
 
         return view('admin.orders.show', [
             'order' => $order,
-            'orderProduct' => $orderProduct
+            'orderProduct' => $orderProduct,
         ]);
     }
 }

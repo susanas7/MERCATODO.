@@ -2,11 +2,10 @@
 
 namespace App\Mail;
 
+use App\Order;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use App\Order;
 
 class OrderPaymentSuccessfulMail extends Mailable
 {

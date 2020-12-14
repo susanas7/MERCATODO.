@@ -2,8 +2,8 @@
 
 namespace App\Observers;
 
-use App\Order;
 use App\Mail\OrderPaymentSuccessfulMail;
+use App\Order;
 use Illuminate\Support\Facades\Mail;
 
 class OrderPaymentSuccessfulObserver
@@ -16,7 +16,7 @@ class OrderPaymentSuccessfulObserver
      */
     public function created(Order $order)
     {
-        if($order->status == 'APPROVED'){
+        if ($order->status == 'APPROVED') {
             Mail::to($order->user->email)->send(new OrderPaymentSuccessfulMail($order));
         }
     }
@@ -29,7 +29,7 @@ class OrderPaymentSuccessfulObserver
      */
     public function updated(Order $order)
     {
-        if($order->status == 'APPROVED'){
+        if ($order->status == 'APPROVED') {
             Mail::to($order->user->email)->send(new OrderPaymentSuccessfulMail($order));
         }
     }

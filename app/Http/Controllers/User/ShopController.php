@@ -128,7 +128,7 @@ class ShopController extends Controller
                 'order_id' => $order->id,
                 'product_id' => $s['id'],
                 'quantity' => $items['qty'],
-                'price' => $items['qty']*$s['price'],
+                'price' => $items['qty'] * $s['price'],
             ]);
         }
 

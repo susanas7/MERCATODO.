@@ -13,6 +13,7 @@ cache:
   - vendor
 
 before_script:
+  - cp .env.testing .env
   - sudo mysql -e 'CREATE DATABASE `tdd`;'
   - composer install
 
