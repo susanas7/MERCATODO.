@@ -1,8 +1,6 @@
 @extends('layouts.app')
 @section('content')
 
-@if(Session::has('cart'))
-
 <section class="container-shoppingcart">
     <div class="shoppingcart-header">
         <div class="shoppingcart-items">
@@ -65,5 +63,4 @@
     </div>
 </section>
 
-@endif
 @endsection
