@@ -18,6 +18,7 @@ before_script:
 
 script:
   - php artisan optimize
+  - php artisan key:generate --force
   - php artisan migrate:refresh --force
   - composer phpcs
   - vendor/bin/phpunit
