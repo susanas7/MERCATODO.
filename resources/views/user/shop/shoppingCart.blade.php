@@ -60,7 +60,7 @@
     <div class="shoppingcart-confirm">
         <form class="shoppingcart-confirm-order" action="{{route('user.store.order')}}" method="POST">
             {{ csrf_field() }}  
-            <button  class="btn btn-dark" type="submit">Confirmar</button>
+            <button  class="btn btn-dark" type="submit">Pagar</button>
         </form>
     </div>
     @endisset

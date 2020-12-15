@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\RandomProducts;
 use App\Product;
 use App\ProductCategory;
 use Illuminate\Http\Request;
@@ -35,8 +36,11 @@ class HomeController extends Controller
      */
     public function show(Product $product): View
     {
+        $collection = RandomProducts::getRandomProducts();
+
         return view('show', [
             'product' => $product,
+            'collection' => $collection,
         ]);
     }
 

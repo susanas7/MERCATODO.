@@ -16,6 +16,17 @@
             @endif
         </div>
     </div>
+</div><br>
+<h5>Te puede interesar</h5><br>
+<div class="container-show-random">
+    @foreach($collection as $p) 
+    <div class="container-show-random-products">
+    <a href="{{route('home.show', $product->id) }}">
+        <img src="{{$p->get_image}}"></a>
+        <a href="{{route('home.show', $product->id) }}" class="btn btn">
+        <h1>{{$p->title}}</h1>
+        <h6>{{$p->price}}</h6></a>
+    </div>
+    @endforeach      
 </div>
-
 @endsection
