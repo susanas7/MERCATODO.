@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\Product;
+use Illuminate\Database\Eloquent\Model;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
@@ -14,10 +15,9 @@ class ProductsImport implements ToModel, WithHeadingRow, WithValidation
 
     /**
      * @param array $row
-     *
-     * @return \Illuminate\Database\Eloquent\Model|null
+     * @return Model|null
      */
-    public function model(array $row)
+    public function model(array $row): Model
     {
         return new Product([
             'category_id' => $row['category_id'],
@@ -28,6 +28,11 @@ class ProductsImport implements ToModel, WithHeadingRow, WithValidation
         ]);
     }
 
+    /**
+     * Validation rules.
+     *
+     * @return array
+     */
     public function rules(): array
     {
         return [
@@ -37,13 +42,4 @@ class ProductsImport implements ToModel, WithHeadingRow, WithValidation
             'price' => 'required|numeric|min:0',
         ];
     }
-
-    /*public function onFailure(Failure ...$failures)
-    {
-    }
-
-    public function onError(\Throwable $errors)
-    {
-        // Handle the exception how you'd like.
-    }*/
 }

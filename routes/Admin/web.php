@@ -14,7 +14,7 @@ Route::as('admin.')->prefix('admin/')->middleware('verified')->namespace('Admin'
     Route::resource('/categories', 'CategoryController');
     Route::get('/orders', 'OrderController@index')->name('orders.index');
     Route::get('/orders/{order}', 'OrderController@show')->name('orders.show');
-    Route::get('/metrics', 'MetricsController@chart')->name('metric')->middleware('can:api');
+    Route::get('/metrics', 'MetricsController@index')->name('metric');
     Route::get('/metrics/data', 'MetricsController@metricData')->name('metricData');
     Route::get('/metrics/data2', 'MetricsController@metricData2')->name('metricData2');
 });

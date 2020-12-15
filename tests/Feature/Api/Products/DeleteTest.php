@@ -15,13 +15,10 @@ class DeleteTest extends TestCase
     /** @test */
     public function anApiProductCanBeDeleted()
     {
-        //Arrange
         $product = factory(Product::class)->create();
 
-        //Act
         $response = $this->deleteJson(route('api.products.destroy', $product));
 
-        //Assert
         $this->assertDatabaseMissing('products', ['id'=> $product->id]);
         $this->assertCount(0, Product::all());
     }

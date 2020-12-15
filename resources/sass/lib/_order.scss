@@ -1,0 +1,48 @@
+.order-info-container{
+    display: grid;
+    gap: 40px;
+    grid-template: auto / repeat(6, 1fr);
+    grid-template-areas: "orderRef orderInfo";
+}
+
+.order-ref{
+    justify-self: end;
+    grid-area: orderRef;
+    grid-column: 3 / span 1;
+    padding: 1% 1% 1% 1%;
+}
+
+.order-info{
+    justify-self: start;
+    grid-area: orderInfo;
+    grid-column: 4 / span 1;
+    padding: 1% 1% 1% 1%;
+}
+
+.order-products-container{
+    display: grid;
+    grid-template: auto / repeat(3, 1fr);
+    grid-template-areas: "orderInfo";
+}
+
+.order-products{
+    grid-area: orderInfo;
+    grid-column: 2 / span 1;
+}
+
+.order-payment-container{
+    display: grid;
+    gap: 35px;
+    grid-template: auto / repeat(3, 1fr);
+}
+
+.order-payment-container h3{
+    grid-column: 2 / span 1;
+    justify-self: end;
+    align-self: center;
+}
+
+.order-payment-container a{
+    width: 300px;
+    grid-column: 3 / span 1;
+}

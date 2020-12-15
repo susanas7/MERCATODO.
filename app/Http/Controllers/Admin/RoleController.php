@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Role\CreateRequest;
 use App\Http\Requests\Role\UpdateRequest;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -16,11 +18,11 @@ class RoleController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of roles.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
         $roles = Role::query()
             ->forIndex()
@@ -29,14 +31,25 @@ class RoleController extends Controller
         return view('admin.roles.index', compact('roles'));
     }
 
-    public function create()
+    /**
+     * Show the form for creating a new role.
+     *
+     * @return View
+     */
+    public function create(): View
     {
         $permissions = Permission::all();
 
         return view('admin.roles.create', compact('permissions'));
     }
 
-    public function store(CreateRequest $request)
+    /**
+     * Store a newly created role in storage.
+     *
+     * @param CreateRequest $request
+     * @return RedirectResponse
+     */
+    public function store(CreateRequest $request): RedirectResponse
     {
         $role = new Role;
 
@@ -50,26 +63,39 @@ class RoleController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified role.
      *
      * @param Role $role
-     * @return \Illuminate\View\View
+     * @return View
      */
-    public function show(Role $role)
+    public function show(Role $role): View
     {
         return view('admin.roles.show', [
             'role' => $role,
         ]);
     }
 
-    public function edit(Role $role)
+    /**
+     * Show the form for editing the specified role.
+     *
+     * @param Role $role
+     * @return View
+     */
+    public function edit(Role $role): View
     {
         $permissions = Permission::all();
 
         return view('admin.roles.edit', compact('role', 'permissions'));
     }
 
-    public function update(UpdateRequest $request, Role $role)
+    /**
+     * Update the specified role in storage.
+     *
+     * @param UpdateRequest $request
+     * @param Role $role
+     * @return RedirectResponse
+     */
+    public function update(UpdateRequest $request, Role $role): RedirectResponse
     {
         $role->name = $request->name;
         $role->slug = $request->slug;
@@ -80,7 +106,13 @@ class RoleController extends Controller
         return redirect()->route('admin.roles.index');
     }
 
-    public function destroy(int $id)
+    /**
+     * Remove the specified role from storage.
+     *
+     * @param int $id
+     * @return RedirectResponse
+     */
+    public function destroy(int $id): RedirectResponse
     {
         $role = Role::find($id);
         $role->delete();

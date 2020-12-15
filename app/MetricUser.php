@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class MetricUser extends Model
 {
@@ -17,12 +18,22 @@ class MetricUser extends Model
         'id', 'date', 'user_id', 'total',
     ];
 
+    /**
+     * Relationship with the products.
+     *
+     * @return BelongsTo
+     */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function getNameAttribute()
+    /**
+     * Get the name of user.
+     *
+     * @return string
+     */
+    public function getNameAttribute(): string
     {
         return $this->user->name;
     }

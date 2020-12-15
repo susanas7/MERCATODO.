@@ -1,8 +1,6 @@
 @extends('layouts.app')
 @section('content')
 
-@if(Session::has('cart'))
-
 <section class="container-shoppingcart">
     <div class="shoppingcart-header">
         <div class="shoppingcart-items">
@@ -16,6 +14,7 @@
         </div>
     </div>
     <div class="shoppingcart-content">
+        @isset($products)
         @foreach($products as $product)
             <div class="shoppingcart-content-container">
                 <div class="shoppingcart-item">
@@ -48,6 +47,7 @@
                 </div>
             </div>
         @endforeach
+        
     </div>
     <div class="shoppingcart-footer">
         <div class="shoppingcart-total">
@@ -63,7 +63,7 @@
             <button  class="btn btn-dark" type="submit">Confirmar</button>
         </form>
     </div>
+    @endisset
 </section>
 
-@endif
 @endsection

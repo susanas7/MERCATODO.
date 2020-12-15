@@ -11,7 +11,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Editar usuario</div>
+                <div class="card-header">Editar categoria</div>
 
                 <div class="card-body">
                     <form action="{{route('admin.categories.update', $category)}}" method="POST">
@@ -27,7 +27,7 @@
                         </div>
                         <div class="form-group"><P ALIGN=center>
                         </div>
-                        <button class="btn btn-success" type="submit" >Actualizar</button>
+                        <button class="btn btn-success" type="submit" >Editar</button>
                     </form>
                 </div>
             </div>

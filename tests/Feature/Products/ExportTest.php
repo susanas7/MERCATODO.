@@ -27,10 +27,11 @@ class ExportTest extends TestCase
     /** @test */
     public function anAuthorizedUserCanExportProducts()
     {
+        $this->withoutExceptionHandling();
         $this->artisan('migrate:refresh --seed');
 
         factory(Product::class, 5)->create();
-        $user = User::all()->last(); //factory(User::class)->create()->assignRole('Super-administrador');
+        $user = User::all()->last();
         Excel::fake();
 
         $response = $this->actingAs($user)

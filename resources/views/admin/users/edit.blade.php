@@ -52,7 +52,7 @@
                         </div>
                         <div class="form-group"><P ALIGN=center>
                         </div>
-                        <button class="btn btn-success" type="submit" >Actualizar</button>
+                        <button class="btn btn-success" type="submit" >Editar</button>
                     </form>
                 </div>
             </div>
