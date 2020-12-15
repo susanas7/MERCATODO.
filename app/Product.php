@@ -23,7 +23,7 @@ class Product extends Model
      * @var array
      */
     protected $hidden = [
-        'img_route',
+        'created_at', 'updated_at', 'img_route',
     ];
 
     /**
