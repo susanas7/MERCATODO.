@@ -133,6 +133,6 @@ class ShopController extends Controller
             ]);
         }
 
-        return redirect(route('admin.orders.show', $order))->with('order');
+        return redirect(route('user.checkout', $order));
     }
 }

@@ -17,7 +17,7 @@ return[
         'created_at' => 'Creado',
         'updated_at' => 'Actualizado',
         'active' => 'Activo',
-        'inactive' => 'Inactivo', 
+        'inactive' => 'Inactivo',
     ],
     'messages' => [
         'updated' => 'Producto actualizado correctamente',
@@ -33,5 +33,5 @@ return[
         'disable' => 'Desactivar',
         'edit' => 'Editar',
         'delete' => 'Eliminar',
-    ], 
+    ],
 ];
