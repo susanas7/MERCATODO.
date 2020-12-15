@@ -4,23 +4,26 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Order;
+use Illuminate\View\View;
 
 class OrderController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(Order::class, 'category');
         $this->middleware('auth');
+        $this->middleware('can:ver orden');
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of orders.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
-        $orders = Order::paginate();
+        $orders = Order::query()
+            ->forIndex()
+            ->paginate();
 
         return view('admin.orders.index', ['orders' => $orders]);
     }
@@ -29,12 +32,10 @@ class OrderController extends Controller
      * Displays all the orders.
      *
      * @param Order $order
-     * @return \Illuminate\View\View
+     * @return View
      */
-    public function show(int $id)
+    public function show(Order $order): View
     {
-        $order = Order::find($id);
-
         return view('admin.orders.show', [
             'order' => $order,
         ]);

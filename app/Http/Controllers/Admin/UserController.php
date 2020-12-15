@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Events\UserCreatedEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\CreateRequest;
 use App\Http\Requests\User\UpdateRequest;
 use App\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
@@ -19,12 +19,12 @@ class UserController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of users.
      *
      * @param Request $request
-     * @return \Illuminate\View\View
+     * @return View
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         $name = $request->get('name');
         $users = User::name($name)->paginate();
@@ -33,11 +33,11 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new user.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
-    public function create()
+    public function create(): View
     {
         $roles = Role::all()->pluck('name', 'id');
 
@@ -45,31 +45,30 @@ class UserController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created user in storage.
      *
      * @param CreateRequest $request
      * @return RedirectResponse
      */
-    public function store(CreateRequest $request)
+    public function store(CreateRequest $request): RedirectResponse
     {
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
         ])->assignRole($request->role);
-        event(new UserCreatedEvent($user));
 
         toast('Usuario creado correctamente', 'success');
         return redirect()->route('admin.users.index');
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified user.
      *
      * @param User $user
-     * @return \Illuminate\View\View
+     * @return View
      */
-    public function show(User $user)
+    public function show(User $user): View
     {
         return view('admin.users.show', [
             'user' => $user,
@@ -77,46 +76,43 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified user.
      *
      * @param User $user
-     * @return \Illuminate\View\View
+     * @return View
      */
-    public function edit(User $user)
+    public function edit(User $user): View
     {
-        //$this->authorize('update', auth()->user());
         $roles = Role::all()->pluck('name', 'id');
 
         return view('admin.users.edit', ['user' => $user, 'roles' => $roles]);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified user in storage.
      *
      * @param UpdateRequest $request
-     * @param int $id
+     * @param User $user
      * @return RedirectResponse
      */
-    public function update(UpdateRequest $request, User $user)
+    public function update(UpdateRequest $request, User $user): RedirectResponse
     {
         $user->name = $request->name;
         $user->email = $request->email;
         $user->syncRoles($request->role);
         $user->save();
-        event(new UserCreatedEvent($user));
 
         toast('Usuario actualizado correctamente', 'success');
         return redirect()->route('admin.users.index');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified user from storage.
      *
-     * @param string $user
-     *
-     * @return \Illuminate\Http\Response
+     * @param User $user
+     * @return RedirectResponse
      */
-    public function destroy(User $user)
+    public function destroy(User $user): RedirectResponse
     {
         $user->delete();
 
@@ -127,18 +123,13 @@ class UserController extends Controller
      * Enable or disable the status of a user.
      *
      * @param int $id
-     *
      * @return RedirectResponse
      */
-    public function changeStatus(int $id)
+    public function changeStatus(int $id): RedirectResponse
     {
         $user = User::find($id);
-
         $user->is_active = !$user->is_active;
-
-        if ($user->save()) {
-            return redirect(route('admin.users.index'));
-        }
+        $user->save();
 
         return redirect(route('admin.users.index'));
     }

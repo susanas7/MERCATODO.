@@ -11,13 +11,16 @@ use App\Product;
 use App\ProductCategory;
 use App\Repositories\ProductRepository;
 use Auth;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
 use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ProductController extends Controller
 {
-    private $productRepository;
+    private ProductRepository $productRepository;
 
     public function __construct(ProductRepository $productRepository)
     {
@@ -26,28 +29,27 @@ class ProductController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of products.
      *
      * @param Request $request
-     * @return \Illuminate\View\View
+     * @return View
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
-        $title = $request->get('title');
-        $slug = $request->get('slug');
-        $categories = ProductCategory::all();
+        $products = Product::query()
+            ->forIndex()
+            ->title($request->title)
+            ->paginate();
 
-        $products = Product::title($title)->paginate();
-
-        return view('admin.products.index', ['products' => $products, 'categories' => $categories]);
+        return view('admin.products.index', ['products' => $products]);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new product.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
-    public function create()
+    public function create(): View
     {
         $categories = ProductCategory::all();
 
@@ -55,26 +57,26 @@ class ProductController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created product in storage.
      *
      * @param StoreProductRequest $request
      * @return RedirectResponse
      */
-    public function store(StoreProductRequest $request)
+    public function store(StoreProductRequest $request): RedirectResponse
     {
-        $this->productRepository->storeProduct($request);
+        $this->productRepository->store($request);
 
         toast('Producto creado correctamente', 'success');
         return redirect()->route('admin.products.index');
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified product.
      *
      * @param Product $product
-     * @return \Illuminate\View\View
+     * @return View
      */
-    public function show(Product $product)
+    public function show(Product $product): View
     {
         return view('admin.products.show', [
             'product' => $product,
@@ -82,12 +84,12 @@ class ProductController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified product.
      *
      * @param Product $product
-     * @return \Illuminate\View\View
+     * @return View
      */
-    public function edit(Product $product)
+    public function edit(Product $product): View
     {
         $categories = ProductCategory::all();
 
@@ -95,30 +97,29 @@ class ProductController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified product in storage.
      *
      * @param UpdateRequest $request
-     * @param int $id
+     * @param Product $product
      * @return RedirectResponse
      */
-    public function update(UpdateRequest $request, Product $product)
+    public function update(UpdateRequest $request, Product $product): RedirectResponse
     {
-        $this->productRepository->updateProduct($request, $product);
+        $this->productRepository->update($request, $product);
 
         toast('Producto actualizado correctamente', 'success');
         return redirect()->route('admin.products.index');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified product from storage.
      *
      * @param Product $product
      * @return RedirectResponse
      */
-    public function destroy(Product $product)
+    public function destroy(Product $product): RedirectResponse
     {
-        Storage::disk('public')->delete($product->img_route);
-        $product->delete();
+        $this->productRepository->delete($product);
 
         return back();
     }
@@ -129,10 +130,9 @@ class ProductController extends Controller
      * @param int $id
      * @return RedirectResponse
      */
-    public function changeStatus(int $id)
+    public function changeStatus(int $id): RedirectResponse
     {
         $product = Product::find($id);
-
         $product->is_active = !$product->is_active;
 
         if ($product->save()) {
@@ -145,9 +145,9 @@ class ProductController extends Controller
     /**
      * Export products.
      *
-     * @return Response
+     * @return BinaryFileResponse
      */
-    public function export()
+    public function export(): BinaryFileResponse
     {
         $this->authorize('update', auth()->user());
 
@@ -160,7 +160,7 @@ class ProductController extends Controller
      * @param Request $request
      * @return RedirectResponse
      */
-    public function import(Request $request)
+    public function import(Request $request): RedirectResponse
     {
         $this->authorize('update', auth()->user());
         $import = new ProductsImport;

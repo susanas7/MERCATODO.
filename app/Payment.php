@@ -4,11 +4,18 @@ namespace App;
 
 use Dnetix\Redirection\PlacetoPay as PlacetoPay;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\JsonResponse;
 use Session;
 
 class Payment extends Model
 {
-    public static function pay(Order $order, Placetopay $placetopay)
+    /**
+     * Create payment request for placetopay gateway.
+     *
+     * @param Order $order
+     * @param Placetopay $placetopay
+     */
+    public static function pay(Order $order, Placetopay $placetopay): JsonResponse
     {
         $request = [
             'locale' => 'es_CO',

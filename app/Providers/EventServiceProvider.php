@@ -2,7 +2,8 @@
 
 namespace App\Providers;
 
-use App\Events\UserCreatedEvent;
+use App\Observers\OrderPaymentSuccessfulObserver;
+use App\Order;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
 
@@ -14,9 +15,6 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        UserCreatedEvent::class => [
-            \App\Listeners\UserCreatedListener::class,
-        ],
     ];
 
     /**
@@ -25,5 +23,7 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         parent::boot();
+
+        Order::observe(OrderPaymentSuccessfulObserver::class);
     }
 }

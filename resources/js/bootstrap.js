@@ -23,7 +23,7 @@ window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-toastr = require('toastr');
+//toastr = require('toastr');
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

@@ -4,11 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Product extends Model
 {
-    protected $table = 'products';
-
     /**
      * The attributes that are mass assignable.
      *
@@ -30,29 +29,19 @@ class Product extends Model
     /**
      * Relationship with the category.
      *
-     * @return relationship
+     * @return BelongsTo
      */
-    public function category()
+    public function category(): BelongsTo
     {
         return $this->belongsTo(ProductCategory::class);
-    }
-
-    public function active()
-    {
-        if ('active' === $this->status) {
-            return true;
-        }
-
-        return false;
     }
 
     /**
      * @param Builder $query
      * @param string  $title
-     *
      * @return Builder
      */
-    public function scopeTitle(Builder $query, string $title = null)
+    public function scopeTitle(Builder $query, string $title = null): Builder
     {
         return $query->where('title', 'LIKE', "%{$title}%")
             ->orWhere('slug', 'LIKE', "%{$title}%");
@@ -62,7 +51,8 @@ class Product extends Model
      * @param Builder $query
      * @param string $field
      * @param string $value
-     * @param string $operator
+     * @param string $operator|null
+     * @return Builder
      */
     public function searchByField(Builder $query, string $field, string $value, string $operator = null): Builder
     {
@@ -72,27 +62,50 @@ class Product extends Model
     /**
      * Get the image of product.
      *
-     * @return image
+     * @return string|null
      */
-    public function getGetImageAttribute()
+    public function getGetImageAttribute(): ?string
     {
         if ($this->img_route) {
             return url("storage/{$this->img_route}");
         }
+        return null;
     }
 
     /**
      * Relationship with the orders.
      *
-     * @return relationship
+     * @return HasToMany
      */
-    public function orders()
+    public function orders(): HasToMany
     {
-        return $this->belongsToMany(Order::class);
+        return $this->HasMany(Order::class);
     }
 
-    public function metrics()
+    /**
+     * Relationship with the metrics.
+     *
+     * @return BelongsTo
+     */
+    public function metrics(): BelongsTo
     {
         return $this->belongsTo(MetricProduct::class);
+    }
+
+    /**
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeForIndex(Builder $query): Builder
+    {
+        return $query
+            ->select('id', 'title', 'slug', 'is_active', 'price', 'img_route')
+            ->addSelect(
+                [
+                'category_title' => ProductCategory::select('title')
+                    ->whereColumn('products.category_id', 'id')
+                    ->limit(1),
+                ]
+            );
     }
 }

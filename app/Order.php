@@ -2,7 +2,10 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Order extends Model
 {
@@ -26,12 +29,35 @@ class Order extends Model
     ];
 
     /**
-     * Relationship with the invoice.
+     * Relationship with the products.
      *
-     * @return relationship
+     * @return BelongsToMany
      */
-    public function products()
+    public function products(): BelongsToMany
     {
         return $this->belongsToMany(Product::class);
+    }
+
+    public function scopeForIndex(Builder $query): Builder
+    {
+        return $query
+            ->select('id', 'status', 'total', 'created_at')
+            ->addSelect(
+                [
+                'user_name' => User::select('name')
+                    ->whereColumn('orders.user_id', 'id')
+                    ->limit(1),
+                ]
+            );
+    }
+
+    /**
+     * Relationship with the order details.
+     *
+     * @return BelongsTo
+     */
+    public function orderDetail(): BelongsTo
+    {
+        return $this->belongsTo(OrderProduct::class);
     }
 }

@@ -6,10 +6,19 @@ use App\Http\Controllers\Controller;
 use App\Order;
 use App\Payment;
 use Dnetix\Redirection\PlacetoPay as PlacetoPay;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class PaymentController extends Controller
 {
-    public function pay(Order $order, Placetopay $placetopay)
+    /**
+     * Redirects to the placetopay gateway.
+     *
+     * @param Order $order
+     * @param Placetopay $placetopay
+     * @return RedirectResponse
+     */
+    public function pay(Order $order, Placetopay $placetopay): RedirectResponse
     {
         $payment = new Payment;
         $payment::pay($order, $placetopay);
@@ -18,13 +27,13 @@ class PaymentController extends Controller
     }
 
     /**
-     * Show the payment result.
+     * Show and update the payment result.
      *
      * @param Order $order
      * @param Placetopay $placetopay
-     * @return \Illuminate\View\View
+     * @return View
      */
-    public function payment(Order $order, Placetopay $placetopay)
+    public function payment(Order $order, Placetopay $placetopay): View
     {
         $response = $placetopay->query($order->requestId);
 
@@ -32,7 +41,7 @@ class PaymentController extends Controller
             'status' => $response->status()->status(),
         ]);
 
-        return view('admin.orders.payment', [
+        return view('admin.orders.show', [
             'order' => $order,
         ]);
     }

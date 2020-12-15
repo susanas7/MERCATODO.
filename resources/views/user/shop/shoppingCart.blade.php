@@ -1,30 +1,37 @@
 @extends('layouts.app')
-
 @section('content')
 
-@if(Session::has('cart'))
-    <div class="row">
-        <div class="container">
-            <ul id="cart0" class="list-group">
-                @foreach($products as $product)
-                    <li id="cart1" class="list-group-item">
+<section class="container-shoppingcart">
+    <div class="shoppingcart-header">
+        <div class="shoppingcart-items">
+            Productos
+        </div>
+        <div class="shoppingcart-quantities">
+            Cantidad
+        </div>
+        <div class="shoppingcart-subtotals">
+            Subtotal
+        </div>
+    </div>
+    <div class="shoppingcart-content">
+        @isset($products)
+        @foreach($products as $product)
+            <div class="shoppingcart-content-container">
+                <div class="shoppingcart-item">
+                    <?php $img = $product['item']['img_route'] ?>
+                    <img src="{{url("storage/$img")}}">
+                    {{$product['item']['title']}}<br>
+                    <?php $pU = $product['price']/$product['qty'] ?>
+                    $ {{number_format($pU, 2)}}
+                </div>
+                <div class="shoppingcart-quantity">
+                    {{$product['qty']}}
+                </div>
+                <div class="shoppingcart-subtotal">
+                    {{number_format($product['price'], 2)}}
+                    
                         <a class="btn btn-link" href="{{route('user.removeItem', ['id' => $product['item']['id']])}}">
-                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                            <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
-                            <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
-                            </svg>
-                        </a>
-                        <span class="badge">{{$product['qty']}}</span>
-                        <td>&nbsp;</td>
-                        <td><br><img src="{{ $product->get_image ?? '' }}" class="card-img-top"></td>
-                        <strong>{{$product['item']['title']}}</strong>
-                        <span class="label label-success">{{$product['price']}}</span>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <a class="btn btn-link" href="{{route('user.reduceByOne', ['id' => $product['item']['id']])}}"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-dash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M3.5 8a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.5-.5z"/>
-                            </svg>
+                            x
                         </a>
                         <a class="btn btn-link" href="{{route('user.addByOne', ['id' => $product['item']['id']])}}">
                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -32,37 +39,31 @@
                             <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"/>
                             </svg>
                         </a>
-                    </li>
-                @endforeach
-            </ul>
-        </div>
-    </div>
-    <br>
-    <div class="row">
-        <div class="container">
-            <div id="cart2">
-                <strong>Total: {{ number_format($totalPrice, 2) }}</strong> 
+                        <a class="btn btn-link" href="{{route('user.reduceByOne', ['id' => $product['item']['id']])}}"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-dash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M3.5 8a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.5-.5z"/>
+                            </svg>
+                        </a>
+                    
+                </div>
             </div>
+        @endforeach
+        
+    </div>
+    <div class="shoppingcart-footer">
+        <div class="shoppingcart-total">
+            Total:
+        </div>
+        <div class="shoppingcart-totalprice">
+            {{ number_format($totalPrice, 2) }}
         </div>
     </div>
-    <hr>
-    <div class="row">
-        <div class="container">
-        <form id="cc" action="{{route('user.store.order')}}" method="POST">
-        {{ csrf_field() }}
-
-            <button id="confirm" type="submit">Confirmar</button>
+    <div class="shoppingcart-confirm">
+        <form class="shoppingcart-confirm-order" action="{{route('user.store.order')}}" method="POST">
+            {{ csrf_field() }}  
+            <button  class="btn btn-dark" type="submit">Pagar</button>
         </form>
-        </div>
     </div>
-@else
-    <div class="row">
-        <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-            <strong>Total: {{ $totalPrice ?? '' }}</strong> 
-        </div>
-    </div>
-
-@endif
-
+    @endisset
+</section>
 
 @endsection

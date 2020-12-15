@@ -1,14 +1,79 @@
-.container2{
-    width: 100%;
-    max-width: 1200px;
-    height: auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin: auto;
+.container-home{
+    display: grid;
+    padding: 1% 1% 1% 1%;
+    grid-template: 180px 600px 100px/ 300px 1fr;
+    grid-template-areas: "left-navigation search-input"
+                         "content content"
+                         "content content";
+    gap: 10px;
 }
 
-.container2 .card{
+.container-home .left-navigation-home{
+    grid-area: left-navigation;
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 1;
+    overflow: auto;
+    padding: 2% 2% 2% 2%;
+    background-color: #EFEFEF;
+    border-radius: 15px;
+}
+
+.container-home .left-navigation-home .categories h5{
+    justify-self: center;
+}
+
+.container-home .left-navigation-home .categories a{
+    justify-self: start;
+}
+
+.container-home .void-navigation-home{
+    grid-area: void-navigation;
+}
+
+.container-home .search-input-home{
+    grid-area: search-input;
+    justify-self: center;
+    align-self: center;
+    
+}
+
+.container-home .search-input-home div{
+    border: 1px solid grey;
+    border-radius: 20px;
+    width: 300px;
+    height: 30px;
+    background-color: #EFEFEF;
+}
+
+.container-home .search-input-home input{
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding-bottom: 1%;
+    padding-left: 5%;
+    font-size: 10px;
+    width: 280px;
+}
+
+.container-home .search-input-home a {
+    width: 10px;
+    height: 10px;
+    color: black;
+
+}
+h5{
+    text-align: center;
+}
+.container-home .content-home{
+    grid-area: content;
+    grid-column: 1 / span 2;
+    grid-row: 2 / span 2;
+    display: grid;
+    padding: 1% 1% 1% 1%;
+    grid-template: repeat(4, 1fr) / repeat(3, 1fr);
+}
+
+.container-home .content-home .card{
     width: 330px;
     height: 430px;
     border-radius: 8px;
@@ -18,45 +83,45 @@
     transition: all 0.25;
 }
 
-.container2 .card:hover{
+.container-home .content-home .card:hover{
     transform: translateY(-5px);
     box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);
 }
 
-.container2 .card img{
+.container-home .content-home .card a img{
     width: 330px;
     height: 220px;
 }
 
-.container2 .card h4{
+.container-home .content-home .card h4{
     font-weight: 600;
     justify-content: left;
     margin-left: 10px;
 }
 
-.container2 .card p{
+.container-home .content-home .card p{
     padding: 0 1rem;
     font-size: 16px;
     margin: 10px;
     height: 40px;
 }
 
-.container2 .card .price{
+.container-home .content-home .card .price{
     text-align: right;
 }
-.container2 .card a{
+.container-home .content-home .card a{
     font-weight: 500;
     text-decoration: none;
     color: #3498db;
 }
-.container2 .card .add{
+.container-home .content-home .card .add{
     background-image: linear-gradient(130deg,#ff9259 0,#ff2426 70%);
     color: white;
     margin: auto;
     text-align: center;
     border-radius: 15px;
     height: 45px;
-    width: 80%;
+    width: 50%;
     font-size: 16px;
     font-family: 'Rubik', sans-serif;
     padding: 8.5px 14px;
@@ -86,8 +151,8 @@
     padding-bottom: 5px;
 }
 body{
-    display: flex;
-    flex-direction: column;
+    //display: flex;
+    //flex-direction: column;
     height: 100%;
 }
 #footer{

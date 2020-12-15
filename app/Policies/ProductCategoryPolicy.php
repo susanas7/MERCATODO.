@@ -11,59 +11,59 @@ class ProductCategoryPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can view any models.
+     * Determine whether the user can view any categories.
      *
-     * @param  \App\User  $user
-     * @return mixed
+     * @param User $user
+     * @return bool
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
         return $user->can('ver categoria');
     }
 
     /**
-     * Determine whether the user can view the model.
+     * Determine whether the user can view the category.
      *
-     * @param  \App\User  $user
-     * @param  \App\ProductCategory  $productCategory
-     * @return mixed
+     * @param User $user
+     * @param ProductCategory $productCategory
+     * @return bool
      */
-    public function view(User $user, ProductCategory $productCategory)
+    public function view(User $user, ProductCategory $category): bool
     {
         return $user->can('ver categoria');
     }
 
     /**
-     * Determine whether the user can create models.
+     * Determine whether the user can create categories.
      *
-     * @param  \App\User  $user
-     * @return mixed
+     * @param User $user
+     * @return bool
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
         return $user->can('crear categoria');
     }
 
     /**
-     * Determine whether the user can update the model.
+     * Determine whether the user can update the category.
      *
-     * @param  \App\User  $user
-     * @param  \App\ProductCategory  $productCategory
-     * @return mixed
+     * @param User $user
+     * @param ProductCategory $productCategory
+     * @return bool
      */
-    public function update(User $user, ProductCategory $category)
+    public function update(User $user, ProductCategory $category): bool
     {
         return $user->can('editar categoria');
     }
 
     /**
-     * Determine whether the user can delete the model.
+     * Determine whether the user can delete the category.
      *
-     * @param  \App\User  $user
-     * @param  \App\ProductCategory  $productCategory
-     * @return mixed
+     * @param User $user
+     * @param ProductCategory $productCategory
+     * @return bool
      */
-    public function delete(User $user, ProductCategory $category)
+    public function delete(User $user, ProductCategory $category): bool
     {
         return $user->can('eliminar categoria');
     }

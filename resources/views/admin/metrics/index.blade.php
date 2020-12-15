@@ -2,9 +2,8 @@
 
 @section('content')
 
-<div>
+<div class="container-show-metrics">
     <metric></metric>
-
 </div>
 
 @endsection

@@ -28,7 +28,7 @@
     <div class="row justify-content-center" >
         <div class="col-md-10">
             <div class="card" id="box-crud" >
-                <div class="card-header"><P ALIGN=center> {{ $products->total() }} productos | página {{ $products->currentPage() }} de {{ $products->lastpage() }} </div>
+                <div class="card-header"><P ALIGN=center> {{ $products->total() }} @lang('products.fields.products') | @lang('products.fields.page')  {{ $products->currentPage() }} de {{ $products->lastpage() }} </div>
                   <div class="card-body">
                   @isset($errors)
                       <div class="row justify-content-center">
@@ -39,25 +39,23 @@
                       @endisset
                     <div>
                     <table class="egt">
-
                       <tr>
-
-                        <td><a href="{{route('admin.products.create')}}" class="btn btn-primary">Crear</a></td>
+                        <td><a href="{{route('admin.products.create')}}" class="btn btn-primary">@lang('products.buttons.create')</a></td>
 
                         <td><form action="{{route('admin.products.export')}}">
-                        <button type="submit" class="btn btn-primary">Exportar</button>
+                        <button type="submit" class="btn btn-primary">@lang('products.buttons.export') </button>
                       </form></td>
 
                         <td><form action="{{route('admin.products.import')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                          Importar
+                          @lang('products.buttons.import') 
                         </button>
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Importar productos</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">@lang('products.buttons.import') @lang('products.fields.products')  </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
@@ -65,13 +63,14 @@
                       <div class="modal-body">
                       <form action="{{route('admin.products.import')}}" method="post" enctype="multipart/form-data">
                         @csrf
+                        <h6>@lang('products.messages.for-import')</h6>
                         <img src="{{ url('storage/images/import.example.png') }}" class="card-img-top">
                         <input type="file" name="file" required>
                       </form>
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <button typ="submit" class="btn btn-link">Importar</button>
+                        <button typ="submit" class="btn btn-link">@lang('products.buttons.import')</button>
                         </form></td>
 
                       </tr>
@@ -87,11 +86,11 @@
                       <tr>
                         <th>ID</th>
                         <th>&nbsp;</th>
-                        <th>Producto</th>
-                        <th>Descripcion</th>
-                        <th>Precio</th>
-                        <th>Estado</th>
-                        <th>Categoria</th>
+                        <th>@lang('products.fields.product')</th>
+                        <th>@lang('products.fields.slug')</th>
+                        <th>@lang('products.fields.price')</th>
+                        <th>@lang('products.fields.status')</th>
+                        <th>@lang('products.fields.category')</th>
                         <th>&nbsp;</th>
                         <th>&nbsp;</th>
                         <th>&nbsp;</th>
@@ -107,30 +106,30 @@
                           <td>{{ number_format($product->price, 2) }}</td>
                           <td>
                           @if($product->is_active==1)
-                              Activo
+                            @lang('products.fields.active')
                             @else
-                              Inactivo
+                              @lang('products.fields.inactive')
                             @endif
                           </td>
-                          <td> {{$product->category->title ?? ''}} </td>
+                          <td> {{$product->category_title ?? ''}} </td>
                           <td></td>
                           <td>
                           @can('ver producto')
-                            <a href="{{route('admin.products.show', $product->id) }}" id="show-crud" class="btn btn-link">Ver</a>
+                            <a href="{{route('admin.products.show', $product->id) }}" id="show-crud" class="btn btn-link">@lang('products.buttons.view')</a>
                           @endcan
                           </td>
                           <td>
                           @if($product->is_active==1)
                             <a href="{{route('admin.products.changeStatus', $product->id)}}" id="status-crud" class="btn btn-link"
-                            >Desactivar</a>
+                            >@lang('products.buttons.disable')</a>
                           @else
                             <a href="{{route('admin.products.changeStatus', $product->id)}}" id="status-crud" class="btn btn-link" 
-                            >Activar</a>
+                            >@lang('products.buttons.enable')</a>
                           @endif
                           </td>
                           <td>
                             @can('editar producto')
-                              <a class="btn btn-link" id="edit-crud" href="{{route('admin.products.edit', $product->id)}}" >Editar</a>
+                              <a class="btn btn-link" id="edit-crud" href="{{route('admin.products.edit', $product->id)}}" >@lang('products.buttons.edit')</a>
                             @endcan
                           </td>
                           <td>
@@ -139,7 +138,7 @@
                               @method('DELETE')
                               @csrf
                               <input type="submit"
-                              value="Eliminar"
+                              value="@lang('products.buttons.delete')"
                               class="btn btn-link"
                               id="delete-crud"
                               onclick="return confirm('¿Desea eliminar?')">

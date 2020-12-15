@@ -8,12 +8,23 @@ use App\Jobs\UserMetricJob;
 use App\MetricProduct;
 use App\MetricUser;
 use Carbon\Carbon;
+use Illuminate\Http\JsonResponse;
+use Illuminate\View\View;
 
 class MetricsController extends Controller
 {
-    public function chart()
+    public function __construct()
     {
-        $this->authorize('viewAny', auth()->user());
+        $this->middleware('can:ver reportes');
+    }
+
+    /**
+     * Display charts for reports.
+     *
+     * @return View
+     */
+    public function index(): View
+    {
         $from = Carbon::now()->subMonths(6);
         $to = Carbon::now();
         $metric = MetricJob::dispatch($from, $to);
@@ -22,33 +33,43 @@ class MetricsController extends Controller
         return view('admin.metrics.index');
     }
 
-    public function metricData()
+    /**
+     * Return data for charts.
+     *
+     * @return JsonResponse
+     */
+    public function metricData(): JsonResponse
     {
-        $data = MetricProduct::orderBy('total', 'desc')->take(5)->get();
-        $d = $data->pluck('total');
-        $c = $data->pluck('title');
+        $prodData = MetricProduct::orderBy('total', 'desc')->take(5)->get();
+        $productData = $prodData->pluck('total');
+        $productTitle = $prodData->pluck('title');
 
-        $userData = MetricUser::orderBy('total', 'desc')->take(5)->get();
-        $a = $userData->pluck('total');
-        $b = $userData->pluck('name');
+        $usrData = MetricUser::orderBy('total', 'desc')->take(5)->get();
+        $userData = $usrData->pluck('total');
+        $userTitle = $usrData->pluck('name');
 
         return response()->json([
-            'productData' => $d,
-            'productTitle' => $c,
-            'userData' => $a,
-            'userTitle' => $b,
+            'productData' => $productData,
+            'productTitle' => $productTitle,
+            'userData' => $userData,
+            'userTitle' => $userTitle,
         ]);
     }
 
-    public function metricData2()
+    /**
+     * Return data for charts.
+     *
+     * @return JsonResponse
+     */
+    public function metricData2(): JsonResponse
     {
-        $data2 = MetricProduct::orderBy('total', 'asc')->take(5)->get();
-        $x = $data2->pluck('total');
-        $z = $data2->pluck('title');
+        $prodData = MetricProduct::orderBy('total', 'asc')->take(5)->get();
+        $productData2 = $prodData->pluck('total');
+        $productTitle2 = $prodData->pluck('title');
 
         return response()->json([
-            'data2' => $x,
-            'total2' => $z,
+            'data2' => $productData2,
+            'total2' => $productTitle2,
         ]);
     }
 }

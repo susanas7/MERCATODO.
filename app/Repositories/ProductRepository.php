@@ -10,10 +10,15 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductRepository
 {
-    public function storeProduct(StoreProductRequest $request)
+    /**
+     * Store products.
+     *
+     * @param StoreProductRequest $request
+     * @return Product $product
+     */
+    public function store(StoreProductRequest $request): Product
     {
         $product = Product::create($request->all());
-
         if ($request->file('img_route')) {
             $product->img_route = $request->file('img_route')->store('images', 'public');
             $product->save();
@@ -22,7 +27,14 @@ class ProductRepository
         return $product;
     }
 
-    public function updateProduct(UpdateRequest $request, Product $product)
+    /**
+     * Update products.
+     *
+     * @param UpdateRequest $request
+     * @param Product $product
+     * @return Product $product
+     */
+    public function update(UpdateRequest $request, Product $product): Product
     {
         $categories = ProductCategory::all();
         $product->update($request->all());
@@ -33,5 +45,17 @@ class ProductRepository
         }
 
         return $product;
+    }
+
+    /**
+     * Delete products.
+     *
+     * @param Product $product
+     * @return bool
+     */
+    public function delete(Product $product): bool
+    {
+        Storage::disk('public')->delete($product->img_route);
+        return $product->delete();
     }
 }

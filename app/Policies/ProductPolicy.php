@@ -11,59 +11,59 @@ class ProductPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can view any models.
+     * Determine whether the user can view any products.
      *
-     * @param  \App\User  $user
-     * @return mixed
+     * @param User $user
+     * @return bool
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
         return $user->can('ver producto');
     }
 
     /**
-     * Determine whether the user can view the model.
+     * Determine whether the user can view the product.
      *
-     * @param  \App\User  $user
-     * @param  \App\Product  $product
-     * @return mixed
+     * @param User $user
+     * @param Product $product
+     * @return bool
      */
-    public function view(User $user, Product $product)
+    public function view(User $user, Product $product): bool
     {
         return $user->can('ver producto');
     }
 
     /**
-     * Determine whether the user can create models.
+     * Determine whether the user can create products.
      *
-     * @param  \App\User  $user
-     * @return mixed
+     * @param User $user
+     * @return bool
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
         return $user->can('crear producto');
     }
 
     /**
-     * Determine whether the user can update the model.
+     * Determine whether the user can update the product.
      *
-     * @param  \App\User  $user
-     * @param  \App\Product  $product
-     * @return mixed
+     * @param User $user
+     * @param Product $product
+     * @return bool
      */
-    public function update(User $user, Product $product)
+    public function update(User $user, Product $product): bool
     {
         return $user->can('editar producto');
     }
 
     /**
-     * Determine whether the user can delete the model.
+     * Determine whether the user can delete the product.
      *
-     * @param  \App\User  $user
-     * @param  \App\Product  $product
-     * @return mixed
+     * @param User $user
+     * @param Product $product
+     * @return bool
      */
-    public function delete(User $user, Product $product)
+    public function delete(User $user, Product $product): bool
     {
         return $user->can('eliminar producto');
     }

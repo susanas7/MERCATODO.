@@ -25,10 +25,10 @@ class IndexTest extends TestCase
     public function anAuthorizedUserCanSeeMetricsAndJobsWorks()
     {
         $this->artisan('migrate:refresh --seed');
-        $user = factory(User::class)->create()->assignRole('Super-administrador');
+        $user = User::all()->last();
 
         $response = $this->actingAs($user)->get(route('admin.metric'))
-            ->assertOk();
+            ->assertStatus(200);
         $this->assertNotNull(MetricProduct::all());
         $this->assertNotNull(MetricUser::all());
     }

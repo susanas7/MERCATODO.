@@ -8,22 +8,24 @@ use App\Http\Requests\Product\UpdateRequest;
 use App\Http\Resources\ProductResource as ProductResource;
 use App\Product;
 use App\Repositories\ProductRepository;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class ProductController extends Controller
 {
-    private $productRepository;
+    private ProductRepository $productRepository;
 
     public function __construct(ProductRepository $productRepository)
     {
         $this->productRepository = $productRepository;
     }
     /**
-     * Display a listing of the resource.
+     * Display a listing of products.
      *
-     * @return JsonResponse
+     * @return AnonymousResourceCollection
      */
-    public function index()
+    public function index(): AnonymousResourceCollection
     {
         $products = Product::paginate();
 
@@ -31,14 +33,14 @@ class ProductController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created product in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @return JsonResponse
      */
-    public function store(StoreProductRequest $request)
+    public function store(StoreProductRequest $request): JsonResponse
     {
-        $product = $this->productRepository->storeProduct($request);
+        $product = $this->productRepository->store($request);
 
         return response()->json([
             'Status' => '200',
@@ -48,12 +50,12 @@ class ProductController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified product.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  Product  $product
+     * @return JsonResponse
      */
-    public function show($id)
+    public function show(int $id): JsonResponse
     {
         $product = Product::find($id);
 
@@ -63,15 +65,15 @@ class ProductController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified product in storage.
      *
-     * @param  Request  $request
-     * @param  int  $id
+     * @param  Request $request
+     * @param  Product $product
      * @return JsonResponse
      */
-    public function update(UpdateRequest $request, Product $product)
+    public function update(UpdateRequest $request, Product $product): JsonResponse
     {
-        $this->productRepository->updateProduct($request, $product);
+        $this->productRepository->update($request, $product);
 
         return response()->json([
             'Status' => '200',
@@ -81,12 +83,12 @@ class ProductController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified product from storage.
      *
-     * @param  Product  $product
+     * @param  int $id
      * @return JsonResponse
      */
-    public function destroy(int $id)
+    public function destroy(int $id): JsonResponse
     {
         $product = Product::find($id);
         $product->delete();
@@ -95,12 +97,5 @@ class ProductController extends Controller
             'Status' => '200',
             'Message' => 'Product deleted successfully',
         ]);
-    }
-
-    public function image($img_route)
-    {
-        $img = Product::find($img_route);
-
-        return $img;
     }
 }

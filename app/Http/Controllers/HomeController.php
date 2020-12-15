@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\RandomProducts;
 use App\Product;
 use App\ProductCategory;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class HomeController extends Controller
 {
@@ -12,13 +14,16 @@ class HomeController extends Controller
      * Show the application dashboard.
      *
      * @param Request $request
-     * @return \Illuminate\View\View
+     * @return View
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
-        $title = $request->get('title');
         $categories = ProductCategory::all();
-        $products = Product::where('is_active', 1)->title($title)->paginate(20);
+        $products = Product::query()
+            ->forIndex()
+            ->where('is_active', 1)
+            ->title($request->title)
+            ->paginate();
 
         return view('home', compact('products', 'categories'));
     }
@@ -27,12 +32,15 @@ class HomeController extends Controller
      * Display the specified resource.
      *
      * @param Product $product
-     * @return \Illuminate\View\View
+     * @return View
      */
-    public function show(Product $product)
+    public function show(Product $product): View
     {
+        $collection = RandomProducts::getRandomProducts();
+
         return view('show', [
             'product' => $product,
+            'collection' => $collection,
         ]);
     }
 
@@ -40,13 +48,13 @@ class HomeController extends Controller
      * List products by category.
      *
      * @param int $id
-     * @return \Illuminate\View\View
+     * @return View
      */
-    public function showCategory(int $id)
+    public function showCategory(int $id): View
     {
-        $category = ProductCategory::all();
-        $categories = Product::where('category_id', $id)->get();
+        $categories = ProductCategory::all();
+        $products = Product::where('category_id', $id)->paginate();
         $id_ = $id;
-        return view('category', compact('categories', 'id_', 'category'));
+        return view('home', compact('products', 'id_', 'categories'));
     }
 }
