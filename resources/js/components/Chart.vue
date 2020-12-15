@@ -28,7 +28,6 @@ export default{
     created() {
         this.getMetrics();
         this.getMetric();
-        this.getUserMetric();
     },
     methods: {
         getMetrics() {
