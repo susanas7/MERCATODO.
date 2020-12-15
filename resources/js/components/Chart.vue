@@ -9,7 +9,6 @@
             <canvas id="most-frequent-users"></canvas>
         </div>
     </div>
-    
 </template>
 <script>
 import Chart from 'chart.js';
@@ -147,3 +146,38 @@ export default{
 }
 }
 </script>
+
+<style>
+.container-show-metrics{
+    margin: 1% 1% 1% 1%;
+    padding: 1% 1% 1% 1%;
+    border-radius: 8px;
+    background-color: #E0E0E0;height: 100%;
+}
+
+#most-selled-products{
+    background-color: white;
+    border-radius: 5px;
+    border: none;
+    padding: 1% 1% 1% 1%;
+}
+
+#less-selled-products{
+    background-color: white;
+    border-radius: 5px;
+    border: none;
+    padding: 1% 1% 1% 1%;
+}
+
+#metric-center{
+    border: none;
+}
+
+#most-frequent-users{
+    background-color: white;
+    border-radius: 5px;
+    border: white;
+    padding: 2% 2% 2% 2%;
+}
+
+</style>

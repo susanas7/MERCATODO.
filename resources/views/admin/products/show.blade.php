@@ -10,6 +10,9 @@
 
                 <div class="card-body">
                         <div class="form-group row">
+                        <img src="{{ $product->get_image }}" class="card-img-top">
+                        </div>
+                        <div class="form-group row">
                             <label name="name" class="col-md-4 col-form-label text-md-right">@lang('products.fields.product'):</label>
 
                             <div class="col-md-6">

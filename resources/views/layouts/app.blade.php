@@ -61,6 +61,11 @@
                                 <a id="title" class="nav-link" href="{{ route('admin.orders.index')}}">Ordenes</a>
                             </li>
                         @endcan
+                        @can('ver reportes')
+                            <li class="nav-item">
+                                <a id="title" class="nav-link" href="{{ route('admin.metric')}}">Reportes</a>
+                            </li>
+                        @endcan
                     </ul>
 
                     </ul>
