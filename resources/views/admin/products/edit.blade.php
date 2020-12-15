@@ -55,7 +55,7 @@
                         <div class="form-group"><P ALIGN=center>
                         <input type="file" name="img_route" >
                         </div>
-                        <button class="btn btn-success" type="submit" >Actualizar</button>
+                        <button class="btn btn-success" type="submit" >Editar</button>
                     </form>
                 </div>
             </div>

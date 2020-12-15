@@ -11,10 +11,10 @@ class OrderPaymentSuccessfulObserver
     /**
      * Handle the order "created" event.
      *
-     * @param  \App\Order  $order
+     * @param Order  $order
      * @return void
      */
-    public function created(Order $order)
+    public function created(Order $order): void
     {
         if ($order->status == 'APPROVED') {
             Mail::to($order->user->email)->send(new OrderPaymentSuccessfulMail($order));
@@ -24,10 +24,10 @@ class OrderPaymentSuccessfulObserver
     /**
      * Handle the order "updated" event.
      *
-     * @param  \App\Order  $order
+     * @param Order  $order
      * @return void
      */
-    public function updated(Order $order)
+    public function updated(Order $order): void
     {
         if ($order->status == 'APPROVED') {
             Mail::to($order->user->email)->send(new OrderPaymentSuccessfulMail($order));

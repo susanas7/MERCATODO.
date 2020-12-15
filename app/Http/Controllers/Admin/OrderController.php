@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Order;
-use App\OrderProduct;
+use Illuminate\View\View;
 
 class OrderController extends Controller
 {
@@ -15,11 +15,11 @@ class OrderController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of orders.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
         $orders = Order::query()
             ->forIndex()
@@ -32,16 +32,12 @@ class OrderController extends Controller
      * Displays all the orders.
      *
      * @param Order $order
-     * @return \Illuminate\View\View
+     * @return View
      */
-    public function show(int $id)
+    public function show(Order $order): View
     {
-        $order = Order::find($id);
-        $orderProduct = OrderProduct::where('order_id', $id);
-
         return view('admin.orders.show', [
             'order' => $order,
-            'orderProduct' => $orderProduct,
         ]);
     }
 }

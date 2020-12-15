@@ -6,16 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UpdateRequest;
 use App\Order;
 use App\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Str;
+use Illuminate\View\View;
 
 class UserAuthController extends Controller
 {
     /**
      * Shows authenticated user data.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
-    public function myProfile()
+    public function myProfile(): View
     {
         $user = User::where('id', '=', auth()->user()->id)->first();
 
@@ -25,9 +27,9 @@ class UserAuthController extends Controller
     /**
      * Shows authenticated user data.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
-    public function editMyProfile()
+    public function editMyProfile(): View
     {
         $user = User::where('id', '=', auth()->user()->id)->first();
 
@@ -40,7 +42,7 @@ class UserAuthController extends Controller
      * @param UpdateRequest $request
      * @return RedirectResponse
      */
-    public function updateMyProfile(UpdateRequest $request)
+    public function updateMyProfile(UpdateRequest $request): RedirectResponse
     {
         $user = User::where('id', '=', auth()->user()->id)->first();
         $user->name = $request->name;
@@ -53,16 +55,20 @@ class UserAuthController extends Controller
     /**
      * Lists all orders of the authenticated user.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
-    public function myOrders()
+    public function myOrders(): View
     {
         $orders = Order::where('user_id', '=', auth()->user()->id, null)->paginate();
 
         return view('admin.orders.index', ['orders' => $orders]);
     }
 
-    public function newApiToken()
+    /**
+     * Generate an api token.
+     * @return RedirectResponse
+     */
+    public function newApiToken(): RedirectResponse
     {
         if (auth()->user()->can('api')) {
             $user = User::where('id', '=', auth()->user()->id)->first();
@@ -76,7 +82,11 @@ class UserAuthController extends Controller
         return back();
     }
 
-    public function deleteApiToken()
+    /**
+     * Remove current token api.
+     * @return RedirectResponse
+     */
+    public function deleteApiToken(): RedirectResponse
     {
         $user = User::where('id', '=', auth()->user()->id)->first();
 

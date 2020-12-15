@@ -7,7 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Order;
 use App\OrderProduct;
 use App\Product;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 use Session;
 
 class ShopController extends Controller
@@ -25,7 +27,7 @@ class ShopController extends Controller
      * @param int $id
      * @return RedirectResponse
      */
-    public function addToCart(Request $request, int $id)
+    public function addToCart(Request $request, int $id): RedirectResponse
     {
         $product = Product::find($id);
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
@@ -43,7 +45,7 @@ class ShopController extends Controller
      * @param int $id
      * @return RedirectResponse
      */
-    public function reduceByOne(int $id)
+    public function reduceByOne(int $id): RedirectResponse
     {
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
@@ -59,7 +61,7 @@ class ShopController extends Controller
      * @param int $id
      * @return RedirectResponse
      */
-    public function addByOne(int $id)
+    public function addByOne(int $id): RedirectResponse
     {
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
@@ -75,7 +77,7 @@ class ShopController extends Controller
      * @param int $id
      * @return RedirectResponse
      */
-    public function removeItem(int $id)
+    public function removeItem(int $id): RedirectResponse
     {
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
@@ -88,16 +90,15 @@ class ShopController extends Controller
     /**
      * Shows all current products in the cart.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
-    public function shoppingCart()
+    public function shoppingCart(): View
     {
         if (!Session::has('cart')) {
             return view('user.shop.shoppingCart', ['products' => null]);
         }
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
-        //dd($cart);
 
         return view('user.shop.shoppingCart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
     }
@@ -108,7 +109,7 @@ class ShopController extends Controller
      * @param Request $request
      * @return RedirectResponse
      */
-    public function storeCart(Request $request)
+    public function storeCart(Request $request): RedirectResponse
     {
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);

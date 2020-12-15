@@ -22,8 +22,9 @@ class Cart
      *
      * @param object $item
      * @param int $id
+     * @return void
      */
-    public function add(object $item, int $id)
+    public function add(object $item, int $id): void
     {
         $storedItem = ['qty' => 0, 'price' => $item->price, 'item' => $item];
         if ($this->items) {
@@ -42,8 +43,9 @@ class Cart
      * Reduce by one to cart.
      *
      * @param int $id
+     * @return void
      */
-    public function reduceByOne(int $id)
+    public function reduceByOne(int $id):void
     {
         $this->items[$id]['qty']--;
         $this->items[$id]['price'] -= $this->items[$id]['item']['price'];
@@ -59,8 +61,9 @@ class Cart
      * Add by one to cart.
      *
      * @param int $id
+     * @return void
      */
-    public function addByOne(int $id)
+    public function addByOne(int $id): void
     {
         $this->items[$id]['qty']++;
         $this->items[$id]['price'] += $this->items[$id]['item']['price'];
@@ -72,8 +75,9 @@ class Cart
      * Remove all the item to cart.
      *
      * @param int $id
+     * @return void
      */
-    public function removeItem(int $id)
+    public function removeItem(int $id): void
     {
         $this->totalQty -= $this->items[$id]['qty'];
         $this->totalPrice -= $this->items[$id]['price'];

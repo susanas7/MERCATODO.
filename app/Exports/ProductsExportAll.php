@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Product;
+use Illuminate\Database\Eloquent\Collection;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
@@ -13,14 +14,17 @@ class ProductsExportAll implements FromCollection, ShouldAutoSize, WithHeadings
     use Exportable;
 
     /**
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
-    public function collection()
+    public function collection(): Collection
     {
         return Product::all();
     }
 
-    public function map($product): array
+    /**
+     * @return array
+     */
+    public function map(Product $product): array
     {
         return [
             $product->id,
@@ -32,6 +36,9 @@ class ProductsExportAll implements FromCollection, ShouldAutoSize, WithHeadings
         ];
     }
 
+    /**
+     * @return array
+     */
     public function headings(): array
     {
         return [

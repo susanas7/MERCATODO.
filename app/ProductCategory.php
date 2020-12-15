@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Cache;
 
 class ProductCategory extends Model
@@ -20,9 +21,9 @@ class ProductCategory extends Model
     /**
      * Relationship with the product.
      *
-     * @return relationship
+     * @return BelongsTo
      */
-    public function products()
+    public function products(): BelongsTo
     {
         return $this->belongsTo(Product::class);
     }
@@ -30,9 +31,9 @@ class ProductCategory extends Model
     /**
      * Get all the categories cached.
      *
-     * @return ProductCategory
+     * @return Collection
      */
-    public static function categoriesCached():Collection
+    public static function categoriesCached(): Collection
     {
         return Cache::remember('product_categories', 100, function () {
             return self::select('id', 'title')->orderBy('title')->get();
@@ -42,14 +43,18 @@ class ProductCategory extends Model
     /**
      * @param Builder $query
      * @param string  $title
-     *
      * @return Builder
      */
-    public function scopeTitle(Builder $query, string $title)
+    public function scopeTitle(Builder $query, string $title): Builder
     {
         return $query->where('title', 'LIKE', "%{$title}%");
     }
 
+    /**
+     * Clear cache when category is updated or created.
+     *
+     * @return void
+     */
     public static function flushCache(): void
     {
         Cache::forget('product_categories');

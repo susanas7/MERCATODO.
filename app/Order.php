@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Order extends Model
 {
@@ -29,9 +31,9 @@ class Order extends Model
     /**
      * Relationship with the products.
      *
-     * @return relationship
+     * @return BelongsToMany
      */
-    public function products()
+    public function products(): BelongsToMany
     {
         return $this->belongsToMany(Product::class);
     }
@@ -50,11 +52,11 @@ class Order extends Model
     }
 
     /**
-     * Relationship with the details.
+     * Relationship with the order details.
      *
-     * @return relationship
+     * @return BelongsTo
      */
-    public function orderDetail()
+    public function orderDetail(): BelongsTo
     {
         return $this->belongsTo(OrderProduct::class);
     }

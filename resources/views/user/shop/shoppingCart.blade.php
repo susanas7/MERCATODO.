@@ -14,6 +14,7 @@
         </div>
     </div>
     <div class="shoppingcart-content">
+        @isset($products)
         @foreach($products as $product)
             <div class="shoppingcart-content-container">
                 <div class="shoppingcart-item">
@@ -46,6 +47,7 @@
                 </div>
             </div>
         @endforeach
+        
     </div>
     <div class="shoppingcart-footer">
         <div class="shoppingcart-total">
@@ -61,6 +63,7 @@
             <button  class="btn btn-dark" type="submit">Confirmar</button>
         </form>
     </div>
+    @endisset
 </section>
 
 @endsection

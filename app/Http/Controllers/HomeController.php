@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Product;
 use App\ProductCategory;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class HomeController extends Controller
 {
@@ -12,9 +13,9 @@ class HomeController extends Controller
      * Show the application dashboard.
      *
      * @param Request $request
-     * @return \Illuminate\View\View
+     * @return View
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         $categories = ProductCategory::all();
         $products = Product::query()
@@ -30,9 +31,9 @@ class HomeController extends Controller
      * Display the specified resource.
      *
      * @param Product $product
-     * @return \Illuminate\View\View
+     * @return View
      */
-    public function show(Product $product)
+    public function show(Product $product): View
     {
         return view('show', [
             'product' => $product,
@@ -43,9 +44,9 @@ class HomeController extends Controller
      * List products by category.
      *
      * @param int $id
-     * @return \Illuminate\View\View
+     * @return View
      */
-    public function showCategory(int $id)
+    public function showCategory(int $id): View
     {
         $categories = ProductCategory::all();
         $products = Product::where('category_id', $id)->paginate();

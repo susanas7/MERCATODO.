@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Cache;
@@ -45,10 +46,8 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
-     * @param Builder
+     * @param Builder $query
      * @param string $name
-     * @param mixed  $query
-     *
      * @return Builder
      */
     public function scopeName(Builder $query, $name): Builder
@@ -61,6 +60,8 @@ class User extends Authenticatable implements MustVerifyEmail
      * @param Builder $query
      * @param string $field
      * @param string $value
+     * @param string $operator|null
+     * @return Builder
      */
     public function searchByField(Builder $query, string $field, string $value, string $operator = null): Builder
     {
@@ -70,14 +71,19 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * Relationship with orders.
      *
-     * @return relationship
+     * @return HasMany
      */
-    public function orders()
+    public function orders(): HasMany
     {
         return $this->hasMany('App\Order');
     }
 
-    public function generateToken()
+    /**
+     * Generate api token for users.
+     *
+     * @return User
+     */
+    public function generateToken(): self
     {
         $this->api_token = Str::random(60);
         $this->save();
@@ -85,7 +91,12 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->api_token;
     }
 
-    public function getPermissionsAttribute()
+    /**
+     * Get permissions cached.
+     *
+     * @return Collection
+     */
+    public function getPermissionsAttribute(): Collection
     {
         $permissions = Cache::rememberForever('permissions', function () {
             return Permission::select('permissions.*', 'model_has_permissions.*')
@@ -96,7 +107,12 @@ class User extends Authenticatable implements MustVerifyEmail
         return $permissions->where('model_id', $this->id);
     }
 
-    public function getRolesAttribute()
+    /**
+     * Get roles cached.
+     *
+     * @return Collection
+     */
+    public function getRolesAttribute(): Collection
     {
         $roles = Cache::rememberForever('roles', function () {
             return Role::select('roles.*', 'model_has_roles.*')

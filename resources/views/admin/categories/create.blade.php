@@ -11,7 +11,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Editar categoria</div>
+                <div class="card-header">Crear categoria</div>
 
                 <div class="card-body">
                     <form action="{{route('admin.categories.store')}}" method="POST">
