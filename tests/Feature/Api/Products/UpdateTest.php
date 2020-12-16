@@ -19,8 +19,6 @@ class UpdateTest extends TestCase
     /** @test */
     public function anApiProductCanBeUpdatedWithValidData()
     {
-        $this->withoutExceptionHandling();
-        //Arrange
         $product = factory(Product::class)->create();
         factory(ProductCategory::class)->create();
         $data = [
@@ -31,13 +29,11 @@ class UpdateTest extends TestCase
             'price' => rand('10', '20'),
         ];
 
-        //Act
         $response = $this->putJson(route('api.products.update', $product), $data)
             ->assertOk();
 
         $product->refresh();
 
-        //PRUEBA FALLA POR EL MODEL BINDING
         $response->assertJsonPath('Status', '200');
     }
 
@@ -48,8 +44,6 @@ class UpdateTest extends TestCase
      */
     public function aProductCanNotBeUpdatedWithInvalidData(string $field, $value = null)
     {
-        //$this->withoutExceptionHandling();
-        // Arrange
         $product = factory(Product::class)->create();
         $data = [
             'category_id' => '1',
@@ -60,11 +54,9 @@ class UpdateTest extends TestCase
         ];
         $data[$field] = $value;
 
-        // Act
         $response = $this->putJson(route('api.products.update', $product), $data);
         $product->refresh();
 
-        // Assert
         $response->assertStatus(422)->assertJsonPath('message', 'The given data was invalid.');
     }
 

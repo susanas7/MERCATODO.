@@ -15,7 +15,6 @@ class CreateTest extends TestCase
     /** @test */
     public function aCategoryCanBeStored()
     {
-        $this->withoutExceptionHandling();
         $response = $this->post(route('admin.categories.store'), [
             'title' => 'Dulces',
         ])->assertSessionHasNoErrors();

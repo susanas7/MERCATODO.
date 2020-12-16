@@ -50,7 +50,6 @@ class AuthorizationTest extends TestCase
     /** @test */
     public function anAuthenticatedUserCanSeeCart()
     {
-        $this->withoutExceptionHandling();
         $response = $this->actingAs($this->user)->get(route('user.shoppingCart'))
             ->assertStatus(200);
     }
