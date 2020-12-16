@@ -25,17 +25,4 @@ class ImportTest extends TestCase
         $response = $this->actingAs($user)->post(route('admin.products.import'), ['file' => $file]);
         $response->assertSessionHasNoErrors();
     }
-
-    /* @test */
-    /*public function canNotImportAFileWithInvalidData()
-    {
-        $this->artisan('migrate:refresh --seed');
-        $file = new UploadedFile(base_path('tests/Feature/Products/prod.xlsx'),
-            'prod.xlsx', null, null, true);
-
-        $user = factory(User::class)->create()->assignRole('Super-administrador');
-
-        $response = $this->actingAs($user)->post(route('admin.products.import'), ['file' => $file]);
-
-    }*/
 }
