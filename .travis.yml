@@ -19,7 +19,6 @@ before_script:
   - composer install
 
 script:
-  - php artisan optimize
   - php artisan key:generate --force
   - php artisan migrate:refresh --force
   - composer phpcs
