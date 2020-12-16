@@ -112,9 +112,9 @@ class RoleController extends Controller
      * @param int $id
      * @return RedirectResponse
      */
-    public function destroy(int $id): RedirectResponse
+    public function destroy(Role $role): RedirectResponse
     {
-        $role = Role::find($id);
+        //$role = Role::find($id);
         $role->delete();
 
         return back();
