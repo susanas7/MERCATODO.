@@ -151,7 +151,7 @@ class ProductController extends Controller
     {
         $this->authorize('update', auth()->user());
 
-        return Excel::download(new ProductsExportAll, 'products.xlsx');
+        return Excel::download(new ProductsExportAll(), 'products.xlsx');
     }
 
     /**
@@ -163,7 +163,7 @@ class ProductController extends Controller
     public function import(Request $request): RedirectResponse
     {
         $this->authorize('update', auth()->user());
-        $import = new ProductsImport;
+        $import = new ProductsImport();
         $import->import($request->file('file'));
 
         return redirect(route('admin.products.index'));
