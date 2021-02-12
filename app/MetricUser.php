@@ -33,8 +33,8 @@ class MetricUser extends Model
      *
      * @return string
      */
-    public function getNameAttribute(): string
+    /*public function getNameAttribute(): string
     {
         return $this->user->name;
-    }
+    }*/
 }
